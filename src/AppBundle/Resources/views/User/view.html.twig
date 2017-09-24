@@ -1,0 +1,174 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+
+    <div class="clearfix">
+        <aside class="fl column bg">
+            <div class="profile">
+                <div class="profile-cont">
+                    <div class="profile__avatar"><img src="{% if entity.image %}{% path entity.image, 'big' %}{% else %}{{ asset('bundles/app/img/user-avatar.png') }}{% endif %}" alt=""></div>
+                    <h3>{{ entity.nickname }} <i class="ic icon-author-rating icon-author-rating__{{ entity.lvl }}"></i></h3>
+                    <p class="profile__text">
+                        {{ entity.name }}
+                        {% if entity.country or entity.city %}<br />{% endif %}
+                        {% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}
+                    </p>
+                    {%  if app.user and app.user != entity %}
+                    <button class="button button_warning button_block">Отправить сообшение</button>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <br />
+                        <a class="button button_warning button_block" href="{{ path('homepage',{_switch_user: entity.email}) }}">Войти в аккаунт</a>
+                    {% endif %}
+                </div>
+                {% if entity.specialization %}
+                <div class="profile-cont">
+                    <h6 class="profile-cont__title">Специализация:</h6>
+                    <p class="profile-cont__text">{{ entity.specialization }}</p>
+                </div>
+                {% endif %}
+                {% if entity.text %}
+                <div class="profile-cont">
+                    <h6 class="profile-cont__title">О себе:</h6>
+                    <p class="profile-cont__text">
+                        {{ entity.text|nl2br }}
+                    </p>
+                </div>
+                {% endif %}
+                {#<div class="profile-cont">
+                    <h6 class="profile-cont__title">Веб-ссылки:</h6>
+                    <ul class="web-link-list">
+                        <li class="web-link-list__item"><a href="#" class="web-link-list__link">Clive Wilkinson
+                                Architects</a></li>
+                    </ul>
+                    <ul class="social">
+                        <li class="social__item"><a href="#" class="social__link social__link_fb"><i
+                                        class="fa fa-facebook"></i></a></li>
+                        <li class="social__item"><a href="#" class="social__link social__link_tw"><i
+                                        class="fa fa-twitter"></i></a></li>
+                    </ul>
+                </div>#}
+                <div class="profile-cont">
+                    <h6 class="profile-cont__title">Дата регистрации:</h6>
+                    <p class="profile-cont__text">{{ entity.createdAt|date("d-m-Y") }}</p>
+                </div>
+            </div>
+        </aside>
+        <div class="content-wrap tab-wrap column bg" style="padding-bottom: 20px;">
+            <div class="main-wrap">
+                <div class="main-wrap__header">
+                    <ul class="nav-tabs-list tabs">
+                        <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}active{% endif %}"><a href="#tab_1"
+                                                                             class="nav-tabs-list__link link">Модели
+                                ({{ products|length }})</a></li>
+                        <li class="nav-tabs-list__item js-hide-bg"><a href="#tab_2"
+                                                                      class="nav-tabs-list__link link">Галерея
+                                (0)</a></li>
+                        {% if app.user and app.user == entity %}
+                        <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'stats' %}active{% else %}{% endif %}"><a href="#tab_3"
+                                                                      class="nav-tabs-list__link link">Статистика</a>
+
+                        <li class="nav-tabs-list__item js-show-bg"><a href="#tab_6"
+                                                                      class="nav-tabs-list__link link">Вывод средств</a>
+
+                        <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') == 'favorites' %}active{% else %}{% endif %}"><a href="#tab_4"
+                                                                      class="nav-tabs-list__link link">Избранное ({{ favorites|length }})</a>
+                        </li>
+                        <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'buy' %}active{% else %}{% endif %}"><a href="#tab_5"
+                                                                      class="nav-tabs-list__link link">Покупки
+                                ({{ buy|length }})</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="box-tab-cont">
+                <div id="tab_1" class="tab-cont {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}{% else %}hide{% endif %}">
+                    {% if products|length > 0 %}
+                        <ul class="product-list col-4 sm">
+                            {% for e in products %}
+                                {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Пользователь не загрузил модели</p>
+                    {% endif %}
+                </div>
+                <div id="tab_2" class="tab-cont hide">
+                    <p>Пользователь не загрузил объекты в галерею</p>
+                </div>
+                {% if app.user and app.user == entity %}
+                    <div id="tab_3" class="tab-cont {% if app.request.get('tab') == 'stats' %}{% else %}hide{% endif %}">
+                        <div class="block-title">
+                            <h4>Загруженно моделей {{ products|length }}</h4>
+                        </div>
+                        <div class="tab-cont__body">
+                            <h4>Последние операции</h4>
+                            <table class="table">
+                                <tr>
+                                    <th class="td-date">Дата</th>
+                                    <th>Операция</th>
+                                    <th class="td-summa">На сумму</th>
+                                </tr>
+                                {% for e in history %}
+                                <tr>
+                                    <td>{{ e.date|date("d.m.Y") }}</td>
+                                    <td>{{ e.name }}</td>
+                                    <td>{{ e.price }}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            {#<p><a href="#" class="link">Смотреть все транзакции</a></p>#}
+                            <dl class="box-label small">
+                                <dt class="box-label__title">Ваш баланс с продаж ${{ app.user.modelsLoadedBuy }}</dt>
+                                <dd class="box-label__cont">Общие продажи ${{ app.user.modelsLoadedBuy }}</dd>
+                            </dl>
+                        </div>
+                        <div class="tab-cont__footer">
+                            <h4>Покупка моделей</h4>
+                            <dl class="box-label small mt10">
+                                <dt class="box-label__title">Доступно {{ app.user.models }} моделей</dt>
+                                <dd class="box-label__cont"><a href="{{ path('cabinet_buy') }}" class="link">Купить модели</a></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div id="tab_6" class="tab-cont hide">
+                        <div class="tab-cont__body">
+                            <h4 class="withdrawals__header">Заявки на вывод средств</h4>
+                            <a href="#withdrawalsAdd" class="button button_warning withdrawals__add fancybox">Создать заявку</a>
+                            <div class="clearfix"></div>
+                            <div class="withdrawal__success">Заявка создана</div>
+                            <table class="table js-withdrawals">
+                                {% include '@App/User/_withdrawals.html.twig' %}
+                            </table>
+                        </div>
+                    </div>
+                    <div id="tab_4" class="tab-cont  {% if app.request.get('tab') == 'favorites' %}{% else %}hide{% endif %}">
+                        {% if favorites|length > 0 %}
+                            <ul class="product-list col-4 sm">
+                                {% for e in favorites %}
+                                    {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e.product} %}
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>Вы еще ничего не добавили в избранное</p>
+                        {% endif %}
+                    </div>
+                    <div id="tab_5" class="tab-cont  {% if app.request.get('tab') == 'buy' %}{% else %}hide{% endif %}">
+                        <div class="tab-cont__body">
+                            {% if buy|length > 0 %}
+                                <ul class="product-list col-4 sm">
+                                    {% for e in buy %}
+                                        {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e.product} %}
+                                    {% endfor %}
+                                </ul>
+                            {% else %}
+                                <p>Вы еще ничего не купили</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <br style="clear: both;" />
+    </div>
+{% endblock %}

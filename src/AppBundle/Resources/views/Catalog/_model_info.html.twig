@@ -1,0 +1,43 @@
+{% if app.user %}
+    <div class="js-model-files">
+    {% if alreadyBuy %}
+        {% include '@App/Catalog/_product_files.html.twig' %}
+    {% else %}
+        {% if product.block %}
+            {% if app.user==product.user or is_granted('ROLE_SUPER_ADMIN') %}
+                Модель заблокирована по причине <strong>{{ product.blockReason }}</strong>.
+            {% endif %}
+        {% else %}
+            {% if product.moderated %}
+                <div class="box-button">
+                    <a href="#" class="button button_warning button_lg"
+                       onclick="buyThisModel(this, {{ product.id }});return false;">Скачать</a><span
+                            class="button-info">Доступно моделей <span>- {{ app.user.models }}</span></span></div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+    </div>
+    {% if app.user == product.user or is_granted('ROLE_SUPER_ADMIN') %}
+        <div class="model-admin-action">
+            <a href="{{ path('catalog_product_edit', {alias:product.alias}) }}" class="button button_warning button_lg button_moderate">Редактировать</a>
+        </div>
+        <div class="model-admin-action">
+            <a href="#delete" class="button button_warning button_lg button_moderate fancybox">Удалить</a>
+        </div>
+        {% if product.moderated == false and is_granted('ROLE_SUPER_ADMIN') %}
+            <div class="model-admin-action js-moderation-action">
+                <a href="#moderation" class="button button_warning button_lg button_moderate fancybox">Отмодерировать</a>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') and product.block == false %}
+            <div class="model-admin-action js-block-action">
+                <a href="#block" class="button button_warning button_lg button_moderate fancybox">Блокировать</a>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') and product.block %}
+            <div class="model-admin-action js-unblock-action">
+                <a href="#unblock" class="button button_warning button_lg button_moderate fancybox">Снять блокировку</a>
+            </div>
+        {% endif %}
+    {% endif %}
+{% endif %}

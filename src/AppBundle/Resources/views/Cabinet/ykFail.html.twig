@@ -1,0 +1,22 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+    <div class="main-wrap__header">
+        <h1>Покупка моделей</h1>
+    </div>
+    <div class="wrap">
+        <div class="wrap-right">
+
+        </div>
+        <div class="wrap-left">
+            <p>Сожалеем, что у Вас сложились проблемы с оплатой.</p>
+            <p><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="button button_warning">Перейти в личный кабинет</a></p>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(".js-ya-form").submit();
+    </script>
+{% endblock %}

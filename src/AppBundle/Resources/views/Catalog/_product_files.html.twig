@@ -1,0 +1,6 @@
+<p>Файлы модели:</p>
+{% for e in files %}
+    <div class="model-files-download">
+        <a href="{{ path('catalog_product_file', {alias:product.alias, file:e.id}) }}" download="{{ e.name }}">{{ e.name }}</a>
+    </div>
+{% endfor %}

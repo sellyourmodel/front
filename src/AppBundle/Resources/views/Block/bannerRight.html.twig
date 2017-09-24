@@ -1,0 +1,5 @@
+{% if banner.link %}
+    <a href="{{ banner.link }}"><img src="{% path e.image, 'full' %}" alt="" /></a>
+{% else %}
+    <img src="{% path banner.image, 'full' %}" alt="" />
+{% endif %}

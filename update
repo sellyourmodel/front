@@ -1,0 +1,11 @@
+#!/bin/bash
+
+echo "start"
+# clear cache
+php app/console cache:clear --env=prod
+# install migrations
+php app/console doctrine:migrations:migrate --no-interaction
+# install assets
+php app/console assets:install
+php app/console assetic:dump --env=prod
+echo "end"

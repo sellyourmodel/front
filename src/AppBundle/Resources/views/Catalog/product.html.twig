@@ -1,0 +1,142 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block mainClass %}product-page{% endblock %}
+
+{% block content %}
+    <div class="box-breadcrumbs">
+        <ul class="breadcrumbs-list">
+            <li class="breadcrumbs-list__item"><a href="{{ path('catalog_category',{alias:product.category.parent.alias}) }}" class="breadcrumbs-list__link">{{ product.category.parent.name }}</a></li>
+            <li class="breadcrumbs-list__item"><a href="{{ path('catalog_category',{alias:product.category.alias}) }}" class="breadcrumbs-list__link">{{ product.category.name }}</a></li>
+            <li class="breadcrumbs-list__item"><span>{{ product.name }}</span></li>
+        </ul>
+    </div>
+    <div class="wrap product">
+        <div class="wrap-right">
+            <div class="product-info">
+                <span class="author">от:<a href="{{ path('user_view',{nickname:product.user.nickname}) }}">{{ product.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ product.user.lvl }}"></span></span>
+                <h1>{{ product.name }}</h1>
+                {% if product.manufacturer %}
+                    {{ product.manufacturer }}
+                {% endif %}
+                {#<ul class="link-list">#}
+                    {#<li class="link-list__item"><a href="#" class="link-list__link link">Современный дизайн</a></li>#}
+                    {#<li class="link-list__item"><a href="#" class="link-list__link link">Геометрический дизайн</a></li>#}
+                {#</ul>#}
+                <p>
+                    {{ product.text|nl2br }}
+                </p>
+                {% if product.software|length > 0 %}
+                    <p>{% for e in product.software %}{{ e.name }}{% if loop.last == false %}, {% endif %}{% endfor %}</p>
+                {% endif %}
+                {% if product.tags|length > 0 %}
+                    <ul class="tags-list">
+                        {% for e in product.tags %}
+                            <li class="tags-list__item"><a href="{{ path('catalog_tag', {id:e.id}) }}" class="tags-list__link">{{ e.name }}</a>{% if loop.last == false %}<span>,</span>{% endif %}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="box-rating rating"><span class="rating__count js-product-likes">{{ product.stars }}</span>
+                    {% if app.user %}
+                        <a href="#" class="product-star {% if alreadyLike %}active{% endif %}" onclick="likeProduct({{ product.id }}, this);return false;"></a>
+                    {% else %}
+                        <span class="product-star"></span>
+                    {% endif %}
+                </div>
+                <div class="link-group">
+                    <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">В избранно{% if alreadyFavorite %}м{% else %}е{% endif %}</a>
+                    <a href="#" class="link js-share-btn" onclick="showShare();return false;">Поделиться</a>
+                    <div id="share-block" class="share-block js-share-block" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,linkedin"></div>
+                </div>
+                <div class="js-model-info">
+                    {% include '@App/Catalog/_model_info.html.twig' %}
+                </div>
+            </div>
+        </div>
+        <div class="wrap-left">
+            <div class="product-slider">
+                <div class="slider-for">
+                    <div class="slider-for__item"><img src="{% path product.image, 'full' %}" alt=""></div>
+                    {% for e in product.images %}
+                        <div class="slider-for__item"><img src="{% path e.image, 'full' %}" alt=""></div>
+                    {% endfor %}
+                </div>
+                <div class="slider-nav">
+                    <div class="slider-nav__item"><img src="{% path product.image, 'small' %}" alt=""></div>
+                    {% for e in product.images %}
+                        <div class="slider-nav__item"><img src="{% path e.image, 'small' %}" alt=""></div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="box-comment">
+                <div class="js-comments">
+                    {% include 'AppBundle:Catalog:_product_comments.html.twig' %}
+                </div>
+                {% if app.user %}
+                    <div class="comments-add">
+                        <textarea name="text" placeholder="Введите комментарий" class="form-control js-comments-textarea"></textarea>
+                        <button type="button" class="button button_warning js-add-model-btn" onclick="addModelComment({{ product.id }}, this);return false;">Добавить комментарий</button>
+                        <span class="help-text inline add-model__result js-add-comment-result"></span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block products_popup %}
+    {% if product.moderated == false and is_granted('ROLE_SUPER_ADMIN') %}
+        <div id="moderation" class="window-open" style="width:400px;padding: 30px;">
+            <div class="window-open-cont">
+                <div class="box-form withdrawals__form">
+                    <h3>Отмодерировать модель</h3>
+                    <form action="{{ path('catalog_moderation_write', {id:product.id}) }}" method="POST" class="js-moderation-form">
+                        <input type="submit" value="Отмодерировать модель" class="button button_warning button_block box-form__button" onclick="ajaxModeration();return false;" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div id="block" class="window-open" style="width:400px;padding: 30px;">
+            <div class="window-open-cont">
+                <div class="box-form withdrawals__form">
+                    <h3>Заблокировать модель</h3>
+                    <form action="{{ path('catalog_block_write', {id:product.id}) }}" method="POST" class="js-block-form">
+                        <div class="box-field login-error">
+                            <div class="login-error__text js-block-add-error"></div>
+                            <label class="box-field__label">Причина блокировки</label>
+                            <div class="box-field__input">
+                                <input type="text" name="reason" class="form-control">
+                            </div>
+                        </div>
+                        <input type="submit" value="Заблокировать" class="button button_warning button_block box-form__button" onclick="ajaxBlock();return false;" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div id="unblock" class="window-open" style="width:400px;padding: 30px;">
+            <div class="window-open-cont">
+                <div class="box-form withdrawals__form">
+                    <h3>Снять блокировку модели</h3>
+                    <form action="{{ path('catalog_unblock_write', {id:product.id}) }}" method="POST" class="js-unblock-form">
+                        <input type="submit" value="Снять блокировку" class="button button_warning button_block box-form__button" onclick="ajaxUnBlock();return false;" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div id="delete" class="window-open" style="width:400px;padding: 30px;">
+            <div class="window-open-cont">
+                <div class="box-form withdrawals__form">
+                    <h3>Удаление модели</h3>
+                    <form action="{{ path('catalog_delete_write', {id:product.id}) }}" method="POST" class="js-unblock-form">
+                        <input type="submit" value="Удалить модель" class="button button_warning button_block box-form__button" onclick="ajaxDelete();return false;" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

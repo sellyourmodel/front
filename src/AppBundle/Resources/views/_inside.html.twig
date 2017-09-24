@@ -1,0 +1,10 @@
+{% extends 'AppBundle::base.html.twig' %}
+
+{% block content_wrapper %}
+
+    <div class="wrapper">
+        <div class="main-wrap {% block wrapper_class %}{% endblock %}">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

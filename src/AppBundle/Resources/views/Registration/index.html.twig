@@ -1,0 +1,159 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block content %}
+    <div class="main-wrap">
+        <div class="main-wrap__header">
+            <h1>Регистрация</h1>
+        </div>
+        <div class="wrap">
+            <div class="wrap-right">
+                <h4 class="wrap__title">Полезная информация</h4>
+                <ol class="list">
+                    <li>Минимальное колличество покупки - 2 PRO.</li>
+                    <li>PRO начисляется единовременно и не имеет ограничения во времени скачивания.</li>
+                    <li>30 FREE начисляется каждый день в рамках оплаченного срока.</li>
+                    <li>При оплате через терминалы и другие оффлайн способы - срок получения доступа может достигать 3-х
+                        дней.
+                    </li>
+                    <li>Оплата с помощью банковской карты - только для стран СНГ.</li>
+                    <li>Оплата через терминалы - только для России.</li>
+                    <li>В случае утери pro-модели или неудачном скачаивании - восстановить её в истории покупок.</li>
+                    <li>Если у вас уже есть PRO-доступы - последуюшая покупка суммируется.</li>
+                    <li>Для корпоративных клиентов. Минимальный заказ 1000 доступов PROFI. Оформление договора и
+                        безналичный расчет. Для уточнения деталей обращайтесь в службу поддержки.
+                    </li>
+                    <li>Служба поддержки. При обращении обязательно указывайте номер заказа!</li>
+                </ol>
+                <ol>
+                    <li>Минимальное колличество покупки - 2 PRO.</li>
+                    <li>PRO начисляется единовременно и не имеет ограничения во времени скачивания.</li>
+                </ol>
+            </div>
+            <div class="wrap-left">
+                <p>Хотите делать покупки гораздо быстрей? Купите предоплачиваемые Кредиты и скачивайте товары по одному
+                    клику!</p>
+                <div class="box-form registration">
+                    <form action="{{ path("registration_write") }}" method="POST" class="js-registration">
+                        <div class="box-field registration-error">
+                            <div class="registration-error__text js-registration-error"></div>
+                            <label class="box-field__label">E-mail</label>
+                            <div class="box-field__input">
+                                <input type="email" name="email" class="form-control js-required" />
+                            </div>
+                        </div>
+                        <div class="box-field">
+                            <label class="box-field__label">Никнейм</label>
+                            <div class="box-field__input">
+                                <input type="text" name="nickname" class="form-control js-required" />
+                            </div>
+                        </div>
+                        <div class="box-field">
+                            <label class="box-field__label">Пароль</label>
+                            <div class="box-field__input">
+                                <input type="password" name="password" class="form-control js-required">
+                            </div>
+                        </div>
+                        <div class="box-field">
+                            <label class="box-field__label">Повторите пароль</label>
+                            <div class="box-field__input">
+                                <input type="password" name="password_repeat" class="form-control js-required">
+                            </div>
+                        </div>
+                        <div class="box-field captcha">
+                            <label class="box-field__label">Вы человек?</label>
+                            <div class="box-field__input">
+                                <div class="g-recaptcha" data-sitekey="6LdrISYUAAAAAAzaB7Nm4xys2M8CZK81QebXWmN_"></div>
+                            </div>
+                        </div>
+                        <div class="box-field checkbox nowrap">
+                            <div class="box-field__input">
+                                <input type="checkbox" id="check_1" class="styler">
+                                <label for="check_1" class="nowrap box-field__label">Я согласен с <a href="#" class="link">пользовательским соглашением</a></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="button button_warning button_block box-form__button" onclick="ajaxRegistration();return false;">
+                            Создать аккаунт
+                        </button>
+                        <p><a href="#login" class="link fancybox">Уже есть учетная запись?</a><span class="devider">|   </span><a
+                                    href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                    </form>
+                </div>
+                <div class="enter-social">
+                    <p>Войти через аккаунт в социальных сетях</p>
+                    <ul class="social-wrap">
+                        <li class="social-wrap__item">
+                            <a href="{{ hwi_oauth_login_url('facebook') }}" class="social-wrap__link fb"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="social-wrap__item">
+                            <a href="{{ hwi_oauth_login_url('vkontakte') }}" class="social-wrap__link vk"><i class="fa fa-vk"></i></a>
+                        </li>
+                        <li class="social-wrap__item">
+                            <a href="#" class="social-wrap__link gp"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    {#<div class="text-page noCrumb">
+        <h1>Регистрация</h1>
+        <form class="login-form js-registration-form" action="{{ path("registration_write") }}"
+              method="post">
+            <div class="login__error"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="login">
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input name="email" placeholder="E-mail" class="form-control input js-required" value=""
+                                       required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="password" name="password" placeholder="Ваш пароль"
+                                       class="form-control input js-required" required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <input type="password" name="password_repeat" placeholder="Повторите пароль"
+                                       class="form-control input js-required" required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="submit" value="Зарегистрироваться" class="submit"><span
+                                        class="login__separator">или</span><a
+                                        href="{{ path('fos_user_security_login') }}"
+                                        class="login__registration">войти</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    Так же Вы можете войти используя аккаунт социальной сети:
+                    <br/>
+                    <br/>
+                    {% for owner in hwi_oauth_resource_owners() %}
+                        <a class="social__icon" href="{{ hwi_oauth_login_url(owner) }}">
+                            <img src="{{ asset('bundles/app/images/icon-social-' ~ owner ~'.png') }}"
+                                 alt="{{ owner }}"/>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </form>
+        <div class="login__reset-link">
+            Если Вы забыли пароль, то можете <a
+                    href="{{ path('fos_user_resetting_request') }}">восстановить пароль</a>.
+        </div>
+    </div>#}
+{% endblock %}

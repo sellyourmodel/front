@@ -1,0 +1,73 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+    <div class="main-wrap__header">
+        <h1>Покупка моделей</h1>
+    </div>
+    <div class="wrap">
+        <div class="wrap-right">
+            <h4 class="wrap__title">Полезная информация</h4>
+            <ol class="list">
+                <li>Минимальное колличество покупки - 2 PRO.</li>
+                <li>PRO начисляется единовременно и не имеет ограничения во времени скачивания.</li>
+                <li>30 FREE начисляется каждый день в рамках оплаченного срока.</li>
+                <li>При оплате через терминалы и другие оффлайн способы - срок получения доступа может
+                    достигать 3-х дней.
+                </li>
+                <li>Оплата с помощью банковской карты - только для стран СНГ.</li>
+                <li>Оплата через терминалы - только для России.</li>
+                <li>В случае утери pro-модели или неудачном скачаивании - восстановить её в истории
+                    покупок.
+                </li>
+                <li>Если у вас уже есть PRO-доступы - последуюшая покупка суммируется.</li>
+                <li>Для корпоративных клиентов. Минимальный заказ 1000 доступов PROFI. Оформление договора и
+                    безналичный расчет. Для уточнения деталей обращайтесь в службу поддержки.
+                </li>
+                <li>Служба поддержки. При обращении обязательно указывайте номер заказа!</li>
+            </ol>
+        </div>
+        <div class="wrap-left">
+            <p>Хотите делать покупки гораздо быстрей? Купите предоплачиваемые Кредиты и скачивайте товары по
+                одному клику! <br> Сколько Кредитов вы хотите купить?</p>
+            <p>Депозит производится в $USD долларах и не подлежит возврату. Купленные Кредиты вы сможете
+                использовать только для покупки товаров в сети магазинов NetrinoMedia!</p>
+            <div class="box-form payment">
+                <form action="#">
+                    <dl class="box-label">
+                        <dt class="box-label__title">Доступно 3d моделей</dt>
+                        <dd class="box-label__cont">{{ app.user.models }}</dd>
+                        <dt class="box-label__title mb25">Выберите количество покупаемых 3d моделей:</dt>
+                        <dd class="box-label__cont mb25">
+                            <input type="text" value="10" class="box-label__input js-buy-count" onchange="setBuyCount({{ settings.modelPrice }});" />
+                        </dd>
+                        <dt class="box-label__title mb25">Сумма заказа:</dt>
+                        <dd class="box-label__cont mb25"><span class="count js-buy-count">{{ 10 * settings.modelPrice }}</span> руб.</dd>
+                    </dl>
+                    <div class="box-field checkbox mb20">
+                        <div class="box-field__input">
+                            <input type="checkbox" id="buy-rules" class="styler" />
+                            <label for="buy-rules" class="box-field__label">
+                                Я согласен с
+                                <a href="{{ path('page_7') }}" target="_blank" class="link">пользовательским соглашением</a>
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" class="button button_warning" onclick="buyModels();return false;">Купить</button>
+                    <span class="help-text inline settings__result js-buy-models-result"></span>
+                    {#<h4 class="box-form__title">Выберите способ оплаты</h4
+                    <div class="payment__button-group">
+                        <button type="button" class="button button_warning" onclick="buyModels();return false;">Купить</button>
+                        <span class="help-text inline settings__result js-buy-models-result"></span>
+                        <button type="button" class="button button_warning button_block">Купить через
+                            PayPal
+                        </button>
+                        <button type="button" class="button button_warning button_block">Купить через
+                            WebMoney
+                        </button>
+                    </div>
+                    <div class="payment__method"><img src="img/payment.jpg" alt=""></div>>#}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+    <div class="main-wrap__header">
+        <h1>Покупка моделей</h1>
+    </div>
+    <div class="wrap">
+        <div class="wrap-right">
+
+        </div>
+        <div class="wrap-left">
+            <p>Идет переадресация на форму заказа, если этого не произошло нажмите на кнопку внизу.</p>
+            <form action="https://demomoney.yandex.ru/eshop.xml" method="post" class="js-ya-form">
+                <input name="shopId" value="129835" type="hidden"/>
+                <input name="scid" value="551245" type="hidden"/>
+                <input name="sum" value="{{ entity.price }}" type="hidden">
+                <input name="customerNumber" value="user{{ app.user.id }}" type="hidden"/>
+                <input name="paymentType" value="" type="hidden"/>
+                <input name="orderNumber" value="{{ entity.id }}" type="hidden"/>
+                <input name="cps_phone" value="" type="hidden"/>
+                <input name="cps_email" value="" type="hidden"/>
+                <input type="submit" class="button button_warning" value="Перейти к оплате" />
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(".js-ya-form").submit();
+    </script>
+{% endblock %}

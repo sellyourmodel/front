@@ -1,0 +1,22 @@
+<tr>
+    <th class="td-date">Дата</th>
+    <th>Заявка</th>
+    <th class="td-summa">На сумму</th>
+    <th class="td-summa">Статус</th>
+</tr>
+{% for e in withdrawals %}
+    <tr>
+        <td>{{ e.date|date("d.m.Y") }}</td>
+        <td>Заявка №{{ e.id }}</td>
+        <td>{{ e.price }}</td>
+        <td>
+            {% if e.status == 'rejected' %}
+                Отклонено
+            {% elseif e.status == 'done' %}
+                Выполнено
+            {% else %}
+                Новая
+            {% endif %}
+        </td>
+    </tr>
+{% endfor %}

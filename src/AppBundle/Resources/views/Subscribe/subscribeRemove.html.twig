@@ -1,0 +1,10 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+    <div class="text-page">
+        <h1>Отписаться от рассылки</h1>
+        <p class="js-unsubscribe-result">Вы действительно хотите отписать e-mail <strong>{{ subscribe.email }}</strong> от рассылки?</p>
+        <div class="js-unsubscribe-error unsubscribe-error"></div>
+        <a href="#" class="unsubscribe__btn" onclick="unsubscribe('{{ subscribe.code }}');return false;">Отписаться</a>
+    </div>
+{% endblock %}

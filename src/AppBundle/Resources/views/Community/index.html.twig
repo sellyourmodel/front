@@ -1,0 +1,105 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block title %}Сообщество{% endblock %}
+
+{% block content %}
+    <div class="content-wrap column">
+        <div class="main-wrap">
+            <div class="main-wrap__header">
+                <h1>Сообщество</h1>
+            </div>
+            <div class="main-wrap__body">
+                <p>
+                    Предлагаю здесь разместить текст о возможностях сайта для сообщеста.
+
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla luctus pharetra vulputate, felis tellus mollis orci, sed rhoncus sapien nunc eget odio.
+
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean euismod bibendum laoreet. Proin gravida dolor sit amet lacus accumsan et viverra justo commodo. Proin sodales pulvinar tempor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam fermentum, nulla
+
+                </p>
+                {% if app.user %}
+
+                {% else %}
+                    <a href="#login" class="button button_warning main-button fancybox">Войти</a>
+                    <p><a href="{{ path('registration') }}" class="link">Регистрация</a><span class="devider">|   </span><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                {% endif %}
+            </div>
+        </div>
+        {#<div class="block-title sm">
+            <h4>Новые работы в галерее <a href="#" class="link block-title__link">Прислать работу</a></h4>
+        </div>
+        <ul class="product-list col-4 sm">
+            <li class="product-list__item">
+                <div class="product-list__img"><a href="#product" class="fancybox"><img src="img/product-img1.png" alt=""></a></div>
+                <div class="product-list__cont">
+                    <h6 class="product-list__title"><a href="#">Editorial Illustrations #2</a></h6>
+                    <div class="product-panel"><span class="author">от:<a href="#">Si Maclencel </a><span class="ic ic_models-two"></span></span><span class="product-panel__item"><span class="product-panel__icon"><i class="fa fa-download"></i><span>50</span></span><span class="product-panel__icon"><i class="fa fa-comment"></i><span>10</span></span><span class="product-panel__icon"><i class="fa fa-star"></i><span>20</span></span></span></div>
+                </div>
+            </li>
+            <li class="product-list__item">
+                <div class="product-list__img"><a href="#product" class="fancybox"><img src="img/product-img2.png" alt=""></a>
+                    <div class="panel"><span class="panel__item panel__item_corona"><span class="ic ic_corona"></span></span></div>
+                </div>
+                <div class="product-list__cont">
+                    <h6 class="product-list__title"><a href="#">Editorial Illustrations #2</a></h6>
+                    <div class="product-panel"><span class="author">от:<a href="#">Si Maclencel </a><span class="ic ic_models-two"></span></span><span class="product-panel__item"><span class="product-panel__icon"><i class="fa fa-download"></i><span>50</span></span><span class="product-panel__icon"><i class="fa fa-comment"></i><span>10</span></span><span class="product-panel__icon"><i class="fa fa-star"></i><span>20</span></span></span></div>
+                </div>
+            </li>
+            <li class="product-list__item">
+                <div class="product-list__img"><a href="#product" class="fancybox"><img src="img/product-img5.png" alt=""></a>
+                    <div class="panel"><span class="panel__item panel__item_play"><span class="ic ic_play"></span></span><span class="panel__item panel__item_corona"><span class="ic ic_corona"></span></span></div>
+                    <div class="panel panel_top"><span class="panel__item panel__item_ss"><span>ss</span></span></div>
+                </div>
+                <div class="product-list__cont">
+                    <h6 class="product-list__title"><a href="#">Editorial Illustrations #2</a></h6>
+                    <div class="product-panel"><span class="author">от:<a href="#">Si Maclencel </a><span class="ic ic_models-two"></span></span><span class="product-panel__item"><span class="product-panel__icon"><i class="fa fa-download"></i><span>50</span></span><span class="product-panel__icon"><i class="fa fa-comment"></i><span>10</span></span><span class="product-panel__icon"><i class="fa fa-star"></i><span>20</span></span></span></div>
+                </div>
+            </li>
+            <li class="product-list__item">
+                <div class="product-list__img"><a href="#product" class="fancybox"><img src="img/product-img3.png" alt=""></a></div>
+                <div class="product-list__cont">
+                    <h6 class="product-list__title"><a href="#">Editorial Illustrations #2</a></h6>
+                    <div class="product-panel"><span class="author">от:<a href="#">Si Maclencel </a><span class="ic ic_models-one"></span></span><span class="product-panel__item"><span class="product-panel__icon"><i class="fa fa-download"></i><span>50</span></span><span class="product-panel__icon"><i class="fa fa-comment"></i><span>10</span></span><span class="product-panel__icon"><i class="fa fa-star"></i><span>20</span></span></span></div>
+                </div>
+            </li>
+        </ul>#}
+        <div class="box-articles mt10">
+            {% if entities|length > 0 %}
+                {% for e in entities %}
+                    <article class="article">
+                        <div class="box-top">
+                            <div class="box-top__avatar">{% if e.user %}<a href="{{ path('user_view',{nickname:e.user.nickname}) }}"><img src="{{ asset('bundles/app/img/article-avatar.png') }}" alt=""></a>{% endif %}</div>
+                            <div class="box-top__cont">
+                                {% if e.user %}<span class="author">от:<a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ e.user.lvl }}"></span></span>{% endif %}
+                                <h3 class="article__title"><a href="{{ path('articles_item',{id:e.id}) }}">{{ e.name }}</a></h3>
+                                <div>
+                                    <span class="date">{{ e.date|date('d.m.Y') }}</span>
+                                    <span class="product-panel__item">
+                                        <span class="product-panel__icon"><i class="ic ic_eye"></i><span>{{ e.views }}</span></span>
+                                        <span class="product-panel__icon"><i class="fa fa-comment"></i><span>{{ e.comments }}</span></span>
+                                        <span class="product-panel__icon"><i class="fa fa-star"></i><span>{{ e.stars }}</span></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="article__body"><img src="{% path e.image, 'big' %}" alt="" />
+                            <p>
+                                {{ e.preview|nl2br}}
+                            </p>
+                            <p><a href="{{ path('articles_item',{id:e.id}) }}" class="more">Читать дальше...</a></p>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p>Материалы не найдены</p>
+            {% endif %}
+        </div>
+    </div>
+    <aside class="column">
+        <div class="banner">{{ bannerRight() }}</div>
+    </aside>
+{% endblock %}

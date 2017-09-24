@@ -1,0 +1,16 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block title %}{{ page.name }}{% endblock %}
+
+{% block content %}
+    <div class="main-wrap">
+        <div class="main-wrap__header">
+            <h1>{{ page.name }}</h1>
+        </div>
+        <div class="wrap">
+            <div class="text-page">
+                {{ page.text|raw }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

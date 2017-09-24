@@ -1,0 +1,27 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block title %}Поиск по каталогу{% endblock %}
+
+{% block wrapper_class %}catalog{% endblock %}
+
+{% block content_wrapper %}
+
+    <div class="wrapper">
+        <div class="main-wrap catalog">
+            <div class="main-wrap__header">
+                <h1>Поиск по каталогу</h1>
+            </div>
+        </div>
+
+            {% if products|length > 0 %}
+                <ul class="product-list col-4">
+                    {% for e in products %}
+                        {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <div class="product_list--empty">Ничего не найдено.</div>
+            {% endif %}
+
+    </div>
+{% endblock %}

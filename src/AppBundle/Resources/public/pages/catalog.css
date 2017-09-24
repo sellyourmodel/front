@@ -1,0 +1,19 @@
+.sub-cats {
+    padding: 29px 22px;
+}
+.sub-cats__item {
+    margin-right: 12px;
+    color:#8b8b8b;
+    text-decoration: underline;
+}
+
+.sub-cats__item:hover {
+    color:#000;
+    text-decoration: none;
+}
+
+.product_list--empty{
+    padding: 29px 22px;
+    background: #fff;
+    margin-top: 10px;
+}

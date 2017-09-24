@@ -1,0 +1,11 @@
+.login-error{
+    position: relative;
+}
+
+.login-error__text{
+    display: none;
+    position: absolute;
+    top:0;
+    right:0;
+    color: #c91d24;
+}

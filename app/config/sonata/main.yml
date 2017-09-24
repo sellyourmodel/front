@@ -1,0 +1,17 @@
+sonata_admin:
+    title: 'SYM'
+    templates:
+        layout:  SonataAdminBundle::layout.html.twig
+
+    options:
+        use_select2:    true # disable select2
+        pager_links:    5     # pager max links to display
+        title_mode:     'single_text'
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]

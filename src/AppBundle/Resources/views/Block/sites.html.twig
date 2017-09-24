@@ -1,0 +1,5 @@
+<ul id="box-lang" class="lang-list unstyled js-open-block">
+    {% for e in sites %}
+        <li class="lang-list__item"><a href="http://{{ e.name }}/" class="lang-list__link"> <span class="ic ic_flag-{{ e.locale }}"></span></a></li>
+    {% endfor %}
+</ul>

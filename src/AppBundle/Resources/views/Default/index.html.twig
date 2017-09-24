@@ -1,0 +1,65 @@
+{% extends 'AppBundle::_main.html.twig' %}
+
+{% block navblock_style %}display: block;{% endblock %}
+{% block navblock_active_class %}active{% endblock %}
+
+{% block banners %}
+    {% spaceless %}
+        <div class="banners-main">
+            {% for e in banners %}
+                <a href="{{ e.link }}" class="banners-main__item">{{ e.name }}</a>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block content %}
+    <div class="slider__wrapper">
+        <div class="slider__container">
+            <div class="slider">
+                {% for e in slider %}
+                    <div>
+                        <a {% if e.link %}href="{{ e.link }}"{% endif %} class="slide">
+                            <div class="wrapper">
+                                <div class="slide__text">{{ e.line1 }}</div>
+                                <div class="slide__text">{{ e.line2 }}</div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="slider__bg">
+            {% for e in slider %}
+                <div class="slider__bg-item {% if loop.index==1 %}active{% endif %}" style="background-image: url({% path e.image, 'reference' %});{% if loop.index==1 %}display:block;{% endif %}"></div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <div class="box-tab">
+            <div class="tab-wrap">
+                <ul class="nav-tabs-list tabs">
+                    <li class="nav-tabs-list__item active"><a href="#tab_1" class="nav-tabs-list__link">Новое в каталоге</a></li>
+                    <li class="nav-tabs-list__item"><a href="#tab_2" class="nav-tabs-list__link">Лучшее</a></li>
+                </ul>
+                <div class="box-tab-cont">
+                    <div id="tab_1" class="tab-cont">
+                        <ul class="product-list">
+                            {% for e in products %}
+                                {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div id="tab_2" class="tab-cont hide">
+                        <ul class="product-list">
+                            {% for e in productsBest %}
+                                {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

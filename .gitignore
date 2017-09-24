@@ -1,0 +1,31 @@
+/verstka_src/
+/web/css/
+/web/js/
+/web/bundles/
+/web/uploads/*
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/app/phpunit.xml
+/build/
+/vendor/
+/bin/
+/composer.phar
+
+# PHPUnit
+/app/phpunit.xml
+/phpunit.xml
+
+# IDE, Mac AND PHP Settings
+.idea
+php.ini
+.DS_Store
+*.php~
+composer.phar
+
+/local/
+
+tests/_output/*

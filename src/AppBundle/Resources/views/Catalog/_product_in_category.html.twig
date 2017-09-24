@@ -1,0 +1,21 @@
+<li class="product-list__item">
+    <div class="product-list__img">
+        <a href="{{ path('catalog_product',{alias:e.alias}) }}"><img src="{% path e.image, 'big' %}" alt="{{ e.name }}" /></a>
+        <a href="{{ path('catalog_product_popup',{id:e.id}) }}" class="product-list__ajax fancybox fancybox.ajax"></a>
+    </div>
+    <div class="product-list__cont">
+        <h6 class="product-list__title"><a href="{{ path('catalog_product',{alias:e.alias}) }}">{{ e.name }}</a></h6>
+        <div class="product-panel">
+            <span class="author">от:<a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.name }}</a>
+                <span class="ic icon-author-rating icon-author-rating__{{ e.user.lvl }}"></span>
+            </span>
+            <span class="product-panel__item">
+                <span class="product-panel__icon"><i class="product-panel__icon-icon product-panel__icon-icon__downloads"></i><span>{{ e.downloads }}</span>
+                </span>
+                <span class="product-panel__icon"><i class="product-panel__icon-icon product-panel__icon-icon__comments"></i><span>{{ e.comments }}</span>
+                </span>
+                <span class="product-panel__icon"><i class="product-panel__icon-icon product-panel__icon-icon__stars"></i><span>{{ e.stars }}</span></span>
+            </span>
+        </div>
+    </div>
+</li>

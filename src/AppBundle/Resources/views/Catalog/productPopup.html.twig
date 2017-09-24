@@ -1,0 +1,86 @@
+<div id="product" class="window-open">
+    <div class="window-open-cont">
+        <div class="wrap product">
+            <div class="wrap-right">
+                <div class="product-info">
+                    <div class="product-info__header">
+                        <span class="author">от:<a href="{{ path('user_view',{nickname:product.user.nickname}) }}">{{ product.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ product.user.lvl }}"></span></span>
+                        <h1>{{ product.name }}</h1>
+                        {% if product.manufacturer %}
+                            {{ product.manufacturer }}
+                        {% endif %}
+                    </div>
+                    {#<ul class="link-list unstyled">#}
+                        {#<li class="link-list__item"><a href="#" class="link-list__link link">Современный дизайн</a></li>#}
+                        {#<li class="link-list__item"><a href="#" class="link-list__link link">Геометрический дизайн</a></li>#}
+                    {#</ul>#}
+                    <p>
+                       {{ product.text|nl2br }}
+                    </p>
+                    {% if product.software|length > 0 %}
+                        <p>{% for e in product.software %}{{ e.name }}{% if loop.last == false %}, {% endif %}{% endfor %}</p>
+                    {% endif %}
+                    {% if product.tags|length > 0 %}
+                    <ul class="tags-list">
+                        {% for e in product.tags %}
+                            <li class="tags-list__item"><a href="{{ path('catalog_tag', {id:e.id}) }}" class="tags-list__link">{{ e.name }}</a>{% if loop.last == false %}<span>,</span>{% endif %}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <div class="box-rating rating">
+                        <span class="rating__count js-product-likes">{{ product.stars }}</span>
+                        {% if app.user %}
+                            <a href="#" class="product-star {% if alreadyLike %}active{% endif %}" onclick="likeProduct({{ product.id }}, this);return false;"></a>
+                        {% else %}
+                            <span class="product-star"></span>
+                        {% endif %}
+                    </div>
+                    <div class="link-group">
+                        <div class="link-group__item">
+                            <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">В избранно{% if alreadyFavorite %}м{% else %}е{% endif %}</a>
+                        </div>
+                        <div class="link-group__item">
+                            <a href="{{ path('catalog_product', {alias:product.alias}) }}" class="link">Комментировать</a>
+                        </div>
+                    </div>
+                    <div class="box-button"><a href="{{ path('catalog_product', {alias:product.alias}) }}" class="link">Подробнее</a></div>
+
+                    <div class="js-model-files">
+                        {% if app.user %}
+                            {%  if alreadyBuy %}
+                                {% include '@App/Catalog/_product_files.html.twig' %}
+                            {% else %}
+                                {% if product.moderated %}
+                                    <div class="box-button text-center">
+                                        <a href="#" class="link" onclick="buyThisModel(this, {{ product.id }});return false;">Скачать</a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="wrap-left">
+                <div class="product-slider">
+                    <div class="slider-for">
+                        <div class="slider-for__item"><img src="{% path product.image, 'full' %}" alt=""></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+//        setTimeout(function(){
+//            $('.slider-for').slick({
+//                slidesToShow: 1,
+//                slidesToScroll: 1,
+//                fade: true,
+//                asNavFor: '.slider-nav',
+//                adaptiveHeight: true
+//            });
+//        }, 500);
+
+    });
+</script>

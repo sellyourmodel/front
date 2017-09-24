@@ -1,0 +1,5 @@
+{% for e in products %}
+    <a href="{{ path('catalog_product',{alias:e.alias}) }}" class="search__results-item">
+        <img src="{% path e.image, 'big' %}" alt="">{{ e.name }}
+    </a>
+{% endfor %}

@@ -1,0 +1,13 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block title %}{{ entity.name }}{% endblock %}
+
+{% block content %}
+    <div class="text-page">
+        <h1>{{ entity.name }}</h1>
+        <div class="b-news-view">
+            <div class="date">{{ entity.dateStr }}</div>
+            {{ entity.text|raw }}
+        </div>
+    </div>
+{% endblock %}

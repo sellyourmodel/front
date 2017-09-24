@@ -1,0 +1,53 @@
+services:
+    gedmo.listener.timestampable:
+        class: Gedmo\Timestampable\TimestampableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    app.dynamic_routing:
+        class: AppBundle\Routing\DynamicLoader
+        arguments: ["@doctrine.orm.default_entity_manager"]
+        tags:
+            - { name: routing.loader }
+
+    wp_authentication_handler:
+        class:        AppBundle\Handler\AuthenticationHandler
+        arguments:    [@router, @security.context, @fos_user.user_manager, @service_container]
+
+    wp_product.upload_photo_listener:
+        class: AppBundle\EventListener\UploadPhotoListener
+        arguments: [ @service_container, @doctrine.orm.entity_manager,@sonata.media.manager.media ]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload.images, method: onUpload }
+
+    wp_cabinet.upload_photo_listener:
+        class: AppBundle\EventListener\UploadAvatarListener
+        arguments: [ @service_container, @doctrine.orm.entity_manager,@sonata.media.manager.media ]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload.avatars, method: onUpload }
+
+    wp_locale.listener:
+        class: AppBundle\EventListener\LocaleListener
+        arguments: [ @doctrine.orm.entity_manager ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 17 }
+
+    wp.menu:
+        class: AppBundle\Twig\Extension\menuExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.banners:
+        class: AppBundle\Twig\Extension\bannersExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.sites:
+        class: AppBundle\Twig\Extension\sitesExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]

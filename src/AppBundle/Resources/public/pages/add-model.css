@@ -1,0 +1,42 @@
+#crop{
+     width: 400px;
+ }
+
+.window-open#crop .box-form{
+    padding: 30px 64px 17px 54px;
+}
+
+.croppie-wrapper{
+    min-height: 400px;
+}
+
+.require-field-z {
+    color: #c91d24;
+}
+
+.model-files {
+    padding-top: 10px;
+}
+
+.model-files__item{
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 10px;
+}
+
+.model-files__item .fa-close{
+    cursor: pointer;
+}
+
+.add-model__result{
+    display: none;
+}
+.add-model__error{
+    color: #c91d24;
+}
+.add-model__success{
+    color:#3B963D;
+}
+.add-model__error-border{
+    border-color: #c91d24;
+}

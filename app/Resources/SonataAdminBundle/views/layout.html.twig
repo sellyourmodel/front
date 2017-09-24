@@ -1,0 +1,108 @@
+{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}" />
+    <link href="{{ asset('bundles/app/admin/jquery_upload/css/jquery.fileupload.css') }}" rel="stylesheet" type="text/css" />
+    <style>
+
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript" src="{{ asset('bundles/sonatacore/vendor/moment/min/moment-with-locales.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+
+    <script src="{{ asset('bundles/sonatacore/vendor/moment/locale/ru.js') }}"></script>
+
+    <script src="{{ asset('bundles/app/admin/jquery_upload/js/jquery.iframe-transport.js') }}"></script>
+    <script src="{{ asset('bundles/app/admin/jquery_upload/js/jquery.fileupload.js') }}"></script>
+
+    {{ elfinder_tinymce_init4('default') }}
+    {{ tinymce_init() }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('body').delegate('.js-product-type-select','change',function(){
+                $('.js-product-type-hide').hide();
+                $('.js-product-type-' + $(this).val()).show();
+            });
+
+            $('.js-product-type-select').trigger('change');
+
+            $('body').delegate('.js-coupon-select','change',function(){
+                $('.js-hide-panel').hide();
+                $('.js-' + $(this).val()).show();
+            });
+
+            $('.js-coupon-select').trigger('change');
+
+            $('form').on('focus', 'input[type=number]', function (e) {
+                $(this).on('mousewheel.disableScroll', function (e) {
+                    e.preventDefault()
+                })
+            })
+            $('form').on('blur', 'input[type=number]', function (e) {
+                $(this).off('mousewheel.disableScroll')
+            })
+
+        });
+
+
+    </script>
+
+    <script type="text/javascript">
+
+        function goLink(e){
+            var link = $(e).val();
+            if(link != ''){
+                window.location.assign(link);
+            }
+        }
+
+        $(document).ready(function () {
+
+            $('body').delegate('.js-coupon-select','change',function(){
+                $('.js-hide-panel').hide();
+                $('.js-' + $(this).val()).show();
+            });
+
+            $('.js-coupon-select').trigger('change');
+        });
+    </script>
+{% endblock %}
+
+{% block sonata_sidebar_search %}
+
+{% endblock %}
+
+{% block side_bar_after_nav %}
+    <p class="text-center small" style="border-top: 1px solid #d2d6de; padding-top: 10px"><a href="{{ relative_path('/') }}" rel="noreferrer" target="_blank">Перейти на сайт</a></p>
+{% endblock %}
+
+
+{% block sonata_top_nav_menu %}
+    <div class="navbar-right">
+        <ul class="nav navbar-nav">
+             <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-plus-square fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                {% include admin_pool.getTemplate('add_block') %}
+            </li>
+            <li class="dropdown user-menu">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-user">
+                    {% include admin_pool.getTemplate('user_block') %}
+                    <li><a href="{{ path('fos_user_security_logout') }}">Выйти</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% if wo_breadcrumbs()|length %}
+    <ul class="crumbs">
+        {% for b in breadcrumbs %}
+        <li>
+            {% if b.url and not loop.last %}
+                <a href="{{ b.url }}">{{- b.text | trans(b.translationParameters, translation_domain, locale) -}}</a>
+            {% else %}
+                <span>{{- b.text | trans(b.translationParameters, translation_domain, locale) -}}</span>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}

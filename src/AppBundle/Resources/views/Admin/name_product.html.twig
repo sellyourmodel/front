@@ -1,0 +1,6 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    <a href="{{ admin.generateUrl('edit', {id:object.id}) }}" class="sonata-link-identifier">{{ object.name }}</a>
+    {% if object.name1c %}<br />{{ object.name1c }}{% endif %}
+{% endblock %}

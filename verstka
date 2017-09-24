@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd verstka_src
+gulp build
+gulp deploy-copy
+cd ..

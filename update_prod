@@ -1,0 +1,2 @@
+#!/bin/bash
+ssh web@sellyourmodel.com "cd ~/sellyourmodel.com; ./update"

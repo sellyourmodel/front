@@ -1,0 +1,172 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block wrapper_class %}catalog{% endblock %}
+
+{% block content %}
+    <div class="main-wrap__header">
+        <h1>{% trans %}model_add{% endtrans %}</h1>
+    </div>
+    <div class="wrap wrap_small">
+        <div class="wrap-right">
+
+        </div>
+        <div class="wrap-left">
+            <div class="box-form settings">
+                <form action="{{ path('catalog_add_write') }}" class="js-add-model-form" method="POST">
+                    <div class="box-field col-5">
+                        <label class="box-field__label">Название модели <span class="require-field-z">*</span></label>
+                        <div class="box-field__input">
+                            <input type="text" name="name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label">Категория <span class="require-field-z">*</span></label>
+                        <div class="box-field__input">
+                            <select name="category" data-placeholder=" " class="styler form-control">
+                                <option value=""></option>
+                                {% for e in categories %}
+                                    {% for e2 in e.children %}
+                                        <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
+                                    {% endfor %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-field-group user js-image-wrapper js-main-image-drop">
+                        <label class="box-field__label">Обложка модели <span class="require-field-z">*</span></label>
+                        <div class="box-field__input js-image-add-input">
+                            <input type="file" id="fileuploadMainImage" data-placeholder="Фаил не выбран" data-browse="Загрузить файл"
+                                   class="styler">
+                        </div>
+                        <div class="model-files js-main-pic"></div>
+                    </div>
+                    <div class="box-field-group user js-image-wrapper js-add-image-drop">
+                        <label class="box-field__label">Дополнительные изображения модели <span class="require-field-z">*</span></label>
+                        <div class="box-field__input js-add-pic-input">
+                            <input type="file" id="fileuploadAddImages" data-placeholder="Фаил не выбран" data-browse="Загрузить файл"
+                                   class="styler">
+                        </div>
+                        <div class="model-files js-add-pic"></div>
+                    </div>
+                    <div class="box-field-group user js-image-wrapper js-files-drop">
+                        <label class="box-field__label">Файлы модели <span class="require-field-z">*</span></label>
+                        <div class="box-field__input">
+                            <input type="file" id="fileupload" data-placeholder="Фаил не выбран" data-browse="Загрузить файл"
+                                   class="styler">
+                        </div>
+                        <div class="model-files js-model-files"></div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label">Производитель</label>
+                        <div class="box-field__input">
+                            <input type="text" name="manufacturer" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label">Теги</label>
+                        <div class="box-field__input">
+                            <select name="tags[]" multiple class="select2-tags form-control">
+                                {% for e in tags %}
+                                    <option value="{{ e.name }}">{{ e.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label">ПО</label>
+                        <div class="box-field__input">
+                            <select name="software[]" multiple class="select2 form-control">
+                                {% for e in software %}
+                                    <option value="{{ e.id }}">{{ e.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label">Описание</label>
+                        <div class="box-field__input">
+                            <textarea name="text" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="button button_warning js-add-model-btn" onclick="addModel();return false;">Добавить</button>
+                    <span class="help-text inline add-model__result js-add-model-result"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function () {
+
+            $('#fileuploadMainImage').fileupload({
+                url: '{{ oneup_uploader_endpoint('images') }}',
+                dropZone: $(".js-main-image-drop"),
+                formData: { type:'mainImg' },
+                dataType: 'json',
+                loadImageFileTypes: '/^image\/(gif|jpeg|png)$/',
+                sequentialUploads: true,
+                done: function (e, data) {
+                    if(data.result.wp_error){
+                        alert(data.result.wp_error_text);
+                    }
+                    else{
+                        var wrapper = $(e.target).closest('.js-image-wrapper');
+                        wrapper.find('.js-main-pic').append(data.result.wp_container);
+                        wrapper.find('.js-image-add-input').slideUp();
+                    }
+                },
+                progressall: function (e, data) {
+
+                }
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+            $('#fileuploadAddImages').fileupload({
+                url: '{{ oneup_uploader_endpoint('images') }}',
+                dropZone: $(".js-add-image-drop"),
+                formData: { type:'addImg' },
+                dataType: 'json',
+                loadImageFileTypes: '/^image\/(gif|jpeg|png)$/',
+                sequentialUploads: true,
+                done: function (e, data) {
+                    if(data.result.wp_error){
+                        alert(data.result.wp_error_text);
+                    }
+                    else{
+                        var wrapper = $(e.target).closest('.js-image-wrapper');
+                        wrapper.find('.js-add-pic').append(data.result.wp_container);
+                    }
+                },
+                progressall: function (e, data) {
+
+                }
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+            $('#fileupload').fileupload({
+                url: '{{ oneup_uploader_endpoint('images') }}',
+                dropZone: $(".js-files-drop"),
+                formData: { type:'files' },
+                dataType: 'json',
+                loadImageFileTypes: '/^image\/(gif|jpeg|png)$/',
+                sequentialUploads: true,
+                done: function (e, data) {
+                    if(data.result.wp_error){
+                        alert(data.result.wp_error_text);
+                    }
+                    else{
+                        var wrapper = $(e.target).closest('.js-image-wrapper');
+                        wrapper.find('.js-model-files').append(data.result.wp_container);
+                    }
+                },
+                progressall: function (e, data) {
+
+                }
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+
+        });
+    </script>
+{% endblock %}

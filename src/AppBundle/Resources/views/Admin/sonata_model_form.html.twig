@@ -1,0 +1,10 @@
+{% extends 'SonataAdminBundle:Form:form_admin_fields.html.twig' %}
+
+{% block sonata_admin_orm_one_to_many_widget %}
+
+    {% if sonata_admin.name == 'images' %}
+        {% include 'AppBundle:Admin:sonata_model_list.html.twig' %}
+    {%  else %}
+        {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_one_to_many.html.twig' %}
+    {% endif %}
+{% endblock %}

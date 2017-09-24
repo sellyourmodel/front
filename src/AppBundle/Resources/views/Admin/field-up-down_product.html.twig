@@ -1,0 +1,12 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+    {% spaceless %}
+        <a href="{{ path('admin_app_product_up', {'id': object.id}) }}">
+            <img src="{{ asset('bundles/app/images-admin/arrow_up.png') }}" alt="{% trans %}Вверх{% endtrans %}" />
+        </a>
+        <a href="{{ path('admin_app_product_down', {'id': object.id}) }}">
+            <img src="{{ asset('bundles/app/images-admin/arrow_down.png') }}" alt="{% trans %}Вниз{% endtrans %}" />
+        </a>
+    {% endspaceless %}
+{% endblock %}

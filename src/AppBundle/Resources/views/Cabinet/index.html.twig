@@ -1,0 +1,182 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+
+    <div class="main-wrap__header">
+        <h1>Настройки</h1>
+    </div>
+    <div class="wrap wrap_small">
+        <div class="wrap-right">
+            <ul class="wrap-list">
+                <li class="wrap-list__item"><a href="{{ path('cabinet') }}" class="wrap-list__link">Профиль</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_password') }}" class="wrap-list__link">Сменить пароль</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_social') }}" class="wrap-list__link">Соц. профайлы</a></li>
+            </ul>
+        </div>
+        <div class="wrap-left">
+            <div class="box-form settings">
+                <form class="js-settings-form" action="{{ path('cabinet_settings_write') }}" method="POST">
+                    <div class="box-field col-3">
+                        <label class="box-field__label">Ник <span class="require-field-z">*</span></label>
+                        <div class="box-field__input">
+                            <input type="text" class="form-control js-require" name="nickname" value="{{ app.user.nickname }}" />
+                        </div>
+                    </div>
+                    {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                        <div class="box-field col-1">
+                            <label class="box-field__label">Уровень</label>
+                            <div class="box-field__input">
+                                <select name="lvl" data-placeholder=" " class="styler form-control">
+                                    <option value="" {% if app.user.lvl == '' %}selected{% endif %}>Без побед</option>
+                                    <option value="lvl1" {% if app.user.lvl == 'lvl1' %}selected{% endif %}>10 побед</option>
+                                    <option value="lvl2" {% if app.user.lvl == 'lvl2' %}selected{% endif %}>20 побед</option>
+                                    <option value="lvl3" {% if app.user.lvl == 'lvl3' %}selected{% endif %}>30 побед</option>
+                                    <option value="lvl4" {% if app.user.lvl == 'lvl4' %}selected{% endif %}>40 побед</option>
+                                    <option value="lvl5" {% if app.user.lvl == 'lvl5' %}selected{% endif %}>50 побед</option>
+                                    <option value="lvl6" {% if app.user.lvl == 'lvl6' %}selected{% endif %}>60 побед</option>
+                                    <option value="lvl7" {% if app.user.lvl == 'lvl7' %}selected{% endif %}>70 побед</option>
+                                    <option value="lvl8" {% if app.user.lvl == 'lvl8' %}selected{% endif %}>80 побед</option>
+                                    <option value="lvl9" {% if app.user.lvl == 'lvl9' %}selected{% endif %}>100 побед</option>
+                                </select>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="box-field-group user js-image-wrapper">
+                        <label class="box-field__label">Аватар</label>
+                        <div class="box-field col-1">
+                            <div class="user__avatar"><img src="{% if app.user.image %}{% path app.user.image, 'big' %}{% else %}{{ asset('bundles/app/img/user-avatar.png') }}{% endif %}" class="js-image" alt=""></div>
+                        </div>
+                        <div class="box-field col-5">
+                            <div class="user__add-avatar">
+                                <div class="box-field__input">
+                                    <input type="file" id="fileupload" data-placeholder="Файл не выбран"
+                                           data-browse="Выберите файл" class="styler">
+                                </div>
+                                <div class="box-field__input">
+                                    <span class="help-text inline">Максимально допустимый размер 100x100px</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-field-group">
+                        <div class="box-field col-3">
+                            <label class="box-field__label">Имя <span class="require-field-z">*</span></label>
+                            <div class="box-field__input">
+                                <input type="text" class="form-control js-require" name="i" value="{{ app.user.i }}" />
+                            </div>
+                        </div>
+                        <div class="box-field col-3">
+                            <label class="box-field__label">Фамилия <span class="require-field-z">*</span></label>
+                            <div class="box-field__input">
+                                <input type="text" class="form-control js-require" name="f" value="{{ app.user.f }}" />
+                            </div>
+                        </div>
+                        <div class="box-field col-3">
+                            <label class="box-field__label">Дата рождения</label>
+                            <div class="box-field__input">
+                                <input type="text" class="form-control js-date" name="birthdate" value="{% if app.user.birthdate %}{{ app.user.birthdate|date('d.m.Y') }}{% endif %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-field col-4">
+                        <label class="box-field__label">E-mail <span class="require-field-z">*</span></label>
+                        <div class="box-field__input">
+                            <input type="email" class="form-control js-require" name="email" value="{{ app.user.email }}" />
+                        </div>
+                    </div>
+                    <div class="box-field col-1">
+                        <label class="box-field__label">Пол</label>
+                        <div class="box-field__input">
+                            <select name="gender" data-placeholder=" " class="styler form-control">
+                                <option value=""></option>
+                                <option value="m" {% if app.user.gender == 'm' %}selected{% endif %}>Мужской</option>
+                                <option value="f" {% if app.user.gender == 'f' %}selected{% endif %}>Женский</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box-field-group">
+                        <div class="box-field col-3">
+                            <label class="box-field__label">Язык</label>
+                            <div class="box-field__input">
+                                <select name="languages[]" multiple class="select2 form-control">
+                                    {% for e in languages %}
+                                    <option value="{{ e.id }}" {% if e.id in app.user.languages %}selected{% endif %}>{{ e.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label">Специализация</label>
+                        <div class="box-field__input">
+                            <input type="text" class="form-control" name="specialization" value="{{ app.user.specialization }}" />
+                        </div>
+                    </div>
+                    <div class="box-field-group">
+                        <label class="box-field__label">Место проживания</label>
+                        <div class="box-field col-2">
+                            <div class="box-field__input">
+                                <select name="country" data-placeholder="Страна" class="styler form-control">
+                                    <option value=""></option>
+                                    {% for e in countries %}
+                                        <option value="{{ e.id }}" {% if e == app.user.country %}selected{% endif %}>{{ e.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="box-field col-2">
+                            <div class="box-field__input">
+                                <input type="text" class="form-control" placeholder="Город" name="city" value="{{ app.user.city }}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-field col-5">
+                        <label class="box-field__label"> О себе</label>
+                        <div class="box-field__input">
+                            <textarea name="text" class="form-control">{{ app.user.text }}</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="button button_warning" onclick="saveSettings();return false;">Изменить</button>
+                    <span class="help-text inline settings__result js-settings-result"></span>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        $(function () {
+            $('#fileupload').fileupload({
+                url: '{{ oneup_uploader_endpoint('avatars') }}',
+                formData: {  },
+                dataType: 'json',
+                loadImageFileTypes: '/^image\/(gif|jpeg|png)$/',
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 999000,
+                // The maximum width of resized images:
+                imageMaxWidth: 100,
+                // The maximum height of resized images:
+                imageMaxHeight: 100,
+                imageCrop: true,
+                sequentialUploads: true,
+                disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator.userAgent),
+                done: function (e, data) {
+                    if(data.result.wp_error){
+                        alert(data.result.wp_error_text);
+                    }
+                    else{
+                        var wrapper = $(e.target).closest('.js-image-wrapper');
+                        wrapper.find('.js-image').attr('src',data.result.wp_file);
+
+                    }
+                },
+                progressall: function (e, data) {
+
+                }
+            }).prop('disabled', !$.support.fileInput)
+                .parent().addClass($.support.fileInput ? undefined : 'disabled');
+        });
+    </script>
+{% endblock %}
