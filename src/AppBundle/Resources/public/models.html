@@ -3,28 +3,29 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>SELLYOURMODELS - Главная</title>
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.rating.css">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- [if lt IE 9]--><script src="js/html5.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css?1506867128593">
+    <link rel="stylesheet" type="text/css" href="/css/jquery.rating.css?1506867128593">
+    <link rel="stylesheet" type="text/css" href="/css/style.css?1506867128593">
+    <!-- [if lt IE 9]--><script src="/js/html5.js?1506867128593"></script>
     <!-- [endif]		-->
   </head>
   <body>
     <!-- BEGIN BODY -->
     <div class="main-wrapper">
-      <!-- BEGIN HEADER-->
+      <!-- BEGIN HEADER--><a href="/links.html" style="width: 100%; height: 50px; display: block;">Все ссылки</a>
       <header>
         <div class="wrapper">
           <div class="header-top"><a href="#" class="logo"><img src="img/svg/logo.svg" class="logo__svg"></a>
+            <button class="box-nav-list-burger"><span>Открыть меню</span></button>
             <nav class="box-nav-list">
               <ul class="nav-list unstyled">
                 <li class="nav-list__item"><a href="#" class="nav-list__link"><span>О нас</span></a></li>
                 <li class="nav-list__item"><a href="#" class="nav-list__link"><span>Продавайте 3D модели</span></a></li>
                 <li class="nav-list__item"><a href="#" class="nav-list__link"><span>Сообщество</span></a></li>
                 <li class="nav-list__item"><a href="#" class="nav-list__link"><span>Поддержка</span></a></li>
-                <li class="nav-list__item"><a href="#" data-target="#box-lang" class="nav-list__link arrow-down js-link-open"><span>Язык:</span><span class="nav-list__icon"><span class="ic ic_flag-ru"></span></span></a>
+                <li class="nav-list__item nav-list__item_lang"><a href="#" data-target="#box-lang" class="nav-list__link arrow-down js-link-open"><span>Язык:</span><span class="nav-list__icon"><span class="ic ic_flag-ru"></span></span></a>
                   <ul id="box-lang" class="lang-list unstyled js-open-block">
                     <li class="lang-list__item"><a href="#" class="lang-list__link"> <span class="ic ic_flag-ru"></span></a></li>
                     <li class="lang-list__item"><a href="#" class="lang-list__link"> <span class="ic ic_flag-en"></span></a></li>
@@ -34,14 +35,14 @@
             </nav>
           </div>
           <div class="header-bottom">
-            <div class="header-table"><a href="#" data-target="#nav" class="header-table__item js-link-open models"><span class="models__text arrow-down">3D models</span></a>
+            <div class="header-table"><a href="#" data-target="#nav" class="header-table__item js-link-open models"><span class="models__text arrow-down"><span>3D models</span></span></a>
               <div class="header-table__item search">
                 <form> 
                   <input type="text" placeholder="Поиск" class="search__input form-control">
                   <input type="submit" value="" class="search__button">
                 </form>
-              </div><a href="#login" class="header-table__item link-login fancybox"><span>Войти </span></a><a href="#" class="header-table__item link-registr"><span>Регистрация</span></a><a href="#" class="header-table__item add-models hidden"><span>Add 3d model</span></a>
-              <div class="header-table__item mini-profile hidden"><a href="#" class="mini-profile__img"><img src="img/user.png" alt=""></a><a href="#" data-target="#nav-profile" class="mini-profile__link js-link-open"> <span class="arrow-down">Alexander<span class="ic ic_models-two"></span></span></a></div>
+              </div>
+              <div data-target="#nav-profile" class="header-table__item mini-profile js-link-open active"><a href="#" class="mini-profile__img"><img src="img/user.png" alt=""></a><a href="#" class="mini-profile__link"> <span class="arrow-down mini-profile__link-login-wrapper"><span class="mini-profile__link-login-name">Иванов Алексей</span><span class="ic ic_models-two"></span></span></a></div>
             </div>
             <div id="nav" class="navigation js-open-block">
               <div class="navigation-table">
@@ -167,29 +168,30 @@
               </div>
             </div>
             <div id="nav-profile" class="nav-profile js-open-block">
-              <ul class="nav-profile-list unstyled">
-                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Публичный Профаил</a></li>
-                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Настройки</a></li>
-                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Уведомления<span class="kbd">2</span></a></li>
-                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Выход</a></li>
-              </ul>
               <div class="nav-profile-wrap">
-                <div class="nav-profile__item">
+                <div class="nav-profile__item nav-profile__item_loaded">
                   <div class="nav-profile__title"><a href="#">Загруженные модели</a></div>
                   <div class="nav-profile__count">10</div>
                   <div class="nav-profile__footer">      <span class="delspin"><a href="#">Просмотры</a><span class="kbd">150</span></span><span class="delspin"><a href="#">Коментарии</a><span class="kbd">100 / 3</span></span></div>
                 </div>
-                <div class="nav-profile__item">
+                <div class="nav-profile__item nav-profile__item_sales">
                   <div class="nav-profile__title"><a href="#">Текущие продажи</a><span class="simbol">?</span></div>
                   <div class="nav-profile__count">$10</div>
                   <div class="nav-profile__footer"><span class="delspin"><a href="#">Общие продажи</a><span class="kbd">$100</span></span></div>
                 </div>
-                <div class="nav-profile__item">
+                <div class="nav-profile__item nav-profile__item_available">
                   <div class="nav-profile__title"><a href="#">Доступно моделей</a><span class="simbol">?</span></div>
                   <div class="nav-profile__count">10</div>
                   <div class="nav-profile__footer"><span class="delspin"><a href="#">Покупки</a></span><span class="delspin"><a href="#">Избранное</a><span class="kbd">50</span></span></div>
                 </div>
               </div>
+              <ul class="nav-profile-list unstyled">
+                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Публичный Профаил</a></li>
+                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Настройки</a></li>
+                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Добавить 3D модель</a></li>
+                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Уведомления<span class="kbd">2</span></a></li>
+                <li class="nav-profile-list__item"><a href="#" class="nav-profile-list__link">Выход</a></li>
+              </ul>
             </div>
           </div>
         </div>
@@ -440,7 +442,7 @@
           <div class="footer-wrapper">
             <div class="footer__item col-1">
               <h4 class="footer__title">Кратко о SYM</h4>
-              <p class="mt7">SYM- это торговая площадка, где вы можете покупать и <br> продавать 3D модели, текстуры, плагины для различных <br> проектов. Наш магазин начал свою работу в Феврале 2004 <br> года, и сегодня мы являемся одним из крупнейших поставщиков 3D контента в мире. У нас только качественные 3D <br> модели!</p>
+              <p class="mt7">SYM- это торговая площадка, где вы можете покупать и продавать 3D модели, текстуры, плагины для различных проектов. Наш магазин начал свою работу в Феврале 2004 года, и сегодня мы являемся одним из крупнейших поставщиков 3D контента в мире. У нас только качественные 3D модели!</p>
             </div>
             <div class="footer__item col-2">
               <h4 class="footer__title">О проекте</h4>
@@ -591,7 +593,7 @@
     </div>
     <!-- BODY EOF  -->
     
-    <script type="text/javascript" src="js/libs.min.js"></script>
-    <script type="text/javascript" src="js/custom.js"></script>
+    <script type="text/javascript" src="/js/libs.min.js?1506867128596"></script>
+    <script type="text/javascript" src="/js/custom.js?1506867128596"></script>
   </body>
 </html>

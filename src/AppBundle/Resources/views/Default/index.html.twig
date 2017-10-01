@@ -21,8 +21,8 @@
                     <div>
                         <a {% if e.link %}href="{{ e.link }}"{% endif %} class="slide">
                             <div class="wrapper">
-                                <div class="slide__text">{{ e.line1 }}</div>
-                                <div class="slide__text">{{ e.line2 }}</div>
+                                <div class="slide__text">{{ e.line1 | striptags('<strong>,<div>,<a>,<img>') | raw }}</div>
+                                <div class="slide__text">{{ e.line2 | striptags('<strong>,<div>,<a>,<img>') | raw }}</div>
                             </div>
                         </a>
                     </div>
