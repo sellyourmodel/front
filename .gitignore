@@ -22,7 +22,7 @@
 # IDE, Mac AND PHP Settings
 .idea
 php.ini
-.DS_Store
+*.DS_Store
 *.php~
 composer.phar
 
