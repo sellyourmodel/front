@@ -27,5 +27,6 @@ php.ini
 composer.phar
 
 /local/
+/logs
 
 tests/_output/*
