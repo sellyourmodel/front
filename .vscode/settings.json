@@ -1,0 +1,10 @@
+{
+  "macros": {
+    "addTmpMacro": [
+      "editor.action.clipboardCopyAction",
+      {"command": "type", "args": {"text": "{% trans %}"}},
+      "editor.action.clipboardPasteAction",
+      {"command": "type", "args": {"text": "{% endtrans %}"}}
+    ]
+  }
+}
