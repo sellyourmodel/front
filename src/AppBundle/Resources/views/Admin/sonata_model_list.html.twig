@@ -136,7 +136,7 @@ file that was distributed with this source code.
                         <!-- The fileinput-button span is used to style the file input field as button -->
                     <span class="btn btn-success btn-sm sonata-ba-action fileinput-button">
                         <i class="fa fa-plus-circle"></i>
-                        <span>Добавить несколько</span>
+                        <span>{% trans %}add_more{% endtrans %}</span>
                         <!-- The file input field used as target for the file upload widget -->
                         <input id="fileupload" type="file" name="files[]" multiple>
                     </span>
@@ -150,7 +150,7 @@ file that was distributed with this source code.
             </div>
             <!-- The container for the uploaded files -->
             <div class="load_errors well" style="display: none;margin-top:10px;">
-                <div>Ошибки:</div>
+                <div>{% trans %}errors{% endtrans %}:</div>
                 <div id="files" class="files"></div>
             </div>
             <div class="js-images-load" style="margin-top:10px;"></div>
@@ -168,7 +168,7 @@ file that was distributed with this source code.
                                 $('<p/>').text(data.result.wp_error_text).appendTo('#files');
                             }
                             else{
-                                $('<p/>').text(data.result.wp_file + " - загружен").appendTo('.js-images-load');
+                                $('<p/>').text(data.result.wp_file + " - {% trans %}loaded{% endtrans %}").appendTo('.js-images-load');
                             }
                             console.log(data.result);
                         },
