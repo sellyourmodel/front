@@ -14,32 +14,31 @@
             </ol>
         </div>
         <div class="wrap-left">
-            <p>Хотите делать покупки гораздо быстрей? Купите предоплачиваемые Кредиты и скачивайте товары по
-                одному клику! <br> Сколько Кредитов вы хотите купить?</p>
-            <p>Депозит производится в $USD долларах и не подлежит возврату. Купленные Кредиты вы сможете
-                использовать только для покупки товаров в сети магазинов NetrinoMedia!</p>
+            {% for left_info in cabinet_buy['left_info']|keys %}
+                <p>{{ cabinet_buy['left_info'][left_info]|trans|raw }}</p>
+            {% endfor %}
             <div class="box-form payment">
                 <form action="#">
                     <dl class="box-label">
-                        <dt class="box-label__title">Доступно 3d моделей</dt>
+                        <dt class="box-label__title">{% trans %}available_3d_models{% endtrans %}</dt>
                         <dd class="box-label__cont">{{ app.user.models }}</dd>
-                        <dt class="box-label__title mb25">Выберите количество покупаемых 3d моделей:</dt>
+                        <dt class="box-label__title mb25">{% trans %}select_number_purchased{% endtrans %}:</dt>
                         <dd class="box-label__cont mb25">
                             <input type="text" value="10" class="box-label__input js-buy-count" onchange="setBuyCount({{ settings.modelPrice }});" />
                         </dd>
-                        <dt class="box-label__title mb25">Сумма заказа:</dt>
-                        <dd class="box-label__cont mb25"><span class="count js-buy-count">{{ 10 * settings.modelPrice }}</span> руб.</dd>
+                        <dt class="box-label__title mb25">{% trans %}order_price{% endtrans %}:</dt>
+                        <dd class="box-label__cont mb25"><span class="count js-buy-count">{{ 10 * settings.modelPrice }}</span> {% trans %}currency_rub{% endtrans %}.</dd>
                     </dl>
                     <div class="box-field checkbox mb20">
                         <div class="box-field__input">
                             <input type="checkbox" id="buy-rules" class="styler" />
                             <label for="buy-rules" class="box-field__label">
-                                Я согласен с
-                                <a href="{{ path('page_7') }}" target="_blank" class="link">пользовательским соглашением</a>
+                                {% trans %}i_agree_with{% endtrans %}
+                                <a href="{{ path('page_7') }}" target="_blank" class="link">{% trans %}user_agreement{% endtrans %}</a>
                             </label>
                         </div>
                     </div>
-                    <button type="button" class="button button_warning" onclick="buyModels();return false;">Купить</button>
+                    <button type="button" class="button button_warning" onclick="buyModels();return false;">{% trans %}buy{% endtrans %}</button>
                     <span class="help-text inline settings__result js-buy-models-result"></span>
                     {#<h4 class="box-form__title">Выберите способ оплаты</h4
                     <div class="payment__button-group">

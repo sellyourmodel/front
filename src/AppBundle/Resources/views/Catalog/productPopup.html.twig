@@ -37,13 +37,13 @@
                     </div>
                     <div class="link-group">
                         <div class="link-group__item">
-                            <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">В избранно{% if alreadyFavorite %}м{% else %}е{% endif %}</a>
+                            <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">{% if alreadyFavorite %}{% trans %}added_to_favourite{% endtrans %}{% else %}{% trans %}add_to_favourite{% endtrans %}{% endif %}</a>
                         </div>
                         <div class="link-group__item">
-                            <a href="{{ path('catalog_product', {alias:product.alias}) }}" class="link">Комментировать</a>
+                            <a href="{{ path('catalog_product', {alias:product.alias}) }}" class="link">{% trans %}comment{% endtrans %}</a>
                         </div>
                     </div>
-                    <div class="box-button"><a href="{{ path('catalog_product', {alias:product.alias}) }}" class="link">Подробнее</a></div>
+                    <div class="box-button"><a href="{{ path('catalog_product', {alias:product.alias}) }}" class="link">{% trans %}learn_more{% endtrans %}</a></div>
 
                     <div class="js-model-files">
                         {% if app.user %}
@@ -52,7 +52,7 @@
                             {% else %}
                                 {% if product.moderated %}
                                     <div class="box-button text-center">
-                                        <a href="#" class="link" onclick="buyThisModel(this, {{ product.id }});return false;">Скачать</a>
+                                        <a href="#" class="link" onclick="buyThisModel(this, {{ product.id }});return false;">{% trans %}download{% endtrans %}</a>
                                     </div>
                                 {% endif %}
                             {% endif %}

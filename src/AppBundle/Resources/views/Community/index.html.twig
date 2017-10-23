@@ -1,12 +1,12 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}Сообщество{% endblock %}
+{% block title %}{% trans %}community{% endtrans %}{% endblock %}
 
 {% block content %}
     <div class="content-wrap column">
         <div class="main-wrap">
             <div class="main-wrap__header">
-                <h1>Сообщество</h1>
+                <h1>{% trans %}community{% endtrans %}</h1>
             </div>
             <div class="main-wrap__body">
                 <p>
@@ -24,8 +24,8 @@
                 {% if app.user %}
 
                 {% else %}
-                    <a href="#login" class="button button_warning main-button fancybox">Войти</a>
-                    <p><a href="{{ path('registration') }}" class="link">Регистрация</a><span class="devider">|   </span><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                    <a href="#login" class="button button_warning main-button fancybox">{% trans %}auth{% endtrans %}</a>
+                    <p><a href="{{ path('registration') }}" class="link">{% trans %}registration{% endtrans %}</a><span class="devider">|   </span><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
                 {% endif %}
             </div>
         </div>
@@ -74,7 +74,7 @@
                         <div class="box-top">
                             <div class="box-top__avatar">{% if e.user %}<a href="{{ path('user_view',{nickname:e.user.nickname}) }}"><img src="{{ asset('bundles/app/img/article-avatar.png') }}" alt=""></a>{% endif %}</div>
                             <div class="box-top__cont">
-                                {% if e.user %}<span class="author">от:<a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ e.user.lvl }}"></span></span>{% endif %}
+                                {% if e.user %}<span class="author">{% trans %}product_from{% endtrans %} :<a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ e.user.lvl }}"></span></span>{% endif %}
                                 <h3 class="article__title"><a href="{{ path('articles_item',{id:e.id}) }}">{{ e.name }}</a></h3>
                                 <div>
                                     <span class="date">{{ e.date|date('d.m.Y') }}</span>
@@ -90,12 +90,12 @@
                             <p>
                                 {{ e.preview|nl2br}}
                             </p>
-                            <p><a href="{{ path('articles_item',{id:e.id}) }}" class="more">Читать дальше...</a></p>
+                            <p><a href="{{ path('articles_item',{id:e.id}) }}" class="more">{% trans %}readmore{% endtrans %}</a></p>
                         </div>
                     </article>
                 {% endfor %}
             {% else %}
-                <p>Материалы не найдены</p>
+                <p>{% trans %}materials_not_found{% endtrans %}</p>
             {% endif %}
         </div>
     </div>

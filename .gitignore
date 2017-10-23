@@ -24,7 +24,7 @@ php.ini
 *.DS_Store
 *.php~
 composer.phar
-./vscode
+.vscode
 
 /local/
 /logs

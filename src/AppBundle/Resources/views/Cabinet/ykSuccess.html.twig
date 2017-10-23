@@ -2,16 +2,16 @@
 
 {% block content %}
     <div class="main-wrap__header">
-        <h1>Покупка моделей</h1>
+        <h1>{% trans %}buying_models_header{% endtrans %}</h1>
     </div>
     <div class="wrap">
         <div class="wrap-right">
 
         </div>
         <div class="wrap-left">
-            <p>Ваш платеж принят в обработку.</p>
+            <p>{% trans %}payment_go_to_treatment{% endtrans %}</p>
             <p>
-                <a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="button button_warning">Перейти в личный кабинет</a>
+                <a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="button button_warning">{% trans %}go_to_profile{% endtrans %}</a>
             </p>
         </div>
     </div>
