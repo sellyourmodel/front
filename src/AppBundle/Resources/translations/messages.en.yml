@@ -18,21 +18,20 @@ learn_more: Learn more
 no_items_found: No items found
 buying_models: Buying models
 helpful_information: Helpful information
-cabinet_buy:
-healful_info:
-  - "The minimum purchase quantity is 2 PRO."
-  - "PRO is charged at a time and has no time limit."
-  - "30 FREE is charged every day within the paid period."
-  - "When paying through terminals and other offline ways - the access time can reach 3 days."
-  - "Payment by bank card is for CIS countries only."
-  - "Payment through terminals is for Russia only."
-  - "In case of loss of the pro-model or unsuccessful downloading - restore it in the purchase history."
-  - "If you already have PRO-accesses - the subsequent purchase is summarized."
-  - "For corporate clients. The minimum order is 1000 accesses PROFI. Execution of the contract and non-cash payment. For details, please contact support."
-  - "Support service. When applying, be sure to specify the order number."
-left_info:
-  - "Do you want to shop much faster? Buy prepaid Loans and download products one click! <br> How many Loans do you want to buy?"
-  - "The deposit is made in $ USD dollars and is non-refundable. Bought credits you can use only to buy goods in the network of stores NetrinoMedia!"
+
+cabinet_buy_healful_info_l1: The minimum purchase quantity is 2 PRO.
+cabinet_buy_healful_info_l2: PRO is charged at a time and has no time limit.
+cabinet_buy_healful_info_l3: 30 FREE is charged every day within the paid period.
+cabinet_buy_healful_info_l4: When paying through terminals and other offline ways - the access time can reach 3 days.
+cabinet_buy_healful_info_l5: Payment by bank card is for CIS countries only.
+cabinet_buy_healful_info_l6: Payment through terminals is for Russia only.
+cabinet_buy_healful_info_l7: In case of loss of the pro-model or unsuccessful downloading - restore it in the purchase history.
+cabinet_buy_healful_info_l8: If you already have PRO-accesses - the subsequent purchase is summarized.
+cabinet_buy_healful_info_l9: For corporate clients. The minimum order is 1000 accesses PROFI. Execution of the contract and non-cash payment. For details, please contact support.
+cabinet_buy_healful_info_l10: Support service. When applying, be sure to specify the order number.
+cabinet_buy_left_info_l1: Do you want to shop much faster? Buy prepaid Loans and download products one click! <br> How many Loans do you want to buy?
+cabinet_buy_left_info_l2: The deposit is made in $ USD dollars and is non-refundable. Bought credits you can use only to buy goods in the network of stores NetrinoMedia!
+
 available_3d_models: Available 3d models
 select_number_purchased: Select the number of 3d models to be purchased
 order_price: Order price

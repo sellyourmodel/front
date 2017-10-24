@@ -8,15 +8,22 @@
         <div class="wrap-right">
             <h4 class="wrap__title">{% trans %}helpful_information{% endtrans %}</h4>
             <ol class="list">
-                {% for healpful_line in cabinet_buy['healful_info']|keys %}
-                    <li>{{ cabinet_buy['healful_info'][healpful_line]|trans|raw }}</li>
-                {% endfor %}
+                <li>{% trans %}cabinet_buy_healful_info_l1{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l2{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l3{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l4{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l5{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l6{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l7{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l8{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l9{% endtrans %}</li>
+                <li>{% trans %}cabinet_buy_healful_info_l10{% endtrans %}</li>
             </ol>
         </div>
         <div class="wrap-left">
-            {% for left_info in cabinet_buy['left_info']|keys %}
-                <p>{{ cabinet_buy['left_info'][left_info]|trans|raw }}</p>
-            {% endfor %}
+            <p>{% trans %}cabinet_buy_left_info_l1{% endtrans %}</p>
+            <p>{% trans %}cabinet_buy_left_info_l2{% endtrans %}</p>
+            
             <div class="box-form payment">
                 <form action="#">
                     <dl class="box-label">
