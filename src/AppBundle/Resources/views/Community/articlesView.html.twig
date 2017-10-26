@@ -6,7 +6,7 @@
     <div class="content-wrap column">
         <div class="main-wrap">
             <div class="main-wrap__header">
-                <h1>Статьи</h1>
+                <h1>{% trans %}articles{% endtrans %}</h1>
             </div>
         </div>
         <div class="box-articles mt10">
@@ -15,7 +15,7 @@
                     <div class="box-top__avatar">{% if entity.user %}<a href="{{ path('user_view',{nickname:entity.user.nickname}) }}"><img
                                     src="{{ asset('bundles/app/img/article-avatar.png') }}" alt=""></a>{% endif %}</div>
                     <div class="box-top__cont">
-                        {% if entity.user %}<span class="author">от:<a
+                        {% if entity.user %}<span class="author">{% trans %}product_from{% endtrans %}:<a
                                     href="{{ path('user_view',{nickname:entity.user.nickname}) }}">{{ entity.user.name }}</a><span
                                     class="ic ic_models-one"></span></span>{% endif %}
                         <h3 class="article__title"><a href="{{ path('articles_item',{id:entity.id}) }}">{{ entity.name }}</a></h3>

@@ -2,9 +2,9 @@
 
 {% block content %}
     <div class="text-page">
-        <h1>Отписаться от рассылки</h1>
-        <p class="js-unsubscribe-result">Вы действительно хотите отписать e-mail <strong>{{ subscribe.email }}</strong> от рассылки?</p>
+        <h1>{% trans %}subscribe_unsubscribe{% endtrans %}</h1>
+        <p class="js-unsubscribe-result">{% trans %}subscribe_question_1{% endtrans %} <strong>{{ subscribe.email }}</strong> {% trans %}subscribe_question_2{% endtrans %}</p>
         <div class="js-unsubscribe-error unsubscribe-error"></div>
-        <a href="#" class="unsubscribe__btn" onclick="unsubscribe('{{ subscribe.code }}');return false;">Отписаться</a>
+        <a href="#" class="unsubscribe__btn" onclick="unsubscribe('{{ subscribe.code }}');return false;">{% trans %}subscribe_unsubscribe_action{% endtrans %}</a>
     </div>
 {% endblock %}

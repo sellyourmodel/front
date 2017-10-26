@@ -78,13 +78,13 @@
             <div class="sonata-ba-list col-md-3 wp-catalog-categories">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h4 class="box-title">Разделы</h4>
+                        <h4 class="box-title">{% trans %}sections{% endtrans %}</h4>
                     </div>
 
                     <div class="box-body">
                         <ul class="sidebar-menu">
                             <a href="{{ admin.generateUrl('list') }}">
-                                <span>Новые товары из 1С</span>
+                                <span>{% trans %}new_1c_products{% endtrans %}</span>
                             </a>
                             <hr />
                             {% for e in categories %}

@@ -1,39 +1,30 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}Регистрация{% endblock %}
+{% block title %}{% trans %}registration_header{% endtrans %}{% endblock %}
 
 {% block content %}
     <div class="main-wrap">
         <div class="main-wrap__header">
-            <h1>Регистрация</h1>
+            <h1>{% trans %}registration_header{% endtrans %}</h1>
         </div>
         <div class="wrap">
             <div class="wrap-right">
-                <h4 class="wrap__title">Полезная информация</h4>
+                <h4 class="wrap__title">{% trans %}helpful_information{% endtrans %}</h4>
                 <ol class="list">
-                    <li>Минимальное колличество покупки - 2 PRO.</li>
-                    <li>PRO начисляется единовременно и не имеет ограничения во времени скачивания.</li>
-                    <li>30 FREE начисляется каждый день в рамках оплаченного срока.</li>
-                    <li>При оплате через терминалы и другие оффлайн способы - срок получения доступа может достигать 3-х
-                        дней.
-                    </li>
-                    <li>Оплата с помощью банковской карты - только для стран СНГ.</li>
-                    <li>Оплата через терминалы - только для России.</li>
-                    <li>В случае утери pro-модели или неудачном скачаивании - восстановить её в истории покупок.</li>
-                    <li>Если у вас уже есть PRO-доступы - последуюшая покупка суммируется.</li>
-                    <li>Для корпоративных клиентов. Минимальный заказ 1000 доступов PROFI. Оформление договора и
-                        безналичный расчет. Для уточнения деталей обращайтесь в службу поддержки.
-                    </li>
-                    <li>Служба поддержки. При обращении обязательно указывайте номер заказа!</li>
-                </ol>
-                <ol>
-                    <li>Минимальное колличество покупки - 2 PRO.</li>
-                    <li>PRO начисляется единовременно и не имеет ограничения во времени скачивания.</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l1{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l2{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l3{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l4{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l5{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l6{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l7{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l8{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l9{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l10{% endtrans %}</li>
                 </ol>
             </div>
             <div class="wrap-left">
-                <p>Хотите делать покупки гораздо быстрей? Купите предоплачиваемые Кредиты и скачивайте товары по одному
-                    клику!</p>
+                <p>{% trans %}registration_left{% endtrans %}</p>
                 <div class="box-form registration">
                     <form action="{{ path("registration_write") }}" method="POST" class="js-registration">
                         <div class="box-field registration-error">
@@ -44,25 +35,25 @@
                             </div>
                         </div>
                         <div class="box-field">
-                            <label class="box-field__label">Никнейм</label>
+                            <label class="box-field__label">{% trans %}registration_nickname{% endtrans %}</label>
                             <div class="box-field__input">
                                 <input type="text" name="nickname" class="form-control js-required" />
                             </div>
                         </div>
                         <div class="box-field">
-                            <label class="box-field__label">Пароль</label>
+                            <label class="box-field__label">{% trans %}registration_password{% endtrans %}</label>
                             <div class="box-field__input">
                                 <input type="password" name="password" class="form-control js-required">
                             </div>
                         </div>
                         <div class="box-field">
-                            <label class="box-field__label">Повторите пароль</label>
+                            <label class="box-field__label">{% trans %}registration_repeat_password{% endtrans %}</label>
                             <div class="box-field__input">
                                 <input type="password" name="password_repeat" class="form-control js-required">
                             </div>
                         </div>
                         <div class="box-field captcha">
-                            <label class="box-field__label">Вы человек?</label>
+                            <label class="box-field__label">{% trans %}registration_captcha{% endtrans %}</label>
                             <div class="box-field__input">
                                 <div class="g-recaptcha" data-sitekey="6LdrISYUAAAAAAzaB7Nm4xys2M8CZK81QebXWmN_"></div>
                             </div>
@@ -70,18 +61,18 @@
                         <div class="box-field checkbox nowrap">
                             <div class="box-field__input">
                                 <input type="checkbox" id="check_1" class="styler">
-                                <label for="check_1" class="nowrap box-field__label">Я согласен с <a href="#" class="link">пользовательским соглашением</a></label>
+                                <label for="check_1" class="nowrap box-field__label">{% trans %}i_agree_with{% endtrans %} <a href="#" class="link">{% trans %}user_agreement{% endtrans %}</a></label>
                             </div>
                         </div>
                         <button type="submit" class="button button_warning button_block box-form__button" onclick="ajaxRegistration();return false;">
-                            Создать аккаунт
+                            {% trans %}registration_create_account{% endtrans %}
                         </button>
-                        <p><a href="#login" class="link fancybox">Уже есть учетная запись?</a><span class="devider">|   </span><a
-                                    href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                        <p><a href="#login" class="link fancybox">{% trans %}registration_has_account{% endtrans %}</a><span class="devider">|   </span><a
+                                    href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
                     </form>
                 </div>
                 <div class="enter-social">
-                    <p>Войти через аккаунт в социальных сетях</p>
+                    <p>{% trans %}registration_auth_in_socials{% endtrans %}</p>
                     <ul class="social-wrap">
                         <li class="social-wrap__item">
                             <a href="{{ hwi_oauth_login_url('facebook') }}" class="social-wrap__link fb"><i class="fa fa-facebook"></i></a>

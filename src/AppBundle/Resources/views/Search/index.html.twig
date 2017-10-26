@@ -1,6 +1,6 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}Поиск по каталогу{% endblock %}
+{% block title %}{% trans %}search_in_catalog{% endtrans %}{% endblock %}
 
 {% block wrapper_class %}catalog{% endblock %}
 
@@ -9,7 +9,7 @@
     <div class="wrapper">
         <div class="main-wrap catalog">
             <div class="main-wrap__header">
-                <h1>Поиск по каталогу</h1>
+                <h1>{% trans %}search_in_catalog{% endtrans %}</h1>
             </div>
         </div>
 
@@ -20,7 +20,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <div class="product_list--empty">Ничего не найдено.</div>
+                <div class="product_list--empty">{% trans %}search_in_catalog_notfound{% endtrans %}</div>
             {% endif %}
 
     </div>

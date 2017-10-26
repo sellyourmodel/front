@@ -13,7 +13,7 @@
     <div class="wrap product">
         <div class="wrap-right">
             <div class="product-info">
-                <span class="author">от:<a href="{{ path('user_view',{nickname:product.user.nickname}) }}">{{ product.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ product.user.lvl }}"></span></span>
+                <span class="author">{% trans %}product_from{% endtrans %}: <a href="{{ path('user_view',{nickname:product.user.nickname}) }}">{{ product.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ product.user.lvl }}"></span></span>
                 <h1>{{ product.name }}</h1>
                 {% if product.manufacturer %}
                     {{ product.manufacturer }}
@@ -43,8 +43,8 @@
                     {% endif %}
                 </div>
                 <div class="link-group">
-                    <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">В избранно{% if alreadyFavorite %}м{% else %}е{% endif %}</a>
-                    <a href="#" class="link js-share-btn" onclick="showShare();return false;">Поделиться</a>
+                    <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">{% if alreadyFavorite %}{% trans %}added_to_favourite{% endtrans %}{% else %}{% trans %}add_to_favourite{% endtrans %}{% endif %}</a>
+                    <a href="#" class="link js-share-btn" onclick="showShare();return false;">{% trans %}share{% endtrans %}</a>
                     <div id="share-block" class="share-block js-share-block" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,linkedin"></div>
                 </div>
                 <div class="js-model-info">
@@ -73,8 +73,8 @@
                 </div>
                 {% if app.user %}
                     <div class="comments-add">
-                        <textarea name="text" placeholder="Введите комментарий" class="form-control js-comments-textarea"></textarea>
-                        <button type="button" class="button button_warning js-add-model-btn" onclick="addModelComment({{ product.id }}, this);return false;">Добавить комментарий</button>
+                        <textarea name="text" placeholder="{% trans %}enter_comment{% endtrans %}" class="form-control js-comments-textarea"></textarea>
+                        <button type="button" class="button button_warning js-add-model-btn" onclick="addModelComment({{ product.id }}, this);return false;">{% trans %}add_comment{% endtrans %}</button>
                         <span class="help-text inline add-model__result js-add-comment-result"></span>
                     </div>
                 {% endif %}
@@ -88,9 +88,9 @@
         <div id="moderation" class="window-open" style="width:400px;padding: 30px;">
             <div class="window-open-cont">
                 <div class="box-form withdrawals__form">
-                    <h3>Отмодерировать модель</h3>
+                    <h3>{% trans %}moderate_model{% endtrans %}</h3>
                     <form action="{{ path('catalog_moderation_write', {id:product.id}) }}" method="POST" class="js-moderation-form">
-                        <input type="submit" value="Отмодерировать модель" class="button button_warning button_block box-form__button" onclick="ajaxModeration();return false;" />
+                        <input type="submit" value="{% trans %}moderate_model{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxModeration();return false;" />
                     </form>
                 </div>
             </div>
@@ -100,16 +100,16 @@
         <div id="block" class="window-open" style="width:400px;padding: 30px;">
             <div class="window-open-cont">
                 <div class="box-form withdrawals__form">
-                    <h3>Заблокировать модель</h3>
+                    <h3>{% trans %}block_model{% endtrans %}</h3>
                     <form action="{{ path('catalog_block_write', {id:product.id}) }}" method="POST" class="js-block-form">
                         <div class="box-field login-error">
                             <div class="login-error__text js-block-add-error"></div>
-                            <label class="box-field__label">Причина блокировки</label>
+                            <label class="box-field__label">{% trans %}block_reasons{% endtrans %}</label>
                             <div class="box-field__input">
                                 <input type="text" name="reason" class="form-control">
                             </div>
                         </div>
-                        <input type="submit" value="Заблокировать" class="button button_warning button_block box-form__button" onclick="ajaxBlock();return false;" />
+                        <input type="submit" value="{% trans %}block_model_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxBlock();return false;" />
                     </form>
                 </div>
             </div>
@@ -119,9 +119,9 @@
         <div id="unblock" class="window-open" style="width:400px;padding: 30px;">
             <div class="window-open-cont">
                 <div class="box-form withdrawals__form">
-                    <h3>Снять блокировку модели</h3>
+                    <h3>{% trans %}unblock_model{% endtrans %}</h3>
                     <form action="{{ path('catalog_unblock_write', {id:product.id}) }}" method="POST" class="js-unblock-form">
-                        <input type="submit" value="Снять блокировку" class="button button_warning button_block box-form__button" onclick="ajaxUnBlock();return false;" />
+                        <input type="submit" value="{% trans %}unblock_model_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxUnBlock();return false;" />
                     </form>
                 </div>
             </div>
@@ -131,9 +131,9 @@
         <div id="delete" class="window-open" style="width:400px;padding: 30px;">
             <div class="window-open-cont">
                 <div class="box-form withdrawals__form">
-                    <h3>Удаление модели</h3>
+                    <h3>{% trans %}detele_model{% endtrans %}</h3>
                     <form action="{{ path('catalog_delete_write', {id:product.id}) }}" method="POST" class="js-unblock-form">
-                        <input type="submit" value="Удалить модель" class="button button_warning button_block box-form__button" onclick="ajaxDelete();return false;" />
+                        <input type="submit" value="{% trans %}detele_model_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxDelete();return false;" />
                     </form>
                 </div>
             </div>

@@ -3,19 +3,19 @@
 {% block content %}
 
     <div class="main-wrap__header">
-        <h1>Соц. профайлы</h1>
+        <h1>{% trans %}socials_header{% endtrans %}</h1>
     </div>
     <div class="wrap wrap_small">
         <div class="wrap-right">
             <ul class="wrap-list">
-                <li class="wrap-list__item"><a href="{{ path('cabinet') }}" class="wrap-list__link">Профиль</a></li>
-                <li class="wrap-list__item"><a href="{{ path('cabinet_password') }}" class="wrap-list__link">Сменить пароль</a></li>
-                <li class="wrap-list__item"><a href="{{ path('cabinet_social') }}" class="wrap-list__link">Соц. профайлы</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet') }}" class="wrap-list__link">{% trans %}profile{% endtrans %}</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_password') }}" class="wrap-list__link">{% trans %}change_password{% endtrans %}</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_social') }}" class="wrap-list__link">{% trans %}socials{% endtrans %}</a></li>
             </ul>
         </div>
         <div class="wrap-left">
             <div class="box-form settings">
-                <p>Для подключения или отключения социальной сети - нажмите на ее логотип (подключение и отключение на тестовом сервере не работает, галочкой для примера показана подключенная соц. сеть)</p>
+                <p>{% trans %}socials_left_text{% endtrans %}</p>
                 <div class="settings-social">
                     <ul class="social-wrap social-wrap__settings unstyled">
                         <li class="social-wrap__item active"> <a href="" class="social-wrap__link fb"><i class="fa fa-facebook"></i><i class="fa fa-check connect-icon"></i></a></li>

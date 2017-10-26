@@ -14,22 +14,22 @@
                         {% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}
                     </p>
                     {%  if app.user and app.user != entity %}
-                    <button class="button button_warning button_block">Отправить сообшение</button>
+                    <button class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</button>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
                         <br />
-                        <a class="button button_warning button_block" href="{{ path('homepage',{_switch_user: entity.email}) }}">Войти в аккаунт</a>
+                        <a class="button button_warning button_block" href="{{ path('homepage',{_switch_user: entity.email}) }}">{% trans %}user_auth{% endtrans %}</a>
                     {% endif %}
                 </div>
                 {% if entity.specialization %}
                 <div class="profile-cont">
-                    <h6 class="profile-cont__title">Специализация:</h6>
+                    <h6 class="profile-cont__title">{% trans %}user_specialization{% endtrans %}:</h6>
                     <p class="profile-cont__text">{{ entity.specialization }}</p>
                 </div>
                 {% endif %}
                 {% if entity.text %}
                 <div class="profile-cont">
-                    <h6 class="profile-cont__title">О себе:</h6>
+                    <h6 class="profile-cont__title">{% trans %}user_about_myself{% endtrans %}:</h6>
                     <p class="profile-cont__text">
                         {{ entity.text|nl2br }}
                     </p>
@@ -49,7 +49,7 @@
                     </ul>
                 </div>#}
                 <div class="profile-cont">
-                    <h6 class="profile-cont__title">Дата регистрации:</h6>
+                    <h6 class="profile-cont__title">{% trans %}user_dt_create{% endtrans %}:</h6>
                     <p class="profile-cont__text">{{ entity.createdAt|date("d-m-Y") }}</p>
                 </div>
             </div>
@@ -59,23 +59,23 @@
                 <div class="main-wrap__header">
                     <ul class="nav-tabs-list tabs">
                         <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}active{% endif %}"><a href="#tab_1"
-                                                                             class="nav-tabs-list__link link">Модели
+                                                                             class="nav-tabs-list__link link">{% trans %}user_models{% endtrans %}
                                 ({{ products|length }})</a></li>
                         <li class="nav-tabs-list__item js-hide-bg"><a href="#tab_2"
-                                                                      class="nav-tabs-list__link link">Галерея
+                                                                      class="nav-tabs-list__link link">{% trans %}user_gallery{% endtrans %}
                                 (0)</a></li>
                         {% if app.user and app.user == entity %}
                         <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'stats' %}active{% else %}{% endif %}"><a href="#tab_3"
-                                                                      class="nav-tabs-list__link link">Статистика</a>
+                                                                      class="nav-tabs-list__link link">{% trans %}user_statistics{% endtrans %}</a>
 
                         <li class="nav-tabs-list__item js-show-bg"><a href="#tab_6"
-                                                                      class="nav-tabs-list__link link">Вывод средств</a>
+                                                                      class="nav-tabs-list__link link">{% trans %}user_withdrawals{% endtrans %}</a>
 
                         <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') == 'favorites' %}active{% else %}{% endif %}"><a href="#tab_4"
-                                                                      class="nav-tabs-list__link link">Избранное ({{ favorites|length }})</a>
+                                                                      class="nav-tabs-list__link link">{% trans %}user_favourite{% endtrans %} ({{ favorites|length }})</a>
                         </li>
                         <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'buy' %}active{% else %}{% endif %}"><a href="#tab_5"
-                                                                      class="nav-tabs-list__link link">Покупки
+                                                                      class="nav-tabs-list__link link">{% trans %}user_purchases{% endtrans %}
                                 ({{ buy|length }})</a></li>
                         {% endif %}
                     </ul>
@@ -90,24 +90,24 @@
                             {% endfor %}
                         </ul>
                     {% else %}
-                        <p>Пользователь не загрузил модели</p>
+                        <p>{% trans %}user_not_loaded_models{% endtrans %}</p>
                     {% endif %}
                 </div>
                 <div id="tab_2" class="tab-cont hide">
-                    <p>Пользователь не загрузил объекты в галерею</p>
+                    <p>{% trans %}user_not_loaded_objects{% endtrans %}</p>
                 </div>
                 {% if app.user and app.user == entity %}
                     <div id="tab_3" class="tab-cont {% if app.request.get('tab') == 'stats' %}{% else %}hide{% endif %}">
                         <div class="block-title">
-                            <h4>Загруженно моделей {{ products|length }}</h4>
+                            <h4>{% trans %}user_models_loaded{% endtrans %} {{ products|length }}</h4>
                         </div>
                         <div class="tab-cont__body">
-                            <h4>Последние операции</h4>
+                            <h4>{% trans %}user_last_operations{% endtrans %}</h4>
                             <table class="table">
                                 <tr>
-                                    <th class="td-date">Дата</th>
-                                    <th>Операция</th>
-                                    <th class="td-summa">На сумму</th>
+                                    <th class="td-date">{% trans %}user_last_operations_date{% endtrans %}</th>
+                                    <th>{% trans %}user_last_operations_operation{% endtrans %}</th>
+                                    <th class="td-summa">{% trans %}user_last_operations_price{% endtrans %}</th>
                                 </tr>
                                 {% for e in history %}
                                 <tr>
@@ -119,24 +119,24 @@
                             </table>
                             {#<p><a href="#" class="link">Смотреть все транзакции</a></p>#}
                             <dl class="box-label small">
-                                <dt class="box-label__title">Ваш баланс с продаж ${{ app.user.modelsLoadedBuy }}</dt>
-                                <dd class="box-label__cont">Общие продажи ${{ app.user.modelsLoadedBuy }}</dd>
+                                <dt class="box-label__title">{% trans %}user_sales_balance{% endtrans %} ${{ app.user.modelsLoadedBuy }}</dt>
+                                <dd class="box-label__cont">{% trans %}user_total_sales{% endtrans %} ${{ app.user.modelsLoadedBuy }}</dd>
                             </dl>
                         </div>
                         <div class="tab-cont__footer">
-                            <h4>Покупка моделей</h4>
+                            <h4>{% trans %}user_models_buying{% endtrans %}</h4>
                             <dl class="box-label small mt10">
-                                <dt class="box-label__title">Доступно {{ app.user.models }} моделей</dt>
-                                <dd class="box-label__cont"><a href="{{ path('cabinet_buy') }}" class="link">Купить модели</a></dd>
+                                <dt class="box-label__title">{% trans %}user_available{% endtrans %} {{ app.user.models }} {% trans %}user_available_models{% endtrans %}</dt>
+                                <dd class="box-label__cont"><a href="{{ path('cabinet_buy') }}" class="link">{% trans %}user_buy_models{% endtrans %}</a></dd>
                             </dl>
                         </div>
                     </div>
                     <div id="tab_6" class="tab-cont hide">
                         <div class="tab-cont__body">
-                            <h4 class="withdrawals__header">Заявки на вывод средств</h4>
-                            <a href="#withdrawalsAdd" class="button button_warning withdrawals__add fancybox">Создать заявку</a>
+                            <h4 class="withdrawals__header">{% trans %}user_withdrawals_requests{% endtrans %}</h4>
+                            <a href="#withdrawalsAdd" class="button button_warning withdrawals__add fancybox">{% trans %}user_create_withdrawals_requests{% endtrans %}</a>
                             <div class="clearfix"></div>
-                            <div class="withdrawal__success">Заявка создана</div>
+                            <div class="withdrawal__success">{% trans %}user_create_withdrawals_request_created{% endtrans %}</div>
                             <table class="table js-withdrawals">
                                 {% include '@App/User/_withdrawals.html.twig' %}
                             </table>
@@ -150,7 +150,7 @@
                                 {% endfor %}
                             </ul>
                         {% else %}
-                            <p>Вы еще ничего не добавили в избранное</p>
+                            <p>{% trans %}user_not_favourites{% endtrans %}</p>
                         {% endif %}
                     </div>
                     <div id="tab_5" class="tab-cont  {% if app.request.get('tab') == 'buy' %}{% else %}hide{% endif %}">
@@ -162,7 +162,7 @@
                                     {% endfor %}
                                 </ul>
                             {% else %}
-                                <p>Вы еще ничего не купили</p>
+                                <p>{% trans %}user_not_buying{% endtrans %}</p>
                             {% endif %}
                         </div>
                     </div>

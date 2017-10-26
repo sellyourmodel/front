@@ -14,13 +14,13 @@
             <div class="box-form settings">
                 <form action="{{ path('catalog_add_write') }}" class="js-add-model-form" method="POST">
                     <div class="box-field col-5">
-                        <label class="box-field__label">Название модели <span class="require-field-z">*</span></label>
+                        <label class="box-field__label">{% trans %}model_name{% endtrans %} <span class="require-field-z">*</span></label>
                         <div class="box-field__input">
                             <input type="text" name="name" class="form-control" />
                         </div>
                     </div>
                     <div class="box-field col-5">
-                        <label class="box-field__label">Категория <span class="require-field-z">*</span></label>
+                        <label class="box-field__label">{% trans %}category{% endtrans %} <span class="require-field-z">*</span></label>
                         <div class="box-field__input">
                             <select name="category" data-placeholder=" " class="styler form-control">
                                 <option value=""></option>
@@ -33,37 +33,37 @@
                         </div>
                     </div>
                     <div class="box-field-group user js-image-wrapper js-main-image-drop">
-                        <label class="box-field__label">Обложка модели <span class="require-field-z">*</span></label>
+                        <label class="box-field__label">model_cover <span class="require-field-z">*</span></label>
                         <div class="box-field__input js-image-add-input">
-                            <input type="file" id="fileuploadMainImage" data-placeholder="Фаил не выбран" data-browse="Загрузить файл"
+                            <input type="file" id="fileuploadMainImage" data-placeholder="{% trans %}file_not_select{% endtrans %}" data-browse="{% trans %}upload_file{% endtrans %}"
                                    class="styler">
                         </div>
                         <div class="model-files js-main-pic"></div>
                     </div>
                     <div class="box-field-group user js-image-wrapper js-add-image-drop">
-                        <label class="box-field__label">Дополнительные изображения модели <span class="require-field-z">*</span></label>
+                        <label class="box-field__label">{% trans %}model_custom_images{% endtrans %} <span class="require-field-z">*</span></label>
                         <div class="box-field__input js-add-pic-input">
-                            <input type="file" id="fileuploadAddImages" data-placeholder="Фаил не выбран" data-browse="Загрузить файл"
+                            <input type="file" id="fileuploadAddImages" data-placeholder="{% trans %}file_not_select{% endtrans %}" data-browse="{% trans %}upload_file{% endtrans %}"
                                    class="styler">
                         </div>
                         <div class="model-files js-add-pic"></div>
                     </div>
                     <div class="box-field-group user js-image-wrapper js-files-drop">
-                        <label class="box-field__label">Файлы модели <span class="require-field-z">*</span></label>
+                        <label class="box-field__label">{% trans %}model_files{% endtrans %} <span class="require-field-z">*</span></label>
                         <div class="box-field__input">
-                            <input type="file" id="fileupload" data-placeholder="Фаил не выбран" data-browse="Загрузить файл"
+                            <input type="file" id="fileupload" data-placeholder="{% trans %}file_not_select{% endtrans %}" data-browse="{% trans %}upload_file{% endtrans %}"
                                    class="styler">
                         </div>
                         <div class="model-files js-model-files"></div>
                     </div>
                     <div class="box-field col-5">
-                        <label class="box-field__label">Производитель</label>
+                        <label class="box-field__label">{% trans %}model_manufacturer{% endtrans %}</label>
                         <div class="box-field__input">
                             <input type="text" name="manufacturer" class="form-control" />
                         </div>
                     </div>
                     <div class="box-field col-5">
-                        <label class="box-field__label">Теги</label>
+                        <label class="box-field__label">{% trans %}model_tags{% endtrans %}</label>
                         <div class="box-field__input">
                             <select name="tags[]" multiple class="select2-tags form-control">
                                 {% for e in tags %}
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="box-field col-5">
-                        <label class="box-field__label">ПО</label>
+                        <label class="box-field__label">{% trans %}model_po{% endtrans %}{% trans %}</label>
                         <div class="box-field__input">
                             <select name="software[]" multiple class="select2 form-control">
                                 {% for e in software %}
@@ -83,12 +83,12 @@
                         </div>
                     </div>
                     <div class="box-field col-5">
-                        <label class="box-field__label">Описание</label>
+                        <label class="box-field__label">{% trans %}model_description{% endtrans %}</label>
                         <div class="box-field__input">
                             <textarea name="text" class="form-control"></textarea>
                         </div>
                     </div>
-                    <button type="submit" class="button button_warning js-add-model-btn" onclick="addModel();return false;">Добавить</button>
+                    <button type="submit" class="button button_warning js-add-model-btn" onclick="addModel();return false;">{% trans %}model_add{% endtrans %}</button>
                     <span class="help-text inline add-model__result js-add-model-result"></span>
                 </form>
             </div>
