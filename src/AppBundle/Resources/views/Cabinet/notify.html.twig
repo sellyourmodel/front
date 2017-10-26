@@ -1,12 +1,12 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}Уведомления{% endblock %}
+{% block title %}{% trans %}notifications_header{% endtrans %}{% endblock %}
 
 {% block content %}
     <div class="content-wrap column">
         <div class="main-wrap">
             <div class="main-wrap__header">
-                <h1>Уведомления</h1>
+                <h1>{% trans %}notifications_header{% endtrans %}</h1>
             </div>
         </div>
         <div class="box-articles mt10">
@@ -28,13 +28,13 @@
                             <p>
                                 {{ e.preview|nl2br}}
                             </p>
-                            <p><a href="{{ path('articles_item',{id:e.id}) }}" class="more">Читать дальше...</a></p>
+                            <p><a href="{{ path('articles_item',{id:e.id}) }}" class="more">{% trans %}readmore{% endtrans %}</a></p>
                         </div>
                     </article>
                 {% endfor %}
             {% else %}
             <div class="article__no-items">
-                Материалы не найдены
+                {% trans %}materials_not_found{% endtrans %}
             </div>
             {% endif %}
         </div>

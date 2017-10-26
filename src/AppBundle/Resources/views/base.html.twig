@@ -39,8 +39,8 @@
                 <nav class="box-nav-list">
                     <ul class="nav-list unstyled">
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                            <li class="nav-list__item"><a href="{{ path('catalog_moderation') }}" class="nav-list__link"><span>Модерация</span></a></li>
-                            <li class="nav-list__item"><a href="{{ path('sonata_admin_dashboard') }}" class="nav-list__link"><span>Администрирование</span></a></li>
+                            <li class="nav-list__item"><a href="{{ path('catalog_moderation') }}" class="nav-list__link"><span>{% trans %}moderation_header{% endtrans %}</span></a></li>
+                            <li class="nav-list__item"><a href="{{ path('sonata_admin_dashboard') }}" class="nav-list__link"><span>{% trans %}administration_header{% endtrans %}</span></a></li>
                         {% endif %}
                         <li class="nav-list__item"><a href="{{ path('page_2') }}" class="nav-list__link"><span>{% trans %}about{% endtrans %}</span></a></li>
                         <li class="nav-list__item"><a href="{{ path('page_3') }}" class="nav-list__link"><span>{% trans %}buy{% endtrans %}</span></a></li>
@@ -48,7 +48,7 @@
                         <li class="nav-list__item"><a href="#" class="nav-list__link"><span>{% trans %}support{% endtrans %}</span></a></li>
                         <li class="nav-list__item">
                             <a href="#" data-target="#box-lang" class="nav-list__link arrow-down js-link-open">
-                                <span>Язык:</span>
+                                <span>{% trans %}language{% endtrans %}:</span>
                                 <span class="nav-list__icon">
                                     <span class="ic ic_flag-{{ app.request.locale }}"></span>
                                 </span>
@@ -62,7 +62,7 @@
                 <div class="header-table"><a href="#" data-target="#nav" class="header-table__item js-link-open models"><span class="models__text arrow-down">3D models</span></a>
                     <div class="header-table__item search">
                         <form method="GET" action="{{ path('search') }}">
-                            <input type="text" name="search" value="{{ app.request.get('search') }}" onkeyup="autoSearch(this);" onchange="autoSearch(this);" autocomplete="off" placeholder="Поиск" class="js-search-val search__input form-control">
+                            <input type="text" name="search" value="{{ app.request.get('search') }}" onkeyup="autoSearch(this);" onchange="autoSearch(this);" autocomplete="off" placeholder="{% trans %}search{% endtrans %}" class="js-search-val search__input form-control">
                             <input type="submit" value="" class="search__button js-search-val" />
                             <div class="search__results js-quick-search-results"></div>
                         </form>
@@ -78,8 +78,8 @@
                             </a>
                         </div>
                     {% else %}
-                        <a href="#login" class="header-table__item link-login fancybox"><span>Войти </span></a>
-                        <a href="{{ path('registration') }}" class="header-table__item link-registr"><span>Регистрация</span></a>
+                        <a href="#login" class="header-table__item link-login fancybox"><span>{% trans %}auth{% endtrans %}</span></a>
+                        <a href="{{ path('registration') }}" class="header-table__item link-registr"><span>{% trans %}registration{% endtrans %}</span></a>
                     {% endif %}
                 </div>
                 <div id="nav" class="navigation js-open-block">
@@ -88,26 +88,26 @@
                 {% if app.user %}
                     <div id="nav-profile" style="{% block navblock_style %}{% endblock %}" class="nav-profile js-open-block js-open-block-noclose">
                         <ul class="nav-profile-list unstyled">
-                            <li class="nav-profile-list__item"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="nav-profile-list__link">Публичный Профаил</a></li>
-                            <li class="nav-profile-list__item"><a href="{{ path('cabinet') }}" class="nav-profile-list__link">Настройки</a></li>
-                            <li class="nav-profile-list__item"><a href="{{ path('notify') }}" class="nav-profile-list__link">Уведомления{#<span class="kbd">2</span>#}</a></li>
-                            <li class="nav-profile-list__item"><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}{{ path('homepage',{_switch_user: "_exit"}) }}{% else %}{{ path('fos_user_security_logout') }}{% endif %}" class="nav-profile-list__link">Выход</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="nav-profile-list__link">{% trans %}public_profile{% endtrans %}</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('cabinet') }}" class="nav-profile-list__link">{% trans %}settings{% endtrans %}</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('notify') }}" class="nav-profile-list__link">{% trans %}notifications{% endtrans %}{#<span class="kbd">2</span>#}</a></li>
+                            <li class="nav-profile-list__item"><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}{{ path('homepage',{_switch_user: "_exit"}) }}{% else %}{{ path('fos_user_security_logout') }}{% endif %}" class="nav-profile-list__link">{% trans %}exit{% endtrans %}</a></li>
                         </ul>
                         <div class="nav-profile-wrap">
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Загруженные модели</a></div>
+                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}loaded_models{% endtrans %}</a></div>
                                 <div class="nav-profile__count">{{ app.user.modelsLoaded }}</div>
-                                <div class="nav-profile__footer">      <span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Просмотры</a><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Коментарии</a><span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
+                                <div class="nav-profile__footer">      <span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}views{% endtrans %}</a><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Коментарии</a><span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
                             </div>
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">Текущие продажи</a><span class="simbol">?</span></div>
+                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol">?</span></div>
                                 <div class="nav-profile__count">${{ app.user.balance }}</div>
-                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">Общие продажи</a><span class="kbd">${{ app.user.balance }}</span></span></div>
+                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}total_sales{% endtrans %}</a><span class="kbd">${{ app.user.balance }}</span></span></div>
                             </div>
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">Доступно моделей</a><span class="simbol">?</span></div>
+                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}available_models{% endtrans %}</a><span class="simbol">?</span></div>
                                 <div class="nav-profile__count">{{ app.user.models }}</div>
-                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"buy"}) }}">Покупки</a></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"favorites"}) }}">Избранное</a><span class="kbd">{{ app.user.modelsFavorites }}</span></span></div>
+                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"buy"}) }}">{% trans %}purchases{% endtrans %}</a></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"favorites"}) }}">Избранное</a><span class="kbd">{{ app.user.modelsFavorites }}</span></span></div>
                             </div>
                         </div>
                     </div>
@@ -133,39 +133,39 @@
         <div class="wrapper">
             <div class="footer-wrapper">
                 <div class="footer__item col-1">
-                    <h4 class="footer__title">Кратко о SYM</h4>
-                    <p class="mt7">SYM- это торговая площадка, где вы можете покупать и <br> продавать 3D модели, текстуры, плагины для различных <br> проектов. Наш магазин начал свою работу в Феврале 2004 <br> года, и сегодня мы являемся одним из крупнейших поставщиков 3D контента в мире. У нас только качественные 3D <br> модели!</p>
+                    <h4 class="footer__title">about_sym_header</h4>
+                    <p class="mt7">{% trans %}about_sym_description{% endtrans %}</p>
                 </div>
                 <div class="footer__item col-2">
-                    <h4 class="footer__title">О проекте</h4>
+                    <h4 class="footer__title">{% trans %}about_sym_description_header{% endtrans %}</h4>
                     <ul class="footer-nav">
-                        <li class="footer-nav__item"><a href="{{ path('page_4') }}" class="footer-nav__link">Правила</a></li>
-                        <li class="footer-nav__item"><a href="{{ path('community') }}" class="footer-nav__link">Сообщество</a></li>
-                        <li class="footer-nav__item"><a href="{{ path('page_5') }}" class="footer-nav__link">Реклама</a></li>
-                        <li class="footer-nav__item"><a href="#" class="footer-nav__link">Тех. Поддержка</a></li>
-                        <li class="footer-nav__item"><a href="#" class="footer-nav__link">Отправить сообщение</a></li>
-                        <li class="footer-nav__item"><a href="{{ path('page_6') }}" class="footer-nav__link">Контакты</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_4') }}" class="footer-nav__link">{% trans %}about_sym_rules{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('community') }}" class="footer-nav__link">{% trans %}about_sym_community{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_5') }}" class="footer-nav__link">{% trans %}about_sym_adversting{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="#" class="footer-nav__link">{% trans %}about_sym_support{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="#" class="footer-nav__link">{% trans %}about_sym_send_message{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_6') }}" class="footer-nav__link">{% trans %}about_sym_contacts{% endtrans %}</a></li>
                     </ul>
                 </div>
                 <div class="footer__item col-3">
-                    <h4 class="footer__title">Правовые аспекты</h4>
+                    <h4 class="footer__title">{% trans %}about_sym_legal_header{% endtrans %}</h4>
                     <ul class="footer-nav">
-                        <li class="footer-nav__item"><a href="{{ path('page_7') }}" class="footer-nav__link">Лицензионное соглашение</a></li>
-                        <li class="footer-nav__item"><a href="{{ path('page_8') }}" class="footer-nav__link">Условия использования</a></li>
-                        <li class="footer-nav__item"><a href="{{ path('page_9') }}" class="footer-nav__link">Политика конфиденциальности</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_7') }}" class="footer-nav__link">{% trans %}about_sym_license{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_8') }}" class="footer-nav__link">{% trans %}about_sym_terms{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_9') }}" class="footer-nav__link">{% trans %}about_sym_privacy{% endtrans %}</a></li>
                     </ul>
                 </div>
                 <div class="footer__item col-4">
-                    <h4 class="footer__title">Свежие обновления</h4>
+                    <h4 class="footer__title">{% trans %}about_sym_updates_header{% endtrans %}</h4>
                     <div class="subscribe__info">
-                        <p>Подпишитесь, чтобы получать свежие уроки, скидоч-<br>ные купоны, бесплатные товары и наши новости.</p>
+                        <p>{% trans %}footer_subscribe_test{% endtrans %}</p>
                         <div class="subscribe__message js-subscribe-message"></div>
                     </div>
                     <div class="subscribe">
-                        <input type="text" placeholder="Ваш E-mail" class="subscribe__input form-control js-subscribe-email" />
-                        <input type="button" value="Подписаться" class="subscribe__button js-subscribe-submit" onclick="subscribe();" />
+                        <input type="text" placeholder="{% trans %}footer_subscribe_email{% endtrans %}" class="subscribe__input form-control js-subscribe-email" />
+                        <input type="button" value="{% trans %}footer_subscribe_action{% endtrans %}" class="subscribe__button js-subscribe-submit" onclick="subscribe();" />
                     </div>
-                    <p>Следуйте за нами</p>
+                    <p>{% trans %}about_sym_follow_us{% endtrans %}</p>
                     <ul class="social">
                         <li class="social__item"><a href="#" class="social__link social__link_tw"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
                         <li class="social__item"><a href="#" class="social__link social__link_pin"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
@@ -178,8 +178,8 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p class="copy fl">&copy; {{ 'now'|date('Y') }}. Все права защищены.</p>
-                <p class="fr">Премиум 3D модели, CG текстуры  | SYM</p>
+                <p class="copy fl">&copy; {{ 'now'|date('Y') }}. {% trans %}footer_all_right_reserved{% endtrans %}</p>
+                <p class="fr">{% trans %}footer_title{% endtrans %}</p>
             </div>
         </div>
     </footer>
@@ -190,7 +190,7 @@
     <div id="login" class="window-open">
         <div class="window-open-cont">
             <div class="box-form registration">
-                <h3>Вход</h3>
+                <h3>{% trans %}modal_auth{% endtrans %}</h3>
                 <form action="{{ path('fos_user_security_check') }}" method="POST" class="js-login">
                     <div class="box-field login-error">
                         <div class="login-error__text js-login-error"></div>
@@ -200,7 +200,7 @@
                         </div>
                     </div>
                     <div class="box-field">
-                        <label class="box-field__label">Пароль</label>
+                        <label class="box-field__label">{% trans %}modal_password{% endtrans %}</label>
                         <div class="box-field__input">
                             <input type="password" name="_password" class="form-control">
                         </div>
@@ -209,12 +209,12 @@
                         <label class="box-field__label">Вы человек?</label>
                         <div class="box-field__input"><img src="{{ asset('bundles/app/img/captcha.png') }}" alt=""></div>
                     </div>#}
-                    <input type="submit" value="Войти" class="button button_warning button_block box-form__button" onclick="ajaxLogin();return false;" />
-                    <p><a href="{{ path('registration') }}" class="link">Регистрация</a><span class="devider">|</span><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                    <input type="submit" value="{% trans %}modal_auth_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxLogin();return false;" />
+                    <p><a href="{{ path('registration') }}" class="link">{% trans %}registration{% endtrans %}</a><span class="devider">|</span><a href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
                 </form>
             </div>
             <div class="enter-social">
-                <p>Войти через аккаунт в социальных сетях</p>
+                <p>{% trans %}registration_auth_in_socials{% endtrans %}</p>
                 <ul class="social-wrap unstyled">
                     <li class="social-wrap__item"> <a href="{{ hwi_oauth_login_url('facebook') }}" class="social-wrap__link fb"><i class="fa fa-facebook"></i></a></li>
                     <li class="social-wrap__item"> <a href="{{ hwi_oauth_login_url('vkontakte') }}" class="social-wrap__link vk"><i class="fa fa-vk"></i></a></li>
@@ -226,16 +226,16 @@
     <div id="withdrawalsAdd" class="window-open">
         <div class="window-open-cont">
             <div class="box-form withdrawals__form">
-                <h3>Заявка на вывод средств</h3>
+                <h3>{% trans %}modal_withdrawals_header{% endtrans %}</h3>
                 <form action="{{ path('cabinet_withdrawal_write') }}" method="POST" class="js-withdrawal-add-form">
                     <div class="box-field login-error">
                         <div class="login-error__text js-withdrawal-add-error"></div>
-                        <label class="box-field__label">Сумма для вывода</label>
+                        <label class="box-field__label">{% trans %}modal_withdrawals_sum{% endtrans %}</label>
                         <div class="box-field__input">
                             <input type="number" name="price" class="form-control">
                         </div>
                     </div>
-                    <input type="submit" value="Отправить заявку" class="button button_warning button_block box-form__button" onclick="ajaxWithdrawalAdd();return false;" />
+                    <input type="submit" value="{% trans %}modal_withdrawals_send{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxWithdrawalAdd();return false;" />
                 </form>
             </div>
         </div>
@@ -243,11 +243,11 @@
     <div id="crop" class="window-open">
         <div class="window-open-cont">
             <div class="box-form">
-                <h3>Обрезка изображения</h3>
+                <h3>{% trans %}image_crop_header{% endtrans %}</h3>
                 <div class="croppie-wrapper">
                     <div class="js-cropper"></div>
                     <br />
-                    <button type="button" class="button button_warning js-crop-btn">Обрезать</button>
+                    <button type="button" class="button button_warning js-crop-btn">{% trans %}image_crop_action{% endtrans %}</button>
                 </div>
 
             </div>

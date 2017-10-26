@@ -1,6 +1,6 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}Поиск по тегу {{ tag.name }}{% endblock %}
+{% block title %}{% trans %}search_by_tags_header{% endtrans %} {{ tag.name }}{% endblock %}
 
 {% block wrapper_class %}catalog{% endblock %}
 
@@ -29,7 +29,7 @@
                         <option value="1">рейтингу</option>
                     </select>
                 </div>#}
-                <h1>Поиск по тегу {{ tag.name }}</h1>
+                <h1>{% trans %}search_by_tags_header{% endtrans %} {{ tag.name }}</h1>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <div class="product_list--empty">По данному тегу нет моделей.</div>
+                <div class="product_list--empty">{% trans %}search_by_tags_notfound{% endtrans %}</div>
             {% endif %}
 
     </div>

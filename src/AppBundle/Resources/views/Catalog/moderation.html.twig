@@ -1,6 +1,6 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}Модерация{% endblock %}
+{% block title %}{% trans %}moderation_header{% endtrans %}{% endblock %}
 
 {% block wrapper_class %}catalog{% endblock %}
 
@@ -29,7 +29,7 @@
                         <option value="1">рейтингу</option>
                     </select>
                 </div>#}
-                <h1>Модерация</h1>
+                <h1>{% trans %}moderation_header{% endtrans %}</h1>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
                     {% endfor %}
                 </ul>
             {% else %}
-                <div class="product_list--empty">Нет моделей на модерацию.</div>
+                <div class="product_list--empty">{% trans %}moderation_not_have_models{% endtrans %}</div>
             {% endif %}
 
     </div>

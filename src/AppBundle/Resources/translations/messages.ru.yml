@@ -3,3 +3,211 @@ about: О нас
 buy: Продавайте 3D модели
 community: Сообщество
 support: Поддержка
+auth: Вход
+registration: Регистрация
+arrow_up: Вверх
+arrow_down: Вниз
+sections: Разделы
+new_1c_products: Новые товары из 1С
+add_more: Добавить несколько
+errors: Ошибки
+loaded: загружен
+catalog_sections: Разделы каталога
+articles: Статьи
+learn_more: Подробнее
+no_items_found: Материалов не найдено
+buying_models: Покупка моделей
+helpful_information: Полезная информация
+
+cabinet_buy_healful_info_l1: Минимальное колличество покупки - 2 PRO.
+cabinet_buy_healful_info_l2: PRO начисляется единовременно и не имеет ограничения во времени скачивания.
+cabinet_buy_healful_info_l3: 30 FREE начисляется каждый день в рамках оплаченного срока.
+cabinet_buy_healful_info_l4: При оплате через терминалы и другие оффлайн способы - срок получения доступа может достигать 3-х дней.
+cabinet_buy_healful_info_l5: Оплата с помощью банковской карты - только для стран СНГ.
+cabinet_buy_healful_info_l6: Оплата через терминалы - только для России.
+cabinet_buy_healful_info_l7: В случае утери pro-модели или неудачном скачаивании - восстановить её в истории покупок.
+cabinet_buy_healful_info_l8: Если у вас уже есть PRO-доступы - последуюшая покупка суммируется.
+cabinet_buy_healful_info_l9: Для корпоративных клиентов. Минимальный заказ 1000 доступов PROFI. Оформление договора и безналичный расчет. Для уточнения деталей обращайтесь в службу поддержки.
+cabinet_buy_healful_info_l10: Служба поддержки. При обращении обязательно указывайте номер заказа.
+cabinet_buy_left_info_l1: Хотите делать покупки гораздо быстрей? Купите предоплачиваемые Кредиты и скачивайте товары по одному клику! <br> Сколько Кредитов вы хотите купить?
+cabinet_buy_left_info_l2: Депозит производится в $USD долларах и не подлежит возврату. Купленные Кредиты вы сможете использовать только для покупки товаров в сети магазинов NetrinoMedia!
+
+available_3d_models: Доступно 3d моделей
+select_number_purchased: Выберите количество покупаемых 3d моделей
+order_price: Сумма заказа
+buy: Купить
+currency_rub: руб.
+i_agree_with: Я согласен с
+user_agreement: пользовательским соглашением
+buy_form_redirect: Идет переадресация на форму заказа, если этого не произошло нажмите на кнопку внизу.
+go_to_pay_btn: Перейти к оплате
+settings_header: Настройки
+profile: Профиль
+change_password: Сменить пароль
+socials: Соц. профайлы
+nickname: Ник
+level: Уровень
+without_wins: Без побед
+wins_postfix: побед
+avatar: Аватар
+avatar_maxsize: Максимально допустимый размер 100x100px
+profile_name: Имя
+profile_lastname: Фамилия
+profile_bday: Дата рождения
+profile_gender: Пол
+profile_gender_w: Женщина
+profile_gender_m: Мужчина
+profile_lang: Язык
+profile_specialization: Специализация
+profile_place: Место проживания
+profile_about_myself: О себе
+change: Изменить
+notifications_header: Уведомления
+materials_not_found: Материалы не найдены
+readmore: Читать дальше...
+change_password_header: Сменить пароль
+new_password: Новый пароль
+repeat_password: Повторите пароль
+socials_header: Соц. профайлы
+socials_left_text: Для подключения или отключения социальной сети - нажмите на ее логотип (подключение и отключение на тестовом сервере не работает, галочкой для примера показана подключенная соц. сеть)
+buying_models_header: Покупка моделей
+payment_error: Сожалеем, что у Вас сложились проблемы с оплатой.
+payment_go_to_treatment: Ваш платеж принят в обработку.
+go_to_profile: Перейти в личный кабинет
+search_notfound: К сожалению, по Вашему запросу ничего не найдено.
+model_blocked_by_reason: Модель заблокирована по причине
+models_available: Доступно моделей
+download: Скачать
+edit: Редактировать
+delete: Удалить
+moderate: Отмодерировать
+block: Блокировать
+unblock: Снять блокировку
+model_name: Название модели
+category: Категория
+model_cover: Обложка модели
+model_custom_images: Дополнительные изображения модели
+model_files: Файлы модели
+model_manufacturer: Производитель
+model_tags: Теги
+model_po: ПО
+model_description: Описание
+model_add: Добавить
+file_not_select: Фаил не выбран
+upload_file: Загрузить файл
+category_not_have_models: В данной категории нет моделей.
+moderation_header: Модерация
+moderation_not_have_models: Нет моделей на модерацию.
+add_to_favourite: В избранное
+added_to_favourite: В избранном
+share: Поделиться
+product_from: от
+enter_comment: Введите комментарий
+moderate_model: Отмодерировать модель
+block_reasons: Причина блокировки
+block_model: Заблокировать модель
+block_model_action: Заблокировать
+unblock_model: Снять блокировку модели
+unblock_model_action: Снять блокировку
+detele_model: Удаление модели
+detele_model_action: Удалить модель
+add_comment: Добавить комментарий
+model_edit_header: Редактирование модели
+comment: Комментировать
+search_by_tags_header: Поиск по тегу
+search_by_tags_notfound: По заданному тегу нет моделей.
+new_in_catalog: Новое в каталоге
+best: Лучшее
+registration_header: Регистрация
+registration_left: Хотите делать покупки гораздо быстрей? Купите предоплачиваемые Кредиты и скачивайте товары по одному клику!
+registration_nickname: Никнейм
+registration_password: Пароль
+registration_repeat_password: Повторите пароль
+registration_captcha: Вы человек?
+registration_forgot_password: Забыли пароль?
+registration_has_account: Уже есть учетная запись?
+registration_create_account: Создать аккаунт
+registration_auth_in_socials: Войти через аккаунт в социальных сетях
+search_in_catalog: Поиск по каталогу
+search_in_catalog_notfound: Ничего не найдено.
+subscribe_unsubscribe: Отписаться от рассылки
+subscribe_question_1: Вы действительно хотите отписать e-mail
+subscribe_question_2: от рассылки?
+subscribe_unsubscribe_action: Отписаться
+drawals_date: Дата
+drawals_application: Заявка
+drawals_price: На сумму
+drawals_status: Статус
+drawals_num: Заявка №
+drawals_status_rejected: Отклонено
+drawals_status_done: Выполнено
+drawals_status_new: Новая
+user_send_message: Отправить сообшение
+user_auth: Войти в аккаунт
+user_specialization: Специализация
+user_about_myself: О себе
+user_dt_create: Дата регистрации
+user_models: Модели
+user_gallery: Галерея
+user_statistics: Статистика
+user_withdrawals: Вывод средств
+user_favourite: Избранное
+user_purchases: Покупки
+user_not_loaded_models: Пользователь не загрузил модели
+user_not_loaded_objects: Пользователь не загрузил объекты в галерею
+user_models_loaded: Загруженно моделей
+user_last_operations: Последние операции
+user_last_operations_date: Дата
+user_last_operations_operation: Операция
+user_last_operations_price: На сумму
+user_sales_balance: Ваш баланс с продаж
+user_total_sales: Общие продажи
+user_models_buying: Покупка моделей
+user_available: Доступно
+user_available_models: моделей
+user_buy_models: Купить модели
+user_withdrawals_requests: Заявки на вывод средств
+user_create_withdrawals_requests: Создать заявку
+user_create_withdrawals_request_created: Заявка создана
+user_not_favourites: Вы еще ничего не добавили в избранное
+user_not_buying: Вы еще ничего не купили
+language: Язык
+administration_header: Администрирование
+public_profile: Публичный Профаил
+settings: Настройки
+notifications: Уведомления
+exit: Выход
+loaded_models: Загруженные модели
+views: Просмотры
+current_sales: Текущие продажи
+total_sales: Общие продажи
+available_models: Доступно моделей
+purchases: Покупки
+about_sym_header: Кратко о SYM
+about_sym_description: SYM- это торговая площадка, где вы можете покупать и <br> продавать 3D модели, текстуры, плагины для различных <br> проектов. Наш магазин начал свою работу в Феврале 2004 <br> года, и сегодня мы являемся одним из крупнейших поставщиков 3D контента в мире. У нас только качественные 3D <br> модели!
+about_sym_description_header: О проекте
+about_sym_legal_header: Правовые аспекты
+about_sym_updates_header: Обновления
+about_sym_follow_us: Следуйте за нами
+about_sym_rules: Правила
+about_sym_community: Сообщество
+about_sym_adversting: Реклама
+about_sym_support: Тех. Поддержка
+about_sym_send_message: Отправить сообщение
+about_sym_contacts: Контакты
+about_sym_license: Лицензионное соглашение
+about_sym_terms: Условия использования
+about_sym_privacy: Политика конфиденциальности
+footer_all_right_reserved: Все права защищены.
+footer_title: Премиум 3D модели, CG текстуры  | SYM
+footer_subscribe_test: Подпишитесь, чтобы получать свежие уроки, скидоч-<br>ные купоны, бесплатные товары и наши новости.
+footer_subscribe_email: Ваш E-mail
+footer_subscribe_action: Подписаться
+modal_auth: Вход
+modal_password: Пароль
+modal_auth_action: Войти
+modal_withdrawals_header: Заявка на вывод средств
+modal_withdrawals_sum: Сумма для вывода
+modal_withdrawals_send: Отправить заявку
+image_crop_header: Обрезка изображения
+image_crop_action: Обрезать

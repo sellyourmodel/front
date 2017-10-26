@@ -2,14 +2,14 @@
 
 {% block content %}
     <div class="main-wrap__header">
-        <h1>Покупка моделей</h1>
+        <h1>{% trans %}buying_models{% endtrans %}</h1>
     </div>
     <div class="wrap">
         <div class="wrap-right">
 
         </div>
         <div class="wrap-left">
-            <p>Идет переадресация на форму заказа, если этого не произошло нажмите на кнопку внизу.</p>
+            <p>{% trans %}buy_form_redirect{% endtrans %}</p>
             <form action="https://demomoney.yandex.ru/eshop.xml" method="post" class="js-ya-form">
                 <input name="shopId" value="129835" type="hidden"/>
                 <input name="scid" value="551245" type="hidden"/>
@@ -19,7 +19,7 @@
                 <input name="orderNumber" value="{{ entity.id }}" type="hidden"/>
                 <input name="cps_phone" value="" type="hidden"/>
                 <input name="cps_email" value="" type="hidden"/>
-                <input type="submit" class="button button_warning" value="Перейти к оплате" />
+                <input type="submit" class="button button_warning" value="{% trans %}go_to_pay_btn{% endtrans %}" />
             </form>
         </div>
     </div>

@@ -1,21 +1,21 @@
 <tr>
-    <th class="td-date">Дата</th>
-    <th>Заявка</th>
-    <th class="td-summa">На сумму</th>
-    <th class="td-summa">Статус</th>
+    <th class="td-date">{% trans %}date{% endtrans %}</th>
+    <th>{% trans %}drawals_application{% endtrans %}</th>
+    <th class="td-summa">{% trans %}drawals_price{% endtrans %}</th>
+    <th class="td-summa">{% trans %}drawals_status{% endtrans %}</th>
 </tr>
 {% for e in withdrawals %}
     <tr>
         <td>{{ e.date|date("d.m.Y") }}</td>
-        <td>Заявка №{{ e.id }}</td>
+        <td>{% trans %}drawals_num{% endtrans %} {{ e.id }}</td>
         <td>{{ e.price }}</td>
         <td>
             {% if e.status == 'rejected' %}
-                Отклонено
+                {% trans %}drawals_status_rejected{% endtrans %}
             {% elseif e.status == 'done' %}
-                Выполнено
+                {% trans %}drawals_status_done{% endtrans %}
             {% else %}
-                Новая
+                {% trans %}drawals_status_new{% endtrans %}
             {% endif %}
         </td>
     </tr>
