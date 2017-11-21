@@ -17,6 +17,19 @@ class BannerIndexAdmin extends Admin
 
         $formMapper
             ->add('name', null, array('label' => 'Название', 'required' => true))
+            ->add('info', null, array('label' => 'Подпись', 'required' => true))
+            ->add('icon', 'sonata_type_model_list', array('label' => 'Иконка'), array(
+                'link_parameters' => array(
+                    'hide_context' => true,
+                    'context' => 'bannerIcon',
+                    'provider' => 'sonata.media.provider.image'
+                )))
+            ->add('bg', 'sonata_type_model_list', array('label' => 'Фон (395×120)'), array(
+                'link_parameters' => array(
+                    'hide_context' => true,
+                    'context' => 'bannerBg',
+                    'provider' => 'sonata.media.provider.image'
+                )))
             ->add('link', null, array('label' => 'Ссылка', 'required' => true))
         ;
     }

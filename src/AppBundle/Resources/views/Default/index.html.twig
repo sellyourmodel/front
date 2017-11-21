@@ -7,7 +7,12 @@
     {% spaceless %}
         <div class="banners-main">
             {% for e in banners %}
-                <a href="{{ e.link }}" class="banners-main__item">{{ e.name }}</a>
+                <a href="{{ e.link }}" style="background: url({% path e.bg, 'reference' %});" class="banners-main__item">
+                    <img src="{% path e.icon, 'reference' %}" alt="" class="banners-main__icon">
+                    <div class="banners-main__name">{{ e.name }}</div>
+                    <div class="banners-main__info">{{ e.info }}</div>
+                    <div class="banners-main__mask"></div>
+                </a>
             {% endfor %}
         </div>
     {% endspaceless %}

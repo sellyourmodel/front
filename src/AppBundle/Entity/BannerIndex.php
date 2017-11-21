@@ -31,9 +31,28 @@ class BannerIndex
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $info;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $link;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER")
+     * @ORM\JoinColumn(name="icon_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $icon;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER")
+     * @ORM\JoinColumn(name="bg_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $bg;
 
     /**
      * toString for sonataAdminBundle breadcrumbs.
@@ -101,5 +120,77 @@ class BannerIndex
     public function getLink()
     {
         return $this->link;
+    }
+
+    /**
+     * Set icon
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $icon
+     *
+     * @return BannerIndex
+     */
+    public function setIcon(\Application\Sonata\MediaBundle\Entity\Media $icon = null)
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Get icon
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * Set bg
+     *
+     * @param \Application\Sonata\MediaBundle\Entity\Media $bg
+     *
+     * @return BannerIndex
+     */
+    public function setBg(\Application\Sonata\MediaBundle\Entity\Media $bg = null)
+    {
+        $this->bg = $bg;
+
+        return $this;
+    }
+
+    /**
+     * Get bg
+     *
+     * @return \Application\Sonata\MediaBundle\Entity\Media
+     */
+    public function getBg()
+    {
+        return $this->bg;
+    }
+
+    /**
+     * Set info
+     *
+     * @param string $info
+     *
+     * @return BannerIndex
+     */
+    public function setInfo($info)
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
+    /**
+     * Get info
+     *
+     * @return string
+     */
+    public function getInfo()
+    {
+        return $this->info;
     }
 }

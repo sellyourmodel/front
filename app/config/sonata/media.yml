@@ -24,6 +24,19 @@ sonata_media:
 
             formats:
                 full:   { width: 1190 , height: 470, quality: 100}
+
+        bannerIcon:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                full:   { width: 32, height: 32, quality: 100}
+
+        bannerBg:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                full:   { width: 395, height: 120, quality: 100}
+
         informImage:
             providers:
                 - sonata.media.provider.image
