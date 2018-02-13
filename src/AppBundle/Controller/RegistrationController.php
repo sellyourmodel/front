@@ -71,7 +71,7 @@ class  RegistrationController extends Controller
             return JsonResponse::create(["error"=>true, 'error_text'=>'Данный никнейм зарегистрирован']);
         }
 
-        $recaptchaCode = $request->get('g-recaptcha-response');
+        /*$recaptchaCode = $request->get('g-recaptcha-response');
 
         $recaptcha = new \ReCaptcha\ReCaptcha("6LdrISYUAAAAAFSRWvn-7n5-7A3SnwD15vF8bS21");
         $resp = $recaptcha->verify($recaptchaCode, $_SERVER['REMOTE_ADDR']);
@@ -79,7 +79,7 @@ class  RegistrationController extends Controller
             if(count($resp->getErrorCodes()) > 0 ){
                 return JsonResponse::create(["error"=>true, 'error_text'=>'Вы не прошли тест reCAPTCHA']);
             }
-        }
+        }*/
 
         $user = new User();
 
