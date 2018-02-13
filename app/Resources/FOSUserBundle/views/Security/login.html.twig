@@ -1,6 +1,9 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
+    {% if app.user %}
+        <meta http-equiv="refresh" content="0; url=/">
+    {% endif %}
     <div class="main-wrap">
         <div class="wrap">
             <div class="wrap-right login-registration__wrap-right">
