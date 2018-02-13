@@ -1,19 +1,44 @@
-<h1>Восстановение пароля</h1>
+<div class="main-wrap">
+    <div class="main-wrap__header">
+        <h1>Восстановение пароля</h1>
+    </div>
+    <div class="wrap">
+        <div class="box-form login-registration__registration-wrapper" style="padding: 0px 22px 22px 22px;">
+            <form action="{{ path('fos_user_resetting_send_email') }}" method="POST">
+                <div class="login-registration__fields-wrapper clearfix">
+                    <div class="box-field registration-error registration-fields">
+                        {% if invalid_username is defined %}
+                            <div class="registration-error__text js-registration-error">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</div>
+                        {% endif %}
+                        <label class="box-field__label">Введите e-mail</label>
+                        <div class="box-field__input">
+                            <input name="username" type="text" placeholder="E-mail" class="form-control" value="" required="required" />
+                        </div>
+                    </div>
+                </div>
+                <div class="login-registration__submit">
+                    <button type="submit" class="button button_warning button_block box-form__button">
+                        Восстановить пароль
+                    </button>
+                </div>
+            </form>
+        </div>
 
-<div class="login">
-    {% if invalid_username is defined %}
-        <div class="login__error">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</div>
-    {% endif %}
-    <form class="login-form" action="{{ path('fos_user_resetting_send_email') }}" method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <input name="username" placeholder="E-mail" class="form-control input" value="" required="required" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
-                <input type="submit" value="Восстановить пароль" class="submit">
-            </div>
-        </div>
-    </form>
+
+        {#{% if invalid_username is defined %}#}
+            {#<div class="login__error">{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}, 'FOSUserBundle') }}</div>#}
+        {#{% endif %}#}
+        {#<form class="login-form" action="{{ path('fos_user_resetting_send_email') }}" method="post">#}
+            {#<div class="row">#}
+                {#<div class="col-md-4">#}
+                    {#<input name="username" placeholder="E-mail" class="form-control input" value="" required="required" />#}
+                {#</div>#}
+            {#</div>#}
+            {#<div class="row">#}
+                {#<div class="col-md-12">#}
+                    {#<input type="submit" value="Восстановить пароль" class="submit">#}
+                {#</div>#}
+            {#</div>#}
+        {#</form>#}
+    </div>
 </div>

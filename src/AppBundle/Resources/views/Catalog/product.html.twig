@@ -22,6 +22,10 @@
                     {#<li class="link-list__item"><a href="#" class="link-list__link link">Современный дизайн</a></li>#}
                     {#<li class="link-list__item"><a href="#" class="link-list__link link">Геометрический дизайн</a></li>#}
                 {#</ul>#}
+                <div class="box-rating rating">
+                    <span class="rating__count js-product-likes">{{ product.stars }}</span>
+                    <span class="product-star"></span>
+                </div>
                 <p>
                     {{ product.text|nl2br }}
                 </p>
@@ -35,15 +39,18 @@
                         {% endfor %}
                     </ul>
                 {% endif %}
-                <div class="box-rating rating"><span class="rating__count js-product-likes">{{ product.stars }}</span>
-                    {% if app.user %}
-                        <a href="#" class="product-star {% if alreadyLike %}active{% endif %}" onclick="likeProduct({{ product.id }}, this);return false;"></a>
+                {% if app.user %}
+                    {% if alreadyLike %}
                     {% else %}
-                        <span class="product-star"></span>
+                        <div class="box-button">
+                            <button role="button" class="button button_warning button_warning--user-like" onclick="likeProduct({{ product.id }}, this);" data-change-name="{% trans %}buy_thanks{% endtrans %}">{% trans %}buy_like{% endtrans %}</button>
+                        </div>
                     {% endif %}
-                </div>
+                {% endif %}
                 <div class="link-group">
-                    <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">{% if alreadyFavorite %}{% trans %}added_to_favourite{% endtrans %}{% else %}{% trans %}add_to_favourite{% endtrans %}{% endif %}</a>
+                    {% if app.user %}
+                        <a href="#" class="link" onclick="favoriteProduct({{ product.id }}, this);return false;">{% if alreadyFavorite %}{% trans %}added_to_favourite{% endtrans %}{% else %}{% trans %}add_to_favourite{% endtrans %}{% endif %}</a>
+                    {% endif %}
                     <a href="#" class="link js-share-btn" onclick="showShare();return false;">{% trans %}share{% endtrans %}</a>
                     <div id="share-block" class="share-block js-share-block" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,twitter,linkedin"></div>
                 </div>

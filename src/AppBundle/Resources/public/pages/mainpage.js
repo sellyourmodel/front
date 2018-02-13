@@ -8,8 +8,10 @@ $(function () {
             $(".slider__bg .slider__bg-item.active").fadeOut().removeClass('active');
             $(".slider__bg .slider__bg-item").eq(slider.currentPage - 1).fadeIn().addClass('active');
         },
-        autoPlay: true
-
+        expand: true,
+        /*resizeContents: true,*/
+        autoPlay: true,
+        delay: 15000
     });
 });
 

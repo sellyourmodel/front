@@ -119,6 +119,30 @@ services:
         calls:
             - { method: setPageId, arguments: [9]}
 
+    wp.admin.poloj:
+        class: AppBundle\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Положение о конфиденциальности}
+        arguments: [~, AppBundle\Entity\TextPage, AppBundle:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [10]}
+
+    wp.admin.poitic:
+        class: AppBundle\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Политика защиты персональной информации}
+        arguments: [~, AppBundle\Entity\TextPage, AppBundle:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [11]}
+
+    wp.admin.support:
+        class: AppBundle\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Поддержка}
+        arguments: [~, AppBundle\Entity\TextPage, AppBundle:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [12]}
+
 #    app.admin.news:
 #        class: AppBundle\Admin\NewsAdmin
 #        tags:
@@ -134,7 +158,7 @@ services:
     app.admin.articles:
         class: AppBundle\Admin\ArticleAdmin
         tags:
-            - { name: sonata.admin, manager_type: orm, group: Блог, label: Блог}
+            - { name: sonata.admin, manager_type: orm, group: Сообщество, label: Статьи}
         arguments: [~, AppBundle\Entity\Article, ~]
 
 #    app.admin.tag:
@@ -160,6 +184,12 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: ПО моделей}
         arguments: [~, AppBundle\Entity\Software, ~]
+
+    app.admin.right.block:
+        class: AppBundle\Admin\RightTextBlockAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Текст справа}
+        arguments: [~, AppBundle\Entity\RightTextBlock, ~]
 
     app.admin.subscribe:
         class: AppBundle\Admin\SubscribeAdmin

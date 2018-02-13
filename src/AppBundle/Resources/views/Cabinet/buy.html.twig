@@ -2,23 +2,24 @@
 
 {% block content %}
     <div class="main-wrap__header">
-        <h1>{% trans %}{{ buying_models }}{% endtrans %}</h1>
+        <h1>{% trans %}buying_models{% endtrans %}</h1>
     </div>
     <div class="wrap">
         <div class="wrap-right">
-            <h4 class="wrap__title">{% trans %}helpful_information{% endtrans %}</h4>
-            <ol class="list">
-                <li>{% trans %}cabinet_buy_healful_info_l1{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l2{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l3{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l4{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l5{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l6{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l7{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l8{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l9{% endtrans %}</li>
-                <li>{% trans %}cabinet_buy_healful_info_l10{% endtrans %}</li>
-            </ol>
+            {{ rightText|raw }}
+            {#<h4 class="wrap__title">{% trans %}helpful_information{% endtrans %}</h4>#}
+            {#<ol class="list">#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l1{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l2{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l3{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l4{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l5{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l6{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l7{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l8{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l9{% endtrans %}</li>#}
+                {#<li>{% trans %}cabinet_buy_healful_info_l10{% endtrans %}</li>#}
+            {#</ol>#}
         </div>
         <div class="wrap-left">
             <p>{% trans %}cabinet_buy_left_info_l1{% endtrans %}</p>
@@ -31,21 +32,23 @@
                         <dd class="box-label__cont">{{ app.user.models }}</dd>
                         <dt class="box-label__title mb25">{% trans %}select_number_purchased{% endtrans %}:</dt>
                         <dd class="box-label__cont mb25">
-                            <input type="text" value="10" class="box-label__input js-buy-count" onchange="setBuyCount({{ settings.modelPrice }});" />
+                            <input type="text" value="2" class="box-label__input js-buy-count" onkeyup="setBuyCount({{ settings.modelPrice }});" onchange="setBuyCount({{ settings.modelPrice }});" />
                         </dd>
                         <dt class="box-label__title mb25">{% trans %}order_price{% endtrans %}:</dt>
-                        <dd class="box-label__cont mb25"><span class="count js-buy-count">{{ 10 * settings.modelPrice }}</span> {% trans %}currency_rub{% endtrans %}.</dd>
+                        <dd class="box-label__cont mb25"><span class="count js-buy-count">{{ 2 * settings.modelPrice }}</span> {% trans %}currency_rub{% endtrans %}</dd>
                     </dl>
-                    <div class="box-field checkbox mb20">
-                        <div class="box-field__input">
-                            <input type="checkbox" id="buy-rules" class="styler" />
-                            <label for="buy-rules" class="box-field__label">
-                                {% trans %}i_agree_with{% endtrans %}
-                                <a href="{{ path('page_7') }}" target="_blank" class="link">{% trans %}user_agreement{% endtrans %}</a>
-                            </label>
+                    <div class="box-field-group">
+                        <div class="box-field checkbox mb20">
+                            <div class="box-field__input">
+                                <input type="checkbox" id="buy-rules" class="styler" />
+                                <label for="buy-rules" class="box-field__label">
+                                    {% trans %}i_agree_with{% endtrans %}
+                                    <a href="{{ path('page_8') }}" target="_blank" class="link">{% trans %}payment_agreement{% endtrans %}</a>
+                                </label>
+                            </div>
                         </div>
                     </div>
-                    <button type="button" class="button button_warning" onclick="buyModels();return false;">{% trans %}buy{% endtrans %}</button>
+                    <button type="button" class="button button_warning" onclick="buyModels();return false;">{% trans %}buy_cabinet{% endtrans %}</button>
                     <span class="help-text inline settings__result js-buy-models-result"></span>
                     {#<h4 class="box-form__title">Выберите способ оплаты</h4
                     <div class="payment__button-group">

@@ -2,7 +2,7 @@
     {% for i in 1..5 %}
     <div class="navigation-table__cell">
         {% for e in categories[i] %}
-        <h4 class="navigation__title">{{ e.name }}</h4>
+        <a class="navigation__title" href="{{ path('catalog_category',{alias:e.alias}) }}">{{ e.name }}</a>
         <ul class="navigation-list unstyled">
             {% for e2 in e.children %}
             <li class="navigation-list__item"><a href="{{ path('catalog_category',{alias:e2.alias}) }}" class="navigation-list__link">{{ e2.name }}</a></li>

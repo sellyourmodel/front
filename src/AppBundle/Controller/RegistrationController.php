@@ -43,6 +43,7 @@ class  RegistrationController extends Controller
         $nickname = trim($request->get('nickname'));
         $password = trim($request->get('password'));
         $password_repeat = trim($request->get('password_repeat'));
+        $user_agreement = trim($request->get('user_agreement', '0'));
 
         if($email == '' OR $nickname == '' OR $password == '' OR $password_repeat == ''){
             return JsonResponse::create(["error"=>true, 'error_text'=>'Заполните все поля']);
@@ -54,6 +55,10 @@ class  RegistrationController extends Controller
 
         if($password != $password_repeat){
             return JsonResponse::create(["error"=>true, 'error_text'=>'Пароли не совпадают']);
+        }
+
+        if($user_agreement != '1'){
+            return JsonResponse::create(["error"=>true, 'error_text'=>'Примите условия']);
         }
 
         $em = $this->getDoctrine()->getManager();

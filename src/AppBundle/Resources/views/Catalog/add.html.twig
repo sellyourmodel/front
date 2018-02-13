@@ -8,32 +8,36 @@
     </div>
     <div class="wrap wrap_small">
         <div class="wrap-right">
-
+            {{ rightText|raw }}
         </div>
         <div class="wrap-left">
             <div class="box-form settings">
                 <form action="{{ path('catalog_add_write') }}" class="js-add-model-form" method="POST">
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}model_name{% endtrans %} <span class="require-field-z">*</span></label>
-                        <div class="box-field__input">
-                            <input type="text" name="name" class="form-control" />
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}model_name{% endtrans %} <span class="require-field-z">*</span></label>
+                            <div class="box-field__input">
+                                <input type="text" name="name" class="form-control" />
+                            </div>
                         </div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}category{% endtrans %} <span class="require-field-z">*</span></label>
-                        <div class="box-field__input">
-                            <select name="category" data-placeholder=" " class="styler form-control">
-                                <option value=""></option>
-                                {% for e in categories %}
-                                    {% for e2 in e.children %}
-                                        <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}category{% endtrans %} <span class="require-field-z">*</span></label>
+                            <div class="box-field__input">
+                                <select name="category" data-placeholder=" " class="styler form-control">
+                                    <option value=""></option>
+                                    {% for e in categories %}
+                                        {% for e2 in e.children %}
+                                            <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
+                                        {% endfor %}
                                     {% endfor %}
-                                {% endfor %}
-                            </select>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="box-field-group user js-image-wrapper js-main-image-drop">
-                        <label class="box-field__label">model_cover <span class="require-field-z">*</span></label>
+                        <label class="box-field__label">{% trans %}model_cover{% endtrans %} <span class="require-field-z">*</span></label>
                         <div class="box-field__input js-image-add-input">
                             <input type="file" id="fileuploadMainImage" data-placeholder="{% trans %}file_not_select{% endtrans %}" data-browse="{% trans %}upload_file{% endtrans %}"
                                    class="styler">
@@ -56,36 +60,50 @@
                         </div>
                         <div class="model-files js-model-files"></div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}model_manufacturer{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <input type="text" name="manufacturer" class="form-control" />
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}model_manufacturer{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <input type="text" name="manufacturer" class="form-control" />
+                            </div>
                         </div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}model_tags{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <select name="tags[]" multiple class="select2-tags form-control">
-                                {% for e in tags %}
-                                    <option value="{{ e.name }}">{{ e.name }}</option>
-                                {% endfor %}
-                            </select>
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}model_tags{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <select name="tags[]" multiple class="select2-tags form-control">
+                                    {% for e in tags %}
+                                        <option value="{{ e.name }}">{{ e.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}model_po{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <select name="software[]" multiple class="select2 form-control">
-                                {% for e in software %}
-                                    <option value="{{ e.id }}">{{ e.name }}</option>
-                                {% endfor %}
-                            </select>
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}model_po{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <select name="software[]" multiple class="select2 form-control">
+                                    {% for e in software %}
+                                        <option value="{{ e.id }}">{{ e.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}model_description{% endtrans %}</label>
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}model_description{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <textarea name="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-field login-fields checkbox nowrap">
                         <div class="box-field__input">
-                            <textarea name="text" class="form-control"></textarea>
+                            <input type="checkbox" id="check_2" name="user_agreement" value="1" class="styler">
+                            <label for="check_2" class="nowrap box-field__label">{% trans %}i_agree_with{% endtrans %} <a href="{{ path('page_7') }}" target="_blank" class="link">{% trans %}agent_agreement{% endtrans %}</a></label>
                         </div>
                     </div>
                     <button type="submit" class="button button_warning js-add-model-btn" onclick="addModel();return false;">{% trans %}model_add{% endtrans %}</button>

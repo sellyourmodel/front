@@ -27,5 +27,6 @@ composer.phar
 
 /local/
 /logs
+.dev
 
 tests/_output/*

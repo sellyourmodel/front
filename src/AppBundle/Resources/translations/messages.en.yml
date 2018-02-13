@@ -1,4 +1,5 @@
 model_add: Add 3D model
+buy_add: Buy model
 about: About us
 buy: Sell 3D models
 community: Community
@@ -36,6 +37,9 @@ available_3d_models: Available 3d models
 select_number_purchased: Select the number of 3d models to be purchased
 order_price: Order price
 buy: Buy
+buy_btn: Buy
+buy_like: Like
+buy_thanks: Thanks!
 currency_rub: rub.
 i_agree_with: I agree with
 user_agreement: user agreement
@@ -118,6 +122,7 @@ search_by_tags_header: Search by tag
 search_by_tags_notfound: There are no models for the given tag.
 new_in_catalog: New in the catalog
 best: The best
+login_left: Do you want to shop much faster?<br />Buy prepaid Loans and download products one click!
 registration_header: Registration
 registration_left: Do you want to shop much faster? Buy prepaid Loans and download products one click!
 registration_nickname: Nickname
@@ -195,9 +200,11 @@ about_sym_adversting: Advertising
 about_sym_support: Support
 about_sym_send_message: Send a message
 about_sym_contacts: Contacts
-about_sym_license: License agreement
-about_sym_terms: Terms of use
+about_sym_agent_dog: Agency agreement
+about_sym_terms: Public offer for the payment
 about_sym_privacy: Privacy policy
+about_sym_conf: Privacy statement and disclaimer
+about_sym_personal: Protection policy of personal information
 footer_all_right_reserved: All rights reserved.
 footer_title: Premium 3D models, CG textures | SYM
 footer_subscribe_test: Sign up to receive fresh lessons, discount coupons, free products and our news.
@@ -211,3 +218,4 @@ modal_withdrawals_sum: Amount for withdrawal
 modal_withdrawals_send: Send an application
 image_crop_header: Crop images
 image_crop_action: Crop
+buy_cabinet: Buy models

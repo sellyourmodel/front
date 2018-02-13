@@ -1,5 +1,10 @@
-<ul id="box-lang" class="lang-list unstyled js-open-block">
-    {% for e in sites %}
-        <li class="lang-list__item"><a href="http://{{ e.name }}/" class="lang-list__link"> <span class="ic ic_flag-{{ e.locale }}"></span></a></li>
-    {% endfor %}
-</ul>
+
+{% for e in sites %}
+        <a href="http://{{ e.name }}/" class="lang__item {% if app.request.host == e.name %}active{% endif %}"><span>{{ e.locale }}</span></a>
+{% endfor %}
+
+{#<ul id="box-lang" class="lang-list unstyled js-open-block">#}
+    {#{% for e in sites %}#}
+        {#<li class="lang-list__item"><a href="http://{{ e.name }}/" class="lang-list__link"> <span class="ic ic_flag-{{ e.locale }}"></span></a></li>#}
+    {#{% endfor %}#}
+{#</ul>#}

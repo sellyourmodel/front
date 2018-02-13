@@ -16,28 +16,33 @@
         <div class="wrap-left">
             <div class="box-form settings">
                 <form class="js-settings-form" action="{{ path('cabinet_settings_write') }}" method="POST">
-                    <div class="box-field col-3">
-                        <label class="box-field__label">{% trans %}nickname{% endtrans %} <span class="require-field-z">*</span></label>
-                        <div class="box-field__input">
-                            <input type="text" class="form-control js-require" name="nickname" value="{{ app.user.nickname }}" />
+                    <div class="box-field-group">
+                        <div class="box-field col-3">
+                            <label class="box-field__label">{% trans %}nickname{% endtrans %} <span class="require-field-z">*</span></label>
+                            <div class="box-field__input">
+                                <input type="text" class="form-control js-require" name="nickname" value="{{ app.user.nickname }}" />
+                            </div>
                         </div>
                     </div>
+
                     {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
-                        <div class="box-field col-1">
-                            <label class="box-field__label">{% trans %}level{% endtrans %}</label>
-                            <div class="box-field__input">
-                                <select name="lvl" data-placeholder=" " class="styler form-control">
-                                    <option value="" {% if app.user.lvl == '' %}selected{% endif %}>{% trans %}without_wins{% endtrans %}</option>
-                                    <option value="lvl1" {% if app.user.lvl == 'lvl1' %}selected{% endif %}>10 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl2" {% if app.user.lvl == 'lvl2' %}selected{% endif %}>20 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl3" {% if app.user.lvl == 'lvl3' %}selected{% endif %}>30 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl4" {% if app.user.lvl == 'lvl4' %}selected{% endif %}>40 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl5" {% if app.user.lvl == 'lvl5' %}selected{% endif %}>50 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl6" {% if app.user.lvl == 'lvl6' %}selected{% endif %}>60 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl7" {% if app.user.lvl == 'lvl7' %}selected{% endif %}>70 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl8" {% if app.user.lvl == 'lvl8' %}selected{% endif %}>80 {% trans %}wins_postfix{% endtrans %}</option>
-                                    <option value="lvl9" {% if app.user.lvl == 'lvl9' %}selected{% endif %}>100 {% trans %}wins_postfix{% endtrans %}</option>
-                                </select>
+                        <div class="box-field-group">
+                            <div class="box-field col-1">
+                                <label class="box-field__label">{% trans %}level{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <select name="lvl" data-placeholder=" " class="styler form-control">
+                                        <option value="" {% if app.user.lvl == '' %}selected{% endif %}>{% trans %}without_wins{% endtrans %}</option>
+                                        <option value="lvl1" {% if app.user.lvl == 'lvl1' %}selected{% endif %}>10 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl2" {% if app.user.lvl == 'lvl2' %}selected{% endif %}>20 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl3" {% if app.user.lvl == 'lvl3' %}selected{% endif %}>30 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl4" {% if app.user.lvl == 'lvl4' %}selected{% endif %}>40 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl5" {% if app.user.lvl == 'lvl5' %}selected{% endif %}>50 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl6" {% if app.user.lvl == 'lvl6' %}selected{% endif %}>60 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl7" {% if app.user.lvl == 'lvl7' %}selected{% endif %}>70 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl8" {% if app.user.lvl == 'lvl8' %}selected{% endif %}>80 {% trans %}wins_postfix{% endtrans %}</option>
+                                        <option value="lvl9" {% if app.user.lvl == 'lvl9' %}selected{% endif %}>100 {% trans %}wins_postfix{% endtrans %}</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     {% endif %}
@@ -78,20 +83,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-field col-4">
-                        <label class="box-field__label">E-mail <span class="require-field-z">*</span></label>
-                        <div class="box-field__input">
-                            <input type="email" class="form-control js-require" name="email" value="{{ app.user.email }}" />
+                    <div class="box-field-group">
+                        <div class="box-field col-4">
+                            <label class="box-field__label">E-mail <span class="require-field-z">*</span></label>
+                            <div class="box-field__input">
+                                <input type="email" class="form-control js-require" name="email" value="{{ app.user.email }}" />
+                            </div>
                         </div>
                     </div>
-                    <div class="box-field col-1">
-                        <label class="box-field__label">{% trans %}profile_gender{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <select name="gender" data-placeholder=" " class="styler form-control">
-                                <option value=""></option>
-                                <option value="m" {% if app.user.gender == 'm' %}selected{% endif %}>{% trans %}profile_gender_m{% endtrans %}</option>
-                                <option value="f" {% if app.user.gender == 'f' %}selected{% endif %}>{% trans %}profile_gender_w{% endtrans %}</option>
-                            </select>
+                    <div class="box-field-group">
+                        <div class="box-field col-1">
+                            <label class="box-field__label">{% trans %}profile_gender{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <select name="gender" data-placeholder=" " class="styler form-control">
+                                    <option value=""></option>
+                                    <option value="m" {% if app.user.gender == 'm' %}selected{% endif %}>{% trans %}profile_gender_m{% endtrans %}</option>
+                                    <option value="f" {% if app.user.gender == 'f' %}selected{% endif %}>{% trans %}profile_gender_w{% endtrans %}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="box-field-group">
@@ -106,10 +115,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}profile_specialization{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <input type="text" class="form-control" name="specialization" value="{{ app.user.specialization }}" />
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}profile_specialization{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <input type="text" class="form-control" name="specialization" value="{{ app.user.specialization }}" />
+                            </div>
                         </div>
                     </div>
                     <div class="box-field-group">
@@ -130,10 +141,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}profile_about_myself{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <textarea name="text" class="form-control">{{ app.user.text }}</textarea>
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}profile_about_myself{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <textarea name="text" class="form-control">{{ app.user.text }}</textarea>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="button button_warning" onclick="saveSettings();return false;">{% trans %}change{% endtrans %}</button>

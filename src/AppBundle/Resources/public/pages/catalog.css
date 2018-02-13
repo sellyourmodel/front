@@ -1,10 +1,12 @@
 .sub-cats {
-    padding: 29px 22px;
+    padding: 29px 22px 0px 22px;
 }
 .sub-cats__item {
     margin-right: 12px;
     color:#8b8b8b;
     text-decoration: underline;
+    display: inline-block;
+    margin-bottom: 29px;
 }
 
 .sub-cats__item:hover {

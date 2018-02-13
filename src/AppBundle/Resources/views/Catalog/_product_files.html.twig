@@ -1,6 +1,6 @@
-<p>Файлы модели:</p>
-{% for e in files %}
-    <div class="model-files-download">
-        <a href="{{ path('catalog_product_file', {alias:product.alias, file:e.id}) }}" download="{{ e.name }}">{{ e.name }}</a>
+{% if productFile %}
+    <div class="box-button">
+        <a href="{{ path('catalog_product_file', {alias:product.alias, file:productFile.id}) }}" download="{{ productFile.name }}" class="button button_warning button_warning--user-buy">{% trans %}download{% endtrans %}</a>
+        <span class="button-info">{% trans %}models_available{% endtrans %} <span>- {{ app.user.models }}</span></span>
     </div>
-{% endfor %}
+{% endif %}

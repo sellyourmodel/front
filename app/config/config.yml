@@ -97,8 +97,8 @@ fos_user:
   firewall_name:  main
   user_class:  AppBundle\Entity\User
   from_email:
-          address:        "info@imodern.ru"
-          sender_name:    "iModern"
+          address:        "info@sellyourmodel.com"
+          sender_name:    "Sellyourmodel"
   resetting:
           token_ttl: 600
 

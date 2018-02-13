@@ -48,16 +48,30 @@ class Slider
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $line1;
 
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $line2;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $line3;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $line4;
 
     /**
      * @var string
@@ -259,5 +273,53 @@ class Slider
     public function getPos()
     {
         return $this->pos;
+    }
+
+    /**
+     * Set line3
+     *
+     * @param string $line3
+     *
+     * @return Slider
+     */
+    public function setLine3($line3)
+    {
+        $this->line3 = $line3;
+
+        return $this;
+    }
+
+    /**
+     * Get line3
+     *
+     * @return string
+     */
+    public function getLine3()
+    {
+        return $this->line3;
+    }
+
+    /**
+     * Set line4
+     *
+     * @param string $line4
+     *
+     * @return Slider
+     */
+    public function setLine4($line4)
+    {
+        $this->line4 = $line4;
+
+        return $this;
+    }
+
+    /**
+     * Get line4
+     *
+     * @return string
+     */
+    public function getLine4()
+    {
+        return $this->line4;
     }
 }

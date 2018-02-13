@@ -76,7 +76,7 @@ function buyThisModel(e, id){
 
 function likeProduct(id, e){
 
-    var likesContainer = $(e).parent().find('.js-product-likes');
+    var likesContainer = $(e).parent().parent().find('.js-product-likes');
 
     $.ajax({
         type: "POST",
@@ -89,12 +89,13 @@ function likeProduct(id, e){
             }
             else {
                 likesContainer.html(data.likes);
-                if(data.active){
-                    $(e).addClass('active');
-                }
-                else{
-                    $(e).removeClass('active');
-                }
+                $(e).attr('disabled', 'disabled').html($(e).attr('data-change-name'));
+                // if(data.active){
+                //     $(e).addClass('active');
+                // }
+                // else{
+                //     $(e).removeClass('active');
+                // }
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

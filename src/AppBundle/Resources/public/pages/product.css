@@ -36,3 +36,18 @@
 .model-admin-action{
     padding-top: 12px;
 }
+
+.button_warning--user-buy{
+    width: 127px;
+    text-align: center;
+}
+
+.button_warning--user-like{
+    width: 197px;
+    text-align: center;
+}
+
+.button_warning--user-like:disabled,
+.button_warning--user-like:disabled:hover{
+    background: #c8c8c8 !important;
+}

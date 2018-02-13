@@ -2,10 +2,75 @@
     position: relative;
 }
 
+.login-fields{
+    float: none;
+}
+
+.registration-fields{
+    float: left;
+    width: 282px;
+    margin-right: 28px;
+}
+
 .login-error__text{
     display: none;
     position: absolute;
     top:0;
     right:0;
     color: #c91d24;
+}
+
+.login-registration__title{
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 400;
+    color: #1f1611;
+    padding: 29px 22px 29px;
+    border-bottom: 1px solid #e5e5e5;
+    margin-left: -22px;
+    margin-right: -22px;
+}
+
+.login-registration__wrap-left{
+    width:36%;
+}
+
+@media (max-width: 767px) {
+    .login-registration__wrap-left {
+        width: 100%;
+        float: left;
+    }
+}
+
+
+.login-registration__wrap-right{
+    width:64%;
+    padding-right:22px;
+}
+
+@media (max-width: 767px) {
+    .login-registration__wrap-right {
+        width: 100%;
+        float: left;
+    }
+}
+
+.login-registration__before-text{
+    padding-bottom: 22px;
+}
+
+.login-registration__registration-wrapper{
+    margin-top: 30px;
+}
+
+.login-registration__submit{
+    max-width: 282px;
+}
+
+.login-registration__fields-wrapper{
+
+}
+
+.login-registration__captcha{
+    margin-top: 0;
 }

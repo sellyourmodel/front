@@ -14,9 +14,9 @@
                         {% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}
                     </p>
                     {%  if app.user and app.user != entity %}
-                    <button class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</button>
+                        <button class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</button>
                     {% endif %}
-                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') and app.user and app.user != entity %}
                         <br />
                         <a class="button button_warning button_block" href="{{ path('homepage',{_switch_user: entity.email}) }}">{% trans %}user_auth{% endtrans %}</a>
                     {% endif %}
@@ -113,14 +113,14 @@
                                 <tr>
                                     <td>{{ e.date|date("d.m.Y") }}</td>
                                     <td>{{ e.name }}</td>
-                                    <td>{{ e.price }}</td>
+                                    <td>{% if e.price != '-1' %}{{ e.price }}{% endif %}</td>
                                 </tr>
                                 {% endfor %}
                             </table>
                             {#<p><a href="#" class="link">Смотреть все транзакции</a></p>#}
                             <dl class="box-label small">
-                                <dt class="box-label__title">{% trans %}user_sales_balance{% endtrans %} ${{ app.user.modelsLoadedBuy }}</dt>
-                                <dd class="box-label__cont">{% trans %}user_total_sales{% endtrans %} ${{ app.user.modelsLoadedBuy }}</dd>
+                                <dt class="box-label__title">{% trans %}user_sales_balance{% endtrans %} {{ app.user.balance }} руб.</dt>
+                                <dd class="box-label__cont">{% trans %}user_total_sales{% endtrans %} {{ app.user.balance }} руб.</dd>
                             </dl>
                         </div>
                         <div class="tab-cont__footer">

@@ -2,24 +2,77 @@
 
 {% block fos_user_content %}
     <div class="main-wrap">
-        <div class="main-wrap__header">
-            <h1>Вход</h1>
-        </div>
         <div class="wrap">
-            <div class="wrap-right">
-
+            <div class="wrap-right login-registration__wrap-right">
+                <div class="login-registration__title">
+                    Регистрация нового пользователя
+                </div>
+                <div class="box-form login-registration__registration-wrapper">
+                    <div class="login-registration__before-text">{% trans %}registration_left{% endtrans %}</div>
+                    <form action="{{ path("registration_write") }}" method="POST" class="js-registration">
+                        <div class="login-registration__fields-wrapper clearfix">
+                            <div class="box-field registration-error registration-fields">
+                                <div class="registration-error__text js-registration-error"></div>
+                                <label class="box-field__label">E-mail</label>
+                                <div class="box-field__input">
+                                    <input type="email" name="email" class="form-control js-required" />
+                                </div>
+                            </div>
+                            <div class="box-field registration-fields">
+                                <label class="box-field__label">{% trans %}registration_nickname{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <input type="text" name="nickname" class="form-control js-required" />
+                                </div>
+                            </div>
+                            <div class="box-field registration-fields">
+                                <label class="box-field__label">{% trans %}registration_password{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <input type="password" name="password" class="form-control js-required">
+                                </div>
+                            </div>
+                            <div class="box-field registration-fields">
+                                <label class="box-field__label">{% trans %}registration_repeat_password{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <input type="password" name="password_repeat" class="form-control js-required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-field login-fields captcha login-registration__captcha">
+                            <label class="box-field__label">{% trans %}registration_captcha{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <div class="g-recaptcha" data-sitekey="6LdrISYUAAAAAAzaB7Nm4xys2M8CZK81QebXWmN_"></div>
+                            </div>
+                        </div>
+                        <div class="box-field login-fields checkbox nowrap">
+                            <div class="box-field__input">
+                                <input type="checkbox" id="check_1" name="user_agreement" value="1" class="styler">
+                                <label for="check_1" class="nowrap box-field__label">{% trans %}i_agree_with{% endtrans %} <a href="{{ path('page_9') }}" target="_blank" class="link">{% trans %}user_agreement{% endtrans %}</a></label>
+                            </div>
+                        </div>
+                        <div class="login-registration__submit">
+                            <button type="submit" class="button button_warning button_block box-form__button" onclick="ajaxRegistration();return false;">
+                                {% trans %}registration_create_account{% endtrans %}
+                            </button>
+                        </div>
+                        <p><a href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
+                    </form>
+                </div>
             </div>
-            <div class="wrap-left">
+            <div class="wrap-left login-registration__wrap-left">
+                <div class="login-registration__title">
+                    Вход в личный кабинет
+                </div>
                 <div class="box-form registration">
+                    <div class="login-registration__before-text">{% trans %}login_left{% endtrans %}</div>
                     <form action="{{ path('fos_user_security_check') }}" method="POST" class="js-login">
-                        <div class="box-field login-error">
+                        <div class="box-field login-error login-fields">
                             <div class="login-error__text js-login-error"></div>
                             <label class="box-field__label">E-mail</label>
                             <div class="box-field__input">
                                 <input type="email" name="_username" class="form-control">
                             </div>
                         </div>
-                        <div class="box-field">
+                        <div class="box-field login-fields">
                             <label class="box-field__label">Пароль</label>
                             <div class="box-field__input">
                                 <input type="password" name="_password" class="form-control">

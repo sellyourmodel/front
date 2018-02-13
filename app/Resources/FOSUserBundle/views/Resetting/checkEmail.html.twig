@@ -1,8 +1,15 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-    <h1>Восстановение пароля</h1>
-<p>
-{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}
-</p>
+    <div class="main-wrap">
+        <div class="main-wrap__header">
+            <h1>Восстановение пароля</h1>
+        </div>
+        <div class="wrap">
+            <div class="box-form login-registration__registration-wrapper" style="padding: 0px 22px 22px 22px;">
+                <p>{{ 'resetting.check_email'|trans({'%email%': email}, 'FOSUserBundle') }}</p>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

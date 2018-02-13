@@ -18,7 +18,7 @@
     'bundles/app/custom-js/anythingslider/css/anythingslider.css'
     'bundles/app/custom-css/*.css'
     'bundles/app/pages/*.css'
-    filter='cssrewrite' output='css/20171121-2.css' %}
+    filter='cssrewrite' output='css/20180130.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     <!-- [if lt IE 9] -->
@@ -35,6 +35,7 @@
                 <a href="{{ path('homepage') }}" class="logo">
                     <img src="{{ asset('bundles/app/img/svg/logo.svg') }}" class="logo__svg">
                 </a>
+                {#<button class="box-nav-list-burger"><span>Открыть меню</span></button>#}
                 <nav class="box-nav-list">
                     <ul class="nav-list unstyled">
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
@@ -44,21 +45,21 @@
                         <li class="nav-list__item"><a href="{{ path('page_2') }}" class="nav-list__link"><span>{% trans %}about{% endtrans %}</span></a></li>
                         <li class="nav-list__item"><a href="{{ path('page_3') }}" class="nav-list__link"><span>{% trans %}buy{% endtrans %}</span></a></li>
                         <li class="nav-list__item"><a href="{{ path('community') }}" class="nav-list__link"><span>{% trans %}community{% endtrans %}</span></a></li>
-                        <li class="nav-list__item"><a href="#" class="nav-list__link"><span>{% trans %}support{% endtrans %}</span></a></li>
+                        <li class="nav-list__item"><a href="{{ path('page_12') }}" class="nav-list__link"><span>{% trans %}support{% endtrans %}</span></a></li>
                         <li class="nav-list__item">
-                            <a href="#" data-target="#box-lang" class="nav-list__link arrow-down js-link-open">
-                                <span>{% trans %}language{% endtrans %}:</span>
-                                <span class="nav-list__icon">
-                                    <span class="ic ic_flag-{{ app.request.locale }}"></span>
-                                </span>
-                            </a>
+                            {#<a href="#" data-target="#box-lang" class="nav-list__link arrow-down js-link-open">#}
+                                {#<span>{% trans %}language{% endtrans %}:</span>#}
+                                {#<span class="nav-list__icon">#}
+                                    {#<span class="ic ic_flag-{{ app.request.locale }}"></span>#}
+                                {#</span>#}
+                            {#</a>#}
                             {{ sites() }}
                         </li>
                     </ul>
                 </nav>
             </div>
             <div class="header-bottom">
-                <div class="header-table"><a href="#" data-target="#nav" class="header-table__item js-link-open models"><span class="models__text arrow-down">3D models</span></a>
+                <div class="header-table"><a href="#" data-target="#nav" class="header-table__item js-link-open models"><span class="models__text arrow-down"><span>3D models</span></span></a>
                     <div class="header-table__item search">
                         <form method="GET" action="{{ path('search') }}">
                             <input type="text" name="search" value="{{ app.request.get('search') }}" onkeyup="autoSearch(this);" onchange="autoSearch(this);" autocomplete="off" placeholder="{% trans %}search{% endtrans %}" class="js-search-val search__input form-control">
@@ -67,7 +68,8 @@
                         </form>
                     </div>
                     {% if app.user %}
-                        <a href="{{ path('catalog_add') }}" class="header-table__item add-models"><span>{% trans %}model_add{% endtrans %}</span></a>
+                        <a href="{{ path('cabinet_buy') }}" class="header-table__item add-models buy-model" style="width:165px;"><span>{% trans %}buy_add{% endtrans %}</span></a>
+                        <a href="{{ path('catalog_add') }}" class="header-table__item add-models" style="width:165px;"><span>{% trans %}model_add{% endtrans %}</span></a>
                         <div data-target="#nav-profile" class="header-table__item mini-profile js-link-open {% block navblock_active_class %}{% endblock %}">
                             <a href="#" class="mini-profile__img" style="width:45px;"><img src="{% if app.user.image %}{% path app.user.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt=""></a>
                             <a href="#" class="mini-profile__link">
@@ -78,7 +80,7 @@
                         </div>
                     {% else %}
                         <a href="#login" class="header-table__item link-login fancybox"><span>{% trans %}auth{% endtrans %}</span></a>
-                        <a href="{{ path('registration') }}" class="header-table__item link-registr"><span>{% trans %}registration{% endtrans %}</span></a>
+                        <a href="{{ path('fos_user_security_login') }}" class="header-table__item link-registr"><span>{% trans %}registration{% endtrans %}</span></a>
                     {% endif %}
                 </div>
                 <div id="nav" class="navigation js-open-block">
@@ -100,8 +102,8 @@
                             </div>
                             <div class="nav-profile__item">
                                 <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol">?</span></div>
-                                <div class="nav-profile__count">${{ app.user.balance }}</div>
-                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}total_sales{% endtrans %}</a><span class="kbd">${{ app.user.balance }}</span></span></div>
+                                <div class="nav-profile__count">{{ app.user.balance }} руб.</div>
+                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}total_sales{% endtrans %}</a><span class="kbd">{{ app.user.balance }} руб.</span></span></div>
                             </div>
                             <div class="nav-profile__item">
                                 <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}available_models{% endtrans %}</a><span class="simbol">?</span></div>
@@ -132,7 +134,7 @@
         <div class="wrapper">
             <div class="footer-wrapper">
                 <div class="footer__item col-1">
-                    <h4 class="footer__title">about_sym_header</h4>
+                    <h4 class="footer__title">{% trans %}about_sym_header{% endtrans %}</h4>
                     <p class="mt7">{% trans %}about_sym_description{% endtrans %}</p>
                 </div>
                 <div class="footer__item col-2">
@@ -141,17 +143,19 @@
                         <li class="footer-nav__item"><a href="{{ path('page_4') }}" class="footer-nav__link">{% trans %}about_sym_rules{% endtrans %}</a></li>
                         <li class="footer-nav__item"><a href="{{ path('community') }}" class="footer-nav__link">{% trans %}about_sym_community{% endtrans %}</a></li>
                         <li class="footer-nav__item"><a href="{{ path('page_5') }}" class="footer-nav__link">{% trans %}about_sym_adversting{% endtrans %}</a></li>
-                        <li class="footer-nav__item"><a href="#" class="footer-nav__link">{% trans %}about_sym_support{% endtrans %}</a></li>
-                        <li class="footer-nav__item"><a href="#" class="footer-nav__link">{% trans %}about_sym_send_message{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_12') }}" class="footer-nav__link">{% trans %}about_sym_support{% endtrans %}</a></li>
+                        {#<li class="footer-nav__item"><a href="#" class="footer-nav__link">{% trans %}about_sym_send_message{% endtrans %}</a></li>#}
                         <li class="footer-nav__item"><a href="{{ path('page_6') }}" class="footer-nav__link">{% trans %}about_sym_contacts{% endtrans %}</a></li>
                     </ul>
                 </div>
                 <div class="footer__item col-3">
                     <h4 class="footer__title">{% trans %}about_sym_legal_header{% endtrans %}</h4>
                     <ul class="footer-nav">
-                        <li class="footer-nav__item"><a href="{{ path('page_7') }}" class="footer-nav__link">{% trans %}about_sym_license{% endtrans %}</a></li>
-                        <li class="footer-nav__item"><a href="{{ path('page_8') }}" class="footer-nav__link">{% trans %}about_sym_terms{% endtrans %}</a></li>
                         <li class="footer-nav__item"><a href="{{ path('page_9') }}" class="footer-nav__link">{% trans %}about_sym_privacy{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_7') }}" class="footer-nav__link">{% trans %}about_sym_agent_dog{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_8') }}" class="footer-nav__link">{% trans %}about_sym_terms{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_10') }}" class="footer-nav__link">{% trans %}about_sym_conf{% endtrans %}</a></li>
+                        <li class="footer-nav__item"><a href="{{ path('page_11') }}" class="footer-nav__link">{% trans %}about_sym_personal{% endtrans %}</a></li>
                     </ul>
                 </div>
                 <div class="footer__item col-4">
@@ -191,14 +195,14 @@
             <div class="box-form registration">
                 <h3>{% trans %}modal_auth{% endtrans %}</h3>
                 <form action="{{ path('fos_user_security_check') }}" method="POST" class="js-login">
-                    <div class="box-field login-error">
+                    <div class="box-field login-error login-fields">
                         <div class="login-error__text js-login-error"></div>
                         <label class="box-field__label">E-mail</label>
                         <div class="box-field__input">
                             <input type="email" name="_username" class="form-control">
                         </div>
                     </div>
-                    <div class="box-field">
+                    <div class="box-field login-fields">
                         <label class="box-field__label">{% trans %}modal_password{% endtrans %}</label>
                         <div class="box-field__input">
                             <input type="password" name="_password" class="form-control">
@@ -209,7 +213,7 @@
                         <div class="box-field__input"><img src="{{ asset('bundles/app/img/captcha.png') }}" alt=""></div>
                     </div>#}
                     <input type="submit" value="{% trans %}modal_auth_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxLogin();return false;" />
-                    <p><a href="{{ path('registration') }}" class="link">{% trans %}registration{% endtrans %}</a><span class="devider">|</span><a href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
+                    <p><a href="{{ path('fos_user_security_login') }}" class="link">{% trans %}registration{% endtrans %}</a><span class="devider">|</span><a href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
                 </form>
             </div>
             <div class="enter-social">
@@ -269,7 +273,7 @@
     'bundles/app/custom-js/jquery-ui/jquery-ui.js'
     'bundles/app/custom-js/jquery.form.min.js'
     'bundles/app/custom-js/anythingslider/js/jquery.anythingslider.min.js'
-    'bundles/app/pages/*.js' output='js/20171121-2.js' %}
+    'bundles/app/pages/*.js' output='js/20180130.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

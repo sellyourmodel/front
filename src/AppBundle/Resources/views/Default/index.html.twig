@@ -5,9 +5,9 @@
 
 {% block banners %}
     {% spaceless %}
-        <div class="banners-main">
+        <div class="banners-main banners-main--desktop">
             {% for e in banners %}
-                <a href="{{ e.link }}" style="background: url({% path e.bg, 'reference' %});" class="banners-main__item">
+                <a href="{{ e.link }}" style="background-image: url({% path e.bg, 'reference' %});" class="banners-main__item">
                     <img src="{% path e.icon, 'reference' %}" alt="" class="banners-main__icon">
                     <div class="banners-main__name">{{ e.name }}</div>
                     <div class="banners-main__info">{{ e.info }}</div>
@@ -25,9 +25,11 @@
                 {% for e in slider %}
                     <div>
                         <a {% if e.link %}href="{{ e.link }}"{% endif %} class="slide">
-                            <div class="wrapper">
-                                <div class="slide__text">{{ e.line1 | striptags('<strong>,<div>,<a>,<img>') | raw }}</div>
-                                <div class="slide__text">{{ e.line2 | striptags('<strong>,<div>,<a>,<img>') | raw }}</div>
+                            <div class="slide__text-wrapper">
+                                <div class="slide__line-1">{{ e.line1|raw }}</div>
+                                <div class="slide__line-2">{{ e.line2|raw }}</div>
+                                <div class="slide__line-3">{{ e.line3|raw }}</div>
+                                <div class="slide__line-4">{{ e.line4|raw }}</div>
                             </div>
                         </a>
                     </div>
@@ -40,7 +42,16 @@
             {% endfor %}
         </div>
     </div>
-
+    <div class="banners-main banners-main--mobile clearfix">
+        {% for e in banners %}
+            <a href="{{ e.link }}" style="background-image: url({% path e.bg, 'reference' %});" class="banners-main__item">
+                <img src="{% path e.icon, 'reference' %}" alt="" class="banners-main__icon">
+                <div class="banners-main__name">{{ e.name }}</div>
+                <div class="banners-main__info">{{ e.info }}</div>
+                <div class="banners-main__mask"></div>
+            </a>
+        {% endfor %}
+    </div>
     <div class="wrapper">
         <div class="box-tab">
             <div class="tab-wrap">

@@ -75,10 +75,20 @@ class  CatalogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $locale = $request->getLocale();
+        $textBlock = $this->getDoctrine()->getRepository('AppBundle:RightTextBlock')->findOneBy(["type"=>"add"]);
+        if($locale == 'en'){
+            $rightText = $textBlock->getTextEn();
+        }
+        else{
+            $rightText = $textBlock->getText();
+        }
+
         return [
             "categories"=>$em->getRepository('AppBundle:Category')->findBy(["parent"=>NULL],["pos"=>"ASC"]),
             "tags"=>$em->getRepository('AppBundle:Tag')->findBy(["active"=>true],["name"=>"ASC"]),
-            "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"])
+            "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"]),
+            "rightText"=>$rightText
         ];
     }
 
@@ -98,6 +108,7 @@ class  CatalogController extends Controller
         $tags = $request->get('tags');
         $software = $request->get('software');
         $text = trim($request->get('text'));
+        $user_agreement = trim($request->get('user_agreement', '0'));
 
         if($name == '' OR $categoryId == ''){
             return JsonResponse::create(["error" => true, 'error_text'=>'Заполните обязательные поля']);
@@ -151,6 +162,10 @@ class  CatalogController extends Controller
 
         if(count($images) == 0){
             return JsonResponse::create(["error" => true, 'error_text'=>'Загрузите хотя бы одно изображение']);
+        }
+
+        if($user_agreement != '1'){
+            return JsonResponse::create(["error"=>true, 'error_text'=>'Примите условия']);
         }
 
         $file = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$images[0]->getNameFile();
@@ -472,12 +487,19 @@ class  CatalogController extends Controller
 
         $user = $this->getUser();
 
+        $productFile = null;
+        $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]);
+        if(isset($files[0])){
+            $productFile = $files[0];
+        }
+
         return [
             "product"=>$product,
             "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$product, "user"=>$user]),
             "alreadyLike"=>$em->getRepository('AppBundle:ProductLike')->findOneBy(['product'=>$product, "user"=>$user]),
             "alreadyFavorite"=>$em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product'=>$product, "user"=>$user]),
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]),
+            "productFile" => $productFile,
+            "settings" => $em->getRepository('AppBundle:Setting')->findOneBy([]),
             "comments" => $em->getRepository('AppBundle:ProductComment')->findBy(["product"=>$product], ["date"=>"ASC"])
         ];
     }
@@ -870,8 +892,15 @@ class  CatalogController extends Controller
 
         $this->get("fos_user.user_manager")->updateUser($author);
 
+        $productFile = null;
+        $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]);
+        if(isset($files[0])){
+            $productFile = $files[0];
+        }
+
         $dataToRender = [];
-        $dataToRender["files"] = $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]);
+        $dataToRender["product"] = $product;
+        $dataToRender["productFile"] = $productFile;
 
         $html = $this->renderView('@App/Catalog/_product_files.html.twig', $dataToRender);
 

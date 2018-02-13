@@ -46,7 +46,7 @@ class Product
     /**
      * @ORM\ManyToMany(targetEntity="Tag")
      * @ORM\JoinTable(name="catalog_products_tags",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
      *      )
      */
@@ -55,7 +55,7 @@ class Product
     /**
      * @ORM\ManyToMany(targetEntity="Software")
      * @ORM\JoinTable(name="catalog_products_software",
-     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="software_id", referencedColumnName="id")}
      *      )
      */

@@ -252,9 +252,18 @@ class  CabinetController extends Controller
      */
     public function buyAction(Request $request)
     {
+        $locale = $request->getLocale();
+        $textBlock = $this->getDoctrine()->getRepository('AppBundle:RightTextBlock')->findOneBy(["type"=>"buy"]);
+        if($locale == 'en'){
+            $rightText = $textBlock->getTextEn();
+        }
+        else{
+            $rightText = $textBlock->getText();
+        }
 
         return [
-            "settings"=>$this->getDoctrine()->getRepository('AppBundle:Setting')->findOneBy([])
+            "settings"=>$this->getDoctrine()->getRepository('AppBundle:Setting')->findOneBy([]),
+            "rightText"=>$rightText
         ];
     }
 
