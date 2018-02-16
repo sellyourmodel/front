@@ -202,6 +202,17 @@ class FOSUBUserProvider extends BaseClass
                 }
                 //dump($data);exit;
             }
+            // Google+
+            if ($service == 'google') {
+                $user->setUsername($response->getNickname());
+                $user->setName($response->getRealName());
+                if(!$email){
+                    $email = $username;
+                }
+
+                $user->setEmail($email);
+                $user->setPlainPassword($username.rand(0,99999));
+            }
             // Мой мир
             if ($service == 'mailru') {
                 $user->setUsername($response->getNickname());

@@ -20,8 +20,8 @@ facebook_login:
 vkontakte_login:
     pattern: /login/check-vkontakte
 
-odnoklassniki_login:
-    pattern: /login/check-odnoklassniki
+google_login:
+    pattern: /login/check-google
 
 oneup_uploader:
     resource: .

@@ -33,7 +33,7 @@ security:
                 resource_owners:
                      facebook:           "/login/check-facebook"
                      vkontakte:          "/login/check-vkontakte"
-                     odnoklassniki:      "/login/check-odnoklassniki"
+                     google:             "/login/check-google"
                 login_path:        /login
                 failure_path:      /login
 
