@@ -288,6 +288,8 @@ class FOSUBUserProvider extends BaseClass
             $user->setEnabled(true);
             /*$user->setRoles(array('ROLE_USER'));*/
             $this->userManager->updateUser($user);
+            $user->setNickname(\Stringy\Stringy::create($user->getName())->slugify()."-".$user->getId());
+            $this->userManager->updateUser($user);
             return $user;
         }
 
