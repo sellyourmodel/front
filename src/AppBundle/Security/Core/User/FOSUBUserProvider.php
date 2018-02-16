@@ -1,6 +1,7 @@
 <?php
 namespace AppBundle\Security\Core\User;
 
+use AppBundle\Entity\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Imagine\Gd\Imagine;
@@ -134,6 +135,7 @@ class FOSUBUserProvider extends BaseClass
         if($username == '' or trim($username) == '' or $username == null){
             return null;
         }
+        /** @var User $user */
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username, 'userType'=>$service));
         $data = $response->getResponse();
         //when the user is registrating
@@ -272,7 +274,7 @@ class FOSUBUserProvider extends BaseClass
                     //$user->setImage($avatar);
                 }*/
             }
-        
+
             /*if($this->session->get('socType', '') == 'agent'){
                 $user->setType('agent');
             }
