@@ -1,0 +1,11 @@
+<h1>Вы купили модель</h1>
+<p>Вы купили модель <a href="{{ url('catalog_product', {alias:product.alias}) }}">{{ product.name }}</a> у пользователя
+    <a href="{{ url('user_view', {nickname:product.user.nickname}) }}">{% if product.user.name %}{{ product.user.name }}{% else %}{{ product.user.nickname }}{% endif %}</a>.</p>
+<p>
+    Файлы модели Вы можете скачать с <a href="{{ url('catalog_product', {alias:product.alias}) }}">ее страницы</a>.
+</p>
+<p>
+    ---------
+    <br />
+    С уважением, команда Sellyourmodel.com
+</p>

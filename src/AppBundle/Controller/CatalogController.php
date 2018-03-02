@@ -899,6 +899,7 @@ class  CatalogController extends Controller
         $this->get("fos_user.user_manager")->updateUser($author);
 
         $this->get('wp.notify.manager')->sendBuyModelEmail($product, $user);
+        $this->get('wp.notify.manager')->sendBuyModelInfoEmail($product, $user);
 
         $productFile = null;
         $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]);
