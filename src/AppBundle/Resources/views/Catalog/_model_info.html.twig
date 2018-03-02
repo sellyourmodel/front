@@ -5,7 +5,7 @@
     {% else %}
         {% if product.block %}
             {% if app.user==product.user or is_granted('ROLE_SUPER_ADMIN') %}
-                {% trans %}model_blocked_by_reason{% endtrans %} <strong>{{ product.blockReason }}</strong>.
+                {% trans %}model_blocked_by_reason{% endtrans %} <strong>{% if product.blockReason %}{{ product.blockReason }}{% else %}{% trans %}without_reason{% endtrans %}{% endif %}</strong>.
             {% endif %}
         {% else %}
             {% if product.moderated %}
