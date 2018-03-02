@@ -107,6 +107,20 @@ class NotifyManager
     }
 
     /**
+     *  Отправка автору о том, что его модель заблокирована
+     */
+    public function sendBlockModelEmail(Product $product)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:productBlock.html.twig', [
+            "product" => $product
+        ]);
+
+        $this->_sendEmail('Ваша модель заблокирована модератором', $product->getUser()->getEmail(), $messageText);
+
+    }
+
+    /**
      *  Отправка тестового сообщения
      */
     public function sendTestMessage()
