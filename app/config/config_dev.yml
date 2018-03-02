@@ -1,6 +1,17 @@
 imports:
     - { resource: config.yml }
 
+fos_elastica:
+    indexes:
+        app:
+            types:
+                catalog:
+                    persistence:
+                        listener:
+                            insert: false
+                            update: false
+                            delete: false
+
 framework:
     router:
         resource: "%kernel.root_dir%/config/routing_dev.yml"
