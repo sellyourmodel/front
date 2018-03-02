@@ -26,16 +26,8 @@ EOF
     protected function execute(InputInterface $input, OutputInterface $output)
     {
 
-        $em = $this->getContainer()->get('doctrine')->getManager();
+        $this->getContainer()->get('wp.notify.manager')->sendTestMessage();
 
-        $message = \Swift_Message::newInstance()
-            ->setContentType("text/html")
-            ->setSubject('Тестовое сообщение')
-            ->setTo("ivanov@web-premier.ru")
-            ->setFrom($this->getContainer()->getParameter('mailer_user'))
-            ->setBody('Тест отправки письма', 'text/html');
-
-        $this->getContainer()->get('mailer')->send($message);
         return 0;
     }
 
