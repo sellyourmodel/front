@@ -139,7 +139,7 @@
             <div class="window-open-cont">
                 <div class="box-form withdrawals__form">
                     <h3>{% trans %}detele_model{% endtrans %}</h3>
-                    <form action="{{ path('catalog_delete_write', {id:product.id}) }}" method="POST" class="js-unblock-form">
+                    <form action="{{ path('catalog_delete_write', {id:product.id}) }}" method="POST" class="js-delete-form">
                         <input type="submit" value="{% trans %}detele_model_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxDelete();return false;" />
                     </form>
                 </div>

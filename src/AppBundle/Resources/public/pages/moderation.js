@@ -87,7 +87,7 @@ function ajaxUnBlock() {
 
 function ajaxDelete() {
 
-    var form = $(".js-block-form");
+    var form = $(".js-delete-form");
 
     var submit = form.find('input[type=submit]');
     submit.attr('data-old-val', submit.val()).val('Подождите...');
