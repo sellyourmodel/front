@@ -99,22 +99,7 @@ class  RegistrationController extends Controller
             return JsonResponse::create(["error" => true, "error_text" => 'Регистрация на данный моммент недоступна']);
         }
 
-        /*$settings = $this->getDoctrine()->getRepository('WPAppBundle:Settings')->findOneBy([]);
-
-        if ($settings AND $settings->getEmailFeedback()) {
-            $message = \Swift_Message::newInstance()
-                ->setContentType("text/html")
-                ->setSubject('Новое сообщение с формы обратной связи Element78')
-                ->setTo($settings->getEmailFeedback())
-                ->setFrom("element78@web-premier.ru")
-                ->setBody($this->get('templating')->render('WPAppBundle:Mail:feedback.html.twig', array(
-                    'name' => $name,
-                    'contacts' => $contacts,
-                    'text' => $text
-                )), 'text/html');
-
-            $this->get('mailer')->send($message);
-        }*/
+        $this->get('wp.notify.manager')->sendRegistrationEmail($user, $password);
 
         return JsonResponse::create(["error"=>false]);
     }
