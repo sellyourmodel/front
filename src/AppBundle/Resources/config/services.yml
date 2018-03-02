@@ -12,6 +12,10 @@ services:
         tags:
             - { name: routing.loader }
 
+    wp.notify.manager:
+        class: AppBundle\Manager\NotifyManager
+        arguments: [@doctrine.orm.entity_manager, @mailer, @templating, @service_container]
+
     wp_authentication_handler:
         class:        AppBundle\Handler\AuthenticationHandler
         arguments:    [@router, @security.context, @fos_user.user_manager, @service_container]
