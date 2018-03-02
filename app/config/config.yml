@@ -145,6 +145,9 @@ swiftmailer:
     host:      "%mailer_host%"
     username:  "%mailer_user%"
     password:  "%mailer_password%"
+    auth_mode: login
+    port : 465
+    encryption: ssl
     spool:     { type: memory }
 
 fos_elastica:
