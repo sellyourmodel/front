@@ -78,14 +78,6 @@ class NotifyManager
     }
 
     /**
-     *  Отправка тестового сообщения
-     */
-    public function sendTestMessage()
-    {
-        $this->_sendEmail('Тестовое сообщение', 'ivanov@web-premier.ru', 'Тестовая отправка');
-    }
-
-    /**
      *  Отправка сообщения о регистрации
      */
     public function sendRegistrationEmail(User $user, $password)
@@ -98,6 +90,28 @@ class NotifyManager
 
         $this->_sendEmail('Регистрация на сайте Sellyourmodel.com', $user->getEmail(), $messageText);
 
+    }
+
+    /**
+     *  Отправка автору о том, что его модель отмодерирована
+     */
+    public function sendModerationModelEmail(Product $product)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:productModeration.html.twig', [
+            "product" => $product
+        ]);
+
+        $this->_sendEmail('Ваша одобрена модератором', $product->getUser()->getEmail(), $messageText);
+
+    }
+
+    /**
+     *  Отправка тестового сообщения
+     */
+    public function sendTestMessage()
+    {
+        $this->_sendEmail('Тестовое сообщение', 'ivanov@web-premier.ru', 'Тестовая отправка');
     }
 
 }

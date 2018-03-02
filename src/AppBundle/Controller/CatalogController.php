@@ -342,6 +342,8 @@ class  CatalogController extends Controller
 
         $modelInfo = $this->renderView('AppBundle:Catalog:_model_info.html.twig', $data);
 
+        $this->get('wp.notify.manager')->sendModerationModelEmail($entity);
+
         return JsonResponse::create(["error"=>false, 'modelInfo'=>$modelInfo]);
     }
 
