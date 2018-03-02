@@ -404,6 +404,8 @@ class  CatalogController extends Controller
         $entity->setBlockReason(NULL);
         $em->flush($entity);
 
+        $this->get('wp.notify.manager')->sendUnBlockModelEmail($entity);
+
         $data = [
             "product"=>$entity,
             "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),

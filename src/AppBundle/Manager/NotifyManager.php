@@ -121,6 +121,20 @@ class NotifyManager
     }
 
     /**
+     *  Отправка автору о том, что его модель разблокирована
+     */
+    public function sendUnBlockModelEmail(Product $product)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:productUnBlock.html.twig', [
+            "product" => $product
+        ]);
+
+        $this->_sendEmail('С вашей модели снята блокировка', $product->getUser()->getEmail(), $messageText);
+
+    }
+
+    /**
      *  Отправка тестового сообщения
      */
     public function sendTestMessage()
