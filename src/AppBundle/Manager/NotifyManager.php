@@ -135,6 +135,21 @@ class NotifyManager
     }
 
     /**
+     *  Отправка автору о том, что его модель куплена другим пользователем
+     */
+    public function sendBuyModelEmail(Product $product, User $user)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:productBuy.html.twig', [
+            "product" => $product,
+            "user" => $user
+        ]);
+
+        $this->_sendEmail('Ваша модель куплена пользователем', $product->getUser()->getEmail(), $messageText);
+
+    }
+
+    /**
      *  Отправка тестового сообщения
      */
     public function sendTestMessage()
