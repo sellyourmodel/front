@@ -1,6 +1,6 @@
 <h1>Ваша модель куплена пользователем</h1>
 <p>Ваша модель <a href="{{ url('catalog_product', {alias:product.alias}) }}">{{ product.name }}</a> куплена пользователем
-    <a href="{{ url('user_view', {nickname:user.nickname}) }}">{% if user.name %}{{ user.name }}{% else %}{{ user.nikcname }}{% endif %}</a>.</p>
+    <a href="{{ url('user_view', {nickname:user.nickname}) }}">{% if user.name %}{{ user.name }}{% else %}{{ user.nickname }}{% endif %}</a>.</p>
 <p>
     ---------
     <br />
