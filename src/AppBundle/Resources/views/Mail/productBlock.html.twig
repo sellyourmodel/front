@@ -1,5 +1,5 @@
 <h1>Ваша модель заблокирована модератором</h1>
-<p>Ваша модель <a href="{{ url('catalog_product', {alias:product.alias}) }}">{{ product.name }}</a> заблокирована модератором, причина блокировки: {% if product.blockReason %}{{ product.blockReason }}{% else %}без причины{% endif %} . Отображение модели в каталоге моделей отключено.</p>
+<p>Ваша модель <a href="{{ url('catalog_product', {alias:product.alias}) }}">{{ product.name }}</a> заблокирована модератором, причина блокировки: <strong>{% if product.blockReason %}{{ product.blockReason }}{% else %}без причины{% endif %}</strong>. Отображение модели в каталоге моделей отключено.</p>
 <p>
     ---------
     <br />
