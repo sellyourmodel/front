@@ -1,19 +1,19 @@
-function ajaxLoginError(text) {
-    $(".js-login-error").html(text).fadeIn();
+function ajaxLoginError(form, text) {
+    form.find(".js-login-error").html(text).fadeIn();
     setTimeout(function () {
-        $(".js-login-error").html('').fadeOut();
+        form.find(".js-login-error").html('').fadeOut();
     }, 5000);
 }
 
-function ajaxLogin() {
+function ajaxLogin(e) {
 
-    var form = $(".js-login");
+    var form = $(e).closest(".js-login");
 
     var login = form.find("input[name=_username]").val();
     var pass = form.find("input[name=_password]").val();
 
     if (login == '' || pass == '') {
-        ajaxLoginError("Введите e-mail и пароль");
+        ajaxLoginError(form, "Введите e-mail и пароль");
         return;
     }
 
@@ -27,7 +27,7 @@ function ajaxLogin() {
         dataType: "json",
         success: function (data, status, object) {
             if (data.error) {
-                ajaxLoginError(data.error_text);
+                ajaxLoginError(form, data.error_text);
             }
             else {
                 window.location.reload();
@@ -35,7 +35,7 @@ function ajaxLogin() {
             submit.val(submit.attr('data-old-val'));
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
-            ajaxLoginError("Вход на сайт времено недоступен");
+            ajaxLoginError(form, "Вход на сайт времено недоступен");
             submit.val(submit.attr('data-old-val'));
         }
     });

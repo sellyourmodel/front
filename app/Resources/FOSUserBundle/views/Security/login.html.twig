@@ -85,8 +85,8 @@
                             <label class="box-field__label">Вы человек?</label>
                             <div class="box-field__input"><img src="{{ asset('bundles/app/img/captcha.png') }}" alt=""></div>
                         </div>#}
-                        <input type="submit" value="Войти" class="button button_warning button_block box-form__button" onclick="ajaxLogin();return false;" />
-                        <p><a href="{{ path('registration') }}" class="link">Регистрация</a><span class="devider">|</span><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                        <input type="submit" value="Войти" class="button button_warning button_block box-form__button" onclick="ajaxLogin(this);return false;" />
+                        <p><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
                     </form>
                 </div>
                 <div class="enter-social">

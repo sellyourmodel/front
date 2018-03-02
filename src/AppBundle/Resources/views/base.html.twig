@@ -212,7 +212,7 @@
                         <label class="box-field__label">Вы человек?</label>
                         <div class="box-field__input"><img src="{{ asset('bundles/app/img/captcha.png') }}" alt=""></div>
                     </div>#}
-                    <input type="submit" value="{% trans %}modal_auth_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxLogin();return false;" />
+                    <input type="submit" value="{% trans %}modal_auth_action{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxLogin(this);return false;" />
                     <p><a href="{{ path('fos_user_security_login') }}" class="link">{% trans %}registration{% endtrans %}</a><span class="devider">|</span><a href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
                 </form>
             </div>
