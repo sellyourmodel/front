@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Intl\Locale;
 
 /**
  * Category
@@ -49,6 +50,13 @@ class Category
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $nameEn;
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"all"}, orphanRemoval=true)
@@ -137,6 +145,20 @@ class Category
      */
     public function getName()
     {
+        return $this->name;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getNameLocale()
+    {
+        $locale = Locale::getDefault();
+        if($locale == 'en'){
+            return $this->nameEn;
+        }
         return $this->name;
     }
 
@@ -365,5 +387,29 @@ class Category
     public function getAlias()
     {
         return $this->alias;
+    }
+
+    /**
+     * Set nameEn
+     *
+     * @param string $nameEn
+     *
+     * @return Category
+     */
+    public function setNameEn($nameEn)
+    {
+        $this->nameEn = $nameEn;
+
+        return $this;
+    }
+
+    /**
+     * Get nameEn
+     *
+     * @return string
+     */
+    public function getNameEn()
+    {
+        return $this->nameEn;
     }
 }

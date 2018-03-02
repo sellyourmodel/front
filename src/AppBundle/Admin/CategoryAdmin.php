@@ -15,6 +15,8 @@ class CategoryAdmin extends Admin
     {
 
         $formMapper
+            ->add('name', null, array('label' => 'Название (ru)'))
+            ->add('nameEn', null, array('label' => 'Название (en)'))
             ->add('text', null, array('label' => 'Текст', 'required' => false, 'attr'=> ['class' => 'tinymce','data-theme' => 'advanced']))
         ;
     }

@@ -5,8 +5,8 @@
 {% block content %}
     <div class="box-breadcrumbs">
         <ul class="breadcrumbs-list">
-            <li class="breadcrumbs-list__item"><a href="{{ path('catalog_category',{alias:product.category.parent.alias}) }}" class="breadcrumbs-list__link">{{ product.category.parent.name }}</a></li>
-            <li class="breadcrumbs-list__item"><a href="{{ path('catalog_category',{alias:product.category.alias}) }}" class="breadcrumbs-list__link">{{ product.category.name }}</a></li>
+            <li class="breadcrumbs-list__item"><a href="{{ path('catalog_category',{alias:product.category.parent.alias}) }}" class="breadcrumbs-list__link">{{ product.category.parent.nameLocale }}</a></li>
+            <li class="breadcrumbs-list__item"><a href="{{ path('catalog_category',{alias:product.category.alias}) }}" class="breadcrumbs-list__link">{{ product.category.nameLocale }}</a></li>
             <li class="breadcrumbs-list__item"><span>{{ product.name }}</span></li>
         </ul>
     </div>
