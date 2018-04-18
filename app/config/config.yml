@@ -78,20 +78,9 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         filters:
-            sale_filter:
-                class:   AppBundle\Filter\SaleFilter
-            available_filter:
-                class:   AppBundle\Filter\AvailableFilter
-            corner_filter:
-                class:   AppBundle\Filter\CornerFilter
-            scatter_filter:
-                class:   AppBundle\Filter\ScatterFilter
-            leather_filter:
-                class:   AppBundle\Filter\LeatherFilter
-            fabric_filter:
-                class:   AppBundle\Filter\FabricFilter
-            price_filter:
-                class:   AppBundle\Filter\PriceFilter
+            deleted_filter:
+                class:   AppBundle\Filter\DeletedFilter
+                enabled: true
 
 fos_user:
   db_driver:  orm # can be orm or odm
