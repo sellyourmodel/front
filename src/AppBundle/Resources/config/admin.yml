@@ -9,6 +9,12 @@ services:
         calls:
             - [ setTemplate, [list, AppBundle:Admin:category_list.html.twig]]
 
+    app.admin.faq:
+        class: AppBundle\Admin\FaqAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Поддежка, label: FAQ}
+        arguments: [~, AppBundle\Entity\Faq, ~]
+
     app.admin.user:
         class: AppBundle\Admin\UserAdmin
         tags:

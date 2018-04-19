@@ -1,11 +1,11 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
-{% block title %}{{ page.name }}{% endblock %}
+{% block title %}Поддержка{% endblock %}
 
 {% block content %}
     <div class="main-wrap">
         <div class="main-wrap__header">
-            <h1>{{ page.name }}</h1>
+            <h1>Поддержка</h1>
         </div>
         <div class="wrap wrap_small">
             <div class="wrap-right">
@@ -28,8 +28,15 @@
                 </ul>
             </div>
             <div class="wrap-left">
-                <div class="text-page">
-                    {{ page.text|raw }}
+                <div class="accordion">
+                    {% for e in entities %}
+                    <div class="accordion-wrap">
+                        <h4 class="accordion__head"><a href="#">{{ e.name }}</a></h4>
+                        <div class="accordion__body">
+                            {{ e.text|raw }}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
