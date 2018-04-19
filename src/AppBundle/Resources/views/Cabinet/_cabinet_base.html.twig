@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="main-wrap__header">
-        <h1>{% trans %}settings_header{% endtrans %}</h1>
+        <h1>{% block cabinetTitle %}{% trans %}settings_header{% endtrans %}{% endblock %}</h1>
     </div>
     <div class="wrap wrap_small">
         <div class="wrap-right">
