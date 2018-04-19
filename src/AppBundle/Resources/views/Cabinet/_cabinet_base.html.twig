@@ -1,0 +1,20 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+
+    <div class="main-wrap__header">
+        <h1>{% trans %}settings_header{% endtrans %}</h1>
+    </div>
+    <div class="wrap wrap_small">
+        <div class="wrap-right">
+            <ul class="wrap-list">
+                <li class="wrap-list__item"><a href="{{ path('cabinet') }}" class="wrap-list__link">{% trans %}profile{% endtrans %}</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_password') }}" class="wrap-list__link">{% trans %}change_password{% endtrans %}</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_social') }}" class="wrap-list__link">{% trans %}socials{% endtrans %}</a></li>
+            </ul>
+        </div>
+        <div class="wrap-left">
+            {% block cabinetContent %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}
