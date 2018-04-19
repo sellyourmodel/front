@@ -30,13 +30,29 @@ class  UserController extends Controller
             throw $this->createNotFoundException('User not found');
         }
 
+        $buyInBase = $em->getRepository('AppBundle:Buy')->findBy(["user"=>$entity],["date"=>"DESC"]);
+        $buy = [];
+        foreach ($buyInBase as $e){
+            if($e->getProduct()){
+                $buy[] = $e;
+            }
+        }
+
+        $favoritesInBase = $em->getRepository('AppBundle:ProductFavorite')->findBy(["user"=>$entity],["id"=>"DESC"]);
+        $favorites = [];
+        foreach ($favoritesInBase as $e){
+            if($e->getProduct()){
+                $favorites[] = $e;
+            }
+        }
+
         return [
             "entity"=>$entity,
             "products"=>$em->getRepository('AppBundle:Product')->findBy(["user"=>$entity],["date"=>"DESC"]),
             "withdrawals"=>$em->getRepository('AppBundle:UserWithdrawal')->findBy(["user"=>$entity],["date"=>"DESC"]),
             "history"=>$em->getRepository('AppBundle:PaymentLog')->findBy(["user"=>$entity],["date"=>"DESC"]),
-            "favorites"=>$em->getRepository('AppBundle:ProductFavorite')->findBy(["user"=>$entity],["id"=>"DESC"]),
-            "buy"=>$em->getRepository('AppBundle:Buy')->findBy(["user"=>$entity],["date"=>"DESC"])
+            "favorites"=>$favoritesInBase,
+            "buy"=>$buy
         ];
     }
 
