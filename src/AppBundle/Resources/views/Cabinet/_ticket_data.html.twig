@@ -1,0 +1,43 @@
+<p>
+    Статус: {% if entity.status == 'new' %}Новое{% elseif entity.status == 'work' %}В работе{% elseif entity.status == 'dublicate' %}Повтор{% elseif entity.status == 'close' %}Закрыто{% else %}Неизвестно{% endif %}
+</p>
+<p>
+    Дата послупления обращения: {{ entity.date|date('H:i d.m.Y') }}
+</p>
+<p>
+    Дата последнего обновления: {{ entity.dateUpdate|date('H:i d.m.Y') }}
+</p>
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <br />
+    {% if entity.status != 'work' %}
+        <div class="model-admin-action">
+            <a href="#" class="button button_warning button_moderate" onclick="ticketSetStatus({{ entity.id }}, 'work');return false;">В работу</a>
+        </div>
+    {% endif %}
+    {% if entity.status != 'dublicate' %}
+        <div class="model-admin-action">
+            <a href="#" class="button button_warning button_moderate" onclick="ticketSetStatus({{ entity.id }}, 'dublicate');return false;">Повтор</a>
+        </div>
+    {% endif %}
+    {% if entity.status != 'close' %}
+        <div class="model-admin-action">
+            <a href="#" class="button button_warning button_moderate" onclick="ticketSetStatus({{ entity.id }}, 'close');return false;">Закрыть</a>
+        </div>
+    {% endif %}
+
+    <br />
+    <table class="table">
+        <tr>
+            <th class="td-date">Дата</th>
+            <th>Операция</th>
+            <th>Пользователь</th>
+        </tr>
+        {% for e in logs %}
+            <tr>
+                <td>{{ e.date|date("H:i d.m.Y") }}</td>
+                <td>{{ e.text }}</td>
+                <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" class="tickets__link">{{ e.user.nickname }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

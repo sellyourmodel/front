@@ -5,10 +5,11 @@
     <div class="main-wrap__header">
         <h1>{% block cabinetTitle %}{% trans %}settings_header{% endtrans %}{% endblock %}</h1>
     </div>
-    <div class="wrap wrap_small">
+    <div class="wrap wrap_small support">
         <div class="wrap-right">
             <ul class="wrap-list">
                 <li class="wrap-list__item"><a href="{{ path('cabinet') }}" class="wrap-list__link">{% trans %}profile{% endtrans %}</a></li>
+                <li class="wrap-list__item"><a href="{{ path('cabinet_tickets') }}" class="wrap-list__link">Обращения в тех поддержку</a></li>
                 <li class="wrap-list__item"><a href="{{ path('cabinet_password') }}" class="wrap-list__link">{% trans %}change_password{% endtrans %}</a></li>
                 <li class="wrap-list__item"><a href="{{ path('cabinet_social') }}" class="wrap-list__link">{% trans %}socials{% endtrans %}</a></li>
             </ul>

@@ -5,6 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\PaymentLog;
 use AppBundle\Entity\PaymentOrder;
 use AppBundle\Entity\ProductResponse;
+use AppBundle\Entity\Ticket;
+use AppBundle\Entity\TicketComment;
+use AppBundle\Entity\TicketLog;
 use AppBundle\Entity\UserWithdrawal;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,8 +25,8 @@ class  CabinetController extends Controller
     public function indexAction(Request $request)
     {
         return [
-            "countries"=>$this->getDoctrine()->getRepository('AppBundle:Country')->findBy(["active"=>true], ["name"=>"ASC"]),
-            "languages"=>$this->getDoctrine()->getRepository('AppBundle:Language')->findBy(["active"=>true], ["name"=>"ASC"])
+            "countries" => $this->getDoctrine()->getRepository('AppBundle:Country')->findBy(["active" => true], ["name" => "ASC"]),
+            "languages" => $this->getDoctrine()->getRepository('AppBundle:Language')->findBy(["active" => true], ["name" => "ASC"])
         ];
     }
 
@@ -55,49 +58,47 @@ class  CabinetController extends Controller
         $city = trim($request->get('city'));
         $text = trim($request->get('text'));
 
-        if($f == '' OR $i == '' OR $email == '' OR $nickname == ''){
-            return $returnError('Заполните обязательные поля','all');
+        if ($f == '' OR $i == '' OR $email == '' OR $nickname == '') {
+            return $returnError('Заполните обязательные поля', 'all');
         }
 
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-            return $returnError('Введите правильный e-mail','email');
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $returnError('Введите правильный e-mail', 'email');
         }
 
         // проверяем e-mail, изменился ли от того что сейчас, если да - то ищем в базе такой же
-        if($email != $user->getEmail()){
-            if($existUser = $em->getRepository('AppBundle:User')->findOneBy(["email"=>$email,'enabled'=>true]) AND $existUser != $user){
-                return $returnError('Пользователь с данным e-mail уже существует','email');
+        if ($email != $user->getEmail()) {
+            if ($existUser = $em->getRepository('AppBundle:User')->findOneBy(["email" => $email, 'enabled' => true]) AND $existUser != $user) {
+                return $returnError('Пользователь с данным e-mail уже существует', 'email');
             }
             $user->setEmail($email);
         }
 
         // проверяем nickname, изменился ли от того что сейчас, если да - то ищем в базе такой же
-        if($nickname != $user->getNickname()){
-            if($existUser = $em->getRepository('AppBundle:User')->findOneBy(["nickname"=>$nickname,'enabled'=>true]) AND $existUser != $user){
-                return $returnError('Пользователь с данным ником уже существует','nickname');
+        if ($nickname != $user->getNickname()) {
+            if ($existUser = $em->getRepository('AppBundle:User')->findOneBy(["nickname" => $nickname, 'enabled' => true]) AND $existUser != $user) {
+                return $returnError('Пользователь с данным ником уже существует', 'nickname');
             }
             $user->setNickname($nickname);
         }
 
         // проверяем дату рождения
 
-        if($birthdate){
+        if ($birthdate) {
             $aBirthDay = [];
-            $aBirthDay = explode('.',$birthdate);
-            $aBirthDay = array_map('intval',$aBirthDay);
+            $aBirthDay = explode('.', $birthdate);
+            $aBirthDay = array_map('intval', $aBirthDay);
 
-            if(count($aBirthDay) <> 3){
-                return $returnError('Введите правильно дату рождения','birthdate');
-            }
-            elseif(!checkdate($aBirthDay[1],$aBirthDay[0],$aBirthDay[2])){
-                return $returnError('Введите правильно дату рождения','birthdate');
-            }
-            else{
+            if (count($aBirthDay) <> 3) {
+                return $returnError('Введите правильно дату рождения', 'birthdate');
+            } elseif (!checkdate($aBirthDay[1], $aBirthDay[0], $aBirthDay[2])) {
+                return $returnError('Введите правильно дату рождения', 'birthdate');
+            } else {
                 $dateToCheck = new \DateTime($birthdate);
 
                 $dateTime18 = new \DateTime("-18 years");
-                if($dateToCheck > $dateTime18){
-                    return $returnError('Вам должно быть больше 18-ти лет','birthdate');
+                if ($dateToCheck > $dateTime18) {
+                    return $returnError('Вам должно быть больше 18-ти лет', 'birthdate');
                 }
                 $user->setBirthdate($dateToCheck);
             }
@@ -105,42 +106,40 @@ class  CabinetController extends Controller
 
         // формируем и записываем поле name из ФИО
         $a = [];
-        if($user->getF()){
+        if ($user->getF()) {
             $a[] = $user->getF();
         }
-        if($user->getI()){
+        if ($user->getI()) {
             $a[] = $user->getI();
         }
-        if($user->getO()){
+        if ($user->getO()) {
             $a[] = $user->getO();
         }
-        $name = implode(' ',$a);
+        $name = implode(' ', $a);
         $user->setName($name);
 
         $user->setF($f);
         $user->setI($i);
 
-        if($this->isGranted('ROLE_PREVIOUS_ADMIN')){
+        if ($this->isGranted('ROLE_PREVIOUS_ADMIN')) {
             $user->setLvl($lvl);
         }
 
-        if($gender == 'm'){
+        if ($gender == 'm') {
             $user->setGender('m');
-        }
-        elseif($gender == 'f'){
+        } elseif ($gender == 'f') {
             $user->setGender('f');
-        }
-        else{
+        } else {
             $user->setGender(NULL);
         }
 
-        if(is_array($languages)){
+        if (is_array($languages)) {
             $user->setLanguages($languages);
         }
 
         $user->setSpecialization($specialization);
 
-        if($countryId){
+        if ($countryId) {
             $country = $em->getRepository('AppBundle:Country')->find($countryId);
             $user->setCountry($country);
         }
@@ -150,7 +149,225 @@ class  CabinetController extends Controller
 
         $this->get("fos_user.user_manager")->updateUser($user);
 
-        return JsonResponse::create(["error"=>false]);
+        return JsonResponse::create(["error" => false]);
+    }
+
+    /**
+     * @Route("/cabinet/tickets/", name="cabinet_tickets", options={"expose"=true})
+     * @Template()
+     */
+    public function ticketsAction(Request $request)
+    {
+
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            $filter = ["user"=>$this->getUser()];
+        }
+        else{
+            $filter = [];
+        }
+
+        return [
+            "entities" => $this->getDoctrine()->getRepository('AppBundle:Ticket')->findBy($filter, ["dateUpdate" => "DESC"])
+        ];
+    }
+
+    /**
+     * @Route("/cabinet/tickets/add/", name="cabinet_tickets_add", options={"expose"=true})
+     * @Template()
+     */
+    public function ticketsAddAction(Request $request)
+    {
+
+        return [
+
+        ];
+    }
+
+    /**
+     * @Route("/cabinet/tickets/add/write/", name="cabinet_tickets_add_write")
+     */
+    public function ticketsAddWriteAction(Request $request)
+    {
+
+        $returnError = function ($text, $error_type) {
+            return new JsonResponse(['error' => 1, 'error_text' => $text, 'error_type' => $error_type],
+                Response::HTTP_OK);
+        };
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        $name = trim($request->get('name'));
+        $text = trim($request->get('text'));
+
+        if (!$name or !$text) {
+            return $returnError('Заполните все поля', 'email');
+        }
+
+        $entity = new Ticket();
+        $entity->setStatus('new');
+        $entity->setUser($user);
+        $entity->setDate(new \DateTime());
+        $entity->setDateUpdate(new \DateTime());
+        $entity->setName($name);
+        $entity->setText($text);
+
+        $em->persist($entity);
+        $em->flush($entity);
+
+        $log = new TicketLog();
+        $log->setTicket($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $log->setText('Обращение создано');
+
+        $em->persist($log);
+        $em->flush($log);
+
+        return JsonResponse::create(["error" => false, "url" => $this->generateUrl('cabinet_tickets_item', ["id" => $entity->getId()])]);
+    }
+
+    /**
+     * @Route("/cabinet/tickets/{id}/", name="cabinet_tickets_item", options={"expose"=true})
+     * @Template()
+     */
+    public function ticketsItemAction(Request $request, $id)
+    {
+
+        $entity = $this->getDoctrine()->getRepository('AppBundle:Ticket')->find($id);
+
+        if (!$entity) {
+            throw $this->createNotFoundException('Ticket not found');
+        }
+
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            if ($entity->getUser() != $this->getUser()) {
+                throw $this->createNotFoundException('Ticket not found');
+            }
+        }
+
+        return [
+            "entity" => $entity,
+            "comments" => $this->getDoctrine()->getRepository('AppBundle:TicketComment')->findBy(["ticket" => $entity], ["date" => "DESC"]),
+            "logs" => $this->getDoctrine()->getRepository('AppBundle:TicketLog')->findBy(["ticket" => $entity], ["date" => "DESC"])
+        ];
+    }
+
+    /**
+     * @Route("/cabinet/tickets/{id}/comment/write/", name="cabinet_tickets_item_comment_write", options={"expose"=true})
+     */
+    public function ticketsItemCommentWriteAction(Request $request, $id)
+    {
+
+        $returnError = function ($text, $error_type) {
+            return new JsonResponse(['error' => 1, 'error_text' => $text, 'error_type' => $error_type],
+                Response::HTTP_OK);
+        };
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $this->getDoctrine()->getRepository('AppBundle:Ticket')->find($id);
+
+        if (!$entity) {
+            return $returnError('Ticket not found');
+        }
+
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            if ($entity->getUser() != $this->getUser()) {
+                return $returnError('Ticket not found');
+            }
+        }
+
+        $text = trim($request->get('text', 'text'));
+
+        if ($text == '') {
+            return $returnError('Напишите комментарий', 'email');
+        }
+
+        $comment = new TicketComment();
+        $comment->setTicket($entity);
+        $comment->setUser($this->getUser());
+        $comment->setDate(new \DateTime());
+        $comment->setText($text);
+
+        $em->persist($comment);
+        $em->flush($comment);
+
+        $entity->setDateUpdate(new \DateTime());
+        $em->flush($entity);
+
+        $comments = $em->getRepository('AppBundle:TicketComment')->findBy(["ticket" => $entity], ["date" => "ASC"]);
+
+        $responseData = [];
+        $responseData["comments"] = $comments;
+
+        $html = $this->renderView('@App/Cabinet/_ticket_comments.html.twig', $responseData);
+
+        return JsonResponse::create(["error" => false, 'html' => $html]);
+    }
+
+    /**
+     * @Route("/cabinet/tickets/{id}/status/change/", name="cabinet_tickets_item_status_change", options={"expose"=true})
+     */
+    public function ticketsItemStatusChangeAction(Request $request, $id)
+    {
+
+        $returnError = function ($text, $error_type) {
+            return new JsonResponse(['error' => 1, 'error_text' => $text, 'error_type' => $error_type],
+                Response::HTTP_OK);
+        };
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $this->getDoctrine()->getRepository('AppBundle:Ticket')->find($id);
+
+        if (!$entity) {
+            return $returnError('Ticket not found');
+        }
+
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            if ($entity->getUser() != $this->getUser()) {
+                return $returnError('Ticket not found');
+            }
+        }
+
+        $status = trim($request->get('status'));
+
+        if (!$status) {
+            return $returnError('Выберите статус', 'email');
+        }
+
+        $entity->setStatus($status);
+        $entity->setDateUpdate(new \DateTime());
+        $em->flush($entity);
+
+        if ($status == 'work') {
+            $statusName = 'В работе';
+        } elseif ($status == 'dublicate') {
+            $statusName = 'Повтор';
+        } elseif ($status == 'close') {
+            $statusName = 'Закрыто';
+        } else {
+            $statusName = 'Неизвестный';
+        }
+
+        $log = new TicketLog();
+        $log->setTicket($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $log->setText('Статус изменен на: '.$statusName);
+
+        $em->persist($log);
+        $em->flush($log);
+
+        $responseData = [];
+        $responseData["entity"] = $entity;
+        $responseData["logs"] = $this->getDoctrine()->getRepository('AppBundle:TicketLog')->findBy(["ticket" => $entity], ["date" => "DESC"]);
+
+        $html = $this->renderView('@App/Cabinet/_ticket_data.html.twig', $responseData);
+
+        return JsonResponse::create(["error" => false, 'html' => $html]);
     }
 
     /**
@@ -182,19 +399,19 @@ class  CabinetController extends Controller
         $password = trim($request->get('password'));
         $password_reply = trim($request->get('password_reply'));
 
-        if($password != $password_reply){
-            return $returnError('Введенные пароли не совпадают','email');
+        if ($password != $password_reply) {
+            return $returnError('Введенные пароли не совпадают', 'email');
         }
 
-        if(strlen($password) < 6){
-            return $returnError('Пароль не может быть меньше 6 символов','email');
+        if (strlen($password) < 6) {
+            return $returnError('Пароль не может быть меньше 6 символов', 'email');
         }
 
         $user->setPlainPassword($password);
 
         $this->get("fos_user.user_manager")->updateUser($user);
 
-        return JsonResponse::create(["error"=>false]);
+        return JsonResponse::create(["error" => false]);
     }
 
     /**
@@ -223,8 +440,8 @@ class  CabinetController extends Controller
 
         $price = $request->get('price', 0);
 
-        if(!$price){
-            return $returnError('Введите сумму','email');
+        if (!$price) {
+            return $returnError('Введите сумму', 'email');
         }
 
         $user = $this->getUser();
@@ -238,12 +455,12 @@ class  CabinetController extends Controller
         $em->flush($withdrawal);
 
         $responseData = [
-            "withdrawals"=>$em->getRepository('AppBundle:UserWithdrawal')->findBy(["user"=>$user],["date"=>"DESC"])
+            "withdrawals" => $em->getRepository('AppBundle:UserWithdrawal')->findBy(["user" => $user], ["date" => "DESC"])
         ];
 
         $html = $this->renderView('@App/User/_withdrawals.html.twig', $responseData);
 
-        return JsonResponse::create(["error"=>false, "html"=>$html]);
+        return JsonResponse::create(["error" => false, "html" => $html]);
     }
 
     /**
@@ -253,17 +470,16 @@ class  CabinetController extends Controller
     public function buyAction(Request $request)
     {
         $locale = $request->getLocale();
-        $textBlock = $this->getDoctrine()->getRepository('AppBundle:RightTextBlock')->findOneBy(["type"=>"buy"]);
-        if($locale == 'en'){
+        $textBlock = $this->getDoctrine()->getRepository('AppBundle:RightTextBlock')->findOneBy(["type" => "buy"]);
+        if ($locale == 'en') {
             $rightText = $textBlock->getTextEn();
-        }
-        else{
+        } else {
             $rightText = $textBlock->getText();
         }
 
         return [
-            "settings"=>$this->getDoctrine()->getRepository('AppBundle:Setting')->findOneBy([]),
-            "rightText"=>$rightText
+            "settings" => $this->getDoctrine()->getRepository('AppBundle:Setting')->findOneBy([]),
+            "rightText" => $rightText
         ];
     }
 
@@ -286,8 +502,8 @@ class  CabinetController extends Controller
 
         $count = intval($request->get('count'));
 
-        if($count == 0){
-            return $returnError('Количество должно быть большое 0','email');
+        if ($count == 0) {
+            return $returnError('Количество должно быть большое 0', 'email');
         }
 
         $order = new PaymentOrder();
@@ -306,7 +522,7 @@ class  CabinetController extends Controller
 //
 //        $this->get("fos_user.user_manager")->updateUser($user);
 
-        return JsonResponse::create(["error"=>false, 'url'=>$this->generateUrl('cabinet_buy_order', ["id"=>$order->getId()])]);
+        return JsonResponse::create(["error" => false, 'url' => $this->generateUrl('cabinet_buy_order', ["id" => $order->getId()])]);
     }
 
     /**
@@ -318,12 +534,12 @@ class  CabinetController extends Controller
 
         $order = $this->getDoctrine()->getRepository('AppBundle:PaymentOrder')->find($id);
 
-        if(!$order){
+        if (!$order) {
             throw $this->createNotFoundException('Order not found');
         }
 
         return [
-            "entity"=>$order
+            "entity" => $order
         ];
     }
 
@@ -338,12 +554,12 @@ class  CabinetController extends Controller
 
         $order = $this->getDoctrine()->getRepository('AppBundle:PaymentOrder')->find($orderId);
 
-        if(!$order){
+        if (!$order) {
             throw $this->createNotFoundException('Order not found');
         }
 
         return [
-            "entity"=>$order
+            "entity" => $order
         ];
     }
 
@@ -358,12 +574,12 @@ class  CabinetController extends Controller
 
         $order = $this->getDoctrine()->getRepository('AppBundle:PaymentOrder')->find($orderId);
 
-        if(!$order){
+        if (!$order) {
             throw $this->createNotFoundException('Order not found');
         }
 
         return [
-            "entity"=>$order
+            "entity" => $order
         ];
     }
 
@@ -374,10 +590,10 @@ class  CabinetController extends Controller
     public function notifyAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('AppBundle:Notify')->findBy(["active"=>true],["date"=>"DESC"]);
+        $news = $em->getRepository('AppBundle:Notify')->findBy(["active" => true], ["date" => "DESC"]);
 
         return [
-            "entities"=>$news
+            "entities" => $news
         ];
     }
 
@@ -388,10 +604,10 @@ class  CabinetController extends Controller
     public function notifyItemAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:Notify')->findOneBy(['id'=>$id, "active"=>true]);
+        $entity = $em->getRepository('AppBundle:Notify')->findOneBy(['id' => $id, "active" => true]);
 
         return [
-            "entity"=>$entity
+            "entity" => $entity
         ];
     }
 
