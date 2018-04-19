@@ -70,7 +70,26 @@ class UploadPhotoListener
         $this->em->persist($file);
         $this->em->flush($file);
 
-        $html = '<div class="model-files__item">'.$fileName.' <i class="fa fa-close" onclick="'.$deleteFunction.'(this);"></i><input type="hidden" name="'.$contentType.'[]" value="'.$file->getId().'" /></div>';
+        if($type == 'file'){
+            $insideHtml = $fileName;
+            $removeAddClass = '';
+        }else{
+            $filePath = $this->container->get('kernel')->getRootDir().'/../web/uploads/images/'.$fileNameToSend;
+
+            $media = new Media;
+            $media->setBinaryContent($filePath);
+            $media->setContext('product');
+            $media->setProviderName('sonata.media.provider.image');
+            $this->mm->save($media);
+
+            $provider = $this->container->get($media->getProviderName());
+            $path = $provider->generatePublicUrl($media, 'product_small');
+
+            $insideHtml = '<img src="'.$path.'" class="add-model__loaded-img" />';
+            $removeAddClass = 'add-model__remove-file--image';
+        }
+
+        $html = '<div class="model-files__item">'.$insideHtml.' <i class="add-model__remove-file '.$removeAddClass.'" onclick="'.$deleteFunction.'(this);"></i><input type="hidden" name="'.$contentType.'[]" value="'.$file->getId().'" /></div>';
 
         $response["wp_error"] = false;
         $response["wp_file"] = $fileNameToSend;
