@@ -347,6 +347,8 @@ button::-moz-focus-inner {
     left: 160px;
     font: normal 14px/18px 'MyriadPro', Arial, sans-serif;
     color: rgba(0, 0, 0, 0.4); }
+  .jq-file__no-show .jq-file__name {
+    display: none; }
   .jq-file:hover .jq-file__browse {
     background: #f7f7f7; }
   .jq-file:active .jq-file__browse {
