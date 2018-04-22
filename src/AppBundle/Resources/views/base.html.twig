@@ -18,7 +18,7 @@
     'bundles/app/custom-js/anythingslider/css/anythingslider.css'
     'bundles/app/custom-css/*.css'
     'bundles/app/pages/*.css'
-    filter='cssrewrite' output='css/20180419.css' %}
+    filter='cssrewrite' output='css/20180422.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     <!-- [if lt IE 9] -->
@@ -120,7 +120,7 @@
     </header>
     <!-- HEADER EOF	-->
     <!-- BEGIN CONTENT -->
-    <main class="content">
+    <main class="content {% block content_class %}{% endblock %}">
         {% block content_wrapper %}{% endblock %}
         {% spaceless %}
             <div class="wrapper">
@@ -273,7 +273,7 @@
     'bundles/app/custom-js/jquery-ui/jquery-ui.js'
     'bundles/app/custom-js/jquery.form.min.js'
     'bundles/app/custom-js/anythingslider/js/jquery.anythingslider.min.js'
-    'bundles/app/pages/*.js' output='js/20180419.js' %}
+    'bundles/app/pages/*.js' output='js/20180422.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

@@ -3387,7 +3387,7 @@ footer {
   aside.fl + .content-wrap {
     float: none;
     margin-left: 10px;
-    min-height: 687px !important; }
+    /*min-height: 687px !important*/ }
   .fl {
     float: none !important;
     min-width: 230px; }

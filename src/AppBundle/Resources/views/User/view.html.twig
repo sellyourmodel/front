@@ -1,9 +1,11 @@
 {% extends 'AppBundle::_inside.html.twig' %}
 
+{% block content_class %}models models-pad{% endblock %}
+
 {% block content %}
 
-    <div class="clearfix">
-        <aside class="fl column bg">
+    <div class="wrapper-column clearfix">
+        <aside class="fl column bg profile-aside">
             <div class="profile">
                 <div class="profile-cont">
                     <div class="profile__avatar"><img src="{% if entity.image %}{% path entity.image, 'big' %}{% else %}{{ asset('bundles/app/img/user-avatar.png') }}{% endif %}" alt=""></div>
