@@ -29,6 +29,11 @@ security:
             logout:       true
             anonymous:    true
             switch_user:  true
+            remember_me:
+                key:      '%secret%'
+                lifetime: 2592000 # 30 days in seconds
+                path:     /
+                always_remember_me: true
             oauth:
                 resource_owners:
                      facebook:           "/login/check-facebook"
