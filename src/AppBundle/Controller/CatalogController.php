@@ -199,6 +199,8 @@ class  CatalogController extends Controller
         for ($i=1;$i<count($images);$i++){
             $pos++;
 
+            $file = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$images[$i]->getNameFile();
+
             $media = new Media;
             $media->setBinaryContent($file);
             $media->setContext('product');
