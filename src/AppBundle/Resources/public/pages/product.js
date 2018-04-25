@@ -12,7 +12,7 @@ function cancelDeleteComment(e){
     $(e).closest('.comment').find('.delete-question').slideUp();
 }
 
-function deleteComment(id){
+function deleteComment(id, e){
 
     $.ajax({
         type: "POST",
@@ -24,7 +24,8 @@ function deleteComment(id){
                 alert(data.error_text);
             }
             else {
-                $(".js-comments").html(data.html);
+                $(e).closest('.comment').remove();
+                //$(".js-comments").html(data.html);
             }
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {

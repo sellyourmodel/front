@@ -8,6 +8,9 @@
                 </a>
             </div>
             <div class="box-top__cont">
+                {% if is_granted('ROLE_SUPER_ADMIN') and allList is defined and allList %}
+                    <div class="comment-model-info">Комментарий к модели: <a href="{{ path('catalog_product', {alias:e.product.alias}) }}">{{ e.product.name }}</a>, пользователь <a href="{{ path('user_view', {nickname:e.product.user.nickname}) }}">{{ e.product.user.nickname }}</a></div>
+                {% endif %}
                 <span class="author">
                     <a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.nickname }}</a>
                     <span class="date">{{ e.date|date("H:i d.m.Y") }}</span>
@@ -20,7 +23,7 @@
                             <p>
                                 Вы действительно хотите удалить данный комментарий?
                             </p>
-                            <button type="submit" class="button button_warning" onclick="deleteComment({{ e.id }});return false;">Удалить</button>
+                            <button type="submit" class="button button_warning" onclick="deleteComment({{ e.id }}, this);return false;">Удалить</button>
                             <button type="submit" class="button button_warning" onclick="cancelDeleteComment(this);return false;">Отмена</button>
                         </div>
                     </div>

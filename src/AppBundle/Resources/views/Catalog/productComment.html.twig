@@ -1,0 +1,12 @@
+{% extends 'AppBundle:Cabinet:_cabinet_base.html.twig' %}
+
+{% block cabinetTitle %}Комментарии к моделям{% endblock %}
+
+{% block cabinetContent %}
+
+    <div class="box-comment">
+        <div class="js-comments">
+            {% include 'AppBundle:Catalog:_product_comments.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

@@ -8,10 +8,26 @@
     <div class="wrap wrap_small support">
         <div class="wrap-right">
             <ul class="wrap-list">
-                <li class="wrap-list__item"><a href="{{ path('cabinet') }}" class="wrap-list__link">{% trans %}profile{% endtrans %}</a></li>
-                <li class="wrap-list__item"><a href="{{ path('cabinet_tickets') }}" class="wrap-list__link">Обращения в тех поддержку</a></li>
-                <li class="wrap-list__item"><a href="{{ path('cabinet_password') }}" class="wrap-list__link">{% trans %}change_password{% endtrans %}</a></li>
-                <li class="wrap-list__item"><a href="{{ path('cabinet_social') }}" class="wrap-list__link">{% trans %}socials{% endtrans %}</a></li>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li class="wrap-list__item">
+                        <a href="{{ path('catalog_moderation') }}" class="wrap-list__link">{% trans %}moderation_header{% endtrans %}</a>
+                    </li>
+                    <li class="wrap-list__item">
+                        <a href="{{ path('catalog_products_comments') }}" class="wrap-list__link">Комментарии к моделям</a>
+                    </li>
+                {% endif %}
+                <li class="wrap-list__item">
+                    <a href="{{ path('cabinet') }}" class="wrap-list__link">{% trans %}profile{% endtrans %}</a>
+                </li>
+                <li class="wrap-list__item">
+                    <a href="{{ path('cabinet_tickets') }}" class="wrap-list__link">Обращения в тех поддержку</a>
+                </li>
+                <li class="wrap-list__item">
+                    <a href="{{ path('cabinet_password') }}" class="wrap-list__link">{% trans %}change_password{% endtrans %}</a>
+                </li>
+                <li class="wrap-list__item">
+                    <a href="{{ path('cabinet_social') }}" class="wrap-list__link">{% trans %}socials{% endtrans %}</a>
+                </li>
             </ul>
         </div>
         <div class="wrap-left">

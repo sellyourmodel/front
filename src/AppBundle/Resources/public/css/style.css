@@ -2315,6 +2315,13 @@ header {
       border-bottom-color: transparent; }
       .comment .author a:hover {
         border-bottom: 1px solid; }
+  .comment .comment-model-info {
+    font-size: 14px;
+    margin-bottom: 10px; }
+    .comment .comment-model-info a {
+      color: #bda180; }
+      .comment .comment-model-info a:hover {
+        border-bottom: 1px solid; }
   .comment .delete {
     margin-top: 3px; }
     .comment .delete a {

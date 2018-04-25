@@ -298,6 +298,25 @@ class  CatalogController extends Controller
     }
 
     /**
+     * @Route("/catalog/products/comments/", name="catalog_products_comments")
+     * @Template()
+     */
+    public function productCommentAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+            throw $this->createNotFoundException('Page not found');
+        }
+
+        $responseData = [];
+        $responseData["comments"] = $em->getRepository('AppBundle:ProductComment')->findBy([], ["date"=>"DESC"]);
+        $responseData["allList"] = true;
+
+        return $responseData;
+    }
+
+    /**
      * @Route("/catalog/moderation/", name="catalog_moderation")
      * @Template()
      */
