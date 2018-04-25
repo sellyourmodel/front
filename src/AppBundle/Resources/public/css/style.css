@@ -2315,6 +2315,19 @@ header {
       border-bottom-color: transparent; }
       .comment .author a:hover {
         border-bottom: 1px solid; }
+  .comment .delete {
+    margin-top: 3px; }
+    .comment .delete a {
+      display: inline-block;
+      font-size: 14px;
+      color: #ad1e0b;
+      border-bottom: 1px solid transparent; }
+      .comment .delete a:hover {
+        border-color: #ad1e0b; }
+    .comment .delete .delete-question {
+      display: none;
+      margin-top: 5px;
+      font-size: 14px; }
 
 .hide {
   position: absolute;

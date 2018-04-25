@@ -1,5 +1,5 @@
 <h4>Комментарии ({{ comments|length }})</h4>
-{%  for e in comments %}
+{% for e in comments %}
     <div class="comment">
         <div class="box-top">
             <div class="box-top__avatar">
@@ -13,6 +13,18 @@
                     <span class="date">{{ e.date|date("H:i d.m.Y") }}</span>
                 </span>
                 <p>{{ e.text|nl2br }}</p>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <div class="delete">
+                        <a href="#" onclick="showDeleteComment(this);return false;">Удалить</a>
+                        <div class="delete-question">
+                            <p>
+                                Вы действительно хотите удалить данный комментарий?
+                            </p>
+                            <button type="submit" class="button button_warning" onclick="deleteComment({{ e.id }});return false;">Удалить</button>
+                            <button type="submit" class="button button_warning" onclick="cancelDeleteComment(this);return false;">Отмена</button>
+                        </div>
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>

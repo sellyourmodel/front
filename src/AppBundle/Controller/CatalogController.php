@@ -1094,6 +1094,64 @@ class  CatalogController extends Controller
         return JsonResponse::create(["error"=>false, 'html'=>$html]);
     }
 
+    /**
+     * @Route("/product/comment/delete/", name="product_comment_delete", options={"expose"=true})
+     */
+    public function commentDeleteAction(Request $request)
+    {
+
+        $returnError = function ($text, $error_type) {
+            return new JsonResponse(['error' => 1, 'error_text' => $text, 'error_type' => $error_type],
+                Response::HTTP_OK);
+        };
+
+        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+            return $returnError('У Вас нет права на управление комментариями', '');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->getUser();
+
+        if(!$user){
+            return $returnError('Вы должны войти на сайт','email');
+        }
+
+        $id = intval($request->get('id'));
+
+        $comment = $em->getRepository('AppBundle:ProductComment')->findOneBy(['id'=>$id]);
+
+        if(!$comment){
+            return $returnError('Комментарий не найден','email');
+        }
+
+        $product = $comment->getProduct();
+
+        if(!$product){
+            return $returnError('Модель не найдена','email');
+        }
+
+        $em->remove($comment);
+        $em->flush($comment);
+
+        $comments = $em->getRepository('AppBundle:ProductComment')->findBy(["product"=>$product], ["date"=>"ASC"]);
+
+        $product->setComments(count($comments));
+        $em->flush($product);
+
+        if($product->getUser()){
+            $product->getUser()->setModelsLoadedComments($product->getUser()->getModelsLoadedComments()+1);
+            $em->flush($product->getUser());
+        }
+
+        $responseData = [];
+        $responseData["comments"] = $comments;
+
+        $html = $this->renderView('@App/Catalog/_product_comments.html.twig', $responseData);
+
+        return JsonResponse::create(["error"=>false, 'html'=>$html]);
+    }
+
     private function _generateAlias($str) {
         $rus = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я');
         $lat = array('A', 'B', 'V', 'G', 'D', 'E', 'E', 'Zh', 'Z', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', '', 'e', 'yu', 'ya');
