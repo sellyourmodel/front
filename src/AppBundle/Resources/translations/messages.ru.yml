@@ -1,4 +1,4 @@
-model_add: Добавить 3D модель
+model_add: Загрузить 3D модель
 buy_add: Купить модель
 about: О нас
 buy: Продавайте 3D модели
@@ -99,7 +99,7 @@ model_manufacturer: Производитель
 model_tags: Теги
 model_po: ПО
 model_description: Описание
-model_add: Добавить
+model_add_btn: Загрузить
 file_not_select: Фаил не выбран
 upload_file: Загрузить файл
 category_not_have_models: В данной категории нет моделей.

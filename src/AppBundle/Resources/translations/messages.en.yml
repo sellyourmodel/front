@@ -1,4 +1,4 @@
-model_add: Add 3D model
+model_add: Upload 3D model
 buy_add: Buy model
 about: About us
 buy: Sell 3D models
@@ -97,7 +97,7 @@ model_manufacturer: Manufacturer
 model_tags: Tags
 model_po: Software
 model_description: Description
-model_add: Upload
+model_add_btn: Upload
 file_not_select: No file selected
 upload_file: Upload file
 category_not_have_models: There are no models in this category.
