@@ -6,7 +6,7 @@
     <div class="product-list__cont">
         <h6 class="product-list__title"><a href="{{ path('catalog_product',{alias:e.alias}) }}">{{ e.name }}</a></h6>
         <div class="product-panel">
-            <span class="author">от:<a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{% if e.user.name %}{{ e.user.name }}{% else %}{{ e.user.nickname }}{% endif %}</a>
+            <span class="author">от:<a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.nickname }}</a>
                 <span class="ic icon-author-rating icon-author-rating__{{ e.user.lvl }}"></span>
             </span>
             <span class="product-panel__item">

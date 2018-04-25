@@ -13,7 +13,7 @@
     <div class="wrap product">
         <div class="wrap-right">
             <div class="product-info">
-                <span class="author">{% trans %}product_from{% endtrans %}: <a href="{{ path('user_view',{nickname:product.user.nickname}) }}">{{ product.user.name }}</a><span class="ic icon-author-rating icon-author-rating__{{ product.user.lvl }}"></span></span>
+                <span class="author">{% trans %}product_from{% endtrans %}: <a href="{{ path('user_view',{nickname:product.user.nickname}) }}">{{ product.user.nickname }}</a><span class="ic icon-author-rating icon-author-rating__{{ product.user.lvl }}"></span></span>
                 <h1>{{ product.name }}</h1>
                 {% if product.manufacturer %}
                     {{ product.manufacturer }}
