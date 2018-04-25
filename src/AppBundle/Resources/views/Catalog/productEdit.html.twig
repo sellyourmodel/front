@@ -34,26 +34,37 @@
                     </div>
                     <div class="box-field-group user js-image-wrapper js-main-image-drop">
                         <label class="box-field__label">{% trans %}model_cover{% endtrans %} <span class="require-field-z">*</span></label>
-                        <div class="box-field__input js-image-add-input" {% if product.image %}style="display: none;"{% endif %}>
-                            <input type="file" id="fileuploadMainImage" data-placeholder="{% trans %}file_not_select{% endtrans %}" data-browse="{% trans %}upload_file{% endtrans %}"
-                                   class="styler">
+
+                        <div class="box-field__input">
+                            <div class="add-image js-image-add-input" {% if product.image %}style="display: none;"{% endif %}>
+                                <img src="{{ asset('bundles/app/img/btn-img-add.png') }}" class="add-image__img">
+                                <input type="file" id="fileuploadMainImage" class="add-image__input">
+                            </div>
+
                         </div>
                         <div class="model-files js-main-pic">
                             {% if product.image %}
-                                <div class="model-files__item">{{ product.image.name }} <i class="fa fa-close" onclick="deleteMainImg(this);"></i><input type="hidden" name="existsMainImg[]" value="{{ product.image.id }}"></div>
+                                <div class="model-files__item">
+                                    <img src="{% path product.image, 'small' %}" class="add-model__loaded-img"> <i class="add-model__remove-file add-model__remove-file--image" onclick="deleteMainImg(this);"></i><input type="hidden" name="existsMainImg[]" value="{{ product.image.id }}">
+                                </div>
                             {% endif %}
                         </div>
                     </div>
                     <div class="box-field-group user js-image-wrapper js-add-image-drop">
                         <label class="box-field__label">{% trans %}model_custom_images{% endtrans %} <span class="require-field-z">*</span></label>
-                        <div class="box-field__input js-add-pic-input">
-                            <input type="file" id="fileuploadAddImages" data-placeholder="{% trans %}file_not_select{% endtrans %}" data-browse="{% trans %}upload_file{% endtrans %}"
-                                   class="styler">
-                        </div>
-                        <div class="model-files js-add-pic">
-                            {% for e in product.images %}
-                                <div class="model-files__item">{{ e.image.name }} <i class="fa fa-close" onclick="deleteOtherFiles(this);"></i><input type="hidden" name="existsAddImg[]" value="{{ e.id }}"></div>
-                            {% endfor %}
+
+                        <div class="model-files">
+                            <div class="model-files__add-images js-add-pic">
+                                {% for e in product.images %}
+                                    <div class="model-files__item">
+                                        <img src="{% path e.image, 'small' %}" class="add-model__loaded-img"> <i class="add-model__remove-file add-model__remove-file--image" onclick="deleteOtherFiles(this);"></i><input type="hidden" name="existsAddImg[]" value="{{ e.id }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="add-image add-image--add-images js-add-pic-input">
+                                <img src="{{ asset('bundles/app/img/btn-img-add.png') }}" class="add-image__img">
+                                <input type="file" id="fileuploadAddImages" class="add-image__input">
+                            </div>
                         </div>
                     </div>
                     <div class="box-field-group user js-image-wrapper js-files-drop">
