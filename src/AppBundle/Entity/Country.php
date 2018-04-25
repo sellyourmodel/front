@@ -31,6 +31,34 @@ class Country
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $nameEn;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $code;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $numberFile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $timeZone;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="boolean")
      */
     private $active = true;
@@ -102,5 +130,101 @@ class Country
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set code
+     *
+     * @param string $code
+     *
+     * @return Country
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * Get code
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set numberFile
+     *
+     * @param integer $numberFile
+     *
+     * @return Country
+     */
+    public function setNumberFile($numberFile)
+    {
+        $this->numberFile = $numberFile;
+
+        return $this;
+    }
+
+    /**
+     * Get numberFile
+     *
+     * @return integer
+     */
+    public function getNumberFile()
+    {
+        return $this->numberFile;
+    }
+
+    /**
+     * Set timeZone
+     *
+     * @param string $timeZone
+     *
+     * @return Country
+     */
+    public function setTimeZone($timeZone)
+    {
+        $this->timeZone = $timeZone;
+
+        return $this;
+    }
+
+    /**
+     * Get timeZone
+     *
+     * @return string
+     */
+    public function getTimeZone()
+    {
+        return $this->timeZone;
+    }
+
+    /**
+     * Set nameEn
+     *
+     * @param string $nameEn
+     *
+     * @return Country
+     */
+    public function setNameEn($nameEn)
+    {
+        $this->nameEn = $nameEn;
+
+        return $this;
+    }
+
+    /**
+     * Get nameEn
+     *
+     * @return string
+     */
+    public function getNameEn()
+    {
+        return $this->nameEn;
     }
 }
