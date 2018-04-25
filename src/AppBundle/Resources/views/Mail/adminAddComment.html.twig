@@ -1,0 +1,11 @@
+<h1>На сайте добавлен новый комментарий</h1>
+<p>К модели <a href="{{ url('catalog_product', {alias:comment.product.alias}) }}">{{ comment.product.name }}</a> был добавлен комментарий от пользователя <a href="{{ url('user_view', {nickname:comment.product.user.nickname}) }}">{{ comment.product.user.nickname }}</a>:</p>
+<p>
+    {{ comment.text|nl2br }}
+</p>
+<p><a href="{{ url('catalog_products_comments') }}">Перейти в управление комментариями</a></p>
+<p>
+    ---------
+    <br />
+    С уважением, команда Sellyourmodel.com
+</p>

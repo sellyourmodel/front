@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\ProductComment;
 use AppBundle\Entity\Response;
 use AppBundle\Entity\Subscribe;
 use AppBundle\Entity\User;
@@ -161,6 +162,20 @@ class NotifyManager
         ]);
 
         $this->_sendEmail('Вы купили модель', $product->getUser()->getEmail(), $messageText);
+
+    }
+
+    /**
+     *  Отправка автору о том, что его модель заблокирована
+     */
+    public function sendAdminAddCommentEmail(ProductComment $comment)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:adminAddComment.html.twig', [
+            "comment" => $comment
+        ]);
+
+        $this->_sendEmail('На сайте добавлен новый комментарий', $this->adminEmails, $messageText);
 
     }
 

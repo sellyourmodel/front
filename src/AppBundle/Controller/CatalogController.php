@@ -1105,6 +1105,8 @@ class  CatalogController extends Controller
             $em->flush($product->getUser());
         }
 
+        $this->get('wp.notify.manager')->sendAdminAddCommentEmail($comment);
+
         $responseData = [];
         $responseData["comments"] = $comments;
 
