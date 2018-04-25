@@ -1,47 +1,18 @@
-{% extends 'AppBundle::_inside.html.twig' %}
+{% extends 'AppBundle:Cabinet:_cabinet_base.html.twig' %}
 
-{% block title %}{% trans %}moderation_header{% endtrans %}{% endblock %}
+{% block cabinetTitle %}{% trans %}moderation_header{% endtrans %}{% endblock %}
 
 {% block wrapper_class %}catalog{% endblock %}
 
-{% block content_wrapper %}
+{% block cabinetContent %}
 
-    <div class="wrapper">
-        <div class="main-wrap catalog">
-            <div class="main-wrap__header">
-                {#<div class="box-select-group">
-                    <select class="styler">
-                        <option value="0">Все форматы</option>
-                        <option value="1">Все форма 1</option>
-                        <option value="2">Все форма 2</option>
-                    </select>
-                    <select class="styler">
-                        <option value="0">Все стили</option>
-                        <option value="1">Все сти 1</option>
-                    </select>
-                    <select class="styler">
-                        <option value="0">Все зоны</option>
-                        <option value="1">Лето</option>
-                        <option value="2">Зима</option>
-                    </select>
-                    <select class="styler">
-                        <option value="0">По дате</option>
-                        <option value="1">рейтингу</option>
-                    </select>
-                </div>#}
-                <h1>{% trans %}moderation_header{% endtrans %}</h1>
-            </div>
-        </div>
-
-            {% if products|length > 0 %}
-                <ul class="product-list col-4">
-                    {% for e in products %}
-                        {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <div class="product_list--empty">{% trans %}moderation_not_have_models{% endtrans %}</div>
-            {% endif %}
-
-    </div>
+    {% if products|length > 0 %}
+        <ul class="product-list col-4">
+            {% for e in products %}
+                {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="product_list--empty">{% trans %}moderation_not_have_models{% endtrans %}</div>
+    {% endif %}
 {% endblock %}
