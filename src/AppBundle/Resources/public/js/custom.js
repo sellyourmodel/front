@@ -103,6 +103,7 @@ $(function () {
         $(".js-date").datepicker({
             language: 'ru',
             dateFormat: "dd.mm.yy",
+            yearRange: "-100:+0",
             firstDay: 1,
             changeMonth: true,
             changeYear: true
