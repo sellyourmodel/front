@@ -228,7 +228,7 @@
 }
 
 .select2-container--default .select2-selection--multiple {
-    height: 34px;
+    min-height: 34px;
     padding: 0 27px 0 10px;
     border: 1px solid #CCC;
     border-radius: 4px;
@@ -336,6 +336,7 @@
     outline: 0;
     box-shadow: none;
     -webkit-appearance: textfield;
+    height: 26px;
 }
 
 .select2-container--default .select2-results > .select2-results__options {
