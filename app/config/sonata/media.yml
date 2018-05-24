@@ -68,7 +68,7 @@ sonata_media:
 
             formats:
                 small:   { width: 123, height: 123 , quality: 100}
-                big:   { width: 228, height: 179 , quality: 100}
+                big:   { width: 228, height: 228 , quality: 100}
                 full:   { width: 600 , height: 600, quality: 100}
         avatar:
             providers:
