@@ -31,6 +31,13 @@ class Style
     /**
      * @var string
      *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $count;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="boolean")
      */
     private $active = true;
@@ -102,5 +109,29 @@ class Style
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set count
+     *
+     * @param integer $count
+     *
+     * @return Style
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
+
+        return $this;
+    }
+
+    /**
+     * Get count
+     *
+     * @return integer
+     */
+    public function getCount()
+    {
+        return $this->count;
     }
 }

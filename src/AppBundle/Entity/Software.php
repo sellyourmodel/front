@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Software
  *
  * @ORM\Table(name="software")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SoftwareRepository")
  */
 class Software
 {
@@ -27,6 +27,13 @@ class Software
      * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $count;
 
     /**
      * @var string
@@ -102,5 +109,29 @@ class Software
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * Set count
+     *
+     * @param integer $count
+     *
+     * @return Software
+     */
+    public function setCount($count)
+    {
+        $this->count = $count;
+
+        return $this;
+    }
+
+    /**
+     * Get count
+     *
+     * @return integer
+     */
+    public function getCount()
+    {
+        return $this->count;
     }
 }
