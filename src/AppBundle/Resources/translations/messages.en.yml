@@ -193,6 +193,8 @@ current_sales: Current sales
 total_sales: Total sales
 available_models: Available Models
 purchases: Purchases
+tooltip_sales: The amount received from the sales of Your models
+tooltip_downloads: The number of models that You can download
 about_sym_header: About SYM
 about_sym_description: SYM is a trading platform where you can buy and sell 3D models, textures, plug-ins for various projects. Our store started its work in February 2004, and today we are one of the largest suppliers of 3D content in the world. We only have high-quality 3D models!
 about_sym_description_header: About the project

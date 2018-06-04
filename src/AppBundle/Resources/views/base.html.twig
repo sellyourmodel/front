@@ -94,19 +94,19 @@
                             <li class="nav-profile-list__item"><a href="{{ path('notify') }}" class="nav-profile-list__link">{% trans %}notifications{% endtrans %}{#<span class="kbd">2</span>#}</a></li>
                             <li class="nav-profile-list__item"><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}{{ path('homepage',{_switch_user: "_exit"}) }}{% else %}{{ path('fos_user_security_logout') }}{% endif %}" class="nav-profile-list__link">{% trans %}exit{% endtrans %}</a></li>
                         </ul>
-                        <div class="nav-profile-wrap">
+                        <div class="nav-profile-wrap nav-profile-wrap--has-tooltip">
                             <div class="nav-profile__item">
                                 <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}loaded_models{% endtrans %}</a></div>
                                 <div class="nav-profile__count">{{ app.user.modelsLoaded }}</div>
                                 <div class="nav-profile__footer">      <span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}views{% endtrans %}</a><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Коментарии</a><span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
                             </div>
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol">?</span></div>
+                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_sales{% endtrans %}</span></span></div>
                                 <div class="nav-profile__count">{{ app.user.balance }} руб.</div>
                                 <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}total_sales{% endtrans %}</a><span class="kbd">{{ app.user.balance }} руб.</span></span></div>
                             </div>
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}available_models{% endtrans %}</a><span class="simbol">?</span></div>
+                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}available_models{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_downloads{% endtrans %}</span></span></div>
                                 <div class="nav-profile__count">{{ app.user.models }}</div>
                                 <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"buy"}) }}">{% trans %}purchases{% endtrans %}</a></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"favorites"}) }}">Избранное</a><span class="kbd">{{ app.user.modelsFavorites }}</span></span></div>
                             </div>
