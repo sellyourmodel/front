@@ -121,6 +121,20 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $notifySale = true;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $notifyNews = true;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="date", nullable=true)
      */
     private $birthdate;
@@ -1149,5 +1163,53 @@ class User extends BaseUser
     public function getBalance()
     {
         return $this->balance;
+    }
+
+    /**
+     * Set notifySale
+     *
+     * @param boolean $notifySale
+     *
+     * @return User
+     */
+    public function setNotifySale($notifySale)
+    {
+        $this->notifySale = $notifySale;
+
+        return $this;
+    }
+
+    /**
+     * Get notifySale
+     *
+     * @return boolean
+     */
+    public function getNotifySale()
+    {
+        return $this->notifySale;
+    }
+
+    /**
+     * Set notifyNews
+     *
+     * @param boolean $notifyNews
+     *
+     * @return User
+     */
+    public function setNotifyNews($notifyNews)
+    {
+        $this->notifyNews = $notifyNews;
+
+        return $this;
+    }
+
+    /**
+     * Get notifyNews
+     *
+     * @return boolean
+     */
+    public function getNotifyNews()
+    {
+        return $this->notifyNews;
     }
 }

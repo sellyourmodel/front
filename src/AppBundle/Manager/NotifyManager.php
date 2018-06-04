@@ -56,7 +56,7 @@ class NotifyManager
 
     }
 
-    private function _sendEmail($subject, $to, $text){
+    private function _sendEmail($subject, $to, $text, $sendEmail = true){
 
         if($to instanceof User){
             $email = $to->getEmail();
@@ -75,24 +75,27 @@ class NotifyManager
             $email = $to;
         }
 
-        $message = \Swift_Message::newInstance($subject)
-            ->setContentType("text/html")
-            ->setFrom($this->mailFrom, $this->mailFromName)
-            ->setBody($text, 'text/html');
+        if($sendEmail){
+            $message = \Swift_Message::newInstance($subject)
+                ->setContentType("text/html")
+                ->setFrom($this->mailFrom, $this->mailFromName)
+                ->setBody($text, 'text/html');
 
-        if(is_array($email)){
-            foreach ($to as $e){
-                if(filter_var($e, FILTER_VALIDATE_EMAIL)){
-                    $message->addTo($e);
+            if(is_array($email)){
+                foreach ($to as $e){
+                    if(filter_var($e, FILTER_VALIDATE_EMAIL)){
+                        $message->addTo($e);
+                    }
+                }
+            }elseif(is_string($to)){
+                if(filter_var($to, FILTER_VALIDATE_EMAIL)){
+                    $message->addTo($to);
                 }
             }
-        }elseif(is_string($to)){
-            if(filter_var($to, FILTER_VALIDATE_EMAIL)){
-                $message->addTo($to);
-            }
+
+            $this->mailer->send($message);
         }
 
-        $this->mailer->send($message);
     }
 
     /**
@@ -163,7 +166,14 @@ class NotifyManager
             "user" => $user
         ]);
 
-        $this->_sendEmail('Ваша модель куплена пользователем', $product->getUser(), $messageText);
+        if($product->getUser()->getNotifySale()){
+            $sendEmail = true;
+        }
+        else{
+            $sendEmail = false;
+        }
+
+        $this->_sendEmail('Ваша модель куплена пользователем', $product->getUser(), $messageText, $sendEmail);
 
     }
 
@@ -178,7 +188,14 @@ class NotifyManager
             "user" => $user
         ]);
 
-        $this->_sendEmail('Вы купили модель', $product->getUser(), $messageText);
+        if($user->getNotifySale()){
+            $sendEmail = true;
+        }
+        else{
+            $sendEmail = false;
+        }
+
+        $this->_sendEmail('Вы купили модель', $user, $messageText, $sendEmail);
 
     }
 

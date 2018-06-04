@@ -65,6 +65,9 @@ profile_lang: Language
 profile_specialization: Specialization
 profile_place: Place of residence
 profile_about_myself: About yourself
+profile_notifications: Notify me about
+profile_notify_sale: Buy and sale my models
+profile_notify_news: Site news
 change: Edit
 notifications_header: Notifications
 materials_not_found: No content found

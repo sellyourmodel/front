@@ -57,6 +57,8 @@ class  CabinetController extends Controller
         $countryId = intval($request->get('country'));
         $city = trim($request->get('city'));
         $text = trim($request->get('text'));
+        $notifySale = trim($request->get('notifySale'));
+        $notifyNews = trim($request->get('notifyNews'));
 
         if ($f == '' OR $i == '' OR $email == '' OR $nickname == '') {
             return $returnError('Заполните обязательные поля', 'all');
@@ -146,6 +148,20 @@ class  CabinetController extends Controller
 
         $user->setCity($city);
         $user->setText($text);
+
+        if($notifySale == '1'){
+            $user->setNotifySale(true);
+        }
+        else{
+            $user->setNotifySale(false);
+        }
+
+        if($notifyNews == '1'){
+            $user->setNotifyNews(true);
+        }
+        else{
+            $user->setNotifyNews(false);
+        }
 
         $this->get("fos_user.user_manager")->updateUser($user);
 

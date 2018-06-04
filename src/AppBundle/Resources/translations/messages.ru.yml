@@ -67,6 +67,9 @@ profile_lang: Язык
 profile_specialization: Специализация
 profile_place: Место проживания
 profile_about_myself: О себе
+profile_notifications: Уведомлять меня на e-mail о следующих событиях
+profile_notify_sale: Покупка и продажа моих моделей
+profile_notify_news: Новости сервиса
 change: Изменить
 notifications_header: Уведомления
 materials_not_found: Материалы не найдены
