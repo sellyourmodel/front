@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Style
  *
  * @ORM\Table(name="styles")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\StyleRepository")
  */
 class Style
 {
