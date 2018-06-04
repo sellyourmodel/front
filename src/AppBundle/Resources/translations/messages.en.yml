@@ -68,6 +68,7 @@ profile_about_myself: About yourself
 change: Edit
 notifications_header: Notifications
 materials_not_found: No content found
+notifications_not_found: No notifications found
 readmore: Read more...
 change_password_header: Change password
 new_password: New password

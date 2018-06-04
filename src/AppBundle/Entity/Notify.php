@@ -29,14 +29,10 @@ class Notify
     private $name;
 
     /**
-     * @var \Image
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="image_id", referencedColumnName="id")
-     * })
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
-    private $image;
+    private $user;
 
     /**
      * @var string
@@ -44,13 +40,6 @@ class Notify
      * @ORM\Column(type="datetime", nullable=false)
      */
     private $date;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $preview;
 
     /**
      * @var string
@@ -186,30 +175,6 @@ class Notify
     }
 
     /**
-     * Set preview
-     *
-     * @param string $preview
-     *
-     * @return Notify
-     */
-    public function setPreview($preview)
-    {
-        $this->preview = $preview;
-
-        return $this;
-    }
-
-    /**
-     * Get preview
-     *
-     * @return string
-     */
-    public function getPreview()
-    {
-        return $this->preview;
-    }
-
-    /**
      * Set text
      *
      * @param string $text
@@ -258,26 +223,26 @@ class Notify
     }
 
     /**
-     * Set image
+     * Set user
      *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $image
+     * @param \AppBundle\Entity\User $user
      *
      * @return Notify
      */
-    public function setImage(\Application\Sonata\MediaBundle\Entity\Media $image = null)
+    public function setUser(\AppBundle\Entity\User $user = null)
     {
-        $this->image = $image;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get image
+     * Get user
      *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
+     * @return \AppBundle\Entity\User
      */
-    public function getImage()
+    public function getUser()
     {
-        return $this->image;
+        return $this->user;
     }
 }

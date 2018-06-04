@@ -1,45 +1,33 @@
-{% extends 'AppBundle::_inside.html.twig' %}
+{% extends 'AppBundle:Cabinet:_cabinet_base.html.twig' %}
 
-{% block title %}{% trans %}notifications_header{% endtrans %}{% endblock %}
+{% block cabinetTitle %}{% trans %}notifications_header{% endtrans %}{% endblock %}
 
-{% block content %}
-    <div class="content-wrap column">
-        <div class="main-wrap">
-            <div class="main-wrap__header">
-                <h1>{% trans %}notifications_header{% endtrans %}</h1>
-            </div>
-        </div>
-        <div class="box-articles mt10">
-            {% if entities|length > 0 %}
-                {% for e in entities %}
-                    <article class="article">
-                        <div class="box-top">
-                            <div class="box-top__cont" style="margin-left: 0;">
-                                <h3 class="article__title"><a href="{{ path('articles_item',{id:e.id}) }}">{{ e.name }}</a></h3>
-                                <div>
-                                    <span class="date">{{ e.date|date('d.m.Y') }}</span>
-                                    <span class="product-panel__item">
+{% block cabinetContent %}
+    {% if entities|length > 0 %}
+        {% for e in entities %}
+            <article class="article">
+                {#<div class="box-top">
+                    <div class="box-top__cont" style="margin-left: 0;">
+                        <h3 class="article__title">{{ e.name }}</h3>
+                        <div>
+                            <span class="date">{{ e.date|date('d.m.Y') }}</span>
+                            <span class="product-panel__item">
 
-                                    </span>
-                                </div>
-                            </div>
+                            </span>
                         </div>
-                        <div class="article__body"><img src="{% path e.image, 'big' %}" alt="" />
-                            <p>
-                                {{ e.preview|nl2br}}
-                            </p>
-                            <p><a href="{{ path('articles_item',{id:e.id}) }}" class="more">{% trans %}readmore{% endtrans %}</a></p>
-                        </div>
-                    </article>
-                {% endfor %}
-            {% else %}
-            <div class="article__no-items">
-                {% trans %}materials_not_found{% endtrans %}
-            </div>
-            {% endif %}
+                    </div>
+                </div>#}
+                <div class="article__body">
+                    <div>
+                        <span class="date">{{ e.date|date('H:i d.m.Y') }}</span>
+                    </div>
+                    {{ e.text|raw}}
+                </div>
+            </article>
+        {% endfor %}
+    {% else %}
+        <div class="article__no-items">
+            {% trans %}notifications_not_found{% endtrans %}
         </div>
-    </div>
-    <aside class="column">
-        <div class="banner">{{ bannerRight() }}</div>
-    </aside>
+    {% endif %}
 {% endblock %}

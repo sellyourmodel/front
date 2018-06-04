@@ -590,7 +590,7 @@ class  CabinetController extends Controller
     public function notifyAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $news = $em->getRepository('AppBundle:Notify')->findBy(["active" => true], ["date" => "DESC"]);
+        $news = $em->getRepository('AppBundle:Notify')->findBy(["user"=>$this->getUser(), "active" => true], ["date" => "DESC"]);
 
         return [
             "entities" => $news

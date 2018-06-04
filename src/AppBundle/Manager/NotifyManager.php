@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\Notify;
 use AppBundle\Entity\ProductComment;
 use AppBundle\Entity\Response;
 use AppBundle\Entity\Subscribe;
@@ -57,13 +58,29 @@ class NotifyManager
 
     private function _sendEmail($subject, $to, $text){
 
+        if($to instanceof User){
+            $email = $to->getEmail();
+
+            $notify = new Notify();
+            $notify->setUser($to);
+            $notify->setName($subject);
+            $notify->setDate(new \DateTime());
+            $notify->setText($text);
+
+            $this->em->persist($notify);
+            $this->em->flush($notify);
+
+        }
+        else{
+            $email = $to;
+        }
 
         $message = \Swift_Message::newInstance($subject)
             ->setContentType("text/html")
             ->setFrom($this->mailFrom, $this->mailFromName)
             ->setBody($text, 'text/html');
 
-        if(is_array($to)){
+        if(is_array($email)){
             foreach ($to as $e){
                 if(filter_var($e, FILTER_VALIDATE_EMAIL)){
                     $message->addTo($e);
@@ -89,7 +106,7 @@ class NotifyManager
             "password" => $password
         ]);
 
-        $this->_sendEmail('Регистрация на сайте Sellyourmodel.com', $user->getEmail(), $messageText);
+        $this->_sendEmail('Регистрация на сайте Sellyourmodel.com', $user, $messageText);
 
     }
 
@@ -103,7 +120,7 @@ class NotifyManager
             "product" => $product
         ]);
 
-        $this->_sendEmail('Ваша одобрена модератором', $product->getUser()->getEmail(), $messageText);
+        $this->_sendEmail('Ваша одобрена модератором', $product->getUser(), $messageText);
 
     }
 
@@ -117,7 +134,7 @@ class NotifyManager
             "product" => $product
         ]);
 
-        $this->_sendEmail('Ваша модель заблокирована модератором', $product->getUser()->getEmail(), $messageText);
+        $this->_sendEmail('Ваша модель заблокирована модератором', $product->getUser(), $messageText);
 
     }
 
@@ -131,7 +148,7 @@ class NotifyManager
             "product" => $product
         ]);
 
-        $this->_sendEmail('С вашей модели снята блокировка', $product->getUser()->getEmail(), $messageText);
+        $this->_sendEmail('С вашей модели снята блокировка', $product->getUser(), $messageText);
 
     }
 
@@ -146,7 +163,7 @@ class NotifyManager
             "user" => $user
         ]);
 
-        $this->_sendEmail('Ваша модель куплена пользователем', $product->getUser()->getEmail(), $messageText);
+        $this->_sendEmail('Ваша модель куплена пользователем', $product->getUser(), $messageText);
 
     }
 
@@ -161,7 +178,7 @@ class NotifyManager
             "user" => $user
         ]);
 
-        $this->_sendEmail('Вы купили модель', $product->getUser()->getEmail(), $messageText);
+        $this->_sendEmail('Вы купили модель', $product->getUser(), $messageText);
 
     }
 

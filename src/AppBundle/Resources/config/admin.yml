@@ -155,12 +155,6 @@ services:
 #            - { name: sonata.admin, manager_type: orm, group: Новости и статьи, label: Новости}
 #        arguments: [~, AppBundle\Entity\News, ~]
 
-    app.admin.notify:
-        class: AppBundle\Admin\ArticleAdmin
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: Уведомления, label: Уведомления}
-        arguments: [~, AppBundle\Entity\Notify, ~]
-
     app.admin.articles:
         class: AppBundle\Admin\ArticleAdmin
         tags:
