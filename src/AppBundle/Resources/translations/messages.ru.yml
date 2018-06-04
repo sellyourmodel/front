@@ -102,6 +102,7 @@ model_files: Файлы модели
 model_manufacturer: Производитель
 model_tags: Теги
 model_po: ПО
+model_style: Стили
 model_description: Описание
 model_add_btn: Загрузить
 file_not_select: Фаил не выбран

@@ -100,6 +100,7 @@ model_files: Model files
 model_manufacturer: Manufacturer
 model_tags: Tags
 model_po: Software
+model_style: Style
 model_description: Description
 model_add_btn: Upload
 file_not_select: No file selected

@@ -185,6 +185,13 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: ПО моделей}
         arguments: [~, AppBundle\Entity\Software, ~]
 
+
+    app.admin.style:
+        class: AppBundle\Admin\StyleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Стили моделей}
+        arguments: [~, AppBundle\Entity\Style, ~]
+
     app.admin.right.block:
         class: AppBundle\Admin\RightTextBlockAdmin
         tags:

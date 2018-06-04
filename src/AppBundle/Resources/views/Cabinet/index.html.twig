@@ -133,11 +133,11 @@
             <div class="box-field-group">
                 <div class="box-field col-5">
                     <label class="box-field__label">{% trans %}profile_notifications{% endtrans %}</label>
-                    <div class="box-field__input">
+                    <div class="box-field__input box-field__checkbox">
                         <input type="checkbox" id="notifySale" name="notifySale" value="1" class="styler" {% if app.user.notifySale %}checked{% endif %}>
                         <label for="notifySale" class="nowrap box-field__label">{% trans %}profile_notify_sale{% endtrans %}</label>
                     </div>
-                    <div class="box-field__input">
+                    <div class="box-field__input box-field__checkbox">
                         <input type="checkbox" id="notifyNews" name="notifyNews" value="1" class="styler" {% if app.user.notifyNews %}checked{% endif %}>
                         <label for="notifyNews" class="nowrap box-field__label">{% trans %}profile_notify_news{% endtrans %}</label>
                     </div>

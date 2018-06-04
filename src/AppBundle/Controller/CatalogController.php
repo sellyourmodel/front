@@ -88,6 +88,7 @@ class  CatalogController extends Controller
             "categories"=>$em->getRepository('AppBundle:Category')->findBy(["parent"=>NULL],["pos"=>"ASC"]),
             "tags"=>$em->getRepository('AppBundle:Tag')->findBy(["active"=>true],["name"=>"ASC"]),
             "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"]),
+            "style"=>$em->getRepository('AppBundle:Style')->findBy(["active"=>true],["name"=>"ASC"]),
             "rightText"=>$rightText
         ];
     }
@@ -107,6 +108,7 @@ class  CatalogController extends Controller
         $manufacturer = trim($request->get('manufacturer'));
         $tags = $request->get('tags');
         $software = $request->get('software');
+        $style = $request->get('style');
         $text = trim($request->get('text'));
         $user_agreement = trim($request->get('user_agreement', '0'));
 
@@ -258,6 +260,16 @@ class  CatalogController extends Controller
                 $softwareEntity = $em->getRepository('AppBundle:Software')->find($e);
                 if($softwareEntity){
                     $entity->addSoftware($softwareEntity);
+                }
+            }
+            $em->flush($entity);
+        }
+
+        if(is_array($style)){
+            foreach($style as $e){
+                $styleEntity = $em->getRepository('AppBundle:Style')->find($e);
+                if($styleEntity){
+                    $entity->addStyle($styleEntity);
                 }
             }
             $em->flush($entity);
@@ -630,7 +642,8 @@ class  CatalogController extends Controller
             "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]),
             "categories"=>$em->getRepository('AppBundle:Category')->findBy(["parent"=>NULL],["pos"=>"ASC"]),
             "tags"=>$em->getRepository('AppBundle:Tag')->findBy(["active"=>true],["name"=>"ASC"]),
-            "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"])
+            "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"]),
+            "style"=>$em->getRepository('AppBundle:Style')->findBy(["active"=>true],["name"=>"ASC"])
         ];
     }
 
@@ -658,6 +671,7 @@ class  CatalogController extends Controller
         $manufacturer = trim($request->get('manufacturer'));
         $tags = $request->get('tags');
         $software = $request->get('software');
+        $style = $request->get('style');
         $text = trim($request->get('text'));
 
         if($name == '' OR $categoryId == ''){
@@ -822,6 +836,23 @@ class  CatalogController extends Controller
                 if($softwareEntity){
                     if(!in_array($softwareEntity->getId(), $curSoftware)){
                         $entity->addSoftware($softwareEntity);
+                    }
+                }
+            }
+            $em->flush($entity);
+        }
+
+        $curStyle = [];
+        foreach ($entity->getStyle() as $e) {
+            $curStyle[] = $e->getId();
+        }
+
+        if(is_array($style)){
+            foreach($style as $e){
+                $styleEntity = $em->getRepository('AppBundle:Style')->find($e);
+                if($styleEntity){
+                    if(!in_array($styleEntity->getId(), $curStyle)){
+                        $entity->addStyle($styleEntity);
                     }
                 }
             }

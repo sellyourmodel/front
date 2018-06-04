@@ -105,6 +105,18 @@
                     </div>
                     <div class="box-field-group">
                         <div class="box-field col-5">
+                            <label class="box-field__label">{% trans %}model_style{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <select name="style[]" multiple class="select2 form-control">
+                                    {% for e in style %}
+                                        <option value="{{ e.id }}">{{ e.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-field-group">
+                        <div class="box-field col-5">
                             <label class="box-field__label">{% trans %}model_description{% endtrans %}</label>
                             <div class="box-field__input">
                                 <textarea name="text" class="form-control"></textarea>

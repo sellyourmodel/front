@@ -62,6 +62,15 @@ class Product
     private $software;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Style")
+     * @ORM\JoinTable(name="catalog_products_styles",
+     *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="style_id", referencedColumnName="id")}
+     *      )
+     */
+    private $style;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
@@ -697,5 +706,39 @@ class Product
     public function getDeleted()
     {
         return $this->deleted;
+    }
+
+    /**
+     * Add style
+     *
+     * @param \AppBundle\Entity\Style $style
+     *
+     * @return Product
+     */
+    public function addStyle(\AppBundle\Entity\Style $style)
+    {
+        $this->style[] = $style;
+
+        return $this;
+    }
+
+    /**
+     * Remove style
+     *
+     * @param \AppBundle\Entity\Style $style
+     */
+    public function removeStyle(\AppBundle\Entity\Style $style)
+    {
+        $this->style->removeElement($style);
+    }
+
+    /**
+     * Get style
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStyle()
+    {
+        return $this->style;
     }
 }
