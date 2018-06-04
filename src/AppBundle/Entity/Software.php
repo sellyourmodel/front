@@ -33,7 +33,7 @@ class Software
      *
      * @ORM\Column(type="integer", nullable=false)
      */
-    private $count;
+    private $count = 0;
 
     /**
      * @var string
