@@ -270,9 +270,12 @@ class  CatalogController extends Controller
 
         $models = $user->getModels();
         $models += 1;
+        $models += 1;
         $user->setModels($models);
 
         $this->get("fos_user.user_manager")->updateUser($user);
+
+        $this->get('wp.notify.manager')->sendAdminNewProduct($entity, $this->getUser());
 
         return JsonResponse::create(["error" => false, 'url'=>$this->generateUrl('catalog_product',["alias"=>$entity->getAlias()])]);
     }
@@ -780,6 +783,8 @@ class  CatalogController extends Controller
         $entity->setManufacturer($manufacturer);
         $entity->setText($text);
 
+        $entity->setModerated(false);
+
         $em->flush($entity);
 
         $curTags = [];
@@ -822,6 +827,8 @@ class  CatalogController extends Controller
             }
             $em->flush($entity);
         }
+
+        $this->get('wp.notify.manager')->sendAdminEditProduct($entity, $this->getUser());
 
         return JsonResponse::create(["error" => false, 'url'=>$this->generateUrl('catalog_product',["alias"=>$entity->getAlias()])]);
     }

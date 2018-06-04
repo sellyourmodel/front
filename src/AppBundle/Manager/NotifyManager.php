@@ -200,7 +200,37 @@ class NotifyManager
     }
 
     /**
-     *  Отправка автору о том, что его модель заблокирована
+     *  Отправка администратору о новой модели
+     */
+    public function sendAdminNewProduct(Product $product, User $user)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:adminNewProduct.html.twig', [
+            "product" => $product,
+            "user" => $user
+        ]);
+
+        $this->_sendEmail('На сайте добавлена новая модель', $this->adminEmails, $messageText);
+
+    }
+
+    /**
+     *  Отправка администратору о редактировании модели
+     */
+    public function sendAdminEditProduct(Product $product, User $user)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:adminEditProduct.html.twig', [
+            "product" => $product,
+            "user" => $user
+        ]);
+
+        $this->_sendEmail('На сайте отредактирована модель', $this->adminEmails, $messageText);
+
+    }
+
+    /**
+     *  Отправка администраторам нового комментария
      */
     public function sendAdminAddCommentEmail(ProductComment $comment)
     {
