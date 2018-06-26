@@ -39,7 +39,7 @@
                 {% for e in entity.product.log %}
                     <tr>
                         <td>{{ e.date|date("H:i d.m.Y") }}</td>
-                        <td>{{ e.text }}</td>
+                        <td>{{ e.text|nl2br }}</td>
                         <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.nickname }}</a></td>
                     </tr>
                 {% endfor %}
@@ -61,7 +61,7 @@
         {% for e in logs %}
             <tr>
                 <td>{{ e.date|date("H:i d.m.Y") }}</td>
-                <td>{{ e.text }}</td>
+                <td>{{ e.text|nl2br }}</td>
                 <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.nickname }}</a></td>
             </tr>
         {% endfor %}
