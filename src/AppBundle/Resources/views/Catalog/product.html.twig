@@ -123,6 +123,25 @@
         </div>
     {% endif %}
     {% if is_granted('ROLE_SUPER_ADMIN') %}
+        <div id="commentAdmin" class="window-open" style="width:400px;padding: 30px;">
+            <div class="window-open-cont">
+                <div class="box-form withdrawals__form">
+                    <h3>Добавить примечание к модели</h3>
+                    <form action="{{ path('catalog_commentAdmin_write', {id:product.id}) }}" method="POST" class="js-commentAdmin-form">
+                        <div class="box-field login-error">
+                            <div class="login-error__text js-block-add-error"></div>
+                            <label class="box-field__label">Примечание</label>
+                            <div class="box-field__input">
+                                <textarea name="comment" class="form-control js-commentAdmin-textarea"></textarea>
+                            </div>
+                        </div>
+                        <input type="submit" value="Добавить примечание" class="button button_warning button_block box-form__button" onclick="ajaxAdminComment();return false;" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {% if is_granted('ROLE_SUPER_ADMIN') %}
         <div id="unblock" class="window-open" style="width:400px;padding: 30px;">
             <div class="window-open-cont">
                 <div class="box-form withdrawals__form">

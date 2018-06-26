@@ -444,6 +444,44 @@ class  CatalogController extends Controller
     }
 
     /**
+     * @Route("/catalog/commentAdmin/{id}/write/", name="catalog_commentAdmin_write")
+     */
+    public function commentAdminWriteAction(Request $request, $id)
+    {
+
+        $returnError = function ($text, $error_type) {
+            return new JsonResponse(['error' => 1, 'error_text' => $text, 'error_type' => $error_type],
+                Response::HTTP_OK);
+        };
+
+        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+            return $returnError('У Вас нет права на упрвление моделями', '');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+
+        $entity = $em->getRepository('AppBundle:Product')->find($id);
+
+        $log = new ProductLog();
+        $log->setText('Примечание:'.PHP_EOL.$request->get('comment'));
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
+
+        $data = [
+            "product"=>$entity,
+            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),
+            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$entity, "user"=>$this->getUser()])
+        ];
+
+        $modelInfo = $this->renderView('AppBundle:Catalog:_model_info.html.twig', $data);
+
+        return JsonResponse::create(["error"=>false, 'modelInfo'=>$modelInfo]);
+    }
+
+    /**
      * @Route("/catalog/unblock/{id}/write/", name="catalog_unblock_write")
      */
     public function unblockWriteAction(Request $request, $id)

@@ -52,6 +52,11 @@
             </div>
         {% endif %}
         {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <div class="model-admin-action js-unblock-action">
+                <a href="#commentAdmin" class="button button_warning button_moderate fancybox">Примечание</a>
+            </div>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
             <br/>
             <br/>
             <br/>
