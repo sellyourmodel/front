@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Helper\SendPulse\SendpulseApi;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -90,6 +91,9 @@ class  RegistrationController extends Controller
 
         $em->persist($user);
         $em->flush($user);
+
+        $SPApiProxy = new SendpulseApi( '7f7944732005d978111c6017c365df24', '58169e472f0a9e5d02582f811151b4e4', 'file' );
+        $SPApiProxy->addEmails('1804566',[["email"=>$email]]);
 
         try {
             $this->container->get('fos_user.security.login_manager')->loginUser(
