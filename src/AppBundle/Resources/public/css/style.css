@@ -1589,6 +1589,11 @@ label {
   .user__add-avatar .box-field__input + .box-field__input {
     margin-top: 23px; }
 
+.box-field__checkbox {
+  margin-top: 6px;
+  margin-bottom: 7px;
+  line-height: 18px; }
+
 /* 4. HEADER */
 /* ================================================ */
 header {
@@ -1769,8 +1774,34 @@ header {
   width: 50px;
   padding: 0;
   border: none;
-  border-left: 1px solid #e5e5e5;
   background: #fff url(../img/svg/search.svg) no-repeat center; }
+
+.search__filters-link {
+  position: absolute;
+  top: 18px;
+  right: 56px;
+  padding-right: 15px;
+  z-index: 2;
+  color: #2e2e2e;
+  font-size: 14px;
+  line-height: 13px;
+  font-weight: 400;
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAGCAYAAAAVMmT4AAAANklEQVQoU2NkYGD4zwABjFAaGwVWA1OATwNcDtk0bBpQxNCtRpbE0IzNnTBFGP7A5SmQBgw5AALrCgbjsJcXAAAAAElFTkSuQmCC") no-repeat right center;
+  cursor: pointer; }
+
+.search__filters-count {
+  color: #bda180; }
+
+.search__filters-block {
+  display: none;
+  position: absolute;
+  z-index: 100;
+  top: 50px;
+  right: 0;
+  background: #fff;
+  border-left: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5; }
 
 .search__results {
   display: none;
@@ -1795,6 +1826,41 @@ header {
       vertical-align: middle;
       margin-right: 10px;
       height: 30px; }
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  text-align: left; }
+  .filters__left {
+    width: 257px;
+    padding: 20px;
+    border-right: 1px solid #e5e5e5; }
+  .filters__right {
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+  .filters__sort {
+    padding: 20px;
+    border-bottom: 1px solid #e5e5e5; }
+  .filters__style {
+    padding: 20px; }
+  .filters__button {
+    padding: 20px; }
+  .filters__label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px; }
+  .filters__checkbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+  .filters__checkbox-wrapper {
+    width: 200px; }
+  .filters__checkbox-count {
+    padding-top: 3px;
+    font-size: 14px;
+    color: #7f7f7f; }
 
 .mini-profile__img {
   position: relative;

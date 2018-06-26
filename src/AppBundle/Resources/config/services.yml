@@ -44,6 +44,12 @@ services:
             - { name: twig.extension }
         arguments: ["@service_container"]
 
+    wp.filters:
+        class: AppBundle\Twig\Extension\filtersExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
     wp.banners:
         class: AppBundle\Twig\Extension\bannersExtension
         tags:

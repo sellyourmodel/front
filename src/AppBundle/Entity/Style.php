@@ -49,7 +49,7 @@ class Style
      */
     public function __toString()
     {
-        return $this->name;
+        return (string) $this->id;
     }
 
     /**

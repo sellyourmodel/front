@@ -18,7 +18,7 @@
     'bundles/app/custom-js/anythingslider/css/anythingslider.css'
     'bundles/app/custom-css/*.css'
     'bundles/app/pages/*.css'
-    filter='cssrewrite' output='css/20180524.css' %}
+    filter='cssrewrite' output='css/20180604.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     <!-- [if lt IE 9] -->
@@ -64,6 +64,10 @@
                         <form method="GET" action="{{ path('search') }}">
                             <input type="text" name="search" value="{{ app.request.get('search') }}" onkeyup="autoSearch(this);" onchange="autoSearch(this);" autocomplete="off" placeholder="{% trans %}search{% endtrans %}" class="js-search-val search__input form-control">
                             <input type="submit" value="" class="search__button js-search-val" />
+                            <span class="search__filters-link js-filters-link">Фильтры <span class="search__filters-count js-filter-styles-count">(0)</span></span>
+                            <div class="search__filters-block js-filters-block">
+                                {{ filters() }}
+                            </div>
                             <div class="search__results js-quick-search-results"></div>
                         </form>
                     </div>
@@ -273,7 +277,7 @@
     'bundles/app/custom-js/jquery-ui/jquery-ui.js'
     'bundles/app/custom-js/jquery.form.min.js'
     'bundles/app/custom-js/anythingslider/js/jquery.anythingslider.min.js'
-    'bundles/app/pages/*.js' output='js/20180524.js' %}
+    'bundles/app/pages/*.js' output='js/20180604.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

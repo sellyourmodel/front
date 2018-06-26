@@ -151,6 +151,17 @@ fos_elastica:
                         name: ~
                         manufacturer: ~
                         tags: ~
+                        software: ~
+                        style: ~
+                        moderated: ~
+                        block: ~
+                        deleted: ~
+                        views:
+                            type: integer
+                        comments:
+                            type: integer
+                        date:
+                            type: date
                         text: ~
                     persistence:
                         # the driver can be orm, mongodb, phpcr or propel

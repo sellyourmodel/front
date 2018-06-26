@@ -14,6 +14,11 @@ function autoSearch(e) {
 
 }
 
+function filtersCheckboxClick(){
+    var count = $(".js-filters-block input[type=checkbox]:checked").length;
+    $(".js-filter-styles-count").html("(" + count +")");
+}
+
 function autoSearchStart(i) {
     if (i != autoSearch_i) {
         return;
@@ -31,3 +36,10 @@ function autoSearchStart(i) {
     });
 
 }
+
+$(document).ready(function() {
+    $(".js-filters-link").click(function(){
+        $(".js-filters-block").slideToggle();
+    });
+    filtersCheckboxClick();
+});

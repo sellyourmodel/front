@@ -1,0 +1,47 @@
+<div class="filters">
+    <div class="filters__left">
+        <div class="filters__label">Типы файлов</div>
+        {% for e in software %}
+        <div class="filters__checkbox">
+            <div class="box-field__input box-field__checkbox filters__checkbox-wrapper">
+                <input type="checkbox" id="filterSoftware{{ e.id }}" onchange="filtersCheckboxClick();" name="software[]" value="{{ e.id }}" {% if e.id in app.request.get('software') %}checked{% endif %} class="styler">
+                <label for="filterSoftware{{ e.id }}" class="box-field__label">{{ e.name }}</label>
+            </div>
+            <div class="filters__checkbox-count">
+                {{ e.count }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="filters__right">
+        <div class="filters__params">
+            <div class="filters__sort">
+                <div class="filters__label">Сортировать</div>
+                <div class="box-field__input">
+                    <select name="sort" data-placeholder=" " class="styler form-control">
+                        <option value="date" {% if app.request.get('sort') == 'date' %}selected{% endif %}>По дате</option>
+                        <option value="comments" {% if app.request.get('sort') == 'comments' %}selected{% endif %}>По комментариям</option>
+                        <option value="views" {% if app.request.get('sort') == 'views' %}selected{% endif %}>По просмотрам</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filters__style">
+                <div class="filters__label">Стили</div>
+                {% for e in style %}
+                    <div class="filters__checkbox">
+                        <div class="box-field__input box-field__checkbox filters__checkbox-wrapper">
+                            <input type="checkbox" id="filterStyle{{ e.id }}" onchange="filtersCheckboxClick();" name="style[]" value="{{ e.id }}" {% if e.id in app.request.get('style') %}checked{% endif %} class="styler">
+                            <label for="filterStyle{{ e.id }}" class="box-field__label">{{ e.name }}</label>
+                        </div>
+                        <div class="filters__checkbox-count">
+                            {{ e.count }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="filters__button">
+            <button type="submit" class="button button_warning">Фильтровать</button>
+        </div>
+    </div>
+</div>
