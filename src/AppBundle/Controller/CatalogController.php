@@ -654,8 +654,7 @@ class  CatalogController extends Controller
             "product"=>$product,
             "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$product, "user"=>$user]),
             "alreadyLike"=>$em->getRepository('AppBundle:ProductLike')->findOneBy(['product'=>$product, "user"=>$user]),
-            "alreadyFavorite"=>$em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product'=>$product, "user"=>$user]),
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product])
+            "alreadyFavorite"=>$em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product'=>$product, "user"=>$user])
         ];
     }
 
