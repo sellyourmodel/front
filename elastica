@@ -1,3 +1,4 @@
 #!/bin/bash
 
 php app/console fos:elastica:populate --env=prod
+php app/console wp:cache:products:stats --env=prod
