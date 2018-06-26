@@ -22,3 +22,19 @@
     margin-top: 15px;
     margin-bottom: 30px;
 }
+
+.tickets__model {
+    display: inline-block;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: 400;
+    color: #1f1611;
+}
+
+.tickets__model-link {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 4px;
+    color: #bda180;
+    border-bottom: 1px solid;
+}

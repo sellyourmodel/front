@@ -194,8 +194,19 @@ class  CabinetController extends Controller
     public function ticketsAddAction(Request $request)
     {
 
-        return [
+        $em = $this->getDoctrine()->getManager();
 
+        $product = null;
+
+        $productId = $request->get('product');
+
+        if($productId){
+            $productId = intval($productId);
+            $product = $em->getRepository('AppBundle:Product')->find($productId);
+        }
+
+        return [
+            "product"=>$product
         ];
     }
 
@@ -212,6 +223,15 @@ class  CabinetController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $product = null;
+
+        $productId = $request->get('product');
+
+        if($productId){
+            $productId = intval($productId);
+            $product = $em->getRepository('AppBundle:Product')->find($productId);
+        }
+
         $user = $this->getUser();
 
         $name = trim($request->get('name'));
@@ -224,6 +244,7 @@ class  CabinetController extends Controller
         $entity = new Ticket();
         $entity->setStatus('new');
         $entity->setUser($user);
+        $entity->setProduct($product);
         $entity->setDate(new \DateTime());
         $entity->setDateUpdate(new \DateTime());
         $entity->setName($name);

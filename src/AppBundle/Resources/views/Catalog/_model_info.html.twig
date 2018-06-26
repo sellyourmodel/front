@@ -23,6 +23,11 @@
     </div>
     {% if app.user == product.user or is_granted('ROLE_SUPER_ADMIN') %}
         <br /><br /><br />
+        {% if app.user == product.user %}
+            <div class="model-admin-action">
+                <a href="{{ path('cabinet_tickets_add', {product:product.id}) }}" class="button button_warning button_moderate">Техподдержка</a>
+            </div>
+        {% endif %}
         <div class="model-admin-action">
             <a href="{{ path('catalog_product_edit', {alias:product.alias}) }}" class="button button_warning button_moderate">{% trans %}edit{% endtrans %}</a>
         </div>

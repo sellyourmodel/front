@@ -5,6 +5,14 @@
 {% block cabinetContent %}
     <div class="box-form settings">
         <form class="js-settings-form" action="{{ path('cabinet_tickets_add_write') }}" method="POST">
+            {% if product %}
+                <div class="box-field-group">
+                    <div class="box-field col-5">
+                        Обращение создается по модели <a href="{{ path('catalog_product', {alias:product.alias}) }}">{{ product.name }}</a>.
+                        <input type="hidden" class="form-control" name="product" value="{{ product.id }}" />
+                    </div>
+                </div>
+            {% endif %}    
             <div class="box-field-group">
                 <div class="box-field col-5">
                     <label class="box-field__label">Тема обращения <span class="require-field-z">*</span></label>

@@ -42,6 +42,12 @@ class Ticket
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+     */
+    private $product;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="string", length=255, nullable=false)
@@ -225,5 +231,29 @@ class Ticket
     public function getDateUpdate()
     {
         return $this->dateUpdate;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return Ticket
+     */
+    public function setProduct(\AppBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \AppBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

@@ -19,7 +19,12 @@
         <div class="wrap-left">
             <div class="box-comment">
                 <h1>{{ entity.name }}</h1>
-                <span class="author">{% trans %}product_from{% endtrans %}: <a href="{{ path('user_view',{nickname:entity.user.nickname}) }}" class="long">{{ entity.user.nickname }}</a><span class="ic icon-author-rating icon-author-rating__{{ entity.user.lvl }}"></span></span>
+                <span class="author">{% trans %}product_from{% endtrans %}: <a href="{{ path('user_view',{nickname:entity.user.nickname}) }}" target="_blank" class="long">{{ entity.user.nickname }}</a><span class="ic icon-author-rating icon-author-rating__{{ entity.user.lvl }}"></span></span>
+                {% if entity.product %}
+                    <div class="tickets__model">
+                        модель: <a href="{{ path('catalog_product',{alias:entity.product.alias}) }}" target="_blank" class="tickets__model-link">{{ entity.product.name }}</a>
+                    </div>
+                {% endif %}
                 <div class="tickets__info">
                     Текст обращения:
                     <br />
