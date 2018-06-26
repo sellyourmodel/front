@@ -14,7 +14,7 @@
                 <input name="shopId" value="129835" type="hidden"/>
                 <input name="scid" value="94987" type="hidden"/>
                 <input name="sum" value="{{ entity.price }}" type="hidden">
-                <input name="customerNumber" value="user{{ app.user.id }}" type="hidden"/>
+                <input name="customerNumber" value="{{ app.user.nickname }}" type="hidden"/>
                 <input name="paymentType" value="" type="hidden"/>
                 <input name="orderNumber" value="{{ entity.id }}" type="hidden"/>
                 <input name="cps_phone" value="" type="hidden"/>
