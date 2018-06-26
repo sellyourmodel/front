@@ -1023,6 +1023,14 @@ class  CatalogController extends Controller
         $em->persist($buy);
         $em->flush($buy);
 
+        $log = new ProductLog();
+        $log->setText('Модель куплена пользователем');
+        $log->setProduct($product);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
+
         $settings = $this->getDoctrine()->getRepository('AppBundle:Setting')->findOneBy([]);
 
         $price = intval($settings->getModelPrice()/2);
