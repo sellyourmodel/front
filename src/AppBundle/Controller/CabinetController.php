@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\PaymentLog;
 use AppBundle\Entity\PaymentOrder;
+use AppBundle\Entity\ProductLog;
 use AppBundle\Entity\ProductResponse;
 use AppBundle\Entity\Ticket;
 use AppBundle\Entity\TicketComment;
@@ -258,6 +259,16 @@ class  CabinetController extends Controller
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
         $log->setText('Обращение создано');
+
+        if($product){
+            $log = new ProductLog();
+            $log->setText('Создано обращение: '.$name);
+            $log->setProduct($product);
+            $log->setUser($this->getUser());
+            $log->setDate(new \DateTime());
+            $em->persist($log);
+            $em->flush($log);
+        }
 
         $em->persist($log);
         $em->flush($log);

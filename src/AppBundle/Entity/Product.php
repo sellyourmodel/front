@@ -171,6 +171,12 @@ class Product
      */
     private $images;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ProductLog", mappedBy="product", cascade={"persist"}, orphanRemoval=true)
+     * @ORM\OrderBy({"date" = "DESC"})
+     */
+    private $log;
+
     public function __toString()
     {
         return $this->getName();
@@ -740,5 +746,39 @@ class Product
     public function getStyle()
     {
         return $this->style;
+    }
+
+    /**
+     * Add log
+     *
+     * @param \AppBundle\Entity\ProductLog $log
+     *
+     * @return Product
+     */
+    public function addLog(\AppBundle\Entity\ProductLog $log)
+    {
+        $this->log[] = $log;
+
+        return $this;
+    }
+
+    /**
+     * Remove log
+     *
+     * @param \AppBundle\Entity\ProductLog $log
+     */
+    public function removeLog(\AppBundle\Entity\ProductLog $log)
+    {
+        $this->log->removeElement($log);
+    }
+
+    /**
+     * Get log
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLog()
+    {
+        return $this->log;
     }
 }

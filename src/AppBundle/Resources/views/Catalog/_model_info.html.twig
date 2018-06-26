@@ -1,28 +1,30 @@
 {% if app.user %}
     <div class="js-model-files">
-    {% if alreadyBuy %}
-        {% include '@App/Catalog/_product_files.html.twig' %}
-    {% else %}
-        {% if product.block %}
-            {% if app.user==product.user or is_granted('ROLE_SUPER_ADMIN') %}
-                {% trans %}model_blocked_by_reason{% endtrans %} <strong>{% if product.blockReason %}{{ product.blockReason }}{% else %}{% trans %}without_reason{% endtrans %}{% endif %}</strong>.
-            {% endif %}
+        {% if alreadyBuy %}
+            {% include '@App/Catalog/_product_files.html.twig' %}
         {% else %}
-            {% if product.moderated %}
-                <div class="box-button">
-                    {% if app.user.models > 0 %}
-                        <a href="#" class="button button_warning button_warning--user-buy" onclick="buyThisModel(this, {{ product.id }});return false;">{% trans %}buy_btn{% endtrans %}</a>
-                    {% else %}
-                        <a href="{{ path('cabinet_buy') }}" class="button button_warning button_warning--user-buy">{{ settings.modelPrice }} р.</a>
-                    {% endif %}
-                    <span class="button-info">{% trans %}models_available{% endtrans %} <span>- {{ app.user.models }}</span></span>
-                </div>
+            {% if product.block %}
+                {% if app.user==product.user or is_granted('ROLE_SUPER_ADMIN') %}
+                    {% trans %}model_blocked_by_reason{% endtrans %}
+                    <strong>{% if product.blockReason %}{{ product.blockReason }}{% else %}{% trans %}without_reason{% endtrans %}{% endif %}</strong>.
+                {% endif %}
+            {% else %}
+                {% if product.moderated %}
+                    <div class="box-button">
+                        {% if app.user.models > 0 %}
+                            <a href="#" class="button button_warning button_warning--user-buy" onclick="buyThisModel(this, {{ product.id }});return false;">{% trans %}buy_btn{% endtrans %}</a>
+                        {% else %}
+                            <a href="{{ path('cabinet_buy') }}" class="button button_warning button_warning--user-buy">{{ settings.modelPrice }} р.</a>
+                        {% endif %}
+                        <span class="button-info">{% trans %}models_available{% endtrans %}
+                            <span>- {{ app.user.models }}</span></span>
+                    </div>
+                {% endif %}
             {% endif %}
         {% endif %}
-    {% endif %}
     </div>
     {% if app.user == product.user or is_granted('ROLE_SUPER_ADMIN') %}
-        <br /><br /><br />
+        <br/><br/><br/>
         {% if app.user == product.user %}
             <div class="model-admin-action">
                 <a href="{{ path('cabinet_tickets_add', {product:product.id}) }}" class="button button_warning button_moderate">Техподдержка</a>
@@ -48,6 +50,30 @@
             <div class="model-admin-action js-unblock-action">
                 <a href="#unblock" class="button button_warning button_moderate fancybox">{% trans %}unblock{% endtrans %}</a>
             </div>
+        {% endif %}
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <br/>
+            <br/>
+            <br/>
+            <div>Операции по моделью:</div>
+            <table class="table">
+                <tr>
+                    <th class="td-date">Дата</th>
+                    <th>Операция</th>
+                    <th>Пользователь</th>
+                </tr>
+                {% if product.log and product.log|length > 0 %}
+                    {% for e in product.log %}
+                        <tr>
+                            <td>{{ e.date|date("H:i d.m.Y") }}</td>
+                            <td>{{ e.text }}</td>
+                            <td>
+                                <a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.nickname }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
         {% endif %}
     {% endif %}
 {% else %}

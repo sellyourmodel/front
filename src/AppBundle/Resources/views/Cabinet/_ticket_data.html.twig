@@ -25,7 +25,33 @@
         </div>
     {% endif %}
 
+    {% if entity.product %}
+        <br />
+        <br />
+        {% if entity.product.log|length > 0 %}
+            <div>Операции по моделью:</div>
+            <table class="table">
+                <tr>
+                    <th class="td-date">Дата</th>
+                    <th>Операция</th>
+                    <th>Пользователь</th>
+                </tr>
+                {% for e in entity.product.log %}
+                    <tr>
+                        <td>{{ e.date|date("H:i d.m.Y") }}</td>
+                        <td>{{ e.text }}</td>
+                        <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.nickname }}</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>С моделью не производились действия</p>
+        {% endif %}
+    {% endif %}
+
     <br />
+    <br />
+    <div>Операции по обращению:</div>
     <table class="table">
         <tr>
             <th class="td-date">Дата</th>
@@ -36,7 +62,7 @@
             <tr>
                 <td>{{ e.date|date("H:i d.m.Y") }}</td>
                 <td>{{ e.text }}</td>
-                <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" class="tickets__link">{{ e.user.nickname }}</a></td>
+                <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.nickname }}</a></td>
             </tr>
         {% endfor %}
     </table>

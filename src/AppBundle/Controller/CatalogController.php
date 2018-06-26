@@ -9,6 +9,7 @@ use AppBundle\Entity\ProductComment;
 use AppBundle\Entity\ProductFavorite;
 use AppBundle\Entity\ProductImage;
 use AppBundle\Entity\ProductLike;
+use AppBundle\Entity\ProductLog;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -275,6 +276,14 @@ class  CatalogController extends Controller
             $em->flush($entity);
         }
 
+        $log = new ProductLog();
+        $log->setText('Модель добавлена на сайт');
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
+
         $this->getUser()->setModelsLoaded($this->getUser()->getModelsLoaded()+1);
         $em->flush($this->getUser());
 
@@ -370,6 +379,14 @@ class  CatalogController extends Controller
         $entity->setModerated(true);
         $em->flush($entity);
 
+        $log = new ProductLog();
+        $log->setText('Модель отмодерирована');
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
+
         $data = [
             "product"=>$entity,
             "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),
@@ -404,6 +421,14 @@ class  CatalogController extends Controller
         $entity->setBlock(true);
         $entity->setBlockReason($request->get('reason'));
         $em->flush($entity);
+
+        $log = new ProductLog();
+        $log->setText('Модель заблокирована по причине: '.$request->get('reason'));
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
 
         $this->get('wp.notify.manager')->sendBlockModelEmail($entity);
 
@@ -440,6 +465,14 @@ class  CatalogController extends Controller
         $entity->setBlockReason(NULL);
         $em->flush($entity);
 
+        $log = new ProductLog();
+        $log->setText('Модель разблокирована');
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
+
         $this->get('wp.notify.manager')->sendUnBlockModelEmail($entity);
 
         $data = [
@@ -474,6 +507,14 @@ class  CatalogController extends Controller
 
         $entity->setDeleted(true);
         $em->flush($entity);
+
+        $log = new ProductLog();
+        $log->setText('Модель удалена');
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
 
         return JsonResponse::create(["error"=>false, 'modelInfo'=>'Модель удалена']);
     }
@@ -858,6 +899,14 @@ class  CatalogController extends Controller
             }
             $em->flush($entity);
         }
+
+        $log = new ProductLog();
+        $log->setText('Модель отредактирована');
+        $log->setProduct($entity);
+        $log->setUser($this->getUser());
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
 
         $this->get('wp.notify.manager')->sendAdminEditProduct($entity, $this->getUser());
 
