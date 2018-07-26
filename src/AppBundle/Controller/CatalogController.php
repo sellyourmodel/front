@@ -422,6 +422,11 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Product')->find($id);
+
+        if(!$entity){
+            return $returnError('Модель не найдена', '');
+        }
+
         $entity->setModerated(true);
         $em->flush($entity);
 
@@ -464,6 +469,11 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Product')->find($id);
+
+        if(!$entity){
+            return $returnError('Модель не найдена', '');
+        }
+
         $entity->setBlock(true);
         $entity->setBlockReason($request->get('reason'));
         $em->flush($entity);
@@ -508,6 +518,10 @@ class  CatalogController extends Controller
 
         $entity = $em->getRepository('AppBundle:Product')->find($id);
 
+        if(!$entity){
+            return $returnError('Модель не найдена', '');
+        }
+
         $log = new ProductLog();
         $log->setText('Примечание:' . PHP_EOL . $request->get('comment'));
         $log->setProduct($entity);
@@ -545,6 +559,11 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('AppBundle:Product')->find($id);
+
+        if(!$entity){
+            return $returnError('Модель не найдена', '');
+        }
+
         $entity->setBlock(false);
         $entity->setBlockReason(NULL);
         $em->flush($entity);
