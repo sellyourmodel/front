@@ -92,8 +92,8 @@ class  RegistrationController extends Controller
         $em->persist($user);
         $em->flush($user);
 
-        $SPApiProxy = new SendpulseApi( '7f7944732005d978111c6017c365df24', '58169e472f0a9e5d02582f811151b4e4', 'file' );
-        $SPApiProxy->addEmails('1804566',[["email"=>$email]]);
+        $SPApiProxy = new SendpulseApi( $this->getParameter('sendpulse_client_id'), $this->getParameter('sendpulse_client_secret'), 'file' );
+        $SPApiProxy->addEmails($this->getParameter('sendpulse_book_registration'),[["email"=>$email]]);
 
         try {
             $this->container->get('fos_user.security.login_manager')->loginUser(

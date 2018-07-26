@@ -17,6 +17,12 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    sendpulse_client_id: ~
+    sendpulse_client_secret: ~
+    sendpulse_book_subscribe: ~
+    sendpulse_book_registration: ~
+
     facebook_app_id: ~
     facebook_app_secret: ~
     vkontakte_app_id: ~
