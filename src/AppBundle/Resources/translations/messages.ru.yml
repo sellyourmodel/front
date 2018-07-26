@@ -232,6 +232,7 @@ image_crop_header: Обрезка изображения
 image_crop_action: Обрезать
 buy_cabinet: Купить модели
 comments_model_admin: Комментарии к моделям
+comments_my_model_admin: Комментарии к моим моделям
 comments: Комментарии
 comments_to_model: Комментарий к модели
 comments_delete: Вы действительно хотите удалить данный комментарий?

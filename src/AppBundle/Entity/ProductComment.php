@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ProductComment
  *
  * @ORM\Table(name="catalog_products_comments")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductCommentRepository")
  */
 class ProductComment
 {

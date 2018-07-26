@@ -341,6 +341,21 @@ class  CatalogController extends Controller
     }
 
     /**
+     * @Route("/catalog/my/products/comments/", name="catalog_my_products_comments")
+     * @Template()
+     */
+    public function myProductCommentAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $responseData = [];
+        $responseData["comments"] = $em->getRepository('AppBundle:ProductComment')->getMyProductComments($this->getUser());
+        $responseData["allList"] = true;
+
+        return $responseData;
+    }
+
+    /**
      * @Route("/catalog/moderation/", name="catalog_moderation")
      * @Template()
      */

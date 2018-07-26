@@ -230,6 +230,7 @@ image_crop_header: Crop images
 image_crop_action: Crop
 buy_cabinet: Buy models
 comments_model_admin: Models comments
+comments_my_model_admin: My models comments
 comments: Comments
 comments_to_model: Model comment
 comments_delete: Delete comment?
