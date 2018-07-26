@@ -78,7 +78,7 @@
                             <a href="#" class="mini-profile__img" style="width:45px;"><img src="{% if app.user.image %}{% path app.user.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt=""></a>
                             <a href="#" class="mini-profile__link">
                                 <span class="arrow-down mini-profile__link-login-wrapper">
-                                    <span class="mini-profile__link-login-name">{{ app.user.nameProfileMini }}</span><span class="ic icon-author-rating icon-author-rating__{{ app.user.lvl }}"></span>
+                                    <span class="mini-profile__link-login-name">{{ app.user.nickname }}</span><span class="ic icon-author-rating icon-author-rating__{{ app.user.lvl }}"></span>
                                 </span>
                             </a>
                         </div>
