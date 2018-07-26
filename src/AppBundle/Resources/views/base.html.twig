@@ -102,7 +102,7 @@
                             <div class="nav-profile__item">
                                 <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}loaded_models{% endtrans %}</a></div>
                                 <div class="nav-profile__count">{{ app.user.modelsLoaded }}</div>
-                                <div class="nav-profile__footer">      <span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}views{% endtrans %}</a><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Коментарии</a><span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
+                                <div class="nav-profile__footer">      <span class="delspin"><span>{% trans %}views{% endtrans %}</span><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Коментарии</a><span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
                             </div>
                             <div class="nav-profile__item">
                                 <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_sales{% endtrans %}</span></span></div>
