@@ -55,19 +55,26 @@
     <div class="wrapper">
         <div class="box-tab">
             <div class="tab-wrap">
-                <ul class="nav-tabs-list tabs">
-                    <li class="nav-tabs-list__item active"><a href="#tab_1" class="nav-tabs-list__link">{% trans %}new_in_catalog{% endtrans %}</a></li>
-                    <li class="nav-tabs-list__item"><a href="#tab_2" class="nav-tabs-list__link">{% trans %}best{% endtrans %}</a></li>
-                </ul>
+                <div class="tab-title">
+                    <ul class="nav-tabs-list tabs">
+                        <li class="nav-tabs-list__item active"><a href="#" data-tab="js-tab-1" class="nav-tabs-list__link">{% trans %}new_in_catalog{% endtrans %}</a></li>
+                        <li class="nav-tabs-list__item"><a href="#" data-tab="js-tab-2" class="nav-tabs-list__link">{% trans %}best{% endtrans %}</a></li>
+                    </ul>
+                    <div class="tab-show-all">
+                        <a href="{{ path('catalog_new') }}" class="tab-more js-tab-1">{% trans %}show_all{% endtrans %}</a>
+                        <a href="{{ path('catalog_best') }}" class="tab-more js-tab-2 hide">{% trans %}show_all{% endtrans %}</a>
+                    </div>
+                </div>
+
                 <div class="box-tab-cont">
-                    <div id="tab_1" class="tab-cont">
+                    <div class="js-tab-1 tab-cont">
                         <ul class="product-list">
                             {% for e in products %}
                                 {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
                             {% endfor %}
                         </ul>
                     </div>
-                    <div id="tab_2" class="tab-cont hide">
+                    <div class="js-tab-2 tab-cont hide">
                         <ul class="product-list">
                             {% for e in productsBest %}
                                 {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}

@@ -41,6 +41,40 @@ class  CatalogController extends Controller
     }
 
     /**
+     * @Route("/catalog/new/", name="catalog_new")
+     * @Template()
+     */
+    public function newAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Главная", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Новое в каталоге");
+
+        return [
+            "entities"=>$em->getRepository('AppBundle:Product')->getNew()
+        ];
+    }
+
+    /**
+     * @Route("/catalog/best/", name="catalog_best")
+     * @Template()
+     */
+    public function bestAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        $breadcrumbs->addItem("Главная", $this->get("router")->generate("homepage"));
+        $breadcrumbs->addItem("Новое в каталоге");
+
+        return [
+            "entities"=>$em->getRepository('AppBundle:Product')->getBest()
+        ];
+    }
+
+    /**
      * @Route("/catalog/search/", name="catalog_search")
      * @Template()
      */

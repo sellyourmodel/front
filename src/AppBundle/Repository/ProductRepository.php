@@ -85,6 +85,48 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
+     * New Products
+     *
+     * @return array
+     */
+    public function getNew($limit = NULL)
+    {
+
+        if(!$limit){
+            $limit = 100;
+        }
+
+        $qb = $this->_baseQb();
+
+        $qb->orderBy('p.date', 'DESC');
+        $qb->setMaxResults($limit);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * New Products
+     *
+     * @return array
+     */
+    public function getBest($limit = NULL)
+    {
+
+        if(!$limit){
+            $limit = 100;
+        }
+
+        $qb = $this->_baseQb();
+
+        $qb->orderBy('p.stars', 'DESC');
+        $qb->setMaxResults($limit);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
+
+    /**
      * Find By Categories.
      *
      * @return array

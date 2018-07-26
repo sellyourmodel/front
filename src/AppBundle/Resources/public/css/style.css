@@ -2078,23 +2078,32 @@ header {
   .box-tab-cont {
     position: relative; }
 
-.nav-tabs-list {
+.nav-tabs-list__item {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 24px; }
+  .nav-tabs-list__item.active .nav-tabs-list__link,
+  .nav-tabs-list__item a:hover, .nav-tabs-list__item.active .link {
+    color: #000;
+    text-decoration: none; }
+  .nav-tabs-list__item .link {
+    color: rgba(0, 0, 0, 0.5); }
+
+.nav-tabs-list__link {
+  font-size: 18px;
+  line-height: 22px;
+  color: #ccc; }
+
+.tab-title {
+  display: flex;
+  justify-content: space-between;
   padding: 14px 22px;
   background: #fff; }
-  .nav-tabs-list__item {
-    display: inline-block;
-    vertical-align: top;
-    margin-right: 24px; }
-    .nav-tabs-list__item.active .nav-tabs-list__link,
-    .nav-tabs-list__item a:hover, .nav-tabs-list__item.active .link {
-      color: #000;
-      text-decoration: none; }
-    .nav-tabs-list__item .link {
-      color: rgba(0, 0, 0, 0.5); }
-  .nav-tabs-list__link {
-    font-size: 18px;
-    line-height: 22px;
-    color: #ccc; }
+
+.tab-show-all {
+  padding-top: 5px; }
+  .tab-show-all:hover {
+    text-decoration: underline; }
 
 .tab-cont__body {
   padding: 12px 22px;

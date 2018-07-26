@@ -67,9 +67,10 @@ $(function () {
 
     $('.tabs li a').click(function () {
         $(this).parents('.tab-wrap').find('.tab-cont').addClass('hide');
+        $(this).parents('.tab-wrap').find('.tab-show-all .tab-more').addClass('hide');
         $(this).parent().siblings().removeClass('active');
-        var id = $(this).attr('href');
-        $(id).removeClass('hide');
+        var tabClass = $(this).attr('data-tab');
+        $("." + tabClass).removeClass('hide');
         $(this).parent().addClass('active');
         if ($('.js-hide-bg').hasClass('active')) {
             $('.content-wrap').removeClass('bg');
