@@ -1,6 +1,6 @@
 {% if app.user %}
     <div class="js-model-files">
-        {% if alreadyBuy %}
+        {% if alreadyBuy or (product.moderated == false and is_granted('ROLE_SUPER_ADMIN')) %}
             {% include '@App/Catalog/_product_files.html.twig' %}
         {% else %}
             {% if product.block %}

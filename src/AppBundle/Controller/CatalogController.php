@@ -31,13 +31,13 @@ class  CatalogController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('AppBundle:Category')->findOneBy(['parent'=>NULL, "active"=>true],["pos"=>"DESC"]);
+        $category = $em->getRepository('AppBundle:Category')->findOneBy(['parent' => NULL, "active" => true], ["pos" => "DESC"]);
 
-        if(!$category){
+        if (!$category) {
             return $this->createNotFoundException('Category not found');
         }
 
-        return $this->redirect($this->generateUrl('catalog_category', ["alias"=>$category->getAlias()]));
+        return $this->redirect($this->generateUrl('catalog_category', ["alias" => $category->getAlias()]));
     }
 
     /**
@@ -53,7 +53,7 @@ class  CatalogController extends Controller
         $breadcrumbs->addItem("Новое в каталоге");
 
         return [
-            "entities"=>$em->getRepository('AppBundle:Product')->getNew()
+            "entities" => $em->getRepository('AppBundle:Product')->getNew()
         ];
     }
 
@@ -70,7 +70,7 @@ class  CatalogController extends Controller
         $breadcrumbs->addItem("Новое в каталоге");
 
         return [
-            "entities"=>$em->getRepository('AppBundle:Product')->getBest()
+            "entities" => $em->getRepository('AppBundle:Product')->getBest()
         ];
     }
 
@@ -82,12 +82,11 @@ class  CatalogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $search = trim($request->get('search',''));
+        $search = trim($request->get('search', ''));
 
-        if(mb_strlen($search) >= 3){
+        if (mb_strlen($search) >= 3) {
             $products = $em->getRepository('AppBundle:Product')->getSearch($search);
-        }
-        else{
+        } else {
             $products = [];
         }
 
@@ -97,8 +96,8 @@ class  CatalogController extends Controller
         $breadcrumbs->addItem("Поиск");
 
         return [
-            "products"=>$products,
-            "searchLen"=>mb_strlen($search)
+            "products" => $products,
+            "searchLen" => mb_strlen($search)
         ];
     }
 
@@ -111,20 +110,19 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $locale = $request->getLocale();
-        $textBlock = $this->getDoctrine()->getRepository('AppBundle:RightTextBlock')->findOneBy(["type"=>"add"]);
-        if($locale == 'en'){
+        $textBlock = $this->getDoctrine()->getRepository('AppBundle:RightTextBlock')->findOneBy(["type" => "add"]);
+        if ($locale == 'en') {
             $rightText = $textBlock->getTextEn();
-        }
-        else{
+        } else {
             $rightText = $textBlock->getText();
         }
 
         return [
-            "categories"=>$em->getRepository('AppBundle:Category')->findBy(["parent"=>NULL],["pos"=>"ASC"]),
-            "tags"=>$em->getRepository('AppBundle:Tag')->findBy(["active"=>true],["name"=>"ASC"]),
-            "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"]),
-            "style"=>$em->getRepository('AppBundle:Style')->findBy(["active"=>true],["name"=>"ASC"]),
-            "rightText"=>$rightText
+            "categories" => $em->getRepository('AppBundle:Category')->findBy(["parent" => NULL], ["pos" => "ASC"]),
+            "tags" => $em->getRepository('AppBundle:Tag')->findBy(["active" => true], ["name" => "ASC"]),
+            "software" => $em->getRepository('AppBundle:Software')->findBy(["active" => true], ["name" => "ASC"]),
+            "style" => $em->getRepository('AppBundle:Style')->findBy(["active" => true], ["name" => "ASC"]),
+            "rightText" => $rightText
         ];
     }
 
@@ -147,65 +145,65 @@ class  CatalogController extends Controller
         $text = trim($request->get('text'));
         $user_agreement = trim($request->get('user_agreement', '0'));
 
-        if($name == '' OR $categoryId == ''){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Заполните обязательные поля']);
+        if ($name == '' OR $categoryId == '') {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Заполните обязательные поля']);
         }
 
         $category = $em->getRepository('AppBundle:Category')->find($categoryId);
 
-        if(!is_array($mainImg)){
+        if (!is_array($mainImg)) {
             $mainImg = [];
         }
-        if(!is_array($addImg)){
+        if (!is_array($addImg)) {
             $addImg = [];
         }
-        if(!is_array($files)){
+        if (!is_array($files)) {
             $files = [];
         }
 
-        if(!$category){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Категория не найдена']);
+        if (!$category) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Категория не найдена']);
         }
 
-        if(count($mainImg) == 0){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Загрузите изображения к модели']);
+        if (count($mainImg) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Загрузите изображения к модели']);
         }
 
-        if(count($files) == 0){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Загрузите файлы модели']);
+        if (count($files) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Загрузите файлы модели']);
         }
 
         $images = [];
 
-        foreach ($mainImg as $e){
+        foreach ($mainImg as $e) {
 
             $file = $em->getRepository('AppBundle:ProductFile')->find($e);
 
-            if($file){
+            if ($file) {
                 $images[] = $file;
             }
 
         }
 
-        foreach ($addImg as $e){
+        foreach ($addImg as $e) {
 
             $file = $em->getRepository('AppBundle:ProductFile')->find($e);
 
-            if($file){
+            if ($file) {
                 $images[] = $file;
             }
 
         }
 
-        if(count($images) == 0){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Загрузите хотя бы одно изображение']);
+        if (count($images) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Загрузите хотя бы одно изображение']);
         }
 
-        if($user_agreement != '1'){
-            return JsonResponse::create(["error"=>true, 'error_text'=>'Примите условия']);
+        if ($user_agreement != '1') {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Примите условия']);
         }
 
-        $file = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$images[0]->getNameFile();
+        $file = $this->get('kernel')->getRootDir() . '/../web/uploads/images/' . $images[0]->getNameFile();
 
         $mediaMain = new Media;
         $mediaMain->setBinaryContent($file);
@@ -228,15 +226,15 @@ class  CatalogController extends Controller
         $em->persist($entity);
         $em->flush($entity);
 
-        $entity->setAlias($this->_generateAlias($entity->getName()).'-'.$entity->getId());
+        $entity->setAlias($this->_generateAlias($entity->getName()) . '-' . $entity->getId());
         $em->flush($entity);
 
         $pos = 0;
 
-        for ($i=1;$i<count($images);$i++){
+        for ($i = 1; $i < count($images); $i++) {
             $pos++;
 
-            $file = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$images[$i]->getNameFile();
+            $file = $this->get('kernel')->getRootDir() . '/../web/uploads/images/' . $images[$i]->getNameFile();
 
             $media = new Media;
             $media->setBinaryContent($file);
@@ -255,17 +253,16 @@ class  CatalogController extends Controller
             $em->flush($productImage);
         }
 
-        foreach ($files as $e){
+        foreach ($files as $e) {
 
             $file = $em->getRepository('AppBundle:ProductFile')->find($e);
 
-            if($file){
-                if($file->getType() == 'file'){
+            if ($file) {
+                if ($file->getType() == 'file') {
                     $file->setProduct($entity);
                     $em->persist($file);
                     $em->flush($file);
-                }
-                elseif($file->getType() == 'image'){
+                } elseif ($file->getType() == 'image') {
                     $em->remove($file);
                     $em->flush($file);
                 }
@@ -273,10 +270,10 @@ class  CatalogController extends Controller
 
         }
 
-        if(is_array($tags)){
-            foreach($tags as $e){
-                $tagEntity = $em->getRepository('AppBundle:Tag')->findOneby(["name"=>$e]);
-                if(!$tagEntity){
+        if (is_array($tags)) {
+            foreach ($tags as $e) {
+                $tagEntity = $em->getRepository('AppBundle:Tag')->findOneby(["name" => $e]);
+                if (!$tagEntity) {
                     $tagEntity = new Tag();
                     $tagEntity->setActive(true);
                     $tagEntity->setName($e);
@@ -290,20 +287,20 @@ class  CatalogController extends Controller
             $em->flush($entity);
         }
 
-        if(is_array($software)){
-            foreach($software as $e){
+        if (is_array($software)) {
+            foreach ($software as $e) {
                 $softwareEntity = $em->getRepository('AppBundle:Software')->find($e);
-                if($softwareEntity){
+                if ($softwareEntity) {
                     $entity->addSoftware($softwareEntity);
                 }
             }
             $em->flush($entity);
         }
 
-        if(is_array($style)){
-            foreach($style as $e){
+        if (is_array($style)) {
+            foreach ($style as $e) {
                 $styleEntity = $em->getRepository('AppBundle:Style')->find($e);
-                if($styleEntity){
+                if ($styleEntity) {
                     $entity->addStyle($styleEntity);
                 }
             }
@@ -318,7 +315,7 @@ class  CatalogController extends Controller
         $em->persist($log);
         $em->flush($log);
 
-        $this->getUser()->setModelsLoaded($this->getUser()->getModelsLoaded()+1);
+        $this->getUser()->setModelsLoaded($this->getUser()->getModelsLoaded() + 1);
         $em->flush($this->getUser());
 
         $user = $this->getUser();
@@ -332,7 +329,7 @@ class  CatalogController extends Controller
 
         $this->get('wp.notify.manager')->sendAdminNewProduct($entity, $this->getUser());
 
-        return JsonResponse::create(["error" => false, 'url'=>$this->generateUrl('catalog_product',["alias"=>$entity->getAlias()])]);
+        return JsonResponse::create(["error" => false, 'url' => $this->generateUrl('catalog_product', ["alias" => $entity->getAlias()])]);
     }
 
     /**
@@ -342,9 +339,9 @@ class  CatalogController extends Controller
     public function tagAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $tag = $em->getRepository('AppBundle:Tag')->findOneBy(['id'=>$id]);
+        $tag = $em->getRepository('AppBundle:Tag')->findOneBy(['id' => $id]);
 
-        if(!$tag){
+        if (!$tag) {
             throw $this->createNotFoundException('Tag not found');
         }
 
@@ -363,7 +360,7 @@ class  CatalogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createNotFoundException('Page not found');
         }
 
@@ -397,7 +394,7 @@ class  CatalogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             throw $this->createNotFoundException('Page not found');
         }
 
@@ -418,7 +415,7 @@ class  CatalogController extends Controller
                 Response::HTTP_OK);
         };
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             return $returnError('У Вас нет права на упрвление моделями', '');
         }
 
@@ -437,16 +434,16 @@ class  CatalogController extends Controller
         $em->flush($log);
 
         $data = [
-            "product"=>$entity,
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),
-            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$entity, "user"=>$this->getUser()])
+            "product" => $entity,
+            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $entity]),
+            "alreadyBuy" => $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $entity, "user" => $this->getUser()])
         ];
 
         $modelInfo = $this->renderView('AppBundle:Catalog:_model_info.html.twig', $data);
 
         $this->get('wp.notify.manager')->sendModerationModelEmail($entity);
 
-        return JsonResponse::create(["error"=>false, 'modelInfo'=>$modelInfo]);
+        return JsonResponse::create(["error" => false, 'modelInfo' => $modelInfo]);
     }
 
     /**
@@ -460,7 +457,7 @@ class  CatalogController extends Controller
                 Response::HTTP_OK);
         };
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             return $returnError('У Вас нет права на упрвление моделями', '');
         }
 
@@ -472,7 +469,7 @@ class  CatalogController extends Controller
         $em->flush($entity);
 
         $log = new ProductLog();
-        $log->setText('Модель заблокирована по причине: '.$request->get('reason'));
+        $log->setText('Модель заблокирована по причине: ' . $request->get('reason'));
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -482,14 +479,14 @@ class  CatalogController extends Controller
         $this->get('wp.notify.manager')->sendBlockModelEmail($entity);
 
         $data = [
-            "product"=>$entity,
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),
-            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$entity, "user"=>$this->getUser()])
+            "product" => $entity,
+            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $entity]),
+            "alreadyBuy" => $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $entity, "user" => $this->getUser()])
         ];
 
         $modelInfo = $this->renderView('AppBundle:Catalog:_model_info.html.twig', $data);
 
-        return JsonResponse::create(["error"=>false, 'modelInfo'=>$modelInfo]);
+        return JsonResponse::create(["error" => false, 'modelInfo' => $modelInfo]);
     }
 
     /**
@@ -503,7 +500,7 @@ class  CatalogController extends Controller
                 Response::HTTP_OK);
         };
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             return $returnError('У Вас нет права на упрвление моделями', '');
         }
 
@@ -512,7 +509,7 @@ class  CatalogController extends Controller
         $entity = $em->getRepository('AppBundle:Product')->find($id);
 
         $log = new ProductLog();
-        $log->setText('Примечание:'.PHP_EOL.$request->get('comment'));
+        $log->setText('Примечание:' . PHP_EOL . $request->get('comment'));
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -520,14 +517,14 @@ class  CatalogController extends Controller
         $em->flush($log);
 
         $data = [
-            "product"=>$entity,
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),
-            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$entity, "user"=>$this->getUser()])
+            "product" => $entity,
+            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $entity]),
+            "alreadyBuy" => $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $entity, "user" => $this->getUser()])
         ];
 
         $modelInfo = $this->renderView('AppBundle:Catalog:_model_info.html.twig', $data);
 
-        return JsonResponse::create(["error"=>false, 'modelInfo'=>$modelInfo]);
+        return JsonResponse::create(["error" => false, 'modelInfo' => $modelInfo]);
     }
 
     /**
@@ -541,7 +538,7 @@ class  CatalogController extends Controller
                 Response::HTTP_OK);
         };
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             return $returnError('У Вас нет права на упрвление моделями', '');
         }
 
@@ -563,14 +560,14 @@ class  CatalogController extends Controller
         $this->get('wp.notify.manager')->sendUnBlockModelEmail($entity);
 
         $data = [
-            "product"=>$entity,
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$entity]),
-            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$entity, "user"=>$this->getUser()])
+            "product" => $entity,
+            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $entity]),
+            "alreadyBuy" => $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $entity, "user" => $this->getUser()])
         ];
 
         $modelInfo = $this->renderView('AppBundle:Catalog:_model_info.html.twig', $data);
 
-        return JsonResponse::create(["error"=>false, 'modelInfo'=>$modelInfo]);
+        return JsonResponse::create(["error" => false, 'modelInfo' => $modelInfo]);
     }
 
     /**
@@ -588,7 +585,7 @@ class  CatalogController extends Controller
 
         $entity = $em->getRepository('AppBundle:Product')->find($id);
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN') AND $entity->getUser() != $this->getUser()){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN') AND $entity->getUser() != $this->getUser()) {
             return $returnError('Это не Ваша модель', '');
         }
 
@@ -603,7 +600,7 @@ class  CatalogController extends Controller
         $em->persist($log);
         $em->flush($log);
 
-        return JsonResponse::create(["error"=>false, 'modelInfo'=>'Модель удалена']);
+        return JsonResponse::create(["error" => false, 'modelInfo' => 'Модель удалена']);
     }
 
     /**
@@ -612,16 +609,16 @@ class  CatalogController extends Controller
     public function categoryAction(Request $request, $alias)
     {
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('AppBundle:Category')->findOneBy(['alias'=>$alias, "active"=>true]);
+        $category = $em->getRepository('AppBundle:Category')->findOneBy(['alias' => $alias, "active" => true]);
 
-        if(!$category){
+        if (!$category) {
             throw $this->createNotFoundException('Category not found');
         }
 
         $categories = [];
         $categories[] = $category->getId();
-        if(count($category->getChildren()) > 0){
-            foreach($category->getChildren() as $e){
+        if (count($category->getChildren()) > 0) {
+            foreach ($category->getChildren() as $e) {
                 $categories[] = $e->getId();
             }
         }
@@ -641,36 +638,36 @@ class  CatalogController extends Controller
     public function productAction(Request $request, $alias)
     {
         $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['alias'=>$alias, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['alias' => $alias, "active" => true]);
 
-        if(!$product){
+        if (!$product) {
             throw $this->createNotFoundException('Product not found');
         }
 
-        $product->setViews($product->getViews()+1);
+        $product->setViews($product->getViews() + 1);
         $em->flush($product);
 
-        if($product->getUser()){
-            $product->getUser()->setModelsLoadedView($product->getUser()->getModelsLoadedView()+1);
+        if ($product->getUser()) {
+            $product->getUser()->setModelsLoadedView($product->getUser()->getModelsLoadedView() + 1);
             $em->flush($product->getUser());
         }
 
         $user = $this->getUser();
 
         $productFile = null;
-        $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]);
-        if(isset($files[0])){
+        $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $product]);
+        if (isset($files[0])) {
             $productFile = $files[0];
         }
 
         return [
-            "product"=>$product,
-            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$product, "user"=>$user]),
-            "alreadyLike"=>$em->getRepository('AppBundle:ProductLike')->findOneBy(['product'=>$product, "user"=>$user]),
-            "alreadyFavorite"=>$em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product'=>$product, "user"=>$user]),
+            "product" => $product,
+            "alreadyBuy" => $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $product, "user" => $user]),
+            "alreadyLike" => $em->getRepository('AppBundle:ProductLike')->findOneBy(['product' => $product, "user" => $user]),
+            "alreadyFavorite" => $em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product' => $product, "user" => $user]),
             "productFile" => $productFile,
             "settings" => $em->getRepository('AppBundle:Setting')->findOneBy([]),
-            "comments" => $em->getRepository('AppBundle:ProductComment')->findBy(["product"=>$product], ["date"=>"ASC"])
+            "comments" => $em->getRepository('AppBundle:ProductComment')->findBy(["product" => $product], ["date" => "ASC"])
         ];
     }
 
@@ -683,28 +680,34 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $user = $this->getUser();
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['alias'=>$alias, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['alias' => $alias, "active" => true]);
 
-        if(!$product){
+        if (!$product) {
             throw $this->createNotFoundException('File not found');
         }
 
-        $alreadyBuy = $em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$product, "user"=>$user]);
+        $checkBuyer = true;
+        if (!$product->getModerated() AND $this->isGranted('ROLE_SUPER_ADMIN')) {
+            $checkBuyer = false;
+        }
 
-        if(!$alreadyBuy){
-            throw $this->createNotFoundException('File not found');
+        if($checkBuyer){
+            $alreadyBuy = $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $product, "user" => $user]);
+            if (!$alreadyBuy) {
+                throw $this->createNotFoundException('File not found');
+            }
         }
 
         $fileEntity = $em->getRepository('AppBundle:ProductFile')->find($file);
 
-        if(!$fileEntity OR $fileEntity->getProduct() != $product){
+        if (!$fileEntity OR $fileEntity->getProduct() != $product) {
             throw $this->createNotFoundException('File not found');
         }
 
-        $filepath = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$fileEntity->getNameFile();
+        $filepath = $this->get('kernel')->getRootDir() . '/../web/uploads/images/' . $fileEntity->getNameFile();
         $filepath = realpath($filepath);
 
-        if(!$filepath){
+        if (!$filepath) {
             throw $this->createNotFoundException('File not found');
         }
 
@@ -721,27 +724,27 @@ class  CatalogController extends Controller
     public function productPopupAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id'=>$id, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id' => $id, "active" => true]);
 
-        if(!$product){
+        if (!$product) {
             throw $this->createNotFoundException('Product not found');
         }
 
-        $product->setViews($product->getViews()+1);
+        $product->setViews($product->getViews() + 1);
         $em->flush($product);
 
-        if($product->getUser()){
-            $product->getUser()->setModelsLoadedView($product->getUser()->getModelsLoadedView()+1);
+        if ($product->getUser()) {
+            $product->getUser()->setModelsLoadedView($product->getUser()->getModelsLoadedView() + 1);
             $em->flush($product->getUser());
         }
 
         $user = $this->getUser();
 
         return [
-            "product"=>$product,
-            "alreadyBuy"=>$em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$product, "user"=>$user]),
-            "alreadyLike"=>$em->getRepository('AppBundle:ProductLike')->findOneBy(['product'=>$product, "user"=>$user]),
-            "alreadyFavorite"=>$em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product'=>$product, "user"=>$user])
+            "product" => $product,
+            "alreadyBuy" => $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $product, "user" => $user]),
+            "alreadyLike" => $em->getRepository('AppBundle:ProductLike')->findOneBy(['product' => $product, "user" => $user]),
+            "alreadyFavorite" => $em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product' => $product, "user" => $user])
         ];
     }
 
@@ -752,25 +755,25 @@ class  CatalogController extends Controller
     public function productEditAction(Request $request, $alias)
     {
         $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['alias'=>$alias, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['alias' => $alias, "active" => true]);
 
-        if(!$product){
+        if (!$product) {
             throw $this->createNotFoundException('Product not found');
         }
 
         $user = $this->getUser();
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN') AND $product->getUser() != $user){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN') AND $product->getUser() != $user) {
             throw $this->createNotFoundException('Product not found');
         }
 
         return [
-            "product"=>$product,
-            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]),
-            "categories"=>$em->getRepository('AppBundle:Category')->findBy(["parent"=>NULL],["pos"=>"ASC"]),
-            "tags"=>$em->getRepository('AppBundle:Tag')->findBy(["active"=>true],["name"=>"ASC"]),
-            "software"=>$em->getRepository('AppBundle:Software')->findBy(["active"=>true],["name"=>"ASC"]),
-            "style"=>$em->getRepository('AppBundle:Style')->findBy(["active"=>true],["name"=>"ASC"])
+            "product" => $product,
+            "files" => $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $product]),
+            "categories" => $em->getRepository('AppBundle:Category')->findBy(["parent" => NULL], ["pos" => "ASC"]),
+            "tags" => $em->getRepository('AppBundle:Tag')->findBy(["active" => true], ["name" => "ASC"]),
+            "software" => $em->getRepository('AppBundle:Software')->findBy(["active" => true], ["name" => "ASC"]),
+            "style" => $em->getRepository('AppBundle:Style')->findBy(["active" => true], ["name" => "ASC"])
         ];
     }
 
@@ -781,10 +784,10 @@ class  CatalogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Product')->findOneBy(['alias'=>$alias, "active"=>true]);
+        $entity = $em->getRepository('AppBundle:Product')->findOneBy(['alias' => $alias, "active" => true]);
 
-        if(!$entity){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Модель не найдена']);
+        if (!$entity) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Модель не найдена']);
         }
 
         $name = trim($request->get('name'));
@@ -801,47 +804,47 @@ class  CatalogController extends Controller
         $style = $request->get('style');
         $text = trim($request->get('text'));
 
-        if($name == '' OR $categoryId == ''){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Заполните обязательные поля']);
+        if ($name == '' OR $categoryId == '') {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Заполните обязательные поля']);
         }
 
         $category = $em->getRepository('AppBundle:Category')->find($categoryId);
 
-        if(!is_array($mainImg)){
+        if (!is_array($mainImg)) {
             $mainImg = [];
         }
-        if(!is_array($addImg)){
+        if (!is_array($addImg)) {
             $addImg = [];
         }
-        if(!is_array($files)){
+        if (!is_array($files)) {
             $files = [];
         }
-        if(!is_array($existsMainImg)){
+        if (!is_array($existsMainImg)) {
             $existsMainImg = [];
         }
-        if(!is_array($existsAddImg)){
+        if (!is_array($existsAddImg)) {
             $existsAddImg = [];
         }
-        if(!is_array($existsFiles)){
+        if (!is_array($existsFiles)) {
             $existsFiles = [];
         }
 
-        if(!$category){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Категория не найдена']);
+        if (!$category) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Категория не найдена']);
         }
 
-        if(count($mainImg) == 0 AND count($existsMainImg) == 0){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Загрузите изображения к модели']);
+        if (count($mainImg) == 0 AND count($existsMainImg) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Загрузите изображения к модели']);
         }
 
-        if(count($files) == 0 AND count($existsFiles) == 0){
-            return JsonResponse::create(["error" => true, 'error_text'=>'Загрузите файлы модели']);
+        if (count($files) == 0 AND count($existsFiles) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Загрузите файлы модели']);
         }
 
-        if(count($mainImg) > 0){
+        if (count($mainImg) > 0) {
             $fileEntity = $em->getRepository('AppBundle:ProductFile')->find($mainImg[0]);
 
-            $file = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$fileEntity->getNameFile();
+            $file = $this->get('kernel')->getRootDir() . '/../web/uploads/images/' . $fileEntity->getNameFile();
 
             $mediaMain = new Media;
             $mediaMain->setBinaryContent($file);
@@ -856,11 +859,11 @@ class  CatalogController extends Controller
 
         $lastAddImgPos = 0;
 
-        $existsAddImagesEntities = $em->getRepository('AppBundle:ProductImage')->findBy(["product"=>$entity], ["pos"=>"ASC"]);
-        foreach ($existsAddImagesEntities as $e){
+        $existsAddImagesEntities = $em->getRepository('AppBundle:ProductImage')->findBy(["product" => $entity], ["pos" => "ASC"]);
+        foreach ($existsAddImagesEntities as $e) {
             $lastAddImgPos = $e->getPos();
 
-            if(!in_array($e->getId(), $existsAddImg)){
+            if (!in_array($e->getId(), $existsAddImg)) {
                 $em->remove($e);
                 $em->flush($e);
             }
@@ -868,12 +871,12 @@ class  CatalogController extends Controller
 
         $pos = $lastAddImgPos;
 
-        for ($i=0;$i<count($addImg);$i++){
+        for ($i = 0; $i < count($addImg); $i++) {
             $pos++;
 
             $fileEntity = $em->getRepository('AppBundle:ProductFile')->find($addImg[$i]);
 
-            $file = $this->get('kernel')->getRootDir().'/../web/uploads/images/'.$fileEntity->getNameFile();
+            $file = $this->get('kernel')->getRootDir() . '/../web/uploads/images/' . $fileEntity->getNameFile();
 
             $media = new Media;
             $media->setBinaryContent($file);
@@ -892,26 +895,25 @@ class  CatalogController extends Controller
             $em->flush($productImage);
         }
 
-        $existsFilesEntities = $em->getRepository('AppBundle:ProductFile')->findBy(["product"=>$entity]);
+        $existsFilesEntities = $em->getRepository('AppBundle:ProductFile')->findBy(["product" => $entity]);
 
-        foreach ($existsFilesEntities as $e){
-            if(!in_array($e->getId(), $existsFiles)){
+        foreach ($existsFilesEntities as $e) {
+            if (!in_array($e->getId(), $existsFiles)) {
                 $em->remove($e);
                 $em->flush($e);
             }
         }
 
-        foreach ($files as $e){
+        foreach ($files as $e) {
 
             $file = $em->getRepository('AppBundle:ProductFile')->find($e);
 
-            if($file){
-                if($file->getType() == 'file'){
+            if ($file) {
+                if ($file->getType() == 'file') {
                     $file->setProduct($entity);
                     $em->persist($file);
                     $em->flush($file);
-                }
-                elseif($file->getType() == 'image'){
+                } elseif ($file->getType() == 'image') {
                     $em->remove($file);
                     $em->flush($file);
                 }
@@ -933,10 +935,10 @@ class  CatalogController extends Controller
             $curTags[] = $e->getId();
         }
 
-        if(is_array($tags)){
-            foreach($tags as $e){
-                $tagEntity = $em->getRepository('AppBundle:Tag')->findOneby(["name"=>$e]);
-                if(!$tagEntity){
+        if (is_array($tags)) {
+            foreach ($tags as $e) {
+                $tagEntity = $em->getRepository('AppBundle:Tag')->findOneby(["name" => $e]);
+                if (!$tagEntity) {
                     $tagEntity = new Tag();
                     $tagEntity->setActive(true);
                     $tagEntity->setName($e);
@@ -945,7 +947,7 @@ class  CatalogController extends Controller
                     $em->flush($tagEntity);
                 }
 
-                if(!in_array($tagEntity->getId(), $curTags)){
+                if (!in_array($tagEntity->getId(), $curTags)) {
                     $entity->addTag($tagEntity);
                 }
             }
@@ -957,11 +959,11 @@ class  CatalogController extends Controller
             $curSoftware[] = $e->getId();
         }
 
-        if(is_array($software)){
-            foreach($software as $e){
+        if (is_array($software)) {
+            foreach ($software as $e) {
                 $softwareEntity = $em->getRepository('AppBundle:Software')->find($e);
-                if($softwareEntity){
-                    if(!in_array($softwareEntity->getId(), $curSoftware)){
+                if ($softwareEntity) {
+                    if (!in_array($softwareEntity->getId(), $curSoftware)) {
                         $entity->addSoftware($softwareEntity);
                     }
                 }
@@ -974,11 +976,11 @@ class  CatalogController extends Controller
             $curStyle[] = $e->getId();
         }
 
-        if(is_array($style)){
-            foreach($style as $e){
+        if (is_array($style)) {
+            foreach ($style as $e) {
                 $styleEntity = $em->getRepository('AppBundle:Style')->find($e);
-                if($styleEntity){
-                    if(!in_array($styleEntity->getId(), $curStyle)){
+                if ($styleEntity) {
+                    if (!in_array($styleEntity->getId(), $curStyle)) {
                         $entity->addStyle($styleEntity);
                     }
                 }
@@ -996,7 +998,7 @@ class  CatalogController extends Controller
 
         $this->get('wp.notify.manager')->sendAdminEditProduct($entity, $this->getUser());
 
-        return JsonResponse::create(["error" => false, 'url'=>$this->generateUrl('catalog_product',["alias"=>$entity->getAlias()])]);
+        return JsonResponse::create(["error" => false, 'url' => $this->generateUrl('catalog_product', ["alias" => $entity->getAlias()])]);
     }
 
     /**
@@ -1016,29 +1018,29 @@ class  CatalogController extends Controller
 
         $id = intval($request->get('id'));
 
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id'=>$id, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id' => $id, "active" => true]);
 
-        if(!$product){
-            return $returnError('Модель не найдена','email');
+        if (!$product) {
+            return $returnError('Модель не найдена', 'email');
         }
 
         $user = $this->getUser();
 
-        $alreadyBuy = $em->getRepository('AppBundle:Buy')->findOneBy(['product'=>$product, "user"=>$user]);
+        $alreadyBuy = $em->getRepository('AppBundle:Buy')->findOneBy(['product' => $product, "user" => $user]);
 
-        if($alreadyBuy){
-            return $returnError('Вы уже купили данную модель','email');
+        if ($alreadyBuy) {
+            return $returnError('Вы уже купили данную модель', 'email');
         }
 
-        if($user->getModels() == 0){
-            return $returnError('У Вас не хватает оплаченных моделей для покупки','email');
+        if ($user->getModels() == 0) {
+            return $returnError('У Вас не хватает оплаченных моделей для покупки', 'email');
         }
 
         $transaction = new PaymentLog();
         $transaction->setDate(new \DateTime());
         $transaction->setUser($user);
         $transaction->setPrice(-1);
-        $transaction->setName('Покупка модели "'.$product->getName().'"');
+        $transaction->setName('Покупка модели "' . $product->getName() . '"');
         $transaction->setType('buy');
 
         $em->persist($transaction);
@@ -1051,14 +1053,14 @@ class  CatalogController extends Controller
 
         $this->get("fos_user.user_manager")->updateUser($user);
 
-        $product->setDownloads($product->getDownloads()+1);
+        $product->setDownloads($product->getDownloads() + 1);
         $em->persist($product);
         $em->flush($product);
 
         $author = $product->getUser();
 
-        if($author){
-            $author->setModelsLoadedBuy($author->getModelsLoadedBuy()+1);
+        if ($author) {
+            $author->setModelsLoadedBuy($author->getModelsLoadedBuy() + 1);
             $em->persist($author);
             $em->flush($author);
         }
@@ -1082,13 +1084,13 @@ class  CatalogController extends Controller
 
         $settings = $this->getDoctrine()->getRepository('AppBundle:Setting')->findOneBy([]);
 
-        $price = intval($settings->getModelPrice()/2);
+        $price = intval($settings->getModelPrice() / 2);
 
         $transaction = new PaymentLog();
         $transaction->setDate(new \DateTime());
         $transaction->setUser($author);
         $transaction->setPrice($price);
-        $transaction->setName('Коммисия с покупки модели "'.$product->getName().'"');
+        $transaction->setName('Коммисия с покупки модели "' . $product->getName() . '"');
         $transaction->setType('sell');
 
         $em->persist($transaction);
@@ -1104,8 +1106,8 @@ class  CatalogController extends Controller
         $this->get('wp.notify.manager')->sendBuyModelInfoEmail($product, $user);
 
         $productFile = null;
-        $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product'=>$product]);
-        if(isset($files[0])){
+        $files = $em->getRepository('AppBundle:ProductFile')->findBy(['product' => $product]);
+        if (isset($files[0])) {
             $productFile = $files[0];
         }
 
@@ -1115,7 +1117,7 @@ class  CatalogController extends Controller
 
         $html = $this->renderView('@App/Catalog/_product_files.html.twig', $dataToRender);
 
-        return JsonResponse::create(["error"=>false, "html"=>$html]);
+        return JsonResponse::create(["error" => false, "html" => $html]);
     }
 
     /**
@@ -1133,24 +1135,24 @@ class  CatalogController extends Controller
 
         $user = $this->getUser();
 
-        if(!$user){
-            return $returnError('Вы должны войти на сайт','email');
+        if (!$user) {
+            return $returnError('Вы должны войти на сайт', 'email');
         }
 
         $id = intval($request->get('id'));
 
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id'=>$id, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id' => $id, "active" => true]);
 
-        if(!$product){
-            return $returnError('Модель не найдена','email');
+        if (!$product) {
+            return $returnError('Модель не найдена', 'email');
         }
 
         $user = $this->getUser();
 
-        $alreadyLike = $em->getRepository('AppBundle:ProductLike')->findOneBy(['product'=>$product, "user"=>$user]);
+        $alreadyLike = $em->getRepository('AppBundle:ProductLike')->findOneBy(['product' => $product, "user" => $user]);
 
-        if($alreadyLike){
-            if($product->getStars() > 0){
+        if ($alreadyLike) {
+            if ($product->getStars() > 0) {
                 $product->setStars($product->getStars() - 1);
                 $em->flush($product);
             }
@@ -1159,8 +1161,7 @@ class  CatalogController extends Controller
             $em->flush($alreadyLike);
 
             $status = false;
-        }
-        else{
+        } else {
             $like = new ProductLike();
             $like->setProduct($product);
             $like->setUser($user);
@@ -1174,7 +1175,7 @@ class  CatalogController extends Controller
             $status = true;
         }
 
-        return JsonResponse::create(["error"=>false, 'likes'=>$product->getStars(), 'active'=>$status]);
+        return JsonResponse::create(["error" => false, 'likes' => $product->getStars(), 'active' => $status]);
     }
 
     /**
@@ -1192,29 +1193,28 @@ class  CatalogController extends Controller
 
         $user = $this->getUser();
 
-        if(!$user){
-            return $returnError('Вы должны войти на сайт','email');
+        if (!$user) {
+            return $returnError('Вы должны войти на сайт', 'email');
         }
 
         $id = intval($request->get('id'));
 
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id'=>$id, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id' => $id, "active" => true]);
 
-        if(!$product){
-            return $returnError('Модель не найдена','email');
+        if (!$product) {
+            return $returnError('Модель не найдена', 'email');
         }
 
         $user = $this->getUser();
 
-        $alreadyFavorite = $em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product'=>$product, "user"=>$user]);
+        $alreadyFavorite = $em->getRepository('AppBundle:ProductFavorite')->findOneBy(['product' => $product, "user" => $user]);
 
-        if($alreadyFavorite){
+        if ($alreadyFavorite) {
             $em->remove($alreadyFavorite);
             $em->flush($alreadyFavorite);
 
             $status = false;
-        }
-        else{
+        } else {
             $like = new ProductFavorite();
             $like->setProduct($product);
             $like->setUser($user);
@@ -1225,12 +1225,12 @@ class  CatalogController extends Controller
             $status = true;
         }
 
-        $count = count($em->getRepository('AppBundle:ProductFavorite')->findBy(["user"=>$user]));
+        $count = count($em->getRepository('AppBundle:ProductFavorite')->findBy(["user" => $user]));
 
         $user->setModelsFavorites($count);
         $this->get("fos_user.user_manager")->updateUser($user);
 
-        return JsonResponse::create(["error"=>false, 'active'=>$status]);
+        return JsonResponse::create(["error" => false, 'active' => $status]);
     }
 
     /**
@@ -1248,21 +1248,21 @@ class  CatalogController extends Controller
 
         $user = $this->getUser();
 
-        if(!$user){
-            return $returnError('Вы должны войти на сайт','email');
+        if (!$user) {
+            return $returnError('Вы должны войти на сайт', 'email');
         }
 
         $id = intval($request->get('id'));
         $text = trim($request->get('text', 'text'));
 
-        if($text == ''){
-            return $returnError('Напишите комментарий','email');
+        if ($text == '') {
+            return $returnError('Напишите комментарий', 'email');
         }
 
-        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id'=>$id, "active"=>true]);
+        $product = $em->getRepository('AppBundle:Product')->findOneBy(['id' => $id, "active" => true]);
 
-        if(!$product){
-            return $returnError('Модель не найдена','email');
+        if (!$product) {
+            return $returnError('Модель не найдена', 'email');
         }
 
         $user = $this->getUser();
@@ -1276,13 +1276,13 @@ class  CatalogController extends Controller
         $em->persist($comment);
         $em->flush($comment);
 
-        $comments = $em->getRepository('AppBundle:ProductComment')->findBy(["product"=>$product], ["date"=>"ASC"]);
+        $comments = $em->getRepository('AppBundle:ProductComment')->findBy(["product" => $product], ["date" => "ASC"]);
 
         $product->setComments(count($comments));
         $em->flush($product);
 
-        if($product->getUser()){
-            $product->getUser()->setModelsLoadedComments($product->getUser()->getModelsLoadedComments()+1);
+        if ($product->getUser()) {
+            $product->getUser()->setModelsLoadedComments($product->getUser()->getModelsLoadedComments() + 1);
             $em->flush($product->getUser());
         }
 
@@ -1293,7 +1293,7 @@ class  CatalogController extends Controller
 
         $html = $this->renderView('@App/Catalog/_product_comments.html.twig', $responseData);
 
-        return JsonResponse::create(["error"=>false, 'html'=>$html]);
+        return JsonResponse::create(["error" => false, 'html' => $html]);
     }
 
     /**
@@ -1307,7 +1307,7 @@ class  CatalogController extends Controller
                 Response::HTTP_OK);
         };
 
-        if(!$this->isGranted('ROLE_SUPER_ADMIN')){
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             return $returnError('У Вас нет права на управление комментариями', '');
         }
 
@@ -1315,34 +1315,34 @@ class  CatalogController extends Controller
 
         $user = $this->getUser();
 
-        if(!$user){
-            return $returnError('Вы должны войти на сайт','email');
+        if (!$user) {
+            return $returnError('Вы должны войти на сайт', 'email');
         }
 
         $id = intval($request->get('id'));
 
-        $comment = $em->getRepository('AppBundle:ProductComment')->findOneBy(['id'=>$id]);
+        $comment = $em->getRepository('AppBundle:ProductComment')->findOneBy(['id' => $id]);
 
-        if(!$comment){
-            return $returnError('Комментарий не найден','email');
+        if (!$comment) {
+            return $returnError('Комментарий не найден', 'email');
         }
 
         $product = $comment->getProduct();
 
-        if(!$product){
-            return $returnError('Модель не найдена','email');
+        if (!$product) {
+            return $returnError('Модель не найдена', 'email');
         }
 
         $em->remove($comment);
         $em->flush($comment);
 
-        $comments = $em->getRepository('AppBundle:ProductComment')->findBy(["product"=>$product], ["date"=>"ASC"]);
+        $comments = $em->getRepository('AppBundle:ProductComment')->findBy(["product" => $product], ["date" => "ASC"]);
 
         $product->setComments(count($comments));
         $em->flush($product);
 
-        if($product->getUser()){
-            $product->getUser()->setModelsLoadedComments($product->getUser()->getModelsLoadedComments()+1);
+        if ($product->getUser()) {
+            $product->getUser()->setModelsLoadedComments($product->getUser()->getModelsLoadedComments() + 1);
             $em->flush($product->getUser());
         }
 
@@ -1351,10 +1351,11 @@ class  CatalogController extends Controller
 
         $html = $this->renderView('@App/Catalog/_product_comments.html.twig', $responseData);
 
-        return JsonResponse::create(["error"=>false, 'html'=>$html]);
+        return JsonResponse::create(["error" => false, 'html' => $html]);
     }
 
-    private function _generateAlias($str) {
+    private function _generateAlias($str)
+    {
         $rus = array('А', 'Б', 'В', 'Г', 'Д', 'Е', 'Ё', 'Ж', 'З', 'И', 'Й', 'К', 'Л', 'М', 'Н', 'О', 'П', 'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', 'а', 'б', 'в', 'г', 'д', 'е', 'ё', 'ж', 'з', 'и', 'й', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ', 'ъ', 'ы', 'ь', 'э', 'ю', 'я');
         $lat = array('A', 'B', 'V', 'G', 'D', 'E', 'E', 'Zh', 'Z', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'R', 'S', 'T', 'U', 'F', 'H', 'C', 'Ch', 'Sh', 'Sch', 'Y', 'Y', 'Y', 'E', 'Yu', 'Ya', 'a', 'b', 'v', 'g', 'd', 'e', 'e', 'zh', 'z', 'i', 'y', 'k', 'l', 'm', 'n', 'o', 'p', 'r', 's', 't', 'u', 'f', 'h', 'c', 'ch', 'sh', 'sch', 'y', 'y', '', 'e', 'yu', 'ya');
         $str = str_replace($rus, $lat, mb_strtolower(trim($str)));
