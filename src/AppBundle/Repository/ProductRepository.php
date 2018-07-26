@@ -17,15 +17,11 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getByCategory($category, $sortArray)
     {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->_baseQb();
 
         $qb
             ->andWhere('p.category = :category OR p.category2 = :category OR p.category3 = :category OR p.category4 = :category OR p.category5 = :category')
             ->setParameter('category', $category)
-            ->andWhere('p.active = true')
-            ->andWhere('p.moderated = true')
-            ->andWhere('p.deleted = false')
-            ->andWhere('p.block = false')
         ;
 
         if(is_array($sortArray)){
@@ -44,19 +40,12 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getByCategories($categories)
     {
-        $qb = $this->createQueryBuilder('p');
+        $qb = $this->_baseQb();
 
         $qb
             ->andWhere('p.category IN (:categories)')
             ->setParameter('categories', $categories)
-            ->andWhere('p.active = true')
-            ->andWhere('p.moderated = true')
-            ->andWhere('p.deleted = false')
-            ->andWhere('p.block = false')
         ;
-
-
-        $qb->orderBy('p.date', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
@@ -68,20 +57,13 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getByTag($tag)
     {
-        $qb = $this->createQueryBuilder('p')
-            ->leftJoin('p.tags', 't');
+        $qb = $this->_baseQb();
+        $qb->leftJoin('p.tags', 't');
 
         $qb
             ->andWhere('t.id = :tag')
             ->setParameter('tag', $tag)
-            ->andWhere('p.active = true')
-            ->andWhere('p.moderated = true')
-            ->andWhere('p.deleted = false')
-            ->andWhere('p.block = false')
         ;
-
-
-        $qb->orderBy('p.date', 'DESC');
 
         return $qb->getQuery()->getResult();
     }
@@ -93,59 +75,13 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
      */
     public function getForModeration()
     {
-        $qb = $this->createQueryBuilder('p');
-
-        $qb
-            ->andWhere('p.active = true')
-            ->andWhere('p.moderated = false')
-            ->andWhere('p.deleted = false')
-            ->andWhere('p.block = false')
-        ;
-
+        $qb = $this->_baseQb();
 
         $qb->orderBy('p.date', 'DESC');
 
+        $qb->setParameter('moderated', false);
+
         return $qb->getQuery()->getResult();
-    }
-
-    /**
-     * Get sale items
-     *
-     * @return array
-     */
-    public function getSale()
-    {
-        return $this->createQueryBuilder('p')
-            ->where('p.active = true')
-            ->andWhere('p.discountPersent is not null')
-            ->andWhere('p.discountPersent > :persent')
-            ->setParameter('persent', 0)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findLastPos($category = null)
-    {
-        $qb = $this->createQueryBuilder('p')
-            ->select('MAX(p.pos)');
-
-        $qb->where('p.category = :category')
-            ->setParameter('category', $category);
-
-        return $qb->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function findLastPosInRoot()
-    {
-        $qb = $this->createQueryBuilder('p')
-            ->select('MAX(p.pos)');
-
-        $qb->where('p.category = :category')
-            ->setParameter('category', NULL);
-
-        return $qb->getQuery()
-            ->getSingleScalarResult();
     }
 
     /**
@@ -156,8 +92,7 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
     public function getSearch($search, $limit = false)
     {
 
-        $qb = $this->createQueryBuilder('p')
-            ->select('p');
+        $qb = $this->_baseQb();
 
         if ($search) {
 
@@ -173,70 +108,25 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             $qb->setMaxResults($limit);
         }
 
-        $qb->andWhere('p.active = true');
-
         return $qb->getQuery()
             ->getResult();
     }
 
-    public function getByIds($ids)
+    private function _baseQb()
     {
-        return $this->createQueryBuilder('p')
-            ->where('p.id IN (:ids)')
-            ->setParameter('ids', array_values($ids))
-            ->setMaxResults(20)
-            ->getQuery()
-            ->getResult();
-    }
+        $qb = $this->createQueryBuilder('p');
 
-    public function getByIdsInCabinet($ids)
-    {
-        return $this->createQueryBuilder('p')
-            ->where('p.id IN (:ids)')
-            ->setParameter('ids', array_values($ids))
-            ->getQuery()
-            ->getResult();
-    }
+        $qb
+            ->andWhere('p.active = true')
+            ->andWhere('p.moderated = :moderated')
+            ->andWhere('p.deleted = false')
+            ->andWhere('p.block = :block')
+            ->setParameter('moderated', true)
+            ->setParameter('block', false)
+        ;
 
-    public function getUpperObject($object){
+        $qb->orderBy('p.date', 'DESC');
 
-        $qb = $this->createQueryBuilder('c')
-            ->andWhere('c.pos > :pos')
-            ->setParameter('pos',$object->getPos());
-
-        if($object->getCategory()){
-            $qb->andWhere('c.category = :category')
-                ->setParameter('category',$object->getCategory());
-        }
-        else{
-            $qb->andWhere('c.category IS NULL');
-        }
-
-        return $qb->orderBy('c.pos', 'ASC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
-
-    }
-
-    public function getDownObject($object){
-
-        $qb = $this->createQueryBuilder('c')
-            ->andWhere('c.pos < :pos')
-            ->setParameter('pos',$object->getPos());
-
-        if($object->getCategory()){
-            $qb->andWhere('c.category = :category')
-                ->setParameter('category',$object->getCategory());
-        }
-        else{
-            $qb->andWhere('c.category IS NULL');
-        }
-
-        return $qb->orderBy('c.pos', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getOneOrNullResult();
-
+        return $qb;
     }
 }
