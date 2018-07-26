@@ -334,7 +334,7 @@ class  CatalogController extends Controller
         }
 
         $responseData = [];
-        $responseData["comments"] = $em->getRepository('AppBundle:ProductComment')->findBy([], ["date"=>"DESC"]);
+        $responseData["comments"] = $em->getRepository('AppBundle:ProductComment')->getProductCommentsForModerator();
         $responseData["allList"] = true;
 
         return $responseData;

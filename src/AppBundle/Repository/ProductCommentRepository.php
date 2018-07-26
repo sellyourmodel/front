@@ -29,6 +29,20 @@ class ProductCommentRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * Get comments for all models for moderator
+     *
+     * @return array
+     */
+    public function getProductCommentsForModerator()
+    {
+        $qb = $this->_baseQb();
+
+        $qb->orderBy('c.date', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function _baseQb()
     {
         $qb = $this->createQueryBuilder('c')
