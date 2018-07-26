@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * ProductFavorite
  *
  * @ORM\Table(name="catalog_products_favorites")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductFavoriteRepository")
  */
 class ProductFavorite
 {
