@@ -1,4 +1,4 @@
-<h4>Комментарии ({{ comments|length }})</h4>
+<h4>{% trans %}comments{% endtrans %} ({{ comments|length }})</h4>
 {% for e in comments %}
     <div class="comment">
         <div class="box-top">
@@ -9,7 +9,7 @@
             </div>
             <div class="box-top__cont">
                 {% if is_granted('ROLE_SUPER_ADMIN') and allList is defined and allList %}
-                    <div class="comment-model-info">Комментарий к модели: <a href="{{ path('catalog_product', {alias:e.product.alias}) }}">{{ e.product.name }}</a>, пользователь <a href="{{ path('user_view', {nickname:e.product.user.nickname}) }}">{{ e.product.user.nickname }}</a></div>
+                    <div class="comment-model-info">{% trans %}comments_to_model{% endtrans %}: <a href="{{ path('catalog_product', {alias:e.product.alias}) }}">{{ e.product.name }}</a>, {% trans %}user{% endtrans %} <a href="{{ path('user_view', {nickname:e.product.user.nickname}) }}">{{ e.product.user.nickname }}</a></div>
                 {% endif %}
                 <span class="author">
                     <a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.nickname }}</a>
@@ -18,13 +18,13 @@
                 <p>{{ e.text|nl2br }}</p>
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <div class="delete">
-                        <a href="#" onclick="showDeleteComment(this);return false;">Удалить</a>
+                        <a href="#" onclick="showDeleteComment(this);return false;">{% trans %}delete{% endtrans %}</a>
                         <div class="delete-question">
                             <p>
-                                Вы действительно хотите удалить данный комментарий?
+                                {% trans %}comments_delete{% endtrans %}
                             </p>
-                            <button type="submit" class="button button_warning" onclick="deleteComment({{ e.id }}, this);return false;">Удалить</button>
-                            <button type="submit" class="button button_warning" onclick="cancelDeleteComment(this);return false;">Отмена</button>
+                            <button type="submit" class="button button_warning" onclick="deleteComment({{ e.id }}, this);return false;">{% trans %}delete{% endtrans %}</button>
+                            <button type="submit" class="button button_warning" onclick="cancelDeleteComment(this);return false;">{% trans %}cancel{% endtrans %}</button>
                         </div>
                     </div>
                 {% endif %}

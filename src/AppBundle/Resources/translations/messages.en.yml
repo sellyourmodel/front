@@ -86,9 +86,11 @@ search_notfound: Unfortunately, your search returned no results.
 model_blocked_by_reason: The model is locked for a reason
 without_reason: without reason
 models_available: Available Models
+user: user
 download: Download
 edit: Edit
 delete: Remove
+cancel: Cancel
 moderate: Moderate
 block: Block
 unblock: Unlock
@@ -227,3 +229,7 @@ modal_withdrawals_send: Send an application
 image_crop_header: Crop images
 image_crop_action: Crop
 buy_cabinet: Buy models
+comments_model_admin: Models comments
+comments: Comments
+comments_to_model: Model comment
+comments_delete: Delete comment?
