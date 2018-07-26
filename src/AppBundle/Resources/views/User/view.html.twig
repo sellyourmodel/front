@@ -8,34 +8,37 @@
         <aside class="fl column bg profile-aside">
             <div class="profile">
                 <div class="profile-cont">
-                    <div class="profile__avatar"><img src="{% if entity.image %}{% path entity.image, 'big' %}{% else %}{{ asset('bundles/app/img/user-avatar.png') }}{% endif %}" alt=""></div>
-                    <h3>{{ entity.nickname }} <i class="ic icon-author-rating icon-author-rating__{{ entity.lvl }}"></i></h3>
+                    <div class="profile__avatar">
+                        <img src="{% if entity.image %}{% path entity.image, 'big' %}{% else %}{{ asset('bundles/app/img/user-avatar.png') }}{% endif %}" alt="">
+                    </div>
+                    <h3>{{ entity.nickname }} <i class="ic icon-author-rating icon-author-rating__{{ entity.lvl }}"></i>
+                    </h3>
                     <p class="profile__text">
                         {{ entity.name }}
-                        {% if entity.country or entity.city %}<br />{% endif %}
+                        {% if entity.country or entity.city %}<br/>{% endif %}
                         {% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}
                     </p>
-                    {%  if app.user and app.user != entity %}
+                    {% if app.user and app.user != entity %}
                         <button class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</button>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') and app.user and app.user != entity %}
-                        <br />
+                        <br/>
                         <a class="button button_warning button_block" href="{{ path('homepage',{_switch_user: entity.email}) }}">{% trans %}user_auth{% endtrans %}</a>
                     {% endif %}
                 </div>
                 {% if entity.specialization %}
-                <div class="profile-cont">
-                    <h6 class="profile-cont__title">{% trans %}user_specialization{% endtrans %}:</h6>
-                    <p class="profile-cont__text">{{ entity.specialization }}</p>
-                </div>
+                    <div class="profile-cont">
+                        <h6 class="profile-cont__title">{% trans %}user_specialization{% endtrans %}:</h6>
+                        <p class="profile-cont__text">{{ entity.specialization }}</p>
+                    </div>
                 {% endif %}
                 {% if entity.text %}
-                <div class="profile-cont">
-                    <h6 class="profile-cont__title">{% trans %}user_about_myself{% endtrans %}:</h6>
-                    <p class="profile-cont__text">
-                        {{ entity.text|nl2br }}
-                    </p>
-                </div>
+                    <div class="profile-cont">
+                        <h6 class="profile-cont__title">{% trans %}user_about_myself{% endtrans %}:</h6>
+                        <p class="profile-cont__text">
+                            {{ entity.text|nl2br }}
+                        </p>
+                    </div>
                 {% endif %}
                 {#<div class="profile-cont">
                     <h6 class="profile-cont__title">Веб-ссылки:</h6>
@@ -60,31 +63,31 @@
             <div class="main-wrap">
                 <div class="main-wrap__header">
                     <ul class="nav-tabs-list tabs">
-                        <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}active{% endif %}"><a href="#tab_1"
-                                                                             class="nav-tabs-list__link link">{% trans %}user_models{% endtrans %}
-                                ({{ products|length }})</a></li>
-                        <li class="nav-tabs-list__item js-hide-bg"><a href="#tab_2"
-                                                                      class="nav-tabs-list__link link">{% trans %}user_gallery{% endtrans %}
-                                (0)</a></li>
-                        {% if app.user and app.user == entity %}
-                        <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'stats' %}active{% else %}{% endif %}"><a href="#tab_3"
-                                                                      class="nav-tabs-list__link link">{% trans %}user_statistics{% endtrans %}</a>
-
-                        <li class="nav-tabs-list__item js-show-bg"><a href="#tab_6"
-                                                                      class="nav-tabs-list__link link">{% trans %}user_withdrawals{% endtrans %}</a>
-
-                        <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') == 'favorites' %}active{% else %}{% endif %}"><a href="#tab_4"
-                                                                      class="nav-tabs-list__link link">{% trans %}user_favourite{% endtrans %} ({{ favorites|length }})</a>
+                        <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}active{% endif %}">
+                            <a href="#" data-tab="js-tab-1" class="nav-tabs-list__link link">{% trans %}user_models{% endtrans %} ({{ products|length }})</a>
                         </li>
-                        <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'buy' %}active{% else %}{% endif %}"><a href="#tab_5"
-                                                                      class="nav-tabs-list__link link">{% trans %}user_purchases{% endtrans %}
-                                ({{ buy|length }})</a></li>
+                        <li class="nav-tabs-list__item js-hide-bg">
+                            <a href="#" data-tab="js-tab-2" class="nav-tabs-list__link link">{% trans %}user_gallery{% endtrans %} (0)</a>
+                        </li>
+                        {% if app.user and app.user == entity %}
+                            <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'stats' %}active{% else %}{% endif %}">
+                                <a href="#" data-tab="js-tab-3" class="nav-tabs-list__link link">{% trans %}user_statistics{% endtrans %}</a>
+                            </li>
+                            <li class="nav-tabs-list__item js-show-bg">
+                                <a href="#" data-tab="js-tab-6" class="nav-tabs-list__link link">{% trans %}user_withdrawals{% endtrans %}</a>
+                            </li>
+                            <li class="nav-tabs-list__item js-hide-bg {% if app.request.get('tab') == 'favorites' %}active{% else %}{% endif %}">
+                                <a href="#" data-tab="js-tab-4" class="nav-tabs-list__link link">{% trans %}user_favourite{% endtrans %} ({{ favorites|length }})</a>
+                            </li>
+                            <li class="nav-tabs-list__item js-show-bg {% if app.request.get('tab') == 'buy' %}active{% else %}{% endif %}">
+                                <a href="#" data-tab="js-tab-5" class="nav-tabs-list__link link">{% trans %}user_purchases{% endtrans %} ({{ buy|length }})</a>
+                            </li>
                         {% endif %}
                     </ul>
                 </div>
             </div>
             <div class="box-tab-cont">
-                <div id="tab_1" class="tab-cont {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}{% else %}hide{% endif %}">
+                <div class="js-tab-1 tab-cont {% if app.request.get('tab') != 'stats' and app.request.get('tab') != 'buy' and app.request.get('tab') != 'favorites' %}{% else %}hide{% endif %}">
                     {% if products|length > 0 %}
                         <ul class="product-list col-4 sm">
                             {% for e in products %}
@@ -95,11 +98,11 @@
                         <p>{% trans %}user_not_loaded_models{% endtrans %}</p>
                     {% endif %}
                 </div>
-                <div id="tab_2" class="tab-cont hide">
+                <div class="js-tab-2 tab-cont hide">
                     <p>{% trans %}user_not_loaded_objects{% endtrans %}</p>
                 </div>
                 {% if app.user and app.user == entity %}
-                    <div id="tab_3" class="tab-cont {% if app.request.get('tab') == 'stats' %}{% else %}hide{% endif %}">
+                    <div class="js-tab-3 tab-cont {% if app.request.get('tab') == 'stats' %}{% else %}hide{% endif %}">
                         <div class="block-title">
                             <h4>{% trans %}user_models_loaded{% endtrans %} {{ products|length }}</h4>
                         </div>
@@ -112,11 +115,11 @@
                                     <th class="td-summa">{% trans %}user_last_operations_price{% endtrans %}</th>
                                 </tr>
                                 {% for e in history %}
-                                <tr>
-                                    <td>{{ e.date|date("d.m.Y") }}</td>
-                                    <td>{{ e.name }}</td>
-                                    <td>{% if e.price != '-1' %}{{ e.price }}{% endif %}</td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ e.date|date("d.m.Y") }}</td>
+                                        <td>{{ e.name }}</td>
+                                        <td>{% if e.price != '-1' %}{{ e.price }}{% endif %}</td>
+                                    </tr>
                                 {% endfor %}
                             </table>
                             {#<p><a href="#" class="link">Смотреть все транзакции</a></p>#}
@@ -129,11 +132,13 @@
                             <h4>{% trans %}user_models_buying{% endtrans %}</h4>
                             <dl class="box-label small mt10">
                                 <dt class="box-label__title">{% trans %}user_available{% endtrans %} {{ app.user.models }} {% trans %}user_available_models{% endtrans %}</dt>
-                                <dd class="box-label__cont"><a href="{{ path('cabinet_buy') }}" class="link">{% trans %}user_buy_models{% endtrans %}</a></dd>
+                                <dd class="box-label__cont">
+                                    <a href="{{ path('cabinet_buy') }}" class="link">{% trans %}user_buy_models{% endtrans %}</a>
+                                </dd>
                             </dl>
                         </div>
                     </div>
-                    <div id="tab_6" class="tab-cont hide">
+                    <div class="js-tab-6 tab-cont hide">
                         <div class="tab-cont__body">
                             <h4 class="withdrawals__header">{% trans %}user_withdrawals_requests{% endtrans %}</h4>
                             <a href="#withdrawalsAdd" class="button button_warning withdrawals__add fancybox">{% trans %}user_create_withdrawals_requests{% endtrans %}</a>
@@ -144,7 +149,7 @@
                             </table>
                         </div>
                     </div>
-                    <div id="tab_4" class="tab-cont  {% if app.request.get('tab') == 'favorites' %}{% else %}hide{% endif %}">
+                    <div class="js-tab-4 tab-cont  {% if app.request.get('tab') == 'favorites' %}{% else %}hide{% endif %}">
                         {% if favorites|length > 0 %}
                             <ul class="product-list col-4 sm">
                                 {% for e in favorites %}
@@ -155,7 +160,7 @@
                             <p>{% trans %}user_not_favourites{% endtrans %}</p>
                         {% endif %}
                     </div>
-                    <div id="tab_5" class="tab-cont  {% if app.request.get('tab') == 'buy' %}{% else %}hide{% endif %}">
+                    <div class="js-tab-5 tab-cont  {% if app.request.get('tab') == 'buy' %}{% else %}hide{% endif %}">
                         <div class="tab-cont__body">
                             {% if buy|length > 0 %}
                                 <ul class="product-list col-4 sm">
@@ -171,6 +176,6 @@
                 {% endif %}
             </div>
         </div>
-        <br style="clear: both;" />
+        <br style="clear: both;"/>
     </div>
 {% endblock %}
