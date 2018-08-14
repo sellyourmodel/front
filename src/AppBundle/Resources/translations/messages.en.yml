@@ -146,6 +146,14 @@ registration_create_account: Create an account
 registration_auth_in_socials: Sign in with your account on social networks
 search_in_catalog: Search in catalog
 search_in_catalog_notfound: Nothing found.
+filters: Filters
+filters_files_types: Files types
+filters_sort: Sort
+filters_sort_by_date: By date
+filters_sort_by_comments: By comments
+filters_sort_by_views: By views
+filters_styles: Styles
+filters_filter_action: Filter
 subscribe_unsubscribe: Сancel subscription
 subscribe_question_1: Are you sure you want to unsubscribe from e-mail?
 subscribe_question_2: from the mailing list?

@@ -64,7 +64,7 @@
                         <form method="GET" action="{{ path('search') }}">
                             <input type="text" name="search" value="{{ app.request.get('search') }}" onkeyup="autoSearch(this);" onchange="autoSearch(this);" autocomplete="off" placeholder="{% trans %}search{% endtrans %}" class="js-search-val search__input form-control">
                             <input type="submit" value="" class="search__button js-search-val" />
-                            <span class="search__filters-link js-filters-link">Фильтры <span class="search__filters-count js-filter-styles-count">(0)</span></span>
+                            <span class="search__filters-link js-filters-link">{% trans %}filters{% endtrans %} <span class="search__filters-count js-filter-styles-count">(0)</span></span>
                             <div class="search__filters-block js-filters-block">
                                 {{ filters() }}
                             </div>

@@ -1,6 +1,6 @@
 <div class="filters">
     <div class="filters__left">
-        <div class="filters__label">Типы файлов</div>
+        <div class="filters__label">{% trans %}filters_files_types{% endtrans %}</div>
         {% for e in software %}
         <div class="filters__checkbox">
             <div class="box-field__input box-field__checkbox filters__checkbox-wrapper">
@@ -16,17 +16,17 @@
     <div class="filters__right">
         <div class="filters__params">
             <div class="filters__sort">
-                <div class="filters__label">Сортировать</div>
+                <div class="filters__label">{% trans %}filters_sort{% endtrans %}</div>
                 <div class="box-field__input">
                     <select name="sort" data-placeholder=" " class="styler form-control">
-                        <option value="date" {% if app.request.get('sort') == 'date' %}selected{% endif %}>По дате</option>
-                        <option value="comments" {% if app.request.get('sort') == 'comments' %}selected{% endif %}>По комментариям</option>
-                        <option value="views" {% if app.request.get('sort') == 'views' %}selected{% endif %}>По просмотрам</option>
+                        <option value="date" {% if app.request.get('sort') == 'date' %}selected{% endif %}>{% trans %}filters_sort_by_date{% endtrans %}</option>
+                        <option value="comments" {% if app.request.get('sort') == 'comments' %}selected{% endif %}>{% trans %}filters_sort_by_comments{% endtrans %}</option>
+                        <option value="views" {% if app.request.get('sort') == 'views' %}selected{% endif %}>{% trans %}filters_sort_by_views{% endtrans %}</option>
                     </select>
                 </div>
             </div>
             <div class="filters__style">
-                <div class="filters__label">Стили</div>
+                <div class="filters__label">{% trans %}filters_styles{% endtrans %}</div>
                 {% for e in style %}
                     <div class="filters__checkbox">
                         <div class="box-field__input box-field__checkbox filters__checkbox-wrapper">
@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="filters__button">
-            <button type="submit" class="button button_warning">Фильтровать</button>
+            <button type="submit" class="button button_warning">{% trans %}filters_filter_action{% endtrans %}</button>
         </div>
     </div>
 </div>

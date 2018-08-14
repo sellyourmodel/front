@@ -148,6 +148,14 @@ registration_create_account: Создать аккаунт
 registration_auth_in_socials: Войти через аккаунт в социальных сетях
 search_in_catalog: Поиск по каталогу
 search_in_catalog_notfound: Ничего не найдено.
+filters: Фильтры
+filters_files_types: Типы файлов
+filters_sort: Сортировать
+filters_sort_by_date: По дате
+filters_sort_by_comments: По комментариям
+filters_sort_by_views: По просмотрам
+filters_styles: Стили
+filters_filter_action: Фильтровать
 subscribe_unsubscribe: Отписаться от рассылки
 subscribe_question_1: Вы действительно хотите отписать e-mail
 subscribe_question_2: от рассылки?
