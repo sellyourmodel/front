@@ -38,6 +38,8 @@ select_number_purchased: Select the number of 3d models to be purchased
 order_price: Order price
 buy: Buy
 buy_btn: Buy
+buy_confirm: Confirm
+buy_confirm_title: Confirm buy model?
 buy_like: Like
 buy_thanks: Thanks!
 currency_rub: rub.

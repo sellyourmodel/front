@@ -10,14 +10,20 @@
                 {% endif %}
             {% else %}
                 {% if product.moderated %}
-                    <div class="box-button">
+                    <div class="box-button buy-block">
                         {% if app.user.models > 0 %}
-                            <a href="#" class="button button_warning button_warning--user-buy" onclick="buyThisModel(this, {{ product.id }});return false;">{% trans %}buy_btn{% endtrans %}</a>
+                            <a href="#" class="button button_warning button_warning--user-buy" onclick="questionBuyModel();return false;">{% trans %}buy_btn{% endtrans %}</a>
                         {% else %}
                             <a href="{{ path('cabinet_buy') }}" class="button button_warning button_warning--user-buy">{{ settings.modelPrice }} р.</a>
                         {% endif %}
                         <span class="button-info">{% trans %}models_available{% endtrans %}
                             <span>- {{ app.user.models }}</span></span>
+                        <div class="buy-block__confirm">
+                            <div class="buy-block__title">
+                                {% trans %}buy_confirm_title{% endtrans %}
+                            </div>
+                            <a href="#" class="button button_warning buy-block__btn-confirm button_warning--user-buy" onclick="buyThisModel(this, {{ product.id }});return false;">{% trans %}buy_confirm{% endtrans %}</a>
+                        </div>
                     </div>
                 {% endif %}
             {% endif %}

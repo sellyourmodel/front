@@ -52,6 +52,9 @@ function ajaxBuyModelsError(text) {
     }, 5000);
 }
 
+function questionBuyModel(){
+    $(".buy-block__confirm").fadeIn();
+}
 
 function buyThisModel(e, id){
     $.ajax({

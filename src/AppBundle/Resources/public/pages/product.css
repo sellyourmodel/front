@@ -51,3 +51,27 @@
 .button_warning--user-like:disabled:hover{
     background: #c8c8c8 !important;
 }
+
+.buy-block{
+    position: relative;
+}
+
+.buy-block__confirm{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+}
+
+.buy-block__title{
+    margin-bottom: 10px;
+}
+
+a.buy-block__btn-confirm{
+    width: auto;
+    text-align: center;
+}
