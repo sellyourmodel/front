@@ -1,0 +1,11 @@
+<h1>Вам пришло личное сообщение</h1>
+<p>Пользователь <a href="{{ url('user_view', {nickname:message.from.nickname}) }}">{{ message.from.nickname }}</a> отправил Вам личное сообщение:</p>
+<p>
+    {{ message.text|nl2br }}
+</p>
+<p><a href="{{ url('messages_dialog', {id:message.from.id}) }}">Перейти к диалогу</a></p>
+<p>
+    ---------
+    <br />
+    С уважением, команда Sellyourmodel.com
+</p>

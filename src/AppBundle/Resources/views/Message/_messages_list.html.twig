@@ -1,0 +1,22 @@
+{% if entities|length > 0 %}
+    {% for e in entities %}
+        <div class="comment">
+            <div class="box-top">
+                <div class="box-top__avatar">
+                    <a href="{{ path('user_view',{nickname:e.from.nickname}) }}">
+                        <img src="{% if e.from.image %}{% path e.from.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt="">
+                    </a>
+                </div>
+                <div class="box-top__cont">
+                                        <span class="author">
+                                            <a href="{{ path('user_view',{nickname:e.from.nickname}) }}">{{ e.from.nickname }}</a>
+                                            <span class="date">{{ e.date|date("H:i d.m.Y") }}</span>
+                                        </span>
+                    <p>{{ e.text|nl2br }}</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Сообщений нет.</p>
+{% endif %}

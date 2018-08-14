@@ -258,3 +258,7 @@ product_log_comment: "Примечание: {comment}"
 product_log_deleted: Модель удалена
 product_log_edited: Модель отредактирована
 product_log_buyed: Модель куплена пользователем
+messages: Сообщения
+messages_dialog: Диалог с
+messages_dialog_text: Введите текст сообщения
+messages_dialog_btn_send: Отправить сообщение

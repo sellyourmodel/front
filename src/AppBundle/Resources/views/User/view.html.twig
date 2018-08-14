@@ -19,7 +19,7 @@
                         {% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}
                     </p>
                     {% if app.user and app.user != entity %}
-                        <button class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</button>
+                        <a href="{{ path('messages_dialog',{id:entity.id}) }}" class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</a>
                     {% endif %}
                     {% if is_granted('ROLE_SUPER_ADMIN') and app.user and app.user != entity %}
                         <br/>

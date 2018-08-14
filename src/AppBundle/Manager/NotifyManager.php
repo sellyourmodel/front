@@ -2,6 +2,7 @@
 
 namespace AppBundle\Manager;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\Notify;
 use AppBundle\Entity\ProductComment;
 use AppBundle\Entity\Response;
@@ -255,6 +256,20 @@ class NotifyManager
         ]);
 
         $this->_sendEmail('На сайте добавлен новый комментарий', $this->adminEmails, $messageText);
+
+    }
+
+    /**
+     *  Отправка уведомления о новом сообщении
+     */
+    public function sendNewMessageEmail(Message $message)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:newMessage.html.twig', [
+            "message" => $message
+        ]);
+
+        $this->_sendEmail('Вам пришло личное сообщение', $message->getTo()->getEmail(), $messageText);
 
     }
 

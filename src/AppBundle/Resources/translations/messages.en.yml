@@ -256,3 +256,7 @@ product_log_comment: "Comment: {comment}"
 product_log_deleted: Model deleted
 product_log_edited: Model edited
 product_log_buyed: Model buy by user
+messages: Messages
+messages_dialog: Messages with
+messages_dialog_text: Enter message text
+messages_dialog_btn_send: Send message
