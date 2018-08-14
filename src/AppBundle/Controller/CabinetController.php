@@ -550,8 +550,8 @@ class  CabinetController extends Controller
 
         $count = intval($request->get('count'));
 
-        if ($count == 0) {
-            return $returnError('Количество должно быть большое 0', 'email');
+        if ($count < 2) {
+            return $returnError('Минимально для покупки 2 модели', 'email');
         }
 
         $order = new PaymentOrder();
