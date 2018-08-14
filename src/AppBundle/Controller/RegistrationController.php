@@ -89,6 +89,10 @@ class  RegistrationController extends Controller
         $user->setPlainPassword($password);
         $user->setEnabled(true);
 
+        $code = strtoupper(chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90)) . chr(rand(65, 90)));
+        $user->setEmailNeedCheck(true);
+        $user->setEmailConfirmCode($code);
+
         $em->persist($user);
         $em->flush($user);
 
@@ -103,8 +107,28 @@ class  RegistrationController extends Controller
             return JsonResponse::create(["error" => true, "error_text" => 'Регистрация на данный моммент недоступна']);
         }
 
-        $this->get('wp.notify.manager')->sendRegistrationEmail($user, $password);
+        $this->get('wp.notify.manager')->sendRegistrationEmail($user, $password, $code);
 
         return JsonResponse::create(["error"=>false]);
+    }
+
+    /**
+     * @Route("/registration/confirm/{code}/", name="registration_confirm")
+     * @Template()
+     */
+    public function confirmAction(Request $request, $code)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $em->getRepository('AppBundle:User')->findOneBy(["code"=>$code, "emailConfirm"=>false, "emailNeedCheck"=>true]);
+
+        if($user){
+            $user->setEmailConfirm(true);
+            $em->flush($user);
+        }
+
+        return [
+            "user"=>$user
+        ];
     }
 }

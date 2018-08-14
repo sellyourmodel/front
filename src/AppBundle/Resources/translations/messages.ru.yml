@@ -146,6 +146,9 @@ registration_forgot_password: Забыли пароль?
 registration_has_account: Уже есть учетная запись?
 registration_create_account: Создать аккаунт
 registration_auth_in_socials: Войти через аккаунт в социальных сетях
+registration_confirm: Подтверждение регистрации
+registration_confirm_done: Регистрация подтверждена.
+registration_confirm_error: Неверная ссылка для подтверждения регистрации, либо аккаунт уже подтвержден.
 search_in_catalog: Поиск по каталогу
 search_in_catalog_notfound: Ничего не найдено.
 filters: Фильтры

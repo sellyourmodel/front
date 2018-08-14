@@ -27,4 +27,30 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @return array
+     */
+    public function findNotConfirmedEmails()
+    {
+
+        $qb = $this->createQueryBuilder('u');
+
+        $date = new \DateTime();
+        $date->modify("-1 day");
+
+        $qb->andWhere('u.emailNeedCheck = :emailNeedCheck')
+            ->setParameter('emailNeedCheck', true)
+        ;
+
+        $qb->andWhere('u.emailConfirm = :emailConfirm')
+            ->setParameter('emailConfirm', false)
+        ;
+
+        $qb->andWhere('u.createdAt < :date')
+            ->setParameter('date', $date);
+
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

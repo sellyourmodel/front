@@ -144,6 +144,9 @@ registration_forgot_password: Forgot your password?
 registration_has_account: Already have an account?
 registration_create_account: Create an account
 registration_auth_in_socials: Sign in with your account on social networks
+registration_confirm: Registration confirm
+registration_confirm_done: Registration confirm done.
+registration_confirm_error: Fail link to confirm registration account or account already confirmed.
 search_in_catalog: Search in catalog
 search_in_catalog_notfound: Nothing found.
 filters: Filters

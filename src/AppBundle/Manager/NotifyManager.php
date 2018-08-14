@@ -101,15 +101,30 @@ class NotifyManager
     /**
      *  Отправка сообщения о регистрации
      */
-    public function sendRegistrationEmail(User $user, $password)
+    public function sendRegistrationEmail(User $user, $password, $code)
     {
 
         $messageText = $this->templating->render('AppBundle:Mail:registration.html.twig', [
             "user" => $user,
-            "password" => $password
+            "password" => $password,
+            "code"=>$code
         ]);
 
         $this->_sendEmail('Регистрация на сайте Sellyourmodel.com', $user, $messageText);
+
+    }
+
+    /**
+     *  Отправка сообщения о блокировке после не подтверждения email
+     */
+    public function sendBlockByRegistrationEmail(User $user)
+    {
+
+        $messageText = $this->templating->render('AppBundle:Mail:registrationBlockBy24H.html.twig', [
+            "user" => $user
+        ]);
+
+        $this->_sendEmail('Блокировка аккаунта на сайте Sellyourmodel.com', $user, $messageText);
 
     }
 

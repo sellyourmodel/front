@@ -44,6 +44,27 @@ class User extends BaseUser
     /**
      * @var string
      *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $emailNeedCheck = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $emailConfirmCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $emailConfirm = false;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $f;
@@ -1211,5 +1232,77 @@ class User extends BaseUser
     public function getNotifyNews()
     {
         return $this->notifyNews;
+    }
+
+    /**
+     * Set emailNeedCheck
+     *
+     * @param boolean $emailNeedCheck
+     *
+     * @return User
+     */
+    public function setEmailNeedCheck($emailNeedCheck)
+    {
+        $this->emailNeedCheck = $emailNeedCheck;
+
+        return $this;
+    }
+
+    /**
+     * Get emailNeedCheck
+     *
+     * @return boolean
+     */
+    public function getEmailNeedCheck()
+    {
+        return $this->emailNeedCheck;
+    }
+
+    /**
+     * Set emailConfirmCode
+     *
+     * @param string $emailConfirmCode
+     *
+     * @return User
+     */
+    public function setEmailConfirmCode($emailConfirmCode)
+    {
+        $this->emailConfirmCode = $emailConfirmCode;
+
+        return $this;
+    }
+
+    /**
+     * Get emailConfirmCode
+     *
+     * @return string
+     */
+    public function getEmailConfirmCode()
+    {
+        return $this->emailConfirmCode;
+    }
+
+    /**
+     * Set emailConfirm
+     *
+     * @param boolean $emailConfirm
+     *
+     * @return User
+     */
+    public function setEmailConfirm($emailConfirm)
+    {
+        $this->emailConfirm = $emailConfirm;
+
+        return $this;
+    }
+
+    /**
+     * Get emailConfirm
+     *
+     * @return boolean
+     */
+    public function getEmailConfirm()
+    {
+        return $this->emailConfirm;
     }
 }
