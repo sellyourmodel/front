@@ -308,7 +308,7 @@ class  CatalogController extends Controller
         }
 
         $log = new ProductLog();
-        $log->setText('Модель добавлена на сайт');
+        $log->setText('product_log_add');
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -431,7 +431,7 @@ class  CatalogController extends Controller
         $em->flush($entity);
 
         $log = new ProductLog();
-        $log->setText('Модель отмодерирована');
+        $log->setText('product_log_moderated');
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -479,7 +479,8 @@ class  CatalogController extends Controller
         $em->flush($entity);
 
         $log = new ProductLog();
-        $log->setText('Модель заблокирована по причине: ' . $request->get('reason'));
+        $log->setText('product_log_block');
+        $log->setLog($request->get('reason'));
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -523,7 +524,8 @@ class  CatalogController extends Controller
         }
 
         $log = new ProductLog();
-        $log->setText('Примечание:' . PHP_EOL . $request->get('comment'));
+        $log->setText('product_log_comment');
+        $log->setComment($request->get('comment'));
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -569,7 +571,7 @@ class  CatalogController extends Controller
         $em->flush($entity);
 
         $log = new ProductLog();
-        $log->setText('Модель разблокирована');
+        $log->setText('product_log_unblock');
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -612,7 +614,7 @@ class  CatalogController extends Controller
         $em->flush($entity);
 
         $log = new ProductLog();
-        $log->setText('Модель удалена');
+        $log->setText('product_log_deleted');
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -1008,7 +1010,7 @@ class  CatalogController extends Controller
         }
 
         $log = new ProductLog();
-        $log->setText('Модель отредактирована');
+        $log->setText('product_log_edited');
         $log->setProduct($entity);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());
@@ -1094,7 +1096,7 @@ class  CatalogController extends Controller
         $em->flush($buy);
 
         $log = new ProductLog();
-        $log->setText('Модель куплена пользователем');
+        $log->setText('product_log_buyed');
         $log->setProduct($product);
         $log->setUser($this->getUser());
         $log->setDate(new \DateTime());

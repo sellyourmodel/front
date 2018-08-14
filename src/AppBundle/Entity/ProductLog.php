@@ -47,6 +47,13 @@ class ProductLog
     /**
      * @var string
      *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $comment;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="datetime", nullable=false)
      */
     private $date;
@@ -155,5 +162,29 @@ class ProductLog
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set comment
+     *
+     * @param string $comment
+     *
+     * @return ProductLog
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * Get comment
+     *
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 }

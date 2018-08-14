@@ -77,7 +77,7 @@
                     {% for e in product.log %}
                         <tr>
                             <td>{{ e.date|date("H:i d.m.Y") }}</td>
-                            <td>{{ e.text|nl2br }}</td>
+                            <td>{{ e.text|trans|nl2br|replace({'{comment}':e.comment}) }}</td>
                             <td>
                                 <a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.nickname }}</a>
                             </td>

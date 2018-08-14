@@ -245,3 +245,11 @@ comments_my_model_admin: My models comments
 comments: Comments
 comments_to_model: Model comment
 comments_delete: Delete comment?
+product_log_block: "Model block by reason: {comment}"
+product_log_unblock: Model unblock
+product_log_add: Model add to site
+product_log_moderated: Model moderated
+product_log_comment: "Comment: {comment}"
+product_log_deleted: Model deleted
+product_log_edited: Model edited
+product_log_buyed: Model buy by user

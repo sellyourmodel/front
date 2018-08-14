@@ -247,3 +247,11 @@ comments_my_model_admin: Комментарии к моим моделям
 comments: Комментарии
 comments_to_model: Комментарий к модели
 comments_delete: Вы действительно хотите удалить данный комментарий?
+product_log_block: "Модель заблокирована по причине: {comment}"
+product_log_unblock: Модель разблокирована
+product_log_add: Модель добавлена на сайт
+product_log_moderated: Модель отмодерирована
+product_log_comment: "Примечание: {comment}"
+product_log_deleted: Модель удалена
+product_log_edited: Модель отредактирована
+product_log_buyed: Модель куплена пользователем
