@@ -18,7 +18,7 @@
     'bundles/app/custom-js/anythingslider/css/anythingslider.css'
     'bundles/app/custom-css/*.css'
     'bundles/app/pages/*.css'
-    filter='cssrewrite' output='css/20181208-2.css' %}
+    filter='cssrewrite' output='css/20181208-3.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     <!-- [if lt IE 9] -->
@@ -81,7 +81,7 @@
                             <span class="mini-profile__link">
                                 <span class="mini-profile__link-login-wrapper">
                                     <a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="mini-profile__link-login-name">{{ app.user.nickname }}</a>
-                                    <a href="#" data-target="#nav-profile" class="mini-profile__link-login-arrow arrow-down arrow-down--profile js-link-open {% block navblock_active_class %}{% endblock %}"></a>
+                                    <a href="#" data-target="#nav-profile" class="mini-profile__link-login-arrow arrow-down arrow-down--profile js-link-open active"></a>
                                 </span>
                             </span>
                         </div>
@@ -94,7 +94,7 @@
                     {{ menu() }}
                 </div>
                 {% if app.user %}
-                    <div id="nav-profile" style="{% block navblock_style %}{% endblock %}" class="nav-profile js-open-block js-open-block-noclose">
+                    <div id="nav-profile" class="nav-profile clearfix js-open-block js-open-block-noclose {% block navblock_class %}{% endblock %}">
                         <ul class="nav-profile-list unstyled">
                             <li class="nav-profile-list__item"><a href="{{ path('cabinet') }}" class="nav-profile-list__link">{% trans %}public_profile{% endtrans %}</a></li>
                             <li class="nav-profile-list__item"><a href="{{ path('messages') }}" class="nav-profile-list__link">{% trans %}messages{% endtrans %}</a>{{ unreadMessage() }}</li>

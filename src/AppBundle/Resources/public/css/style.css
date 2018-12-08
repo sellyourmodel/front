@@ -2016,16 +2016,18 @@ header {
 
 .navigation,
 .nav-profile {
-  display: none;
-  position: absolute;
-  top: 100%;
   left: 10px;
   right: 10px;
   border-top: 1px solid #e5e5e5;
   background-color: #f7f7f7;
   z-index: 75; }
+  .navigation--main-page,
+  .nav-profile--main-page {
+    position: absolute;
+    top: 100%; }
 
 .navigation {
+  display: none;
   z-index: 100 !important;
   overflow: hidden; }
   .navigation-table {
