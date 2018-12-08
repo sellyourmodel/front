@@ -9,26 +9,25 @@
     <div class="wrapper">
         <div class="main-wrap catalog">
             <div class="main-wrap__header">
-                {#<div class="box-select-group">
-                    <select class="styler">
+                <form action="" method="GET" class="box-select-group js-category-filter">
+                    <select name="software" onchange="catalogFilter();" class="styler">
                         <option value="0">Все форматы</option>
-                        <option value="1">Все форма 1</option>
-                        <option value="2">Все форма 2</option>
+                        {% for e in software %}
+                            <option value="{{ e.id }}" {% if app.request.get('software', '0') == e.id %}selected{% endif %}>{{ e.name }} ({{ e.count }})</option>
+                        {% endfor %}
                     </select>
-                    <select class="styler">
-                        <option value="0">Все стили</option>
-                        <option value="1">Все сти 1</option>
+                    <select name="style" onchange="catalogFilter();" class="styler">
+                        <option value="">Все стили</option>
+                        {% for e in style %}
+                            <option value="{{ e.id }}" {% if app.request.get('style', '0') == e.id %}selected{% endif %}>{{ e.name }} ({{ e.count }})</option>
+                        {% endfor %}
                     </select>
-                    <select class="styler">
-                        <option value="0">Все зоны</option>
-                        <option value="1">Лето</option>
-                        <option value="2">Зима</option>
+                    <select name="sort" onchange="catalogFilter();" class="styler">
+                        <option value="date" {% if app.request.get('sort', 'date') == 'date' %}selected{% endif %}>{% trans %}filters_sort_by_date{% endtrans %}</option>
+                        <option value="comments" {% if app.request.get('sort') == 'comments' %}selected{% endif %}>{% trans %}filters_sort_by_comments{% endtrans %}</option>
+                        <option value="views" {% if app.request.get('sort') == 'views' %}selected{% endif %}>{% trans %}filters_sort_by_views{% endtrans %}</option>
                     </select>
-                    <select class="styler">
-                        <option value="0">По дате</option>
-                        <option value="1">рейтингу</option>
-                    </select>
-                </div>#}
+                </form>
                 {% if category.parent %}
                     <h1><a href="{{ path('catalog_category',{alias:category.parent.alias}) }}" class="link link_warning">{{ category.parent.nameLocale }}</a> <span class="text-warning devider">/</span> {{ category.nameLocale }}</h1>
                 {% else %}
@@ -44,15 +43,9 @@
             {% endif %}
         </div>
 
-            {% if products|length > 0 %}
-                <ul class="product-list col-4">
-                    {% for e in products %}
-                        {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e} %}
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <div class="product_list--empty">{% trans %}category_not_have_models{% endtrans %}</div>
-            {% endif %}
+        <div class="js-products">
+            {% include 'AppBundle:Catalog:_category_inside.html.twig' %}
+        </div>
 
     </div>
 {% endblock %}

@@ -2565,13 +2565,14 @@ header {
     padding: 16px 22px;
     border-bottom: 1px solid #e5e5e5; }
     .main-wrap__header .box-select-group {
-      height: 100px;
+      height: 74px;
       white-space: nowrap;
       border: none;
       float: right;
-      margin: -29px -13px -29px 0;
-      padding: 35px 0 31px 44px; }
+      margin: -16px -13px -16px 0;
+      padding: 22px 0 18px 44px; }
       .main-wrap__header .box-select-group .jq-selectbox__dropdown {
+        width: auto;
         min-width: 120px; }
       .main-wrap__header .box-select-group .jq-selectbox__select {
         display: inline-block;

@@ -38,7 +38,7 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
      *
      * @return array
      */
-    public function getByCategories($categories)
+    public function getByCategories($categories, $filter, $sort)
     {
         $qb = $this->_baseQb();
 
@@ -46,6 +46,32 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('p.category IN (:categories)')
             ->setParameter('categories', $categories)
         ;
+
+        if(isset($filter["software"]) AND $filter["software"]){
+            $qb
+                ->leftJoin('p.software', 's')
+                ->andWhere('s.id = :software')
+                ->setParameter('software', $filter["software"])
+            ;
+        }
+
+        if(isset($filter["style"]) AND $filter["style"]){
+            $qb
+                ->leftJoin('p.style', 'st')
+                ->andWhere('st.id = :style')
+                ->setParameter('style', $filter["style"])
+            ;
+        }
+
+        if($sort == 'date'){
+            $qb->orderBy('p.date', 'DESC');
+        }
+        if($sort == 'comments'){
+            $qb->orderBy('p.comments', 'DESC');
+        }
+        if($sort == 'views'){
+            $qb->orderBy('p.views', 'DESC');
+        }
 
         return $qb->getQuery()->getResult();
     }

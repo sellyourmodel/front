@@ -680,12 +680,30 @@ class  CatalogController extends Controller
             }
         }
 
-        $responseData = [];
-        $responseData["category"] = $category;
-        $responseData["products"] = $em->getRepository('AppBundle:Product')->getByCategories($categories);
+        $sort = $request->get('sort', 'date');
 
-        $html = $this->get('templating')->render('AppBundle:Catalog:category.html.twig', $responseData);
-        return new Response($html, Response::HTTP_OK);
+        $filter = [];
+        if(intval($request->get('software'))){
+            $filter["software"] = intval($request->get('software'));
+        }
+        if(intval($request->get('style'))){
+            $filter["style"] = intval($request->get('style'));
+        }
+
+        $responseData = [];
+        $responseData["software"] = $em->getRepository('AppBundle:Software')->findForStats();
+        $responseData["style"] = $em->getRepository('AppBundle:Style')->findForStats();
+        $responseData["category"] = $category;
+        $responseData["products"] = $em->getRepository('AppBundle:Product')->getByCategories($categories, $filter, $sort);
+
+        if($request->isXmlHttpRequest()){
+            $html = $this->get('templating')->render('AppBundle:Catalog:_category_inside.html.twig', $responseData);
+            return new JsonResponse(["error"=>false, "html"=>$html]);
+        }else{
+            $html = $this->get('templating')->render('AppBundle:Catalog:category.html.twig', $responseData);
+            return new Response($html, Response::HTTP_OK);
+        }
+
     }
 
     /**
