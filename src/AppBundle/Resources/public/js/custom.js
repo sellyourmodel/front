@@ -43,8 +43,8 @@ $(function () {
             $('.block-pof').show();
         }
         if ($(dataTarget).length) {
-            $('.js-open-block:not(.js-open-block-noclose)').not(dataTarget).slideUp();
-            $(dataTarget).slideToggle();
+            $('.js-open-block:not(.js-open-block-noclose)').not(dataTarget).hide();
+            $(dataTarget).toggle();
 
         }
 
@@ -53,7 +53,7 @@ $(function () {
 
 
     $('.block-pof').click(function () {
-        $('.js-open-block').slideUp();
+        $('.js-open-block').hide();
         $('.js-link-open').removeClass('active');
         $(this).hide();
     });
