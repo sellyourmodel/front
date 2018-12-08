@@ -1,9 +1,10 @@
 model_add: Upload 3D model
-buy_add: Buy model
+buy_add: Buy 3D model
 about: About us
 buy: Sell 3D models
 community: Community
 support: Support
+tech_support: Support
 auth: Auth
 registration: Registration
 arrow_up: Up
@@ -48,6 +49,11 @@ user_agreement: user agreement
 buy_form_redirect: There is a redirect to the order form, if it did not happen click on the button below.
 go_to_pay_btn: Proceed to checkout
 settings_header: Settings
+my_models: My models
+my_products_loaded: Loaded models
+my_products_moderation: On moderation
+my_products_buys: My purchases
+my_products_favorites: In favorites
 profile: Profile
 change_password: Change password
 socials: Soc. profiles
@@ -55,6 +61,8 @@ nickname: Nickname
 level: Level
 without_wins: Without victories
 wins_postfix: victories
+email: E-mail
+main_info: Main info
 avatar: Avatar
 avatar_maxsize: The maximum allowable size is 100x100px
 profile_name: First name
@@ -98,6 +106,9 @@ block: Block
 unblock: Unlock
 model_name: Model name
 category: Category
+model_images: Model images
+model_files: Model files
+model_info: Information
 model_cover: Cover model
 model_custom_images: Additional model images
 model_files: Model files
@@ -179,7 +190,9 @@ user_gallery: Gallery
 user_statistics: Statistics
 user_withdrawals: Withdrawal of funds
 user_favourite: My favorites
+user_in_favourite: In favorites
 user_purchases: Purchases
+user_comments: Comments
 user_not_loaded_models: User did not load models
 user_not_loaded_objects: User has not uploaded items to the gallery
 user_models_loaded: Loaded models
@@ -187,7 +200,10 @@ user_last_operations: Recent operations
 user_last_operations_date: Date
 user_last_operations_operation: Operation
 user_last_operations_price: For the amount of
+user_last_withdrawl: Last withdrawal
+user_all_transactions: Show all transactions
 user_sales_balance: Your sales balance
+user_all_sales_balance: Total sales
 user_total_sales: Total sales
 user_models_buying: Buying models
 user_available: Available
@@ -205,9 +221,12 @@ settings: Settings
 notifications: Notifications
 exit: Exit
 loaded_models: Uploaded Models
+loaded_models_moderation: (on moderation)
+tooltip_loaded_models: Count loaded models
 views: Views
 current_sales: Current sales
 total_sales: Total sales
+drawals_header_link: Withdrawal of funds
 available_models: Available Models
 purchases: Purchases
 tooltip_sales: The amount received from the sales of Your models

@@ -1,0 +1,48 @@
+{% extends 'AppBundle::_main.html.twig' %}
+
+{% block content %}
+
+    <div class="wrapper">
+        <div class="box-tab">
+            <div class="tab-wrap">
+                <div class="tab-title">
+                    <ul class="nav-tabs-list tabs">
+                        <li class="nav-tabs-list__item nav-tabs-list--profile {% if app.request.get('tab', 'buy') == 'buy' %}active{% endif %}"><a href="#" data-tab="js-tab-1" class="nav-tabs-list__link">{% trans %}my_products_buys{% endtrans %}</a></li>
+                        <li class="nav-tabs-list__item nav-tabs-list--profile {% if app.request.get('tab', 'buy') == 'favorites' %}active{% endif %}"><a href="#" data-tab="js-tab-2" class="nav-tabs-list__link">{% trans %}my_products_favorites{% endtrans %}</a></li>
+                    </ul>
+                    <div class="tab-show-all">
+                    </div>
+                </div>
+
+                <div class="box-tab-cont">
+                    <div class="js-tab-1 tab-cont {% if app.request.get('tab', 'buy') == 'buy' %}{% else %}hide{% endif %}">
+                        {% if productsBuys|length > 0 %}
+                            <ul class="product-list">
+                                {% for e in productsBuys %}
+                                    {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e.product} %}
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="no-items">
+                                У Вас нет покупок.
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="js-tab-2 tab-cont {% if app.request.get('tab', 'buy') == 'favorites' %}{% else %}hide{% endif %}">
+                        {% if productsFavorites|length > 0 %}
+                            <ul class="product-list">
+                                {% for e in productsFavorites %}
+                                    {% include 'AppBundle:Catalog:_product_in_category.html.twig' with {'e':e.product} %}
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="no-items">
+                                У Вас нет моделей в избранном.
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

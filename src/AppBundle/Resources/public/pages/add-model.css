@@ -37,8 +37,8 @@
 
 .add-model__remove-file {
     display: inline-block;
-    width:17px;
-    height: 17px;
+    width:23px;
+    height: 23px;
     background: url("../img/btn-remove-img.png");
     cursor: pointer;
     vertical-align: middle;
@@ -48,8 +48,8 @@
 
 .add-model__remove-file--image{
     position: absolute;
-    top: -7px;
-    right: -7px;
+    top: 0px;
+    right: 0px;
 }
 
 .add-model__loaded-img {

@@ -62,14 +62,14 @@ class NotifyManager
         if($to instanceof User){
             $email = $to->getEmail();
 
-            $notify = new Notify();
+            /*$notify = new Notify();
             $notify->setUser($to);
             $notify->setName($subject);
             $notify->setDate(new \DateTime());
             $notify->setText($text);
 
             $this->em->persist($notify);
-            $this->em->flush($notify);
+            $this->em->flush($notify);*/
 
         }
         else{
@@ -189,6 +189,16 @@ class NotifyManager
             $sendEmail = false;
         }
 
+        $notify = new Notify();
+        $notify->setProduct($product);
+        $notify->setUser($product->getUser());
+        $notify->setUser2($user);
+        $notify->setType("buy");
+        $notify->setDate(new \DateTime());
+
+        $this->em->persist($notify);
+        $this->em->flush($notify);
+
         $this->_sendEmail('Ваша модель куплена пользователем', $product->getUser(), $messageText, $sendEmail);
 
     }
@@ -212,6 +222,27 @@ class NotifyManager
         }
 
         $this->_sendEmail('Вы купили модель', $user, $messageText, $sendEmail);
+
+    }
+
+    /**
+     *  Отправка пользователю о комментировании его модели
+     */
+    public function sendAddCommentEmail(ProductComment $comment)
+    {
+
+        if($comment->getProduct()->getUser() != $comment->getUser()){
+            $notify = new Notify();
+            $notify->setProduct($comment->getProduct());
+            $notify->setUser($comment->getProduct()->getUser());
+            $notify->setUser2($comment->getUser());
+            $notify->setType("comment");
+            $notify->setText($comment->getText());
+            $notify->setDate(new \DateTime());
+
+            $this->em->persist($notify);
+            $this->em->flush($notify);
+        }
 
     }
 

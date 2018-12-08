@@ -6,7 +6,7 @@
         <h1>{% block cabinetTitle %}{% trans %}settings_header{% endtrans %}{% endblock %}</h1>
     </div>
     <div class="wrap wrap_small support">
-        <div class="wrap-right">
+        <div class="wrap-right wrap-right--profile">
             <ul class="wrap-list">
                 {% if is_granted('ROLE_SUPER_ADMIN') %}
                     <li class="wrap-list__item">
@@ -26,7 +26,7 @@
                     <a href="{{ path('notify') }}" class="wrap-list__link">{% trans %}notifications{% endtrans %}</a>
                 </li>
                 <li class="wrap-list__item">
-                    <a href="{{ path('cabinet_tickets') }}" class="wrap-list__link">Обращения в тех поддержку</a>
+                    <a href="{{ path('cabinet_tickets') }}" class="wrap-list__link">{% trans %}tech_support{% endtrans %}</a>
                 </li>
                 <li class="wrap-list__item">
                     <a href="{{ path('cabinet_password') }}" class="wrap-list__link">{% trans %}change_password{% endtrans %}</a>
@@ -36,7 +36,7 @@
                 </li>
             </ul>
         </div>
-        <div class="wrap-left">
+        <div class="wrap-left wrap-left--profile">
             {% block cabinetContent %}{% endblock %}
         </div>
     </div>

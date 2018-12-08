@@ -18,7 +18,7 @@
     'bundles/app/custom-js/anythingslider/css/anythingslider.css'
     'bundles/app/custom-css/*.css'
     'bundles/app/pages/*.css'
-    filter='cssrewrite' output='css/20180814-2.css' %}
+    filter='cssrewrite' output='css/20181208-2.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     <!-- [if lt IE 9] -->
@@ -74,13 +74,16 @@
                     {% if app.user %}
                         <a href="{{ path('cabinet_buy') }}" class="header-table__item add-models buy-model" style="width:165px;"><span>{% trans %}buy_add{% endtrans %}</span></a>
                         <a href="{{ path('catalog_add') }}" class="header-table__item add-models" style="width:165px;"><span>{% trans %}model_add{% endtrans %}</span></a>
-                        <div data-target="#nav-profile" class="header-table__item mini-profile js-link-open {% block navblock_active_class %}{% endblock %}">
-                            <a href="#" class="mini-profile__img" style="width:45px;"><img src="{% if app.user.image %}{% path app.user.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt=""></a>
-                            <a href="#" class="mini-profile__link">
-                                <span class="arrow-down mini-profile__link-login-wrapper">
-                                    <span class="mini-profile__link-login-name">{{ app.user.nickname }}</span><span class="ic icon-author-rating icon-author-rating__{{ app.user.lvl }}"></span>
-                                </span>
+                        <div data-target="#nav-profile" class="header-table__item mini-profile ">
+                            <a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="mini-profile__img" style="width:45px;">
+                                <img src="{% if app.user.image %}{% path app.user.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt="">
                             </a>
+                            <span class="mini-profile__link">
+                                <span class="mini-profile__link-login-wrapper">
+                                    <a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="mini-profile__link-login-name">{{ app.user.nickname }}</a>
+                                    <a href="#" data-target="#nav-profile" class="mini-profile__link-login-arrow arrow-down arrow-down--profile js-link-open {% block navblock_active_class %}{% endblock %}"></a>
+                                </span>
+                            </span>
                         </div>
                     {% else %}
                         <a href="#login" class="header-table__item link-login fancybox"><span>{% trans %}auth{% endtrans %}</span></a>
@@ -93,26 +96,30 @@
                 {% if app.user %}
                     <div id="nav-profile" style="{% block navblock_style %}{% endblock %}" class="nav-profile js-open-block js-open-block-noclose">
                         <ul class="nav-profile-list unstyled">
-                            <li class="nav-profile-list__item"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="nav-profile-list__link">{% trans %}public_profile{% endtrans %}</a></li>
-                            <li class="nav-profile-list__item"><a href="{{ path('cabinet') }}" class="nav-profile-list__link">{% trans %}settings{% endtrans %}</a></li>
-                            <li class="nav-profile-list__item"><a href="{{ path('notify') }}" class="nav-profile-list__link">{% trans %}notifications{% endtrans %}{#<span class="kbd">2</span>#}</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('cabinet') }}" class="nav-profile-list__link">{% trans %}public_profile{% endtrans %}</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('messages') }}" class="nav-profile-list__link">{% trans %}messages{% endtrans %}</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('notify') }}" class="nav-profile-list__link">{% trans %}notifications{% endtrans %}</a>{{ unreadNotify() }}</li>
                             <li class="nav-profile-list__item"><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}{{ path('homepage',{_switch_user: "_exit"}) }}{% else %}{{ path('fos_user_security_logout') }}{% endif %}" class="nav-profile-list__link">{% trans %}exit{% endtrans %}</a></li>
                         </ul>
                         <div class="nav-profile-wrap nav-profile-wrap--has-tooltip">
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">{% trans %}loaded_models{% endtrans %}</a></div>
-                                <div class="nav-profile__count">{{ app.user.modelsLoaded }}</div>
-                                <div class="nav-profile__footer">      <span class="delspin"><span>{% trans %}views{% endtrans %}</span><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}">Коментарии</a><span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
+                                <div class="nav-profile__title">
+                                    <a href="{{ path('catalog_my_products') }}">{% trans %}loaded_models{% endtrans %}</a>
+                                    <span class="nav-profile__add-info"> {% trans %}loaded_models_moderation{% endtrans %}</span>
+                                    <span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_loaded_models{% endtrans %}</span></span>
+                                </div>
+                                <div class="nav-profile__count">{{ app.user.modelsLoaded }}{% if app.user.modelsModeration and app.user.modelsModeration > 0 %}<span class="nav-profile__count--add-info">({{ app.user.modelsModeration }})</span>{% endif %}</div>
+                                <div class="nav-profile__footer">      <span class="delspin"><span>{% trans %}views{% endtrans %}:</span><span class="kbd">{{ app.user.modelsLoadedView }}</span></span><span class="delspin"><a href="{{ path('catalog_my_products_comments') }}">{% trans %}user_comments{% endtrans %}</a>:<span class="kbd">{{ app.user.modelsLoadedComments }}</span></span></div>
                             </div>
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_sales{% endtrans %}</span></span></div>
+                                <div class="nav-profile__title"><a href="{{ path('user_view_stats',{nickname:app.user.nickname}) }}">{% trans %}current_sales{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_sales{% endtrans %}</span></span></div>
                                 <div class="nav-profile__count">{{ app.user.balance }} руб.</div>
-                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}total_sales{% endtrans %}</a><span class="kbd">{{ app.user.balance }} руб.</span></span></div>
+                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('myprofile_withdrawals') }}">{% trans %}drawals_header_link{% endtrans %}</a></span></div>
                             </div>
                             <div class="nav-profile__item">
-                                <div class="nav-profile__title"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"stats"}) }}">{% trans %}available_models{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_downloads{% endtrans %}</span></span></div>
+                                <div class="nav-profile__title"><a href="{{ path('cabinet_buy') }}">{% trans %}available_models{% endtrans %}</a><span class="simbol tooltip">?<span class="tooltip__text">{% trans %}tooltip_downloads{% endtrans %}</span></span></div>
                                 <div class="nav-profile__count">{{ app.user.models }}</div>
-                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"buy"}) }}">{% trans %}purchases{% endtrans %}</a></span><span class="delspin"><a href="{{ path('user_view',{nickname:app.user.nickname, "tab":"favorites"}) }}">Избранное</a><span class="kbd">{{ app.user.modelsFavorites }}</span></span></div>
+                                <div class="nav-profile__footer"><span class="delspin"><a href="{{ path('catalog_my_buys',{"tab":"buy"}) }}">{% trans %}purchases{% endtrans %}</a></span><span class="delspin"><a href="{{ path('catalog_my_buys',{"tab":"favorites"}) }}">{% trans %}user_in_favourite{% endtrans %}</a>:<span class="kbd">{{ app.user.modelsFavorites }}</span></span></div>
                             </div>
                         </div>
                     </div>
@@ -230,23 +237,6 @@
             </div>
         </div>
     </div>
-    <div id="withdrawalsAdd" class="window-open">
-        <div class="window-open-cont">
-            <div class="box-form withdrawals__form">
-                <h3>{% trans %}modal_withdrawals_header{% endtrans %}</h3>
-                <form action="{{ path('cabinet_withdrawal_write') }}" method="POST" class="js-withdrawal-add-form">
-                    <div class="box-field login-error">
-                        <div class="login-error__text js-withdrawal-add-error"></div>
-                        <label class="box-field__label">{% trans %}modal_withdrawals_sum{% endtrans %}</label>
-                        <div class="box-field__input">
-                            <input type="number" name="price" class="form-control">
-                        </div>
-                    </div>
-                    <input type="submit" value="{% trans %}modal_withdrawals_send{% endtrans %}" class="button button_warning button_block box-form__button" onclick="ajaxWithdrawalAdd();return false;" />
-                </form>
-            </div>
-        </div>
-    </div>
     <div id="crop" class="window-open">
         <div class="window-open-cont">
             <div class="box-form">
@@ -277,7 +267,7 @@
     'bundles/app/custom-js/jquery-ui/jquery-ui.js'
     'bundles/app/custom-js/jquery.form.min.js'
     'bundles/app/custom-js/anythingslider/js/jquery.anythingslider.min.js'
-    'bundles/app/pages/*.js' output='js/20180814-2.js' %}
+    'bundles/app/pages/*.js' output='js/20181208.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

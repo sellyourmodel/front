@@ -116,6 +116,13 @@ class User extends BaseUser
      *
      * @ORM\Column(type="integer", nullable=false)
      */
+    private $modelsModeration = 0;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
     private $modelsFavorites = 0;
 
     /**
@@ -1304,5 +1311,29 @@ class User extends BaseUser
     public function getEmailConfirm()
     {
         return $this->emailConfirm;
+    }
+
+    /**
+     * Set modelsModeration
+     *
+     * @param integer $modelsModeration
+     *
+     * @return User
+     */
+    public function setModelsModeration($modelsModeration)
+    {
+        $this->modelsModeration = $modelsModeration;
+
+        return $this;
+    }
+
+    /**
+     * Get modelsModeration
+     *
+     * @return integer
+     */
+    public function getModelsModeration()
+    {
+        return $this->modelsModeration;
     }
 }

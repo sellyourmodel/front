@@ -13,11 +13,6 @@
                 <div class="user-profile__text">{% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}</div>
                 {#<div class="user-profile__text"><a href="#" class="user-profile__link">www.sell3d.ru</a></div>#}
                 <div class="user-profile__text">{% trans %}user_dt_create{% endtrans %}: {{ entity.createdAt|date("d-m-Y") }}</div>
-                {% if app.user and app.user != entity %}
-                    <div class="user-profile__btn">
-                        <a href="{{ path('messages_dialog',{id:entity.id}) }}" class="button button_warning button_block">{% trans %}user_send_message{% endtrans %}</a>
-                    </div>
-                {% endif %}
             </div>
             <div class="user-profile__about">
                 <div class="user-profile__rating">Репутация 500</div>
@@ -26,20 +21,12 @@
                     <div class="user-profile__rating-icon"></div>
                     <div class="user-profile__rating-icon"></div>
                 </div>
-                {% if app.user and app.user != entity %}
-                    <div class="user-profile__about-text">{{ entity.text|nl2br }}</div>
-                {% endif %}
             </div>
         </div>
         <div class="user-profile__tabs">
             <ul class="nav-tabs-list nav-tabs-list--profile">
-                {% if app.user and app.user != entity %}
-                    <li class="nav-tabs-list__item active"><a href="" class="nav-tabs-list__link">Модели автора</a></li>
-                    <li class="nav-tabs-list__item"><a href="" class="nav-tabs-list__link">Все модели автора</a></li>
-                {% else %}
-                    <li class="nav-tabs-list__item active"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="nav-tabs-list__link">Заруженные модели</a></li>
-                    <li class="nav-tabs-list__item"><a href="{{ path('user_view_moderation',{nickname:app.user.nickname}) }}" class="nav-tabs-list__link">Модели на модерации</a></li>
-                {% endif %}
+                <li class="nav-tabs-list__item"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="nav-tabs-list__link">Заруженные модели</a></li>
+                <li class="nav-tabs-list__item active"><a href="{{ path('user_view_moderation',{nickname:app.user.nickname}) }}" class="nav-tabs-list__link">Модели на модерации</a></li>
             </ul>
         </div>
     </div>

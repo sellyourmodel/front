@@ -1,0 +1,47 @@
+{% extends 'AppBundle::_inside.html.twig' %}
+
+{% block content %}
+
+    <div class="main-wrap__header">
+        <h1>{% trans %}user_statistics{% endtrans %}</h1>
+    </div>
+    <div class="wrap wrap_small support">
+        <div class="wrap-right wrap-right--profile">
+            <ul class="wrap-list">
+
+            </ul>
+        </div>
+        <div class="wrap-left wrap-left--profile">
+            <div class="stats">
+                <div class="stats__top-info">
+                    {#<p></p>#}
+                    <h4>{% trans %}user_last_operations{% endtrans %}</h4>
+                    <table class="table">
+                        <tr>
+                            <th class="td-date">{% trans %}user_last_operations_date{% endtrans %}</th>
+                            <th>{% trans %}user_last_operations_operation{% endtrans %}</th>
+                            <th class="td-summa">{% trans %}user_last_operations_price{% endtrans %}</th>
+                        </tr>
+                        {% for e in history|slice(0, 5) %}
+                            <tr>
+                                <td>{{ e.date|date("d.m.Y") }}</td>
+                                <td>{{ e.name }}</td>
+                                <td>{% if e.price != '-1' %}{{ e.price }}{% endif %}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    {% if history|length > 5 %}
+                        <p><a href="{{ path('user_view_stats_transactions', {'nickname': app.user.nickname}) }}" class="link">{% trans %}user_all_transactions{% endtrans %}</a></p>
+                    {% endif %}
+                </div>
+                <div class="stats__bottom-info">
+                    {% if lastWithdrawal %}
+                        <p>{% trans %}user_last_withdrawl{% endtrans %} {{ lastWithdrawal.date|date('d.m.Y') }}</p>
+                    {% endif %}
+                    <h4>{% trans %}user_sales_balance{% endtrans %} {{ app.user.balance }} руб.</h4>
+                    <p>{% trans %}user_all_sales_balance{% endtrans %} {{ app.user.balance }} руб.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

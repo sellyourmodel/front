@@ -316,6 +316,7 @@ class  CatalogController extends Controller
         $em->flush($log);
 
         $this->getUser()->setModelsLoaded($this->getUser()->getModelsLoaded() + 1);
+        $this->getUser()->setModelsModeration($this->getUser()->getModelsModeration() + 1);
         $em->flush($this->getUser());
 
         $user = $this->getUser();
@@ -372,6 +373,21 @@ class  CatalogController extends Controller
     }
 
     /**
+     * @Route("/catalog/my/products/", name="catalog_my_products")
+     * @Template()
+     */
+    public function myProductAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $responseData = [];
+        $responseData["products"] = $em->getRepository('AppBundle:Product')->findBy(["user"=>$this->getUser(), "moderated"=>true],["date"=>"DESC"]);
+        $responseData["productsModeration"] = $em->getRepository('AppBundle:Product')->findBy(["user"=>$this->getUser(), "moderated"=>false],["date"=>"DESC"]);
+
+        return $responseData;
+    }
+
+    /**
      * @Route("/catalog/my/products/comments/", name="catalog_my_products_comments")
      * @Template()
      */
@@ -382,6 +398,21 @@ class  CatalogController extends Controller
         $responseData = [];
         $responseData["comments"] = $em->getRepository('AppBundle:ProductComment')->getMyProductComments($this->getUser());
         $responseData["allList"] = true;
+
+        return $responseData;
+    }
+
+    /**
+     * @Route("/catalog/my/buys/", name="catalog_my_buys")
+     * @Template()
+     */
+    public function myBuysAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $responseData = [];
+        $responseData["productsBuys"] = $em->getRepository('AppBundle:Buy')->getMyBuy($this->getUser());
+        $responseData["productsFavorites"] = $em->getRepository('AppBundle:ProductFavorite')->getMyFavorites($this->getUser());
 
         return $responseData;
     }
@@ -429,6 +460,11 @@ class  CatalogController extends Controller
 
         $entity->setModerated(true);
         $em->flush($entity);
+
+        $modelsModeration = $em->getRepository('AppBundle:Product')->findBy(["user"=>$entity->getUser(), "moderated"=>false]);
+        $user = $entity->getUser();
+        $user->setModelsModeration(count($modelsModeration));
+        $em->flush($user);
 
         $log = new ProductLog();
         $log->setText('product_log_moderated');
@@ -1246,7 +1282,12 @@ class  CatalogController extends Controller
             $status = true;
         }
 
-        $count = count($em->getRepository('AppBundle:ProductFavorite')->findBy(["user" => $user]));
+        $connection = $em->getConnection();
+
+        $statement = $connection->prepare("SELECT COUNT(*) as count FROM catalog_products_favorites f INNER JOIN catalog_products p ON f.product_id=p.id WHERE f.user_id={$user->getId()} AND f.product_id IS NOT NULL AND p.deleted=0");
+        $statement->execute();
+        $results = $statement->fetchAll();
+        $count = $results[0]["count"];
 
         $user->setModelsFavorites($count);
         $this->get("fos_user.user_manager")->updateUser($user);
@@ -1307,6 +1348,7 @@ class  CatalogController extends Controller
             $em->flush($product->getUser());
         }
 
+        $this->get('wp.notify.manager')->sendAddCommentEmail($comment);
         $this->get('wp.notify.manager')->sendAdminAddCommentEmail($comment);
 
         $responseData = [];

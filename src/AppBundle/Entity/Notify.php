@@ -22,17 +22,29 @@ class Notify
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(type="string", length=255, nullable=false)
-     */
-    private $name;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true)
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="orders")
+     * @ORM\JoinColumn(name="user2_id", referencedColumnName="id", nullable=true)
+     */
+    private $user2;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Product", inversedBy="orders")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=true)
+     */
+    private $product;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $type;
 
     /**
      * @var string
@@ -56,14 +68,11 @@ class Notify
     private $active = true;
 
     /**
-     * toString for sonataAdminBundle breadcrumbs.
+     * @var string
      *
-     * @return string
+     * @ORM\Column(type="boolean")
      */
-    public function __toString()
-    {
-        return $this->name;
-    }
+    private $isRead = false;
 
     /**
      * Get id
@@ -73,30 +82,6 @@ class Notify
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Notify
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
     }
 
 
@@ -244,5 +229,101 @@ class Notify
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set isRead
+     *
+     * @param boolean $isRead
+     *
+     * @return Notify
+     */
+    public function setIsRead($isRead)
+    {
+        $this->isRead = $isRead;
+
+        return $this;
+    }
+
+    /**
+     * Get isRead
+     *
+     * @return boolean
+     */
+    public function getIsRead()
+    {
+        return $this->isRead;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return Notify
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Set user2
+     *
+     * @param \AppBundle\Entity\User $user2
+     *
+     * @return Notify
+     */
+    public function setUser2(\AppBundle\Entity\User $user2 = null)
+    {
+        $this->user2 = $user2;
+
+        return $this;
+    }
+
+    /**
+     * Get user2
+     *
+     * @return \AppBundle\Entity\User
+     */
+    public function getUser2()
+    {
+        return $this->user2;
+    }
+
+    /**
+     * Set product
+     *
+     * @param \AppBundle\Entity\Product $product
+     *
+     * @return Notify
+     */
+    public function setProduct(\AppBundle\Entity\Product $product = null)
+    {
+        $this->product = $product;
+
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return \AppBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

@@ -9,7 +9,7 @@ function ajaxWithdrawalAdd() {
 
     var form = $(".js-withdrawal-add-form");
 
-    var login = form.find("input[name=_username]").val();
+    /*var login = form.find("input[name=_username]").val();
     var pass = form.find("input[name=_password]").val();
 
     if (login == '' || pass == '') {
@@ -18,7 +18,7 @@ function ajaxWithdrawalAdd() {
     }
 
     var submit = form.find('input[type=submit]');
-    submit.attr('data-old-val', submit.val()).val('Подождите...');
+    submit.attr('data-old-val', submit.val()).val('Подождите...');*/
 
     $.ajax({
         type: "POST",
@@ -30,9 +30,8 @@ function ajaxWithdrawalAdd() {
                 ajaxWithdrawalError(data.error_text);
             }
             else {
-                $.fancybox.close();
                 $(".js-withdrawals").html(data.html);
-                $(".withdrawal__success").slideDown();
+                $(".withdrawals__success").slideDown();
                 setTimeout(function(){
                     $(".withdrawal__success").slideUp();
                 }, 5000);

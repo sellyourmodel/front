@@ -3,7 +3,7 @@
 {% block content_wrapper %}
 
     <div class="wrapper">
-        <div class="main-wrap {% block wrapper_class %}{% endblock %}">
+        <div class="{% block main_wrapper_class %}main-wrap{% endblock %} {% block wrapper_class %}{% endblock %}">
             {% block content %}{% endblock %}
         </div>
     </div>
