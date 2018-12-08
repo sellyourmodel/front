@@ -2551,8 +2551,8 @@ header {
   margin-top: 10px;
   background: #fff; }
   .main-wrap__header {
-    height: 100px;
-    padding: 29px 22px;
+    height: 74px;
+    padding: 16px 22px;
     border-bottom: 1px solid #e5e5e5; }
     .main-wrap__header .box-select-group {
       height: 100px;
