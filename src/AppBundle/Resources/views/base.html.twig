@@ -97,7 +97,7 @@
                     <div id="nav-profile" style="{% block navblock_style %}{% endblock %}" class="nav-profile js-open-block js-open-block-noclose">
                         <ul class="nav-profile-list unstyled">
                             <li class="nav-profile-list__item"><a href="{{ path('cabinet') }}" class="nav-profile-list__link">{% trans %}public_profile{% endtrans %}</a></li>
-                            <li class="nav-profile-list__item"><a href="{{ path('messages') }}" class="nav-profile-list__link">{% trans %}messages{% endtrans %}</a></li>
+                            <li class="nav-profile-list__item"><a href="{{ path('messages') }}" class="nav-profile-list__link">{% trans %}messages{% endtrans %}</a>{{ unreadMessage() }}</li>
                             <li class="nav-profile-list__item"><a href="{{ path('notify') }}" class="nav-profile-list__link">{% trans %}notifications{% endtrans %}</a>{{ unreadNotify() }}</li>
                             <li class="nav-profile-list__item"><a href="{% if is_granted('ROLE_PREVIOUS_ADMIN') %}{{ path('homepage',{_switch_user: "_exit"}) }}{% else %}{{ path('fos_user_security_logout') }}{% endif %}" class="nav-profile-list__link">{% trans %}exit{% endtrans %}</a></li>
                         </ul>

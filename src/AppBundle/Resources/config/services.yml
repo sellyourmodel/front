@@ -50,6 +50,12 @@ services:
             - { name: twig.extension }
         arguments: ["@service_container"]
 
+    wp.unread.message:
+        class: AppBundle\Twig\Extension\unreadMessageExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
     wp.filters:
         class: AppBundle\Twig\Extension\filtersExtension
         tags:
