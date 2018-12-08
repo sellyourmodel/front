@@ -6,6 +6,11 @@ function setBuyCount(price){
         return;
     }
 
+    if(count < 2){
+        ajaxBuyModelsError("Минимальное кол-во моделей для покупки - 2 шт.");
+        return;
+    }
+
     $(".js-buy-count").html(count*price);
 
 }
@@ -16,6 +21,11 @@ function buyModels(){
 
     if(count <= 0 || isNaN(count)){
         ajaxBuyModelsError("Кол-во моделей должно быть число больше нуля");
+        return;
+    }
+
+    if(count < 2){
+        ajaxBuyModelsError("Минимальное кол-во моделей для покупки - 2 шт.");
         return;
     }
 
