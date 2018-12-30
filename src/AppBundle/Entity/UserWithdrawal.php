@@ -49,6 +49,19 @@ class UserWithdrawal
     private $status = 'new';
 
     /**
+     * @ORM\ManyToOne(targetEntity="UserWithdrawalMethod")
+     * @ORM\JoinColumn(name="method_id", referencedColumnName="id", nullable=true)
+     */
+    private $method;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $account;
+
+    /**
      * toString for sonataAdminBundle breadcrumbs.
      *
      * @return string
@@ -173,5 +186,53 @@ class UserWithdrawal
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set method
+     *
+     * @param string $method
+     *
+     * @return UserWithdrawal
+     */
+    public function setMethod($method)
+    {
+        $this->method = $method;
+
+        return $this;
+    }
+
+    /**
+     * Get method
+     *
+     * @return string
+     */
+    public function getMethod()
+    {
+        return $this->method;
+    }
+
+    /**
+     * Set account
+     *
+     * @param string $account
+     *
+     * @return UserWithdrawal
+     */
+    public function setAccount($account)
+    {
+        $this->account = $account;
+
+        return $this;
+    }
+
+    /**
+     * Get account
+     *
+     * @return string
+     */
+    public function getAccount()
+    {
+        return $this->account;
     }
 }

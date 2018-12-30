@@ -21,11 +21,34 @@
     position: relative;
 }
 
-.withdrawals__price-input{
+.withdrawals__field{
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    .withdrawals__field{
+        width:100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+.withdrawals__input{
     display: inline-block !important;
     width:175px !important;
-    margin-right: 12px;
-    height: 34px !important;
+}
+
+@media (max-width: 767px) {
+    .withdrawals__input{
+        display: block !important;
+        width:100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+.withdrawals__submit-wrapper{
+    position: relative;
 }
 
 .withdrawals__submit{
@@ -35,20 +58,17 @@
 
 .withdrawals__success{
     position: absolute;
-    top:0;
-    left:0;
-    bottom: 0;
-    right:0;
-    background: #fff;
+    top: 12px !important;
+    right: auto !important;
+    left: 190px !important;
     display: none;
     color:#3B963D;
-    font-size: 14px;
 }
 
 .withdrawals__error{
-    top: 10px !important;
+    top: 12px !important;
     right: auto !important;
-    left: 390px !important;
+    left: 190px !important;
 }
 
 .withdrawals__history{

@@ -256,8 +256,13 @@ footer_subscribe_action: Subscribe
 modal_auth: Auth
 modal_password: Password
 modal_auth_action: Auth
+modal_withdrawals_available: Available for withdrawal
+modal_withdrawals_create: Send order
 modal_withdrawals_header: Application for withdrawal of funds
 modal_withdrawals_sum: Amount for withdrawal
+modal_withdrawals_method: Method for withdrawal
+modal_withdrawals_account: Requisites
+modal_withdrawals_confirm: I am responsible for the correctness of the provided details
 modal_withdrawals_send: Send an application
 image_crop_header: Crop images
 image_crop_action: Crop

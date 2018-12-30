@@ -31,6 +31,7 @@ function ajaxWithdrawalAdd() {
             }
             else {
                 $(".js-withdrawals").html(data.html);
+                $(".withdrawals__field input").val('');
                 $(".withdrawals__success").slideDown();
                 setTimeout(function(){
                     $(".withdrawal__success").slideUp();

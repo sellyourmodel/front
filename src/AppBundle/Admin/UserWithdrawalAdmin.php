@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Admin;
 
 use AppBundle\Entity\PaymentLog;
@@ -15,8 +16,19 @@ class UserWithdrawalAdmin extends AbstractAdmin
     public function configureFormFields(FormMapper $formMapper)
     {
 
+        $entity = $this->getSubject();
+
+        $info = $this->getConfigurationPool()->getContainer()->get('twig')->render('@App/Admin/_withdrawal_info.html.twig', ["entity"=>$entity]);
+
         $formMapper
-            ->add('price', null, array('label' => 'Сумма', 'required' => true))
+            ->add('price', 'text',
+                array(
+                    'label' => 'Информация',
+                    'required' => false,
+                    'attr' => ["style" => "display:none;"],
+                    'help'=>$info
+                )
+            )
             ->add('status', 'choice', array(
                 'choices' => array(
                     'new' => "Новая",
@@ -26,8 +38,7 @@ class UserWithdrawalAdmin extends AbstractAdmin
                 'multiple' => false,
                 'expanded' => false,
                 'label' => 'Статус'
-            ))
-        ;
+            ));
     }
 
     public function configureListFields(ListMapper $listMapper)
@@ -43,14 +54,13 @@ class UserWithdrawalAdmin extends AbstractAdmin
                     'done' => "Выполнено"
                 ),
                 'label' => 'Статус'
-            ))
-        ;
+            ));
     }
 
     public function postUpdate($object)
     {
         //$this->fos_manager->updatePassword($object);
-        if($object->getStatus() == 'done'){
+        if ($object->getStatus() == 'done') {
             $em = $this->getConfigurationPool()->getContainer()->get('doctrine.orm.entity_manager');
             $user = $object->getUser();
             $price = $object->getPrice();
@@ -59,15 +69,15 @@ class UserWithdrawalAdmin extends AbstractAdmin
             $transaction->setDate(new \DateTime());
             $transaction->setUser($user);
             $transaction->setPrice(-1 * $price);
-            $transaction->setName('Вывод денег по заявке №"'.$object->getId().'"');
+            $transaction->setName('Вывод денег по заявке №"' . $object->getId() . '"');
             $transaction->setType('withdrawal');
 
             $em->persist($transaction);
             $em->flush($transaction);
 
             $balance = 0;
-            $payments = $em->getRepository('AppBundle:PaymentLog')->findBy(["user"=>$user]);
-            foreach ($payments as $e){
+            $payments = $em->getRepository('AppBundle:PaymentLog')->findBy(["user" => $user]);
+            foreach ($payments as $e) {
                 $balance += $e->getPrice();
             }
 

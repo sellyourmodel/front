@@ -486,10 +486,23 @@ class  CabinetController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
+        $confirm = $request->get('confirm');
         $price = $request->get('price', 0);
+        $method = intval($request->get('method'));
+        $account = trim($request->get('account', ''));
 
-        if (!$price) {
-            return $returnError('Введите сумму', 'email');
+        if (!$price OR !$method OR !$account) {
+            return $returnError('Заполните все поля', 'email');
+        }
+
+        $methodEntity = $em->getRepository('AppBundle:UserWithdrawalMethod')->find($method);
+
+        if(!$methodEntity){
+            return $returnError('Не верно выбран способ получения', 'email');
+        }
+
+        if ($confirm != '1') {
+            return $returnError('Поставьте галочку о предоставленнии реквизитов', 'email');
         }
 
         $user = $this->getUser();
@@ -498,6 +511,8 @@ class  CabinetController extends Controller
         $withdrawal->setUser($user);
         $withdrawal->setDate(new \DateTime());
         $withdrawal->setPrice($price);
+        $withdrawal->setMethod($methodEntity);
+        $withdrawal->setAccount($account);
 
         $em->persist($withdrawal);
         $em->flush($withdrawal);

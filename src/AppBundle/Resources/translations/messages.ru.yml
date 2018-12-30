@@ -258,8 +258,13 @@ footer_subscribe_action: Подписаться
 modal_auth: Вход
 modal_password: Пароль
 modal_auth_action: Войти
+modal_withdrawals_available: Доступно для вывода
+modal_withdrawals_create: Создать заявку
 modal_withdrawals_header: Заявка на вывод средств
 modal_withdrawals_sum: Сумма для вывода
+modal_withdrawals_method: Способ получения
+modal_withdrawals_account: Реквизиты
+modal_withdrawals_confirm: Я несу ответственность за корректность предоставленных реквизитов
 modal_withdrawals_send: Отправить заявку
 image_crop_header: Обрезка изображения
 image_crop_action: Обрезать

@@ -142,6 +142,7 @@ class  UserController extends Controller
 
         return [
             "entity"=>$entity,
+            "methods"=>$em->getRepository('AppBundle:UserWithdrawalMethod')->findBy([],["id"=>"ASC"]),
             "withdrawals"=>$em->getRepository('AppBundle:UserWithdrawal')->findBy(["user"=>$entity],["date"=>"DESC"])
         ];
     }

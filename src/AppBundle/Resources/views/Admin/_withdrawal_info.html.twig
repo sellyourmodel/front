@@ -1,0 +1,27 @@
+<table class="table table-bordered">
+    <tr>
+        <td width="200">Пользователь</td>
+        <td><a href="{{ path('user_view', {'nickname': entity.user.nickname}) }}">{{ entity.user.nickname }}</a></td>
+    </tr>
+        <td>Дата заявки</td>
+        <td>{{ entity.date|date('H:i d.m.Y') }}</td>
+    </tr>
+    <tr>
+        <td>Сумма</td>
+        <td>{{ entity.price }} руб.</td>
+    </tr>
+    <tr>
+        <td>Способ</td>
+        <td>
+            {% if entity.method %}
+                {{ entity.method.name }}
+            {% else %}
+                Неизвестно
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td>Реквизиты</td>
+        <td>{{ entity.account }}</td>
+    </tr>
+</table>
