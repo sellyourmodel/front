@@ -47,6 +47,7 @@ currency_rub: rub.
 i_agree_with: I agree with
 user_agreement: user agreement
 buy_form_redirect: There is a redirect to the order form, if it did not happen click on the button below.
+buy_form_no_pay: You paid for the order by means of sales of models, the number of models available for purchase increased.
 go_to_pay_btn: Proceed to checkout
 settings_header: Settings
 my_models: My models

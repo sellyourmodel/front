@@ -1,5 +1,6 @@
 function setBuyCount(price){
     var count = parseInt($(".js-buy-count").val());
+    var accountsum = parseInt($("[name=accountsum]").val());
 
     if(count <= 0 || isNaN(count)){
         ajaxBuyModelsError("Кол-во моделей должно быть число больше нуля");
@@ -11,13 +12,31 @@ function setBuyCount(price){
         return;
     }
 
-    $(".js-buy-count").html(count*price);
+    if($("#no-use-account-sum").prop('checked')){
+        $(".js-buy-count").html(count*price);
+        $(".js-buy-count-pay").html(count*price);
+    }else{
+        var sum = count*price;
+        if(accountsum > sum){
+            var pay = 0;
+        }else{
+            var pay = sum-accountsum;
+        }
+        $(".js-buy-count").html(sum);
+        $(".js-buy-count-pay").html(pay);
+    }
 
 }
 
 function buyModels(){
 
     var count = parseInt($(".js-buy-count").val());
+    var dontUseAccountBalance = $("#no-use-account-sum").prop('checked');
+    if(dontUseAccountBalance){
+        dontUseAccountBalance = '1';
+    }else{
+        dontUseAccountBalance = '0';
+    }
 
     if(count <= 0 || isNaN(count)){
         ajaxBuyModelsError("Кол-во моделей должно быть число больше нуля");
@@ -37,7 +56,7 @@ function buyModels(){
     $.ajax({
         type: "POST",
         url: Routing.generate('cabinet_buy_write'),
-        data: {count: count},
+        data: {count: count, dontUseAccountBalance:dontUseAccountBalance},
         dataType: "json",
         success: function (data, status, object) {
             if (data.error) {

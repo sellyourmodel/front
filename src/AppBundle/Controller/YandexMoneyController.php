@@ -81,6 +81,28 @@ class YandexMoneyController extends Controller
 
             $user->setModels($models);
 
+            if($order->getAccountBalanceSum()){
+                $transaction = new PaymentLog();
+                $transaction->setDate(new \DateTime());
+                $transaction->setUser($user);
+                $transaction->setPrice(-1 * $order->getAccountBalanceSum());
+                $transaction->setName('Оплата заказа №"' . $order->getId() . '"');
+                $transaction->setType('useaccountsum');
+
+                $em->persist($transaction);
+                $em->flush($transaction);
+
+                $balance = 0;
+                $payments = $em->getRepository('AppBundle:PaymentLog')->findBy(["user" => $user]);
+                foreach ($payments as $e) {
+                    $balance += $e->getPrice();
+                }
+
+                $user->setBalance($balance);
+            }
+
+            $em->flush($user);
+
             $this->get("fos_user.user_manager")->updateUser($user);
 
         }

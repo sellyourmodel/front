@@ -53,6 +53,20 @@ class PaymentOrder
      *
      * @ORM\Column(type="boolean")
      */
+    private $useAccountBalance = true;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $accountBalanceSum;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean")
+     */
     private $finished = false;
 
     /**
@@ -224,5 +238,53 @@ class PaymentOrder
     public function getFinishedDate()
     {
         return $this->finishedDate;
+    }
+
+    /**
+     * Set useAccountBalance
+     *
+     * @param boolean $useAccountBalance
+     *
+     * @return PaymentOrder
+     */
+    public function setUseAccountBalance($useAccountBalance)
+    {
+        $this->useAccountBalance = $useAccountBalance;
+
+        return $this;
+    }
+
+    /**
+     * Get useAccountBalance
+     *
+     * @return boolean
+     */
+    public function getUseAccountBalance()
+    {
+        return $this->useAccountBalance;
+    }
+
+    /**
+     * Set accountBalanceSum
+     *
+     * @param integer $accountBalanceSum
+     *
+     * @return PaymentOrder
+     */
+    public function setAccountBalanceSum($accountBalanceSum)
+    {
+        $this->accountBalanceSum = $accountBalanceSum;
+
+        return $this;
+    }
+
+    /**
+     * Get accountBalanceSum
+     *
+     * @return integer
+     */
+    public function getAccountBalanceSum()
+    {
+        return $this->accountBalanceSum;
     }
 }

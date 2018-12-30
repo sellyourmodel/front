@@ -564,28 +564,85 @@ class  CabinetController extends Controller
         $user = $this->getUser();
 
         $count = intval($request->get('count'));
+        $dontUseAccountBalance = $request->get('dontUseAccountBalance');
 
         if ($count < 2) {
             return $returnError('Минимальное кол-во моделей для покупки - 2 шт.', 'email');
         }
 
+        $sum = $settings->getModelPrice() * $count;
+
+        if($dontUseAccountBalance == '1'){
+            $useAccountBalance = false;
+            $useAccountBalanceSum = NULL;
+            $noPay = false;
+        }
+        else{
+            $useAccountBalance = true;
+            $accountBalance = $user->getBalance();
+            if($accountBalance >= $sum){
+                $useAccountBalanceSum = $sum;
+                $sum = 0;
+                $noPay = true;
+            }else{
+                $useAccountBalanceSum = $accountBalance;
+                $sum = $sum - $accountBalance;
+                $noPay = false;
+            }
+        }
+
         $order = new PaymentOrder();
         $order->setDate(new \DateTime());
         $order->setUser($user);
-        $order->setPrice($settings->getModelPrice() * $count);
+        $order->setPrice($sum);
         $order->setCount($count);
+        $order->setUseAccountBalance($useAccountBalance);
+        $order->setAccountBalanceSum($useAccountBalanceSum);
+
+        if($noPay){
+            $order->setFinished(true);
+        }
 
         $em->persist($order);
         $em->flush($order);
 
-//        $models = $user->getModels();
-//        $models += $count;
-//
-//        $user->setModels($models);
-//
-//        $this->get("fos_user.user_manager")->updateUser($user);
+        if($noPay){
+            $models = $user->getModels();
+            $models += $count;
+            $user->setModels($models);
+            $this->get("fos_user.user_manager")->updateUser($user);
 
-        return JsonResponse::create(["error" => false, 'url' => $this->generateUrl('cabinet_buy_order', ["id" => $order->getId()])]);
+            $transaction = new PaymentLog();
+            $transaction->setDate(new \DateTime());
+            $transaction->setUser($user);
+            $transaction->setPrice(-1 * $useAccountBalanceSum);
+            $transaction->setName('Оплата заказа №"' . $order->getId() . '"');
+            $transaction->setType('useaccountsum');
+
+            $em->persist($transaction);
+            $em->flush($transaction);
+
+            $balance = 0;
+            $payments = $em->getRepository('AppBundle:PaymentLog')->findBy(["user" => $user]);
+            foreach ($payments as $e) {
+                $balance += $e->getPrice();
+            }
+
+            $user->setBalance($balance);
+            $em->flush($user);
+        }
+
+        if($useAccountBalanceSum){
+
+        }
+
+        if($noPay){
+            $url = $this->generateUrl('cabinet_buy_order_accountsum', ["id" => $order->getId()]);
+        }else{
+            $url = $this->generateUrl('cabinet_buy_order', ["id" => $order->getId()]);
+        }
+
+        return JsonResponse::create(["error" => false, 'url' => $url]);
     }
 
     /**
@@ -593,6 +650,24 @@ class  CabinetController extends Controller
      * @Template()
      */
     public function buyOrderAction(Request $request, $id)
+    {
+
+        $order = $this->getDoctrine()->getRepository('AppBundle:PaymentOrder')->find($id);
+
+        if (!$order) {
+            throw $this->createNotFoundException('Order not found');
+        }
+
+        return [
+            "entity" => $order
+        ];
+    }
+
+    /**
+     * @Route("/cabinet/buy/orderaccountsum/{id}/", name="cabinet_buy_order_accountsum", options={"expose"=true})
+     * @Template()
+     */
+    public function buyOrderAccountSumAction(Request $request, $id)
     {
 
         $order = $this->getDoctrine()->getRepository('AppBundle:PaymentOrder')->find($id);

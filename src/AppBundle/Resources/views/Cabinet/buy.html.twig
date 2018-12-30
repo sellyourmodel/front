@@ -32,11 +32,26 @@
                         <dd class="box-label__cont">{{ app.user.models }}</dd>
                         <dt class="box-label__title mb25">{% trans %}select_number_purchased{% endtrans %}:</dt>
                         <dd class="box-label__cont mb25">
+                            <input type="hidden" name="accountsum" value="{{ app.user.balance }}"/>
                             <input type="text" value="2" class="box-label__input js-buy-count" onkeyup="setBuyCount({{ settings.modelPrice }});" onchange="setBuyCount({{ settings.modelPrice }});" />
                         </dd>
+                        <dt class="box-label__title mb25">Сумма от продаж:</dt>
+                        <dd class="box-label__cont mb25"><span class="count">{{ app.user.balance }}</span> {% trans %}currency_rub{% endtrans %}</dd>
                         <dt class="box-label__title mb25">{% trans %}order_price{% endtrans %}:</dt>
                         <dd class="box-label__cont mb25"><span class="count js-buy-count">{{ 2 * settings.modelPrice }}</span> {% trans %}currency_rub{% endtrans %}</dd>
+                        <dt class="box-label__title mb25">К оплате:</dt>
+                        <dd class="box-label__cont mb25"><span class="count js-buy-count-pay">{% if app.user.balance>2 * settings.modelPrice %}0{% else %}{{ (2 * settings.modelPrice) - app.user.balance }}{% endif %}</span> {% trans %}currency_rub{% endtrans %}</dd>
                     </dl>
+                    <div class="box-field-group">
+                        <div class="box-field checkbox mb20">
+                            <div class="box-field__input">
+                                <input type="checkbox" id="no-use-account-sum" name="no-use-account-sum" onchange="setBuyCount({{ settings.modelPrice }});" class="styler" />
+                                <label for="no-use-account-sum" class="box-field__label">
+                                    Не использовать сумму от продаж
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <div class="box-field-group">
                         <div class="box-field checkbox mb20">
                             <div class="box-field__input">
