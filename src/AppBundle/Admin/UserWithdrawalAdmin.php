@@ -65,6 +65,15 @@ class UserWithdrawalAdmin extends AbstractAdmin
             $em->persist($transaction);
             $em->flush($transaction);
 
+            $balance = 0;
+            $payments = $em->getRepository('AppBundle:PaymentLog')->findBy(["user"=>$user]);
+            foreach ($payments as $e){
+                $balance += $e->getPrice();
+            }
+
+            $user->setBalance($balance);
+            $em->flush($user);
+
         }
 
     }
