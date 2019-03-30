@@ -1,0 +1,39 @@
+.settings__result{
+    display: none;
+}
+.settings__error{
+    color: #c91d24;
+}
+.settings__success{
+    color:#3B963D;
+}
+
+.settings .error{
+    border-color: #c91d24;
+}
+
+.settings-social{
+    max-width: 300px;
+}
+
+.social-wrap__settings{
+    margin-left: 0;
+}
+
+.social-wrap__item{
+    position: relative;
+}
+
+.social-wrap__item .connect-icon{
+    display: none;
+    font-size: 24px;
+    position: absolute;
+    z-index: 5;
+    top:50%;
+    left:10px;
+    margin-top: -12px;
+}
+
+.social-wrap__item.active .connect-icon{
+    display: block;
+}

@@ -1,0 +1,35 @@
+.cookie-agree{
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background: #fff;
+    border-top: 1px solid #c1a788;
+    z-index: 100;
+}
+
+.cookie-agree__text{
+    margin-right: 20px;
+}
+
+.cookie-agree__button{
+    width:190px;
+}
+
+@media (max-width: 767px) {
+    .cookie-agree {
+        flex-direction: column;
+    }
+    .cookie-agree__text{
+        margin-right: 0px;
+        margin-bottom: 20px;
+    }
+
+    .cookie-agree__button{
+        width:100%;
+    }
+}

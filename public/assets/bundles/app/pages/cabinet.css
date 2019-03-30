@@ -1,0 +1,96 @@
+.withdrawals__add{
+    position: relative;
+    margin-top: 10px;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 0 20px 20px 20px;
+    border-bottom:1px solid #e5e5e5;
+}
+
+.withdrawals__sum-info{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.withdrawals__label{
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.withdrawals__form{
+    position: relative;
+}
+
+.withdrawals__field{
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+    .withdrawals__field{
+        width:100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+.withdrawals__input{
+    display: inline-block !important;
+    width:175px !important;
+}
+
+@media (max-width: 767px) {
+    .withdrawals__input{
+        display: block !important;
+        width:100% !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+.withdrawals__submit-wrapper{
+    position: relative;
+}
+
+.withdrawals__submit{
+    display: inline-block !important;
+    width:180px !important;
+}
+
+.withdrawals__success{
+    position: absolute;
+    top: 12px !important;
+    right: auto !important;
+    left: 190px !important;
+    display: none;
+    color:#3B963D;
+}
+
+.withdrawals__error{
+    top: 12px !important;
+    right: auto !important;
+    left: 190px !important;
+}
+
+.withdrawals__history{
+    font-size: 18px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.stats__top-info{
+    padding-bottom: 20px;
+}
+
+.stats__bottom-info{
+    position: relative;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding: 20px 20px 0px 20px;
+    border-top:1px solid #e5e5e5;
+}
+
+.article__no-items{
+    padding: 29px 22px;
+    line-height: 100%;
+    background: #fff;
+}

@@ -1,0 +1,30 @@
+{
+    "devDependencies": {
+        "@symfony/webpack-encore": "^0.22.0",
+        "imports-loader": "^0.8.0",
+        "script-loader": "^0.7.2",
+        "webpack-notifier": "^1.6.0"
+    },
+    "license": "UNLICENSED",
+    "private": true,
+    "scripts": {
+        "dev-server": "encore dev-server",
+        "dev": "encore dev",
+        "watch": "encore dev --watch",
+        "build": "encore production --progress"
+    },
+    "dependencies": {
+        "@fancyapps/fancybox": "^3.5.2",
+        "blueimp-file-upload": "^9.28.0",
+        "copy-webpack-plugin": "^4.6.0",
+        "jquery": "^1.11.3",
+        "jquery-form-styler": "^1.7.8",
+        "jquery.ui.widget": "^1.10.3",
+        "jqueryui": "^1.11.1",
+        "select2": "^4.0.6-rc.1",
+        "slick-carousel": "^1.6.0",
+        "vue": "^2.5.18",
+        "vue-loader": "^15.4.2",
+        "vue-template-compiler": "^2.5.18"
+    }
+}

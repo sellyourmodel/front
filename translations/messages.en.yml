@@ -1,0 +1,286 @@
+model_add: Upload 3D model
+buy_add: Buy 3D model
+about: About us
+buy_menu: Sell 3D models
+community: Community
+support: Support
+tech_support: Support
+auth: Auth
+registration: Registration
+arrow_up: Up
+arrow_down: Down
+sections: Sections
+new_1c_products: New products from 1C
+add_more: Add more
+errors: Errors
+loaded: loaded
+catalog_sections: Catalog sections
+articles: Articles
+learn_more: Learn more
+no_items_found: No items found
+buying_models: Buying models
+helpful_information: Helpful information
+
+cabinet_buy_healful_info_l1: The minimum purchase quantity is 2 PRO.
+cabinet_buy_healful_info_l2: PRO is charged at a time and has no time limit.
+cabinet_buy_healful_info_l3: 30 FREE is charged every day within the paid period.
+cabinet_buy_healful_info_l4: When paying through terminals and other offline ways - the access time can reach 3 days.
+cabinet_buy_healful_info_l5: Payment by bank card is for CIS countries only.
+cabinet_buy_healful_info_l6: Payment through terminals is for Russia only.
+cabinet_buy_healful_info_l7: In case of loss of the pro-model or unsuccessful downloading - restore it in the purchase history.
+cabinet_buy_healful_info_l8: If you already have PRO-accesses - the subsequent purchase is summarized.
+cabinet_buy_healful_info_l9: For corporate clients. The minimum order is 1000 accesses PROFI. Execution of the contract and non-cash payment. For details, please contact support.
+cabinet_buy_healful_info_l10: Support service. When applying, be sure to specify the order number.
+cabinet_buy_left_info_l1: Do you want to shop much faster? Buy prepaid Loans and download products one click! <br> How many Loans do you want to buy?
+cabinet_buy_left_info_l2: The deposit is made in $ USD dollars and is non-refundable. Bought credits you can use only to buy goods in the network of stores NetrinoMedia!
+
+available_3d_models: Available 3d models
+select_number_purchased: Select the number of 3d models to be purchased
+order_price: Order price
+buy: Buy
+buy_btn: Buy
+buy_confirm: Confirm
+buy_confirm_title: Confirm buy model?
+buy_like: Like
+buy_thanks: Thanks!
+currency_rub: rub.
+i_agree_with: I agree with
+user_agreement: user agreement
+buy_form_redirect: There is a redirect to the order form, if it did not happen click on the button below.
+buy_form_no_pay: You paid for the order by means of sales of models, the number of models available for purchase increased.
+go_to_pay_btn: Proceed to checkout
+settings_header: Settings
+my_models: My models
+my_products_loaded: Loaded models
+my_products_moderation: On moderation
+my_products_buys: My purchases
+my_products_favorites: In favorites
+profile: Profile
+change_password: Change password
+socials: Soc. profiles
+nickname: Nickname
+level: Level
+without_wins: Without victories
+wins_postfix: victories
+email: E-mail
+main_info: Main info
+avatar: Avatar
+avatar_maxsize: The maximum allowable size is 100x100px
+profile_name: First name
+profile_lastname: Surname
+profile_bday: Date of birth
+profile_gender: Gender
+profile_gender_w: Female
+profile_gender_m: Male
+profile_lang: Language
+profile_specialization: Specialization
+profile_place: Place of residence
+profile_about_myself: About yourself
+profile_notifications: Notify me about
+profile_notify_sale: Buy and sale my models
+profile_notify_news: Site news
+change: Edit
+notifications_header: Notifications
+materials_not_found: No content found
+notifications_not_found: No notifications found
+readmore: Read more...
+change_password_header: Change password
+new_password: New password
+repeat_password: Confirm password
+socials_header: Soc. profiles
+socials_left_text: To connect or disconnect the social network - click on its logo (connection and disconnection on the test server does not work, check the attached social network for an example)
+buying_models_header: Buying models
+payment_error: I'm sorry to hear that you have problems with payment.
+payment_go_to_treatment: Your payment has been accepted for processing.
+go_to_profile: Go to My Account
+search_notfound: Unfortunately, your search returned no results.
+model_blocked_by_reason: The model is locked for a reason
+without_reason: without reason
+models_available: Available Models
+user: user
+download: Download
+edit: Edit
+delete: Remove
+cancel: Cancel
+moderate: Moderate
+block: Block
+unblock: Unlock
+model_name: Model name
+category: Category
+model_images: Model images
+model_files: Model files
+model_info: Information
+model_cover: Cover model
+model_custom_images: Additional model images
+model_manufacturer: Manufacturer
+model_tags: Tags
+model_po: Software
+model_style: Style
+model_description: Description
+model_add_btn: Upload
+file_not_select: No file selected
+upload_file: Upload file
+category_not_have_models: There are no models in this category.
+moderation_header: Moderation
+moderation_not_have_models: There are no models for moderation.
+add_to_favourite: To favorites
+added_to_favourite: In favorites
+share: Share this
+product_from: from
+enter_comment: Enter a comment
+moderate_model: Moderate model
+block_reasons: Reason of blocking
+block_model: Lock model
+block_model_action: Block
+unblock_model: Unlock the model
+unblock_model_action: Unlock
+detele_model: Delete model
+detele_model_action: Delete model
+add_comment: Add a comment
+model_edit_header: Editing a model
+comment: Add a comment
+search_by_tags_header: Search by tag
+search_by_tags_notfound: There are no models for the given tag.
+new_in_catalog: New in the catalog
+best: The best
+show_all: Show all
+login_left: Do you want to shop much faster?<br />Buy prepaid Loans and download products one click!
+registration_header: Registration
+registration_left: Do you want to shop much faster? Buy prepaid Loans and download products one click!
+registration_nickname: Nickname
+registration_password: Password
+registration_repeat_password: Confirm password
+registration_captcha: Are you human?
+registration_forgot_password: Forgot your password?
+registration_has_account: Already have an account?
+registration_create_account: Create an account
+registration_auth_in_socials: Sign in with your account on social networks
+registration_confirm: Registration confirm
+registration_confirm_done: Registration confirm done.
+registration_confirm_error: Fail link to confirm registration account or account already confirmed.
+search_in_catalog: Search in catalog
+search_in_catalog_notfound: Nothing found.
+filters: Filters
+filters_files_types: Files types
+filters_sort: Sort
+filters_sort_by_date: By date
+filters_sort_by_comments: By comments
+filters_sort_by_views: By views
+filters_styles: Styles
+filters_filter_action: Filter
+subscribe_unsubscribe: Сancel subscription
+subscribe_question_1: Are you sure you want to unsubscribe from e-mail?
+subscribe_question_2: from the mailing list?
+subscribe_unsubscribe_action: Unsubscribe
+drawals_date: Date
+drawals_application: Application
+drawals_price: For the amount of
+drawals_status: Status
+drawals_num: Application №
+drawals_status_rejected: Disapproved
+drawals_status_done: Done
+drawals_status_new: New
+user_send_message: Send a message
+user_auth: Sign in to your account
+user_specialization: Specialization
+user_about_myself: About yourself
+user_dt_create: Date of registration
+user_models: Models
+user_gallery: Gallery
+user_statistics: Statistics
+user_withdrawals: Withdrawal of funds
+user_favourite: My favorites
+user_in_favourite: In favorites
+user_purchases: Purchases
+user_comments: Comments
+user_not_loaded_models: User did not load models
+user_not_loaded_objects: User has not uploaded items to the gallery
+user_models_loaded: Loaded models
+user_last_operations: Recent operations
+user_last_operations_date: Date
+user_last_operations_operation: Operation
+user_last_operations_price: For the amount of
+user_last_withdrawl: Last withdrawal
+user_all_transactions: Show all transactions
+user_sales_balance: Your sales balance
+user_all_sales_balance: Total sales
+user_total_sales: Total sales
+user_models_buying: Buying models
+user_available: Available
+user_available_models: models
+user_buy_models: Buy models
+user_withdrawals_requests: Requests for withdrawal of funds
+user_create_withdrawals_requests: Create an order
+user_create_withdrawals_request_created: Application created
+user_not_favourites: You have not added any favorites to your favorites yet.
+user_not_buying: You have not bought anything yet
+language: Language
+administration_header: Administration
+public_profile: Profile
+settings: Settings
+notifications: Notifications
+exit: Exit
+loaded_models: Uploaded Models
+loaded_models_moderation: (on moderation)
+tooltip_loaded_models: Count loaded models
+views: Views
+current_sales: Current sales
+total_sales: Total sales
+drawals_header_link: Withdrawal of funds
+available_models: Available Models
+purchases: Purchases
+tooltip_sales: The amount received from the sales of Your models
+tooltip_downloads: The number of models that You can download
+about_sym_header: About SYM
+about_sym_description: SYM is a trading platform where you can buy and sell 3D models, textures, plug-ins for various projects. Our store started its work in February 2004, and today we are one of the largest suppliers of 3D content in the world. We only have high-quality 3D models!
+about_sym_description_header: About the project
+about_sym_legal_header: Legal Aspects
+about_sym_updates_header: Updates
+about_sym_follow_us: Follow us
+about_sym_rules: Rules
+about_sym_community: Community
+about_sym_adversting: Advertising
+about_sym_support: Support
+about_sym_send_message: Send a message
+about_sym_contacts: Contacts
+about_sym_agent_dog: Agency agreement
+about_sym_terms: Public offer for the payment
+about_sym_privacy: Privacy policy
+about_sym_conf: Privacy statement and disclaimer
+about_sym_personal: Protection policy of personal information
+footer_all_right_reserved: All rights reserved.
+footer_title: Premium 3D models, CG textures | SYM
+footer_subscribe_test: Sign up to receive fresh lessons, discount coupons, free products and our news.
+footer_subscribe_email: Your E-mail
+footer_subscribe_action: Subscribe
+modal_auth: Auth
+modal_password: Password
+modal_auth_action: Auth
+modal_withdrawals_available: Available for withdrawal
+modal_withdrawals_create: Send order
+modal_withdrawals_header: Application for withdrawal of funds
+modal_withdrawals_sum: Amount for withdrawal
+modal_withdrawals_method: Method for withdrawal
+modal_withdrawals_account: Requisites
+modal_withdrawals_confirm: I am responsible for the correctness of the provided details
+modal_withdrawals_send: Send an application
+image_crop_header: Crop images
+image_crop_action: Crop
+buy_cabinet: Buy models
+comments_model_admin: Models comments
+comments_my_model_admin: My models comments
+comments: Comments
+comments_to_model: Model comment
+comments_delete: Delete comment?
+product_log_block: "Model block by reason: {comment}"
+product_log_unblock: Model unblock
+product_log_add: Model add to site
+product_log_moderated: Model moderated
+product_log_comment: "Comment: {comment}"
+product_log_deleted: Model deleted
+product_log_edited: Model edited
+product_log_buyed: Model buy by user
+messages: Messages
+messages_dialog: Messages with
+messages_dialog_text: Enter message text
+messages_dialog_btn_send: Send message

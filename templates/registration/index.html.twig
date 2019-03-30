@@ -1,0 +1,91 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}{% trans %}registration_header{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="main-wrap">
+        <div class="main-wrap__header">
+            <h1>{% trans %}registration_header{% endtrans %}</h1>
+        </div>
+        <div class="wrap">
+            <div class="wrap-right">
+                <h4 class="wrap__title">{% trans %}helpful_information{% endtrans %}</h4>
+                <ol class="list">
+                    <li>{% trans %}cabinet_buy_healful_info_l1{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l2{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l3{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l4{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l5{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l6{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l7{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l8{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l9{% endtrans %}</li>
+                    <li>{% trans %}cabinet_buy_healful_info_l10{% endtrans %}</li>
+                </ol>
+            </div>
+            <div class="wrap-left">
+                <p>{% trans %}registration_left{% endtrans %}</p>
+                <div class="box-form registration">
+                    <form action="{{ path("registration_write") }}" method="POST" class="js-registration">
+                        <div class="box-field registration-error">
+                            <div class="registration-error__text js-registration-error"></div>
+                            <label class="box-field__label">E-mail</label>
+                            <div class="box-field__input">
+                                <input type="email" name="email" class="form-control js-required" />
+                            </div>
+                        </div>
+                        <div class="box-field">
+                            <label class="box-field__label">{% trans %}registration_nickname{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <input type="text" name="nickname" class="form-control js-required" />
+                            </div>
+                        </div>
+                        <div class="box-field">
+                            <label class="box-field__label">{% trans %}registration_password{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <input type="password" name="password" class="form-control js-required">
+                            </div>
+                        </div>
+                        <div class="box-field">
+                            <label class="box-field__label">{% trans %}registration_repeat_password{% endtrans %}</label>
+                            <div class="box-field__input">
+                                <input type="password" name="password_repeat" class="form-control js-required">
+                            </div>
+                        </div>
+                        {#<div class="box-field captcha">#}
+                            {#<label class="box-field__label">{% trans %}registration_captcha{% endtrans %}</label>#}
+                            {#<div class="box-field__input">#}
+                                {#<div class="g-recaptcha" data-sitekey="6LdrISYUAAAAAAzaB7Nm4xys2M8CZK81QebXWmN_"></div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        <div class="box-field checkbox nowrap">
+                            <div class="box-field__input">
+                                <input type="checkbox" id="check_1" class="styler">
+                                <label for="check_1" class="nowrap box-field__label">{% trans %}i_agree_with{% endtrans %} <a href="#" class="link">{% trans %}user_agreement{% endtrans %}</a></label>
+                            </div>
+                        </div>
+                        <button type="submit" class="button button_warning button_block box-form__button" onclick="ajaxRegistration();return false;">
+                            {% trans %}registration_create_account{% endtrans %}
+                        </button>
+                        <p><a href="#login" class="link fancybox">{% trans %}registration_has_account{% endtrans %}</a><span class="devider">|   </span><a
+                                    href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
+                    </form>
+                </div>
+                <div class="enter-social">
+                    <p>{% trans %}registration_auth_in_socials{% endtrans %}</p>
+                    <ul class="social-wrap">
+                        <li class="social-wrap__item">
+                            <a href="{{ hwi_oauth_login_url('facebook') }}" class="social-wrap__link fb"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li class="social-wrap__item">
+                            <a href="{{ hwi_oauth_login_url('vkontakte') }}" class="social-wrap__link vk"><i class="fa fa-vk"></i></a>
+                        </li>
+                        <li class="social-wrap__item">
+                            <a href="{{ hwi_oauth_login_url('google') }}" class="social-wrap__link gp"><i class="fa fa-google-plus"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,116 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Twig,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    app.dynamic_routing:
+        class: App\Routing\DynamicLoader
+        arguments: ["@doctrine.orm.default_entity_manager"]
+        tags: [routing.loader]
+
+    wp_authentication_handler:
+        class:        App\Handler\AuthenticationHandler
+        arguments:    ["@router", "@fos_user.user_manager", "@service_container"]
+        # not required, will help in our example
+        autowire: false
+        public: true
+
+    app_provider:
+        class: App\Security\Core\User\FOSUBUserProvider
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: ["@fos_user.user_manager",{facebook: facebook_id, vkontakte: vkontakte_id, google: google_id},"@session"]
+        # not required, will help in our example
+        autowire: false
+        public: true
+
+    wp_locale.listener:
+        class: App\EventListener\LocaleListener
+        arguments: [ "@doctrine.orm.entity_manager" ]
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, priority: 17 }
+
+    wp_product.upload_photo_listener:
+        class: App\EventListener\UploadPhotoListener
+        arguments: [ "@service_container", "@doctrine.orm.entity_manager","@sonata.media.manager.media" ]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload.images, method: onUpload }
+
+    wp_cabinet.upload_photo_listener:
+        class: App\EventListener\UploadAvatarListener
+        arguments: [ "@service_container", "@doctrine.orm.entity_manager","@sonata.media.manager.media" ]
+        tags:
+            - { name: kernel.event_listener, event: oneup_uploader.post_upload.avatars, method: onUpload }
+
+    wp.notify.manager:
+        class: App\Manager\NotifyManager
+        arguments: ['@doctrine.orm.entity_manager', '@mailer', '@templating', '@service_container']
+        # not required, will help in our example
+        autowire: true
+        public: true
+        
+        
+    wp.menu:
+        class: App\Twig\Extension\menuExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.unread.notify:
+        class: App\Twig\Extension\unreadNotifyExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.unread.message:
+        class: App\Twig\Extension\unreadMessageExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.filters:
+        class: App\Twig\Extension\filtersExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.banners:
+        class: App\Twig\Extension\bannersExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.sites:
+        class: App\Twig\Extension\sitesExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
+    wp.cookie.agree:
+        class: App\Twig\Extension\cookieAgreeExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]

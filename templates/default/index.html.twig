@@ -1,0 +1,87 @@
+{% extends '_main.html.twig' %}
+
+{% block navblock_class %}nav-profile--main-page{% endblock %}
+
+{% block banners %}
+    {% spaceless %}
+        <div class="banners-main banners-main--desktop">
+            {% for e in banners %}
+                <a href="{{ e.link }}" style="background-image: url({% path e.bg, 'reference' %});" class="banners-main__item">
+                    <img src="{% path e.icon, 'reference' %}" alt="" class="banners-main__icon">
+                    <div class="banners-main__name">{{ e.name }}</div>
+                    <div class="banners-main__info">{{ e.info }}</div>
+                    <div class="banners-main__mask"></div>
+                </a>
+            {% endfor %}
+        </div>
+    {% endspaceless %}
+{% endblock %}
+
+{% block content %}
+    <div class="slider__wrapper">
+        <div class="slider__container">
+            <div class="slider">
+                {% for e in slider %}
+                    <div>
+                        <a {% if e.link %}href="{{ e.link }}"{% endif %} class="slide">
+                            <div class="slide__text-wrapper">
+                                <div class="slide__line-1">{{ e.line1|raw }}</div>
+                                <div class="slide__line-2">{{ e.line2|raw }}</div>
+                                <div class="slide__line-3">{{ e.line3|raw }}</div>
+                                <div class="slide__line-4">{{ e.line4|raw }}</div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="slider__bg">
+            {% for e in slider %}
+                <div class="slider__bg-item {% if loop.index==1 %}active{% endif %}" style="background-image: url({% path e.image, 'reference' %});{% if loop.index==1 %}display:block;{% endif %}"></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="banners-main banners-main--mobile clearfix">
+        {% for e in banners %}
+            <a href="{{ e.link }}" style="background-image: url({% path e.bg, 'reference' %});" class="banners-main__item">
+                <img src="{% path e.icon, 'reference' %}" alt="" class="banners-main__icon">
+                <div class="banners-main__name">{{ e.name }}</div>
+                <div class="banners-main__info">{{ e.info }}</div>
+                <div class="banners-main__mask"></div>
+            </a>
+        {% endfor %}
+    </div>
+    <div class="wrapper">
+        <div class="box-tab">
+            <div class="tab-wrap">
+                <div class="tab-title">
+                    <ul class="nav-tabs-list tabs">
+                        <li class="nav-tabs-list__item active"><a href="#" data-tab="js-tab-1" class="nav-tabs-list__link">{% trans %}new_in_catalog{% endtrans %}</a></li>
+                        <li class="nav-tabs-list__item"><a href="#" data-tab="js-tab-2" class="nav-tabs-list__link">{% trans %}best{% endtrans %}</a></li>
+                    </ul>
+                    <div class="tab-show-all">
+                        <a href="{{ path('catalog_new') }}" class="tab-more js-tab-1">{% trans %}show_all{% endtrans %}</a>
+                        <a href="{{ path('catalog_best') }}" class="tab-more js-tab-2 hide">{% trans %}show_all{% endtrans %}</a>
+                    </div>
+                </div>
+
+                <div class="box-tab-cont">
+                    <div class="js-tab-1 tab-cont">
+                        <ul class="product-list">
+                            {% for e in products %}
+                                {% include 'catalog/_product_in_category.html.twig' with {'e':e} %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="js-tab-2 tab-cont hide">
+                        <ul class="product-list">
+                            {% for e in productsBest %}
+                                {% include 'catalog/_product_in_category.html.twig' with {'e':e} %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

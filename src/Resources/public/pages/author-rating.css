@@ -1,0 +1,32 @@
+.icon-author-rating {
+    width: 12px;
+    height: 12px;
+    background: transparent;
+}
+.icon-author-rating__lvl1 {
+    background: url(../img/svg/icon_lvl1.svg) no-repeat center center;
+}
+.icon-author-rating__lvl2 {
+    background: url(../img/svg/icon_lvl2.svg) no-repeat center center;
+}
+.icon-author-rating__lvl3 {
+    background: url(../img/svg/icon_lvl3.svg) no-repeat center center;
+}
+.icon-author-rating__lvl4 {
+    background: url(../img/svg/icon_lvl4.svg) no-repeat center center;
+}
+.icon-author-rating__lvl5 {
+    background: url(../img/svg/icon_lvl5.svg) no-repeat center center;
+}
+.icon-author-rating__lvl6 {
+    background: url(../img/svg/icon_lvl6.svg) no-repeat center center;
+}
+.icon-author-rating__lvl7 {
+    background: url(../img/svg/icon_lvl7.svg) no-repeat center center;
+}
+.icon-author-rating__lvl8 {
+    background: url(../img/svg/icon_lvl8.svg) no-repeat center center;
+}
+.icon-author-rating__lvl9 {
+    background: url(../img/svg/icon_lvl9.svg) no-repeat center center;
+}

@@ -1,0 +1,41 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}{{ entity.name }}{% endblock %}
+
+{% block content %}
+    <div class="content-wrap column">
+        <div class="main-wrap">
+            <div class="main-wrap__header">
+                <h1>{% trans %}articles{% endtrans %}</h1>
+            </div>
+        </div>
+        <div class="box-articles mt10">
+            <article class="article">
+                <div class="box-top">
+                    <div class="box-top__avatar">{% if entity.user %}<a href="{{ path('user_view',{nickname:entity.user.nickname}) }}"><img
+                                    src="{% if entity.user.image %}{% path entity.user.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt=""></a>{% endif %}</div>
+                    <div class="box-top__cont">
+                        {% if entity.user %}<span class="author">{% trans %}product_from{% endtrans %}:<a
+                                    href="{{ path('user_view',{nickname:entity.user.nickname}) }}">{{ entity.user.name }}</a><span
+                                    class="ic ic_models-one"></span></span>{% endif %}
+                        <h3 class="article__title"><a href="{{ path('articles_item',{id:entity.id}) }}">{{ entity.name }}</a></h3>
+                        <div><span class="date">{{ entity.date|date('d.m.Y') }}</span><span class="product-panel__item"><span
+                                        class="product-panel__icon"><i class="ic ic_eye"></i><span>50</span></span><span
+                                        class="product-panel__icon"><i
+                                            class="fa fa-comment"></i><span>50</span></span><span
+                                        class="product-panel__icon"><i
+                                            class="fa fa-star"></i><span>50</span></span></span></div>
+                    </div>
+                </div>
+                <div class="article__body"><img src="{% path entity.image, 'big' %}" alt=""/>
+                    <p>
+                        {{ entity.text|raw }}
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+    <aside class="column">
+        <div class="banner">{{ bannerRight() }}</div>
+    </aside>
+{% endblock %}

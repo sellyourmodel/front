@@ -1,0 +1,12 @@
+{% extends 'cabinet/_cabinet_base.html.twig' %}
+
+{% block cabinetTitle %}{% trans %}comments_my_model_admin{% endtrans %}{% endblock %}
+
+{% block cabinetContent %}
+
+    <div class="box-comment">
+        <div class="js-comments">
+            {% include 'catalog/_product_comments.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

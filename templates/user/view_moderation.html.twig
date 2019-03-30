@@ -1,0 +1,46 @@
+{% extends '_inside.html.twig' %}
+
+{% block main_wrapper_class %}{% endblock %}
+
+{% block content %}
+
+    <div class="user-profile">
+        <div class="user-profile__top">
+            <div class="user-profile__avatar"><img src="{% if entity.image %}{% path entity.image, 'big' %}{% else %}{{ asset('bundles/app/img/user-avatar.png') }}{% endif %}" alt=""></div>
+            <div class="user-profile__info">
+                <h3 class="user-profile__nick">{{ entity.nickname }}</h3>
+                <div class="user-profile__text user-profile__text--first">{{ entity.specialization }}</div>
+                <div class="user-profile__text">{% if entity.country %}{{ entity.country.name }}{% endif %}{% if entity.country and entity.city %}, {% endif %}{{ entity.city }}</div>
+                {#<div class="user-profile__text"><a href="#" class="user-profile__link">www.sell3d.ru</a></div>#}
+                <div class="user-profile__text">{% trans %}user_dt_create{% endtrans %}: {{ entity.createdAt|date("d-m-Y") }}</div>
+            </div>
+            <div class="user-profile__about">
+                <div class="user-profile__rating">Репутация 500</div>
+                <div class="user-profile__rating-icons">
+                    <div class="user-profile__rating-icon"></div>
+                    <div class="user-profile__rating-icon"></div>
+                    <div class="user-profile__rating-icon"></div>
+                </div>
+            </div>
+        </div>
+        <div class="user-profile__tabs">
+            <ul class="nav-tabs-list nav-tabs-list--profile">
+                <li class="nav-tabs-list__item"><a href="{{ path('user_view',{nickname:app.user.nickname}) }}" class="nav-tabs-list__link">Заруженные модели</a></li>
+                <li class="nav-tabs-list__item active"><a href="{{ path('user_view_moderation',{nickname:app.user.nickname}) }}" class="nav-tabs-list__link">Модели на модерации</a></li>
+            </ul>
+        </div>
+    </div>
+
+    {% if products|length > 0 %}
+        <ul class="product-list">
+            {% for e in products %}
+                {% include 'catalog/_product_in_category.html.twig' with {'e':e} %}
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="no-items">
+            Модели отсутствуют.
+        </div>
+    {% endif %}
+
+{% endblock %}

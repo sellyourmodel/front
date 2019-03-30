@@ -1,0 +1,51 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}{{ category.nameLocale }}{% endblock %}
+
+{% block wrapper_class %}catalog{% endblock %}
+
+{% block content_wrapper %}
+
+    <div class="wrapper">
+        <div class="main-wrap catalog">
+            <div class="main-wrap__header">
+                <form action="" method="GET" class="box-select-group js-category-filter">
+                    <select name="software" onchange="catalogFilter();" class="styler">
+                        <option value="0">Все форматы</option>
+                        {% for e in software %}
+                            <option value="{{ e.id }}" {% if app.request.get('software', '0') == e.id %}selected{% endif %}>{{ e.name }} ({{ e.count }})</option>
+                        {% endfor %}
+                    </select>
+                    <select name="style" onchange="catalogFilter();" class="styler">
+                        <option value="">Все стили</option>
+                        {% for e in style %}
+                            <option value="{{ e.id }}" {% if app.request.get('style', '0') == e.id %}selected{% endif %}>{{ e.name }} ({{ e.count }})</option>
+                        {% endfor %}
+                    </select>
+                    <select name="sort" onchange="catalogFilter();" class="styler">
+                        <option value="date" {% if app.request.get('sort', 'date') == 'date' %}selected{% endif %}>{% trans %}filters_sort_by_date{% endtrans %}</option>
+                        <option value="comments" {% if app.request.get('sort') == 'comments' %}selected{% endif %}>{% trans %}filters_sort_by_comments{% endtrans %}</option>
+                        <option value="views" {% if app.request.get('sort') == 'views' %}selected{% endif %}>{% trans %}filters_sort_by_views{% endtrans %}</option>
+                    </select>
+                </form>
+                {% if category.parent %}
+                    <h1><a href="{{ path('catalog_category',{alias:category.parent.alias}) }}" class="link link_warning">{{ category.parent.nameLocale }}</a> <span class="text-warning devider">/</span> {{ category.nameLocale }}</h1>
+                {% else %}
+                    <h1>{{ category.nameLocale }}</h1>
+                {% endif %}
+            </div>
+            {% if category.parent is null and category.children|length > 0 %}
+                <div class="sub-cats">
+                    {% for e in category.children %}
+                        <a class="sub-cats__item" href="{{ path('catalog_category',{alias:e.alias}) }}">{{ e.nameLocale }}</a>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="js-products">
+            {% include 'catalog/_category_inside.html.twig' %}
+        </div>
+
+    </div>
+{% endblock %}

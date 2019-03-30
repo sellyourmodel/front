@@ -1,0 +1,33 @@
+{% extends '_inside.html.twig' %}
+
+{% block content %}
+
+    <div class="main-wrap__header">
+        <h1>{% trans %}user_last_operations{% endtrans %}</h1>
+    </div>
+    <div class="wrap wrap_small support">
+        <div class="wrap-right wrap-right--profile">
+            <ul class="wrap-list">
+
+            </ul>
+        </div>
+        <div class="wrap-left wrap-left--profile">
+            {#<p></p>#}
+            <table class="table">
+                <tr>
+                    <th class="td-date">{% trans %}user_last_operations_date{% endtrans %}</th>
+                    <th>{% trans %}user_last_operations_operation{% endtrans %}</th>
+                    <th class="td-summa">{% trans %}user_last_operations_price{% endtrans %}</th>
+                </tr>
+                {% for e in history %}
+                    <tr>
+                        <td>{{ e.date|date("d.m.Y") }}</td>
+                        <td>{{ e.name }}</td>
+                        <td>{% if e.price != '-1' %}{{ e.price }}{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

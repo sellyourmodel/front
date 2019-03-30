@@ -1,0 +1,16 @@
+{% extends 'cabinet/_cabinet_base.html.twig' %}
+
+{% block cabinetTitle %}{% trans %}socials_header{% endtrans %}{% endblock %}
+
+{% block cabinetContent %}
+    <div class="box-form settings">
+        <p>{% trans %}socials_left_text{% endtrans %}</p>
+        <div class="settings-social">
+            <ul class="social-wrap social-wrap__settings unstyled">
+                <li class="social-wrap__item active"> <a href="" class="social-wrap__link fb"><i class="fa fa-facebook"></i><i class="fa fa-check connect-icon"></i></a></li>
+                <li class="social-wrap__item"> <a href="" class="social-wrap__link vk"><i class="fa fa-vk"></i><i class="fa fa-check connect-icon"></i></a></li>
+                <li class="social-wrap__item"> <a href="#" class="social-wrap__link gp"><i class="fa fa-google-plus"></i><i class="fa fa-check connect-icon"></i></a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

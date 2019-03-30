@@ -1,0 +1,25 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}{% trans %}new_in_catalog{% endtrans %}{% endblock %}
+
+{% block wrapper_class %}catalog{% endblock %}
+
+{% block content_wrapper %}
+
+    <div class="wrapper">
+        <div class="main-wrap catalog">
+            <div class="main-wrap__header">
+                <h1>{% trans %}new_in_catalog{% endtrans %}</h1>
+            </div>
+        </div>
+
+            {% if entities|length > 0 %}
+                <ul class="product-list col-4">
+                    {% for e in entities %}
+                        {% include 'catalog/_product_in_category.html.twig' with {'e':e} %}
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+    </div>
+{% endblock %}

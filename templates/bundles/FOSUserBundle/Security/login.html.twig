@@ -1,0 +1,104 @@
+{% extends "_inside.html.twig" %}
+
+{% block content %}
+    {% if app.user %}
+        <meta http-equiv="refresh" content="0; url=/">
+    {% endif %}
+    <div class="main-wrap">
+        <div class="wrap">
+            <div class="wrap-right login-registration__wrap-right">
+                <div class="login-registration__title">
+                    Регистрация нового пользователя
+                </div>
+                <div class="box-form login-registration__registration-wrapper">
+                    <div class="login-registration__before-text">{% trans %}registration_left{% endtrans %}</div>
+                    <form action="{{ path("registration_write") }}" method="POST" class="js-registration">
+                        <div class="login-registration__fields-wrapper clearfix">
+                            <div class="box-field registration-error registration-fields">
+                                <div class="registration-error__text js-registration-error"></div>
+                                <label class="box-field__label">E-mail</label>
+                                <div class="box-field__input">
+                                    <input type="email" name="email" class="form-control js-required" />
+                                </div>
+                            </div>
+                            <div class="box-field registration-fields">
+                                <label class="box-field__label">{% trans %}registration_nickname{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <input type="text" name="nickname" class="form-control js-required" />
+                                </div>
+                            </div>
+                            <div class="box-field registration-fields">
+                                <label class="box-field__label">{% trans %}registration_password{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <input type="password" name="password" class="form-control js-required">
+                                </div>
+                            </div>
+                            <div class="box-field registration-fields">
+                                <label class="box-field__label">{% trans %}registration_repeat_password{% endtrans %}</label>
+                                <div class="box-field__input">
+                                    <input type="password" name="password_repeat" class="form-control js-required">
+                                </div>
+                            </div>
+                        </div>
+                        {#<div class="box-field login-fields captcha login-registration__captcha">#}
+                            {#<label class="box-field__label">{% trans %}registration_captcha{% endtrans %}</label>#}
+                            {#<div class="box-field__input">#}
+                                {#<div class="g-recaptcha" data-sitekey="6LdrISYUAAAAAAzaB7Nm4xys2M8CZK81QebXWmN_"></div>#}
+                            {#</div>#}
+                        {#</div>#}
+                        <div class="box-field login-fields checkbox nowrap">
+                            <div class="box-field__input">
+                                <input type="checkbox" id="check_1" name="user_agreement" value="1" class="styler">
+                                <label for="check_1" class="nowrap box-field__label">{% trans %}i_agree_with{% endtrans %} <a href="{{ path('page_9') }}" target="_blank" class="link">{% trans %}user_agreement{% endtrans %}</a></label>
+                            </div>
+                        </div>
+                        <div class="login-registration__submit">
+                            <button type="submit" class="button button_warning button_block box-form__button" onclick="ajaxRegistration();return false;">
+                                {% trans %}registration_create_account{% endtrans %}
+                            </button>
+                        </div>
+                        <p><a href="{{ path('fos_user_resetting_request') }}" class="link">{% trans %}registration_forgot_password{% endtrans %}</a></p>
+                    </form>
+                </div>
+            </div>
+            <div class="wrap-left login-registration__wrap-left">
+                <div class="login-registration__title">
+                    Вход в личный кабинет
+                </div>
+                <div class="box-form registration">
+                    <div class="login-registration__before-text">{% trans %}login_left{% endtrans %}</div>
+                    <form action="{{ path('fos_user_security_check') }}" method="POST" class="js-login">
+                        <div class="box-field login-error login-fields">
+                            <div class="login-error__text js-login-error"></div>
+                            <label class="box-field__label">E-mail</label>
+                            <div class="box-field__input">
+                                <input type="email" name="_username" class="form-control">
+                            </div>
+                        </div>
+                        <div class="box-field login-fields">
+                            <label class="box-field__label">Пароль</label>
+                            <div class="box-field__input">
+                                <input type="password" name="_password" class="form-control">
+                            </div>
+                        </div>
+                        {#<div class="box-field captcha">
+                            <label class="box-field__label">Вы человек?</label>
+                            <div class="box-field__input"><img src="{{ asset('bundles/app/img/captcha.png') }}" alt=""></div>
+                        </div>#}
+                        <input type="submit" value="Войти" class="button button_warning button_block box-form__button" onclick="ajaxLogin(this);return false;" />
+                        <p><a href="{{ path('fos_user_resetting_request') }}" class="link">Забыли пароль?</a></p>
+                    </form>
+                </div>
+                <div class="enter-social">
+                    <p>Войти через аккаунт в социальных сетях</p>
+                    <ul class="social-wrap unstyled">
+                        <li class="social-wrap__item"> <a href="{{ hwi_oauth_login_url('facebook') }}" class="social-wrap__link fb"><i class="fa fa-facebook"></i></a></li>
+                        <li class="social-wrap__item"> <a href="{{ hwi_oauth_login_url('vkontakte') }}" class="social-wrap__link vk"><i class="fa fa-vk"></i></a></li>
+                        <li class="social-wrap__item"> <a href="{{ hwi_oauth_login_url('google') }}" class="social-wrap__link gp"><i class="fa fa-google-plus"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}{% trans %}messages_dialog{% endtrans %} {{ user.nickname }}{% endblock %}
+
+{% block content %}
+    <div class="main-wrap">
+        <div class="main-wrap__header">
+            <h1>{% trans %}messages_dialog{% endtrans %} {{ user.nickname }}</h1>
+        </div>
+        <div class="wrap wrap_small">
+            <div class="wrap-right">
+
+            </div>
+            <div class="wrap-left">
+                <div class="text-page">
+                    <div class="">
+                        <div class="js-messages">
+                            {{ messages|raw }}
+                        </div>
+                        <div class="comments-add">
+                            <textarea name="text" placeholder="{% trans %}messages_dialog_text{% endtrans %}" class="form-control js-comments-textarea"></textarea>
+                            <button type="button" class="button button_warning js-add-model-btn" onclick="sendUserMessage({{ user.id }}, this);return false;">{% trans %}messages_dialog_btn_send{% endtrans %}</button>
+                            <span class="help-text inline add-model__result js-add-comment-result"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

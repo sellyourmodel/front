@@ -1,0 +1,46 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}Поддержка{% endblock %}
+
+{% block content %}
+    <div class="main-wrap">
+        <div class="main-wrap__header">
+            <h1>Поддержка</h1>
+        </div>
+        <div class="wrap wrap_small">
+            <div class="wrap-right">
+                <h4 class="footer__title">{% trans %}about_sym_description_header{% endtrans %}</h4>
+                <ul class="footer-nav">
+                    <li class="footer-nav__item"><a href="{{ path('page_4') }}" class="footer-nav__link">{% trans %}about_sym_rules{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('community') }}" class="footer-nav__link">{% trans %}about_sym_community{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('page_5') }}" class="footer-nav__link">{% trans %}about_sym_adversting{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('faq') }}" class="footer-nav__link">{% trans %}about_sym_support{% endtrans %}</a></li>
+                    {#<li class="footer-nav__item"><a href="#" class="footer-nav__link">{% trans %}about_sym_send_message{% endtrans %}</a></li>#}
+                    <li class="footer-nav__item"><a href="{{ path('page_6') }}" class="footer-nav__link">{% trans %}about_sym_contacts{% endtrans %}</a></li>
+                </ul>
+                <h4 class="footer__title">{% trans %}about_sym_legal_header{% endtrans %}</h4>
+                <ul class="footer-nav">
+                    <li class="footer-nav__item"><a href="{{ path('page_9') }}" class="footer-nav__link">{% trans %}about_sym_privacy{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('page_7') }}" class="footer-nav__link">{% trans %}about_sym_agent_dog{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('page_8') }}" class="footer-nav__link">{% trans %}about_sym_terms{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('page_10') }}" class="footer-nav__link">{% trans %}about_sym_conf{% endtrans %}</a></li>
+                    <li class="footer-nav__item"><a href="{{ path('page_11') }}" class="footer-nav__link">{% trans %}about_sym_personal{% endtrans %}</a></li>
+                </ul>
+            </div>
+            <div class="wrap-left">
+                <div class="accordion">
+                    {% for e in entities %}
+                    <div class="accordion-wrap">
+                        <h4 class="accordion__head"><a href="#">{{ e.name }}</a></h4>
+                        <div class="accordion__body">
+                            {{ e.text|raw }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br /><br />
+                <a href="{{ path('cabinet_tickets_add') }}" class="button button_warning">Создать обращение</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

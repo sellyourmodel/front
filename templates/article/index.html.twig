@@ -1,0 +1,30 @@
+{% extends '_inside.html.twig' %}
+
+{% block title %}{% trans %}articles{% endtrans %}{% endblock %}
+
+{% block content %}
+    <div class="text-page">
+        <h1>{% trans %}articles{% endtrans %}</h1>
+        <div class="b-news">
+            {% if articles|length > 0 %}
+                {% for e in articles %}
+                    <div class="item">
+                        <div class="image">
+                            <a href="{{ path('articles_item',{id:e.id}) }}"><img src="{% path e.image, 'small' %}" class="img-responsive"/></a>
+                        </div>
+                        <div class="text">
+                            <h2>{{ e.name }}</h2>
+                            <div class="date">{{ e.dateStr }}</div>
+                            <div class="preview">
+                                {{ e.preview|nl2br }}
+                            </div>
+                            <a href="{{ path('articles_item',{id:e.id}) }}">{% trans %}learn_more{% endtrans %}</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>{% trans %}no_items_found{% endtrans %}.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

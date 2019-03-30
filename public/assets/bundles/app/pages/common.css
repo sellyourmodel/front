@@ -1,0 +1,14 @@
+.lang__item{
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+.lang__item.active{
+    color:#bda180;
+}
+
+@media (max-width: 767px) {
+    .buy-model{
+        display: none;
+    }
+}

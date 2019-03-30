@@ -1,0 +1,77 @@
+.share-block{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 25px;
+}
+
+.link-group{
+    min-height: 24px;
+}
+
+.link-group .link{
+    margin-top: 3px;
+}
+
+.product-star{
+    display: inline-block;
+    width: 24px;
+    height: 18px;
+    border: 0;
+    background: url(../img/star.png) no-repeat 0 0px;
+}
+
+.product-star.active,
+.product-star:hover{
+    background-position: 0 -18px;
+}
+
+.model-files-download{
+    padding: 3px 0;
+}
+
+.model-files-download a{
+    text-decoration: underline;
+}
+
+.model-admin-action{
+    padding-top: 12px;
+}
+
+.button_warning--user-buy{
+    width: 127px;
+    text-align: center;
+}
+
+.button_warning--user-like{
+    width: 197px;
+    text-align: center;
+}
+
+.button_warning--user-like:disabled,
+.button_warning--user-like:disabled:hover{
+    background: #c8c8c8 !important;
+}
+
+.buy-block{
+    position: relative;
+}
+
+.buy-block__confirm{
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top:0;
+    left:0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+}
+
+.buy-block__title{
+    margin-bottom: 10px;
+}
+
+a.buy-block__btn-confirm{
+    width: auto;
+    text-align: center;
+}
