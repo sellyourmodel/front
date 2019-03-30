@@ -1,33 +1,23 @@
-/web/css/
-/web/js/
-/web/bundles/
-/web/uploads/*
-/app/bootstrap.php.cache
-/app/cache/*
-/app/config/parameters.yml
-/app/logs/*
-!app/cache/.gitkeep
-!app/logs/.gitkeep
-/app/phpunit.xml
-/build/
-/vendor/
-/bin/
-/composer.phar
-
-# PHPUnit
-/app/phpunit.xml
-/phpunit.xml
-
-# IDE, Mac AND PHP Settings
-.idea
+.idea/
+/local/
+/logs
+.php71
 php.ini
 *.DS_Store
 *.php~
 composer.phar
 
-/local/
-/logs
-.dev
+###> symfony/framework-bundle ###
+/.env.local
+/.env.*.local
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
 
-tests/_output/*
-/console
+###> symfony/webpack-encore-bundle ###
+/node_modules/
+/public/build/
+npm-debug.log
+yarn-error.log
+###< symfony/webpack-encore-bundle ###
