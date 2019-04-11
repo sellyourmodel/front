@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Helper\SendPulse\SendpulseApi;
+use FOS\UserBundle\Security\LoginManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -14,6 +15,14 @@ use Symfony\Component\Security\Core\Exception\AccountStatusException;
 
 class  RegistrationController extends Controller
 {
+
+    private $loginManager;
+
+    public function __construct(LoginManagerInterface $loginManager){
+        $this->loginManager = $loginManager;
+    }
+
+
     /**
      * @Route("/registration/", name="registration")
      * @Template()
@@ -83,6 +92,8 @@ class  RegistrationController extends Controller
         }*/
 
         $user = new User();
+        $user->setCreatedAt(new \DateTime());
+        $user->setUpdatedAt(new \DateTime());
 
         $user->setEmail($email);
         $user->setNickname($nickname);
@@ -100,7 +111,7 @@ class  RegistrationController extends Controller
         $SPApiProxy->addEmails(getenv('sendpulse_book_registration'),[["email"=>$email]]);
 
         try {
-            $this->container->get('fos_user.security.login_manager')->loginUser(
+            $this->loginManager->loginUser(
                 $this->container->getParameter('fos_user.firewall_name'),
                 $user);
         } catch (AccountStatusException $ex) {

@@ -148,6 +148,8 @@ class FOSUBUserProvider extends BaseClass
             $user->$setter_id($username);
             $user->$setter_token($response->getAccessToken());
             $user->setUserType($service);
+            $user->setCreatedAt(new \DateTime());
+            $user->setUpdatedAt(new \DateTime());
 
             $email = $response->getEmail();
 
