@@ -8,6 +8,9 @@
     "cocur/slugify": {
         "version": "v3.2"
     },
+    "danielstjules/stringy": {
+        "version": "3.1.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {

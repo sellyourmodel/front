@@ -137,7 +137,7 @@ class FOSUBUserProvider extends BaseClass
         }
         /** @var User $user */
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username, 'userType'=>$service));
-        $data = $response->getResponse();
+        $data = $response->getPaths();
         //when the user is registrating
         if (null === $user) {
             $setter = 'set' . ucfirst($service);
@@ -169,7 +169,7 @@ class FOSUBUserProvider extends BaseClass
                     $email = $username;
                 }
                 if(strstr($response->getRealName(), ' ')){
-                    $a = explode(' ', $response->getNickname());
+                    $a = explode(' ', $response->getRealName());
                     if(count($a) > 1){
                         $user->setI($a[0]);
                         $user->setF($a[1]);
@@ -178,10 +178,10 @@ class FOSUBUserProvider extends BaseClass
                 }
                 $user->setEmail($email);
                 $user->setPlainPassword($username.rand(0,99999));
-                if($data["picture"]["data"]["url"]){
+                //if($data["picture"]["data"]["url"]){
                     //$avatar = $this->getAvatarFromUrl($data["picture"]["data"]["url"]);
                     //$user->setImage($avatar);
-                }
+                //}
 
             }
             // VK
@@ -194,17 +194,14 @@ class FOSUBUserProvider extends BaseClass
 
                 $user->setEmail($email);
                 $user->setPlainPassword($username.rand(0,99999));
-                if($data["response"][0]["first_name"]){
-                    $user->setI($data["response"][0]["first_name"]);
+                if(strstr($response->getRealName(), ' ')){
+                    $a = explode(' ', $response->getRealName());
+                    if(count($a) > 1){
+                        $user->setI($a[1]);
+                        $user->setF($a[0]);
+                        $user->setName($a[0]." ".$a[1]);
+                    }
                 }
-                if($data["response"][0]["last_name"]){
-                    $user->setF($data["response"][0]["last_name"]);
-                }
-                if($data["response"][0]["photo_medium"]){
-                    //$avatar = $this->getAvatarFromUrl($data["response"][0]["photo_medium"]);
-                    //$user->setImage($avatar);
-                }
-                //dump($data);exit;
             }
             // Google+
             if ($service == 'google') {
@@ -212,6 +209,14 @@ class FOSUBUserProvider extends BaseClass
                 $user->setName($response->getRealName());
                 if(!$email){
                     $email = $username;
+                }
+                if(strstr($response->getRealName(), ' ')){
+                    $a = explode(' ', $response->getRealName());
+                    if(count($a) > 1){
+                        $user->setI($a[0]);
+                        $user->setF($a[1]);
+                        $user->setName($a[1]." ".$a[0]);
+                    }
                 }
 
                 $user->setEmail($email);
