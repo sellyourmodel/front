@@ -1,0 +1,205 @@
+services:
+## Admin resources
+
+    app.admin.category:
+        class: App\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Каталог, label: Разделы каталога}
+        arguments: [~, App\Entity\Category, App:CategoryAdmin]
+        calls:
+            - [ setTemplate, [list, App:Admin:category_list.html.twig]]
+
+    app.admin.faq:
+        class: App\Admin\FaqAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Поддежка, label: FAQ}
+        arguments: [~, App\Entity\Faq, ~]
+
+    app.admin.user:
+        class: App\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Пользователи, label: Пользователи}
+        arguments: [~, App\Entity\User, ~]
+        calls:
+          - [ setUserManager, ["@fos_user.user_manager"]]
+
+    wp.admin.withdrawal:
+        class: App\Admin\UserWithdrawalAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Пользователи, label: Заявки на вывод}
+        arguments: [~, App\Entity\UserWithdrawal, ~]
+
+#    wp.admin.main:
+#        class: App\Admin\TextPageAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: Главная страница, label: Текст}
+#        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+#        calls:
+#            - { method: setPageId, arguments: [1]}
+
+    wp.admin.slider:
+        class: App\Admin\SliderAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Главная страница, label: Слайдер}
+        arguments: [~, App\Entity\Slider, ~]
+
+    wp.admin.banners.index:
+        class: App\Admin\BannerIndexAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Главная страница, label: Баннеры}
+        arguments: [~, App\Entity\BannerIndex, ~]
+
+    wp.admin.banners.bottom:
+        class: App\Admin\BannerBottomAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Баннеры, label: Баннер внизу}
+        arguments: [~, App\Entity\BannerBottom, ~]
+
+    wp.admin.banners.right:
+        class: App\Admin\BannerRightAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Баннеры, label: Баннер справа}
+        arguments: [~, App\Entity\BannerRight, ~]
+
+    wp.admin.about:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: О нас}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [2]}
+
+    wp.admin.selling:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Продавайте 3D модели}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [3]}
+
+    wp.admin.rules:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Правила}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [4]}
+
+    wp.admin.adv:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Реклама}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [5]}
+
+    wp.admin.contacts:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Контакты}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [6]}
+
+    wp.admin.license:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Лицензионное соглашение}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [7]}
+
+    wp.admin.conditions:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Условия использования}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [8]}
+
+    wp.admin.privacy:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Политика конфиденциальности}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [9]}
+
+    wp.admin.poloj:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Положение о конфиденциальности}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [10]}
+
+    wp.admin.poitic:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Политика защиты персональной информации}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [11]}
+
+    wp.admin.support:
+        class: App\Admin\TextPageAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Поддержка}
+        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        calls:
+            - { method: setPageId, arguments: [12]}
+
+#    app.admin.news:
+#        class: App\Admin\NewsAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: Новости и статьи, label: Новости}
+#        arguments: [~, App\Entity\News, ~]
+
+    app.admin.articles:
+        class: App\Admin\ArticleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Сообщество, label: Статьи}
+        arguments: [~, App\Entity\Article, ~]
+
+#    app.admin.tag:
+#        class: App\Admin\TagAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Теги}
+#        arguments: [~, App\Entity\Tag, ~]
+
+#    app.admin.language:
+#        class: App\Admin\LanguageAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Языки пользователя}
+#        arguments: [~, App\Entity\Language, ~]
+
+    app.admin.settings:
+        class: App\Admin\SettingSiteAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Общие настройки}
+        arguments: [~, App\Entity\Setting, App:AdminEdit]
+
+    app.admin.software:
+        class: App\Admin\SoftwareAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: ПО моделей}
+        arguments: [~, App\Entity\Software, ~]
+
+
+    app.admin.style:
+        class: App\Admin\StyleAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Стили моделей}
+        arguments: [~, App\Entity\Style, ~]
+
+    app.admin.right.block:
+        class: App\Admin\RightTextBlockAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Текст справа}
+        arguments: [~, App\Entity\RightTextBlock, ~]
+
+    app.admin.subscribe:
+        class: App\Admin\SubscribeAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Подписка на рассылку, label: Список подписчиков}
+        arguments: [~, App\Entity\Subscribe, ~]

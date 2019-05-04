@@ -140,6 +140,12 @@
     "knplabs/gaufrette": {
         "version": "v0.8.1"
     },
+    "knplabs/knp-menu": {
+        "version": "2.3.0"
+    },
+    "knplabs/knp-menu-bundle": {
+        "version": "v2.2.1"
+    },
     "kriswallsmith/buzz": {
         "version": "v0.16.1"
     },
@@ -242,6 +248,26 @@
     "setasign/fpdi": {
         "version": "1.6.2"
     },
+    "sonata-project/admin-bundle": {
+        "version": "3.31",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "3.31",
+            "ref": "0e5931df1732e3dccfba42a20853049e5e9db6ae"
+        },
+        "files": [
+            "config/packages/sonata_admin.yaml",
+            "config/routes/sonata_admin.yaml",
+            "src/Admin/.gitignore"
+        ]
+    },
+    "sonata-project/block-bundle": {
+        "version": "3.15.0"
+    },
+    "sonata-project/cache": {
+        "version": "2.0.1"
+    },
     "sonata-project/core-bundle": {
         "version": "3.9",
         "recipe": {
@@ -257,8 +283,14 @@
     "sonata-project/doctrine-extensions": {
         "version": "1.2.0"
     },
+    "sonata-project/doctrine-orm-admin-bundle": {
+        "version": "3.9.0"
+    },
     "sonata-project/easy-extends-bundle": {
         "version": "2.5.0"
+    },
+    "sonata-project/exporter": {
+        "version": "1.11.1"
     },
     "sonata-project/media-bundle": {
         "version": "3.13",
@@ -328,6 +360,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v4.2.0"
+    },
+    "symfony/expression-language": {
+        "version": "v4.2.8"
     },
     "symfony/filesystem": {
         "version": "v4.2.0"
@@ -409,6 +444,9 @@
             "version": "4.2",
             "ref": "5374e24d508ba8fd6ba9eb15170255fdb778316a"
         }
+    },
+    "symfony/security-acl": {
+        "version": "v3.0.2"
     },
     "symfony/security-bundle": {
         "version": "3.3",
