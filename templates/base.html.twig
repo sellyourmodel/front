@@ -30,6 +30,7 @@
                 <nav class="box-nav-list">
                     <ul class="nav-list unstyled">
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <li class="nav-list__item"><a href="{{ path('cabinet_tracker') }}" class="nav-list__link"><span>Трекер</span></a></li>
                             <li class="nav-list__item"><a href="{{ path('catalog_moderation') }}" class="nav-list__link"><span>{% trans %}moderation_header{% endtrans %}</span></a></li>
                             {#<li class="nav-list__item"><a href="{{ path('sonata_admin_dashboard') }}" class="nav-list__link"><span>{% trans %}administration_header{% endtrans %}</span></a></li>#}
                         {% endif %}

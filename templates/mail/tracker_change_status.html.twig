@@ -1,0 +1,7 @@
+<h1>Изменение статуса задачи в трекере</h1>
+<p>{{ changer.name }} установил статус <strong>{% if task.status == 'new' %}Новое{% elseif task.status == 'work' %}В работе{% elseif task.status == 'dublicate' %}Повтор{% elseif task.status == 'close' %}Закрыто{% else %}Неизвестно{% endif %}</strong> у задаче <a href="{{ url('cabinet_tracker_item', {id:task.id}) }}">{{ task.name }}</a></p>
+<p>
+    ---------
+    <br />
+    С уважением, команда Sellyourmodel.com
+</p>

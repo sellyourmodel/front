@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Intl\Locale;
 
@@ -92,6 +93,7 @@ class Category
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**

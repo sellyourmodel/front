@@ -1,0 +1,41 @@
+{% extends '_inside.html.twig' %}
+
+{% block mainClass %}product-page{% endblock %}
+
+{% block content %}
+    <div class="box-breadcrumbs">
+        <ul class="breadcrumbs-list">
+            <li class="breadcrumbs-list__item"><a href="{{ path('cabinet') }}" class="breadcrumbs-list__link">Личный кабинет</a></li>
+            <li class="breadcrumbs-list__item"><a href="{{ path('cabinet_tracker') }}" class="breadcrumbs-list__link">Трекер</a></li>
+            <li class="breadcrumbs-list__item"><span>{{ entity.name }}</span></li>
+        </ul>
+    </div>
+    <div class="wrap product tracker">
+        <div class="wrap-right">
+            <div class="product-info js-ticket-data">
+                {% include 'tracker/_tracker_data.html.twig' %}
+            </div>
+        </div>
+        <div class="wrap-left">
+            <div class="box-comment">
+                <h1>{{ entity.name }}</h1>
+                <div class="tickets__info">
+                    Описание:
+                    <br />
+                    <br />
+                    {{ entity.text|nl2br }}
+                </div>
+                <div class="js-comments">
+                    {% include 'tracker/_tracker_comments.html.twig' %}
+                </div>
+                {% if app.user %}
+                    <div class="comments-add">
+                        <textarea name="text" placeholder="{% trans %}enter_comment{% endtrans %}" class="form-control js-comments-textarea"></textarea>
+                        <button type="button" class="button button_warning js-add-model-btn" onclick="addTrackerComment({{ entity.id }}, this);return false;">{% trans %}add_comment{% endtrans %}</button>
+                        <span class="help-text inline add-model__result js-add-comment-result"></span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

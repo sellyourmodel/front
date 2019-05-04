@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Application\Sonata\MediaBundle\Entity\Media;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
@@ -189,6 +191,9 @@ class Product
     {
         $this->images = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->software = new ArrayCollection();
+        $this->style = new ArrayCollection();
+        $this->log = new ArrayCollection();
     }
 
     /**

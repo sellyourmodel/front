@@ -53,4 +53,20 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return array
+     */
+    public function findAdmins()
+    {
+
+        $qb = $this->createQueryBuilder('u');
+
+        $qb->andWhere("u.roles LIKE '%ROLE_SUPER_ADMIN%'");
+
+        $qb->addOrderBy('u.name', 'ASC');
+
+        return $qb->getQuery()
+            ->getResult();
+    }
 }

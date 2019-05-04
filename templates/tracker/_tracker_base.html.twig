@@ -1,0 +1,20 @@
+{% extends '_inside.html.twig' %}
+
+{% block content %}
+
+    <div class="main-wrap__header">
+        <h1>{% block cabinetTitle %}{% trans %}settings_header{% endtrans %}{% endblock %}</h1>
+    </div>
+    <div class="wrap wrap_small support">
+        <div class="wrap-right wrap-right--profile">
+            <ul class="wrap-list">
+                <li class="wrap-list__item">
+                    <a href="{{ path('cabinet_tracker') }}" class="wrap-list__link">Трекер</a>
+                </li>
+            </ul>
+        </div>
+        <div class="wrap-left wrap-left--profile">
+            {% block cabinetContent %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

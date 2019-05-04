@@ -1,0 +1,53 @@
+{% extends 'cabinet/_cabinet_base.html.twig' %}
+
+{% block cabinetTitle %}Новая задача{% endblock %}
+
+{% block cabinetContent %}
+    <div class="box-form settings">
+        <form class="js-settings-form" action="{{ path('cabinet_tracker_add_write') }}" method="POST">
+            <div class="box-field-group">
+                <div class="box-field col-5">
+                    <label class="box-field__label">Название <span class="require-field-z">*</span></label>
+                    <div class="box-field__input">
+                        <input type="text" class="form-control js-require" name="name" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="box-field-group">
+                <div class="box-field col-5">
+                    <label class="box-field__label">Ответственный <span class="require-field-z">*</span></label>
+                    <div class="box-field__input">
+                        <select name="responsible" data-placeholder="Выберите ответственного" class="styler form-control">
+                            <option value=""></option>
+                            {% for e in users %}
+                                <option value="{{ e.id }}">{{ e.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box-field-group">
+                <div class="box-field col-5">
+                    <label class="box-field__label">Наблюдатели</label>
+                    <div class="box-field__input">
+                        <select name="watchers[]" multiple class="select2 form-control">
+                            {% for e in users %}
+                                <option value="{{ e.id }}" {% if app.user==e %}selected{% endif %}>{{ e.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="box-field-group">
+                <div class="box-field col-5">
+                    <label class="box-field__label">Описание</label>
+                    <div class="box-field__input">
+                        <textarea name="text" class="form-control"></textarea>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button button_warning" onclick="addTracker();return false;">Создать задачу</button>
+            <span class="help-text inline settings__result js-settings-result"></span>
+        </form>
+    </div>
+{% endblock %}

@@ -82,6 +82,8 @@ require('./pages/tickets.css');
 require('script-loader!./pages/tickets.js');
 require('./pages/tooltip.css');
 require('script-loader!./pages/withdrawal.js');
+require('script-loader!./pages/tracker.js');
+require('./pages/tracker.css');
 
 // Jquery
 var $ = require('jquery');

@@ -7,6 +7,8 @@ use App\Entity\Notify;
 use App\Entity\ProductComment;
 use App\Entity\Response;
 use App\Entity\Subscribe;
+use App\Entity\TrackerTask;
+use App\Entity\TrackerTaskComment;
 use App\Entity\User;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -302,6 +304,52 @@ class NotifyManager
         ]);
 
         $this->_sendEmail('Вам пришло личное сообщение', $message->getTo()->getEmail(), $messageText);
+
+    }
+
+    /**
+     *  Отправка сообщения о новой задаче в трекере
+     */
+    public function sendTrackerNewTaskEmail(User $user, TrackerTask $task)
+    {
+
+        $messageText = $this->templating->render('mail/tracker_task.html.twig', [
+            "user" => $user,
+            "task" => $task
+        ]);
+
+        $this->_sendEmail('Новая задача в трекере на сайте Sellyourmodel.com', $user, $messageText);
+
+    }
+
+    /**
+     *  Отправка сообщения о комментарии в трекере
+     */
+    public function sendTrackerNewCommentEmail(User $user, TrackerTaskComment $comment)
+    {
+
+        $messageText = $this->templating->render('mail/tracker_new_comment.html.twig', [
+            "user" => $user,
+            "comment" => $comment
+        ]);
+
+        $this->_sendEmail('Новый комментарий в трекере на сайте Sellyourmodel.com', $user, $messageText);
+
+    }
+
+    /**
+     *  Отправка сообщения о изменении статуса в трекере
+     */
+    public function sendTrackerChangeStatusEmail(User $user, TrackerTask $task, User $changer)
+    {
+
+        $messageText = $this->templating->render('mail/tracker_change_status.html.twig', [
+            "user" => $user,
+            "changer" => $changer,
+            "task" => $task
+        ]);
+
+        $this->_sendEmail('Изменение статуса задачи в трекере на сайте Sellyourmodel.com', $user, $messageText);
 
     }
 

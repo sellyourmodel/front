@@ -1,0 +1,65 @@
+
+<div class="tracker__info-line">
+    Статус: {% if entity.status == 'new' %}Новое{% elseif entity.status == 'work' %}В работе{% elseif entity.status == 'dublicate' %}Повтор{% elseif entity.status == 'close' %}Закрыто{% else %}Неизвестно{% endif %}
+</div>
+<div class="tracker__info-line">
+    Автор: {{ entity.user.name }}
+</div>
+<div class="tracker__info-line">
+    Ответственный: {{ entity.responsible.name }}
+</div>
+<div class="tracker__info-line">
+    Наблюдатели:
+    {% if watchers|length >0 %}
+        {% for e in watchers %}
+            {{ e.name }}{% if loop.last == false %}, {% endif %}
+        {% endfor %}
+    {% else %}
+        Не установлены
+    {% endif %}
+</div>
+<div class="tracker__info-line">
+    Дата создания: {{ entity.date|date('H:i d.m.Y') }}
+</div>
+<div class="tracker__info-line">
+    Дата последнего обновления: {{ entity.dateUpdate|date('H:i d.m.Y') }}
+</div>
+<div class="tracker__info-line">
+    Дедлайн: {% if entity.deadline %}{{ entity.dateUpdate|date('H:i d.m.Y') }}{% else %}Не установлено{% endif %}
+</div>
+{% if is_granted('ROLE_SUPER_ADMIN') %}
+    <br />
+    {% if entity.status != 'work' %}
+        <div class="model-admin-action">
+            <a href="#" class="button button_warning button_moderate" onclick="ticketSetStatus({{ entity.id }}, 'work');return false;">В работу</a>
+        </div>
+    {% endif %}
+    {#{% if entity.status != 'dublicate' %}#}
+        {#<div class="model-admin-action">#}
+            {#<a href="#" class="button button_warning button_moderate" onclick="ticketSetStatus({{ entity.id }}, 'dublicate');return false;">Повтор</a>#}
+        {#</div>#}
+    {#{% endif %}#}
+    {% if entity.status != 'close' %}
+        <div class="model-admin-action">
+            <a href="#" class="button button_warning button_moderate" onclick="ticketSetStatus({{ entity.id }}, 'close');return false;">Закрыть</a>
+        </div>
+    {% endif %}
+
+    <br />
+    <br />
+    <div>Операции с задачей:</div>
+    <table class="table">
+        <tr>
+            <th class="td-date">Дата</th>
+            <th>Операция</th>
+            <th>Пользователь</th>
+        </tr>
+        {% for e in logs %}
+            <tr>
+                <td>{{ e.date|date("H:i d.m.Y") }}</td>
+                <td>{{ e.text|nl2br }}</td>
+                <td><a href="{{ path('user_view',{nickname:e.user.nickname}) }}" target="_blank" class="tickets__link">{{ e.user.name }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}

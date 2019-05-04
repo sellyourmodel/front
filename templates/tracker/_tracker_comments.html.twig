@@ -1,0 +1,19 @@
+<h4>Комментарии к задаче ({{ comments|length }})</h4>
+{%  for e in comments %}
+    <div class="comment">
+        <div class="box-top">
+            <div class="box-top__avatar">
+                <a href="{{ path('user_view',{nickname:e.user.nickname}) }}">
+                    <img src="{% if e.user.image %}{% path e.user.image, 'small' %}{% else %}{{ asset('bundles/app/img/user.png') }}{% endif %}" alt="">
+                </a>
+            </div>
+            <div class="box-top__cont">
+                <span class="author">
+                    <a href="{{ path('user_view',{nickname:e.user.nickname}) }}">{{ e.user.nickname }}</a>
+                    <span class="date">{{ e.date|date("H:i d.m.Y") }}</span>
+                </span>
+                <p>{{ e.text|nl2br }}</p>
+            </div>
+        </div>
+    </div>
+{% endfor %}

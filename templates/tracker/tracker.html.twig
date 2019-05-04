@@ -1,0 +1,31 @@
+{% extends 'tracker/_tracker_base.html.twig' %}
+
+{% block cabinetTitle %}Трекер{% endblock %}
+
+{% block cabinetContent %}
+    <div class="box-form settings">
+        <h4 class="tickets__header">Активный задачи</h4>
+        <a href="{{ path('cabinet_tracker_add') }}" class="button button_warning tickets__add">Создать задачу</a>
+        <div class="clearfix"></div>
+        {% if entities|length > 0 %}
+            <table class="table">
+                <tr>
+                    <th class="td-date-time">Дата</th>
+                    <th>Обращение</th>
+                    <th class="td-summa">Пользователь</th>
+                    <th class="td-summa">Статус</th>
+                </tr>
+                {% for e in entities %}
+                    <tr>
+                        <td>{{ e.date|date("H:i d.m.Y") }}</td>
+                        <td><a href="{{ path('cabinet_tracker_item', {id:e.id}) }}" class="tickets__link">{{ e.name }}</a></td>
+                        <td>{{ e.user.name }}</td>
+                        <td>{% if e.status == 'new' %}Новое{% elseif e.status == 'work' %}В работе{% elseif e.status == 'dublicate' %}Повтор{% elseif e.status == 'close' %}Закрыто{% else %}Неизвестно{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>Задач не обнаружено.</p>
+        {% endif %}
+    </div>
+{% endblock %}

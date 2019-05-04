@@ -1,0 +1,8 @@
+<h1>Новый комментарий в трекере</h1>
+<p>{{ comment.user.name }} оставил комментарий к задаче <a href="{{ url('cabinet_tracker_item', {id:comment.ticket.id}) }}">{{ comment.ticket.name }}</a>:</p>
+<p>{{ comment.text|nl2br }}</p>
+<p>
+    ---------
+    <br />
+    С уважением, команда Sellyourmodel.com
+</p>

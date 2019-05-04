@@ -1,0 +1,8 @@
+<h1>Новая задача в трекере</h1>
+<p>{{ task.user.name }} создал задачу <a href="{{ url('cabinet_tracker_item', {id:task.id}) }}">{{ task.name }}</a>.</p>
+<p>Ответственный: {{ task.responsible.name }}</p>
+<p>
+    ---------
+    <br />
+    С уважением, команда Sellyourmodel.com
+</p>
