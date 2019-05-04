@@ -48,10 +48,6 @@ class  CatalogController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Главная", $this->get("router")->generate("homepage"));
-        $breadcrumbs->addItem("Новое в каталоге");
-
         return [
             "entities" => $em->getRepository('App:Product')->getNew()
         ];
@@ -64,10 +60,6 @@ class  CatalogController extends Controller
     public function bestAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Главная", $this->get("router")->generate("homepage"));
-        $breadcrumbs->addItem("Новое в каталоге");
 
         return [
             "entities" => $em->getRepository('App:Product')->getBest()
@@ -89,11 +81,6 @@ class  CatalogController extends Controller
         } else {
             $products = [];
         }
-
-
-        $breadcrumbs = $this->get("white_october_breadcrumbs");
-        $breadcrumbs->addItem("Главная", $this->get("router")->generate("homepage"));
-        $breadcrumbs->addItem("Поиск");
 
         return [
             "products" => $products,
