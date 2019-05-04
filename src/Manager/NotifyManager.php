@@ -86,14 +86,14 @@ class NotifyManager
                 ->setBody($text, 'text/html');
 
             if(is_array($email)){
-                foreach ($to as $e){
+                foreach ($email as $e){
                     if(filter_var($e, FILTER_VALIDATE_EMAIL)){
                         $message->addTo($e);
                     }
                 }
-            }elseif(is_string($to)){
-                if(filter_var($to, FILTER_VALIDATE_EMAIL)){
-                    $message->addTo($to);
+            }elseif(is_string($email)){
+                if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $message->addTo($email);
                 }
             }
 
