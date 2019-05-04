@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__).'/config/bootstrap.php';
 
-if ($_SERVER['APP_DEBUG']) {
+if ($_SERVER['APP_DEBUG'] OR $_SERVER["REMOTE_ADDR"] == '62.245.43.235') {
     umask(0000);
 
     Debug::enable();
