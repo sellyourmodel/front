@@ -236,6 +236,13 @@ class User extends BaseUser
      */
     private $phone;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
+    private $accessTracker = false;
+
     /** @ORM\Column(name="user_type", type="string", length=255, nullable=true) */
     protected $userType;
 
@@ -1334,5 +1341,17 @@ class User extends BaseUser
     public function getModelsModeration()
     {
         return $this->modelsModeration;
+    }
+
+    public function getAccessTracker(): ?bool
+    {
+        return $this->accessTracker;
+    }
+
+    public function setAccessTracker(bool $accessTracker): self
+    {
+        $this->accessTracker = $accessTracker;
+
+        return $this;
     }
 }

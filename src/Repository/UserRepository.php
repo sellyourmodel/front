@@ -62,7 +62,9 @@ class UserRepository extends \Doctrine\ORM\EntityRepository
 
         $qb = $this->createQueryBuilder('u');
 
-        $qb->andWhere("u.roles LIKE '%ROLE_SUPER_ADMIN%'");
+        $qb->andWhere('u.accessTracker = :accessTracker')
+            ->setParameter('accessTracker', true)
+        ;
 
         $qb->addOrderBy('u.name', 'ASC');
 
