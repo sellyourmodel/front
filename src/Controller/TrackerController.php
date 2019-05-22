@@ -14,6 +14,7 @@ use App\Entity\TrackerTaskComment;
 use App\Entity\TrackerTaskLog;
 use App\Entity\UserWithdrawal;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,6 +26,7 @@ class  TrackerController extends Controller
 
     /**
      * @Route("/cabinet/tracker/", name="cabinet_tracker", options={"expose"=true})
+     * @Security("has_role('ROLE_TRACKER')")
      * @Template()
      */
     public function trackerAction(Request $request)
@@ -39,6 +41,7 @@ class  TrackerController extends Controller
 
     /**
      * @Route("/cabinet/tracker/add/", name="cabinet_tracker_add", options={"expose"=true})
+     * @Security("has_role('ROLE_TRACKER')")
      * @Template()
      */
     public function trackerAddAction(Request $request)
@@ -55,6 +58,7 @@ class  TrackerController extends Controller
 
     /**
      * @Route("/cabinet/tracker/add/write/", name="cabinet_tracker_add_write")
+     * @Security("has_role('ROLE_TRACKER')")
      */
     public function trackerAddWriteAction(Request $request)
     {
@@ -141,6 +145,7 @@ class  TrackerController extends Controller
 
     /**
      * @Route("/cabinet/tracker/{id}/", name="cabinet_tracker_item", options={"expose"=true})
+     * @Security("has_role('ROLE_TRACKER')")
      * @Template()
      */
     public function trackerItemAction(Request $request, $id)
@@ -176,6 +181,7 @@ class  TrackerController extends Controller
 
     /**
      * @Route("/cabinet/tracker/{id}/comment/write/", name="cabinet_tracker_item_comment_write", options={"expose"=true})
+     * @Security("has_role('ROLE_TRACKER')")
      */
     public function trackerItemCommentWriteAction(Request $request, $id)
     {
@@ -237,6 +243,7 @@ class  TrackerController extends Controller
 
     /**
      * @Route("/cabinet/tracker/{id}/status/change/", name="cabinet_tracker_item_status_change", options={"expose"=true})
+     * @Security("has_role('ROLE_TRACKER')")
      */
     public function trackerItemStatusChangeAction(Request $request, $id)
     {
