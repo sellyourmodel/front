@@ -1,0 +1,33 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: '127.0.0.1', port: 9200 }
+    indexes:
+        app:
+            index_name: app_%kernel.environment%
+            types:
+                catalog:
+                    properties:
+                        name: ~
+                        manufacturer: ~
+                        tags: ~
+                        software: ~
+                        style: ~
+                        moderated: ~
+                        block: ~
+                        deleted: ~
+                        views:
+                            type: integer
+                        comments:
+                            type: integer
+                        date:
+                            type: date
+                        text: ~
+                    persistence:
+                        # the driver can be orm, mongodb, phpcr or propel
+                        # listener and finder are not supported by
+                        # propel and should be removed
+                        driver: orm
+                        model: App\Entity\Product
+                        provider: ~
+                        finder: ~

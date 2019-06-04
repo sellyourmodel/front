@@ -1,5 +1,5 @@
 #!/bin/bash
 
-php app/console fos:elastica:populate --env=prod
-php app/console wp:cache:products:stats --env=prod
-php app/console wp:cache:user:stats --env=prod
+php bin/console fos:elastica:populate --env=prod
+php bin/console wp:cache:products:stats --env=prod
+php bin/console wp:cache:user:stats --env=prod

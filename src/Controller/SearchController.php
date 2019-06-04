@@ -42,7 +42,7 @@ class SearchController extends Controller
 
             $fieldQuery = new \Elastica\Query\Match();
             $fieldQuery->setFieldQuery('name', $search);
-            $fieldQuery->setFieldParam('name', 'type', 'phrase_prefix');
+            //$fieldQuery->setFieldParam('name', 'type', 'phrase_prefix');
             $boolQuery->addMust($fieldQuery);
 
             $software = $request->get('software');
@@ -126,7 +126,7 @@ class SearchController extends Controller
 
         $fieldQuery = new \Elastica\Query\Match();
         $fieldQuery->setFieldQuery('name', $search);
-        $fieldQuery->setFieldParam('name', 'type', 'phrase_prefix');
+        //$fieldQuery->setFieldParam('name', 'type', 'phrase_prefix');
         $boolQuery->addMust($fieldQuery);
 
         $software = $request->get('software');
