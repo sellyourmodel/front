@@ -1,0 +1,14 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: '127.0.0.1', port: 9200 }
+    indexes:
+        app:
+            index_name: app_%kernel.environment%
+            types:
+                catalog:
+                    persistence:
+                        listener:
+                            insert: false
+                            update: false
+                            delete: false
