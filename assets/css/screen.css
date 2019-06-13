@@ -188,53 +188,58 @@ button::-moz-focus-inner {
   .jq-radio.disabled {
     opacity: .55; }
 
-.jq-file {
-  padding-right: 150px; }
-  .jq-file input {
-    height: auto;
-    line-height: 1em;
-    cursor: pointer;
-    left: 0;
-    bottom: 0; }
-  .jq-file__browse {
-    overflow: hidden;
-    box-sizing: border-box;
-    width: 140px;
-    height: 34px;
-    padding: 8px 8px 0;
-    font: normal 14px/18px 'MyriadPro', Arial, sans-serif;
-    color: #000;
-    white-space: nowrap;
-    text-align: center;
-    text-overflow: ellipsis;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    background: #fff; }
-  .jq-file__name {
-    display: none;
-    position: absolute;
-    top: 9px;
-    left: 160px;
-    font: normal 14px/18px 'MyriadPro', Arial, sans-serif;
-    color: rgba(0, 0, 0, 0.4); }
-  .jq-file__no-show .jq-file__name {
-    display: none; }
-  .jq-file:hover .jq-file__browse {
-    background: #f7f7f7; }
-  .jq-file:active .jq-file__browse {
-    background: #f7f7f7; }
-  .jq-file.focused .jq-file__name {
-    border: none; }
-  .jq-file.disabled {
+.jq-file input {
+  height: auto;
+  line-height: 1em;
+  cursor: pointer;
+  left: 0;
+  bottom: 0; }
+
+.jq-file__browse {
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 140px;
+  height: 34px;
+  padding: 8px 8px 0;
+  font: normal 14px/18px 'MyriadPro', Arial, sans-serif;
+  color: #000;
+  white-space: nowrap;
+  text-align: center;
+  text-overflow: ellipsis;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #fff; }
+
+.jq-file__name {
+  display: none;
+  position: absolute;
+  top: 9px;
+  left: 160px;
+  font: normal 14px/18px 'MyriadPro', Arial, sans-serif;
+  color: rgba(0, 0, 0, 0.4); }
+
+.jq-file__no-show .jq-file__name {
+  display: none; }
+
+.jq-file:hover .jq-file__browse {
+  background: #f7f7f7; }
+
+.jq-file:active .jq-file__browse {
+  background: #f7f7f7; }
+
+.jq-file.focused .jq-file__name {
+  border: none; }
+
+.jq-file.disabled {
+  border-color: #CCC;
+  background: #F5F5F5;
+  box-shadow: none;
+  color: #888; }
+  .jq-file.disabled .jq-file__name, .jq-file.disabled .jq-file__browse {
     border-color: #CCC;
     background: #F5F5F5;
     box-shadow: none;
     color: #888; }
-    .jq-file.disabled .jq-file__name, .jq-file.disabled .jq-file__browse {
-      border-color: #CCC;
-      background: #F5F5F5;
-      box-shadow: none;
-      color: #888; }
 
 .jq-number {
   position: relative;
@@ -711,7 +716,7 @@ input[type='button'].styler[disabled], input[type='submit'].styler[disabled] {
   height: 100%;
   cursor: pointer;
   text-decoration: none;
-  background: transparent url("blank.gif");
+  background: transparent;
   -webkit-tap-highlight-color: transparent;
   z-index: 19040; }
 
