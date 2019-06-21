@@ -1,7 +1,7 @@
 <li class="product-list__item">
     <div class="product-list__img">
         <a href="{{ path('catalog_product',{alias:e.alias}) }}"><img src="{% path e.image, 'big' %}" alt="{{ e.name }}" /></a>
-        <a href="{{ path('catalog_product_popup',{id:e.id}) }}" class="product-list__ajax fancybox fancybox.ajax"></a>
+        <a href="javascript:;" data-type="ajax" data-src="{{ path('catalog_product_popup',{id:e.id}) }}" class="product-list__ajax fancybox"></a>
     </div>
     <div class="product-list__cont">
         <h6 class="product-list__title"><a href="{{ path('catalog_product',{alias:e.alias}) }}">{{ e.name }}</a></h6>
