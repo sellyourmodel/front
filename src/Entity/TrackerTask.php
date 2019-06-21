@@ -38,7 +38,7 @@ class TrackerTask
     /**
      * @var string
      *
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $deadline;
 
@@ -339,6 +339,19 @@ class TrackerTask
         $this->watchers = $watchers;
 
         return $this;
+    }
+
+    public function isDeadline()
+    {
+        if($this->deadline){
+            $this->deadline->setTime(23,59,59);
+            if($this->deadline < new \Datetime()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 
     public function getDeadline(): ?\DateTimeInterface

@@ -11,16 +11,20 @@
             <table class="table">
                 <tr>
                     <th class="td-date-time">Дата</th>
-                    <th>Обращение</th>
-                    <th class="td-summa">Пользователь</th>
+                    <th>Задача</th>
                     <th class="td-summa">Статус</th>
+                    <th class="td-summa">Дедлайн</th>
                 </tr>
                 {% for e in entities %}
                     <tr>
                         <td>{{ e.date|date("H:i d.m.Y") }}</td>
-                        <td><a href="{{ path('cabinet_tracker_item', {id:e.id}) }}" class="tickets__link">{{ e.name }}</a></td>
-                        <td>{{ e.user.name }}</td>
+                        <td>
+                            <a href="{{ path('cabinet_tracker_item', {id:e.id}) }}" class="tickets__link">{{ e.name }}</a>
+                            <br />
+                            {{ e.user.name }}
+                        </td>
                         <td>{% if e.status == 'new' %}Новое{% elseif e.status == 'work' %}В работе{% elseif e.status == 'dublicate' %}Повтор{% elseif e.status == 'close' %}Закрыто{% else %}Неизвестно{% endif %}</td>
+                        <td style="{% if e.isDeadLine and (e.status == 'work' or e.status == 'new') %}color:red;{% endif %}">{% if e.deadline %}{{ e.deadline|date("d.m.Y") }}{% endif %}</td>
                     </tr>
                 {% endfor %}
             </table>
