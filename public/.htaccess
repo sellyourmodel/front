@@ -21,7 +21,7 @@ DirectoryIndex index.php
     RewriteEngine On
 
     # Подгрузка изображений с продакшена
-    RewriteCond %{HTTP_HOST} ^sym_new.local
+    RewriteCond %{HTTP_HOST} ^sym.local
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_URI} \.(gif|jpe?g|png|ico)$
     RewriteRule ^(.*)$ https://sellyourmodel.com/$1 [R,NC,L]
