@@ -34,7 +34,7 @@
                         {% endif %}
                         {% if is_granted('ROLE_SUPER_ADMIN') %}
                             <li class="nav-list__item"><a href="{{ path('catalog_moderation') }}" class="nav-list__link"><span>{% trans %}moderation_header{% endtrans %}</span></a></li>
-                            {#<li class="nav-list__item"><a href="{{ path('sonata_admin_dashboard') }}" class="nav-list__link"><span>{% trans %}administration_header{% endtrans %}</span></a></li>#}
+                            <li class="nav-list__item"><a href="{{ path('sonata_admin_dashboard') }}" class="nav-list__link"><span>{% trans %}administration_header{% endtrans %}</span></a></li>
                         {% endif %}
                         <li class="nav-list__item"><a href="{{ path('page_2') }}" class="nav-list__link"><span>{% trans %}about{% endtrans %}</span></a></li>
                         <li class="nav-list__item"><a href="{{ path('page_3') }}" class="nav-list__link"><span>{% trans %}buy_menu{% endtrans %}</span></a></li>
