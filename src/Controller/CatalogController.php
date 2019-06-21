@@ -310,7 +310,6 @@ class  CatalogController extends Controller
 
         $models = $user->getModels();
         $models += 1;
-        $models += 1;
         $user->setModels($models);
 
         $this->get("fos_user.user_manager")->updateUser($user);

@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class CategoryAdmin extends Admin
 {
@@ -17,6 +18,9 @@ class CategoryAdmin extends Admin
         $formMapper
             ->add('name', null, array('label' => 'Название (ru)'))
             ->add('nameEn', null, array('label' => 'Название (en)'))
+            ->add('parent', null, array('label' => 'Родитель'))
+            ->add('colNumber', ChoiceType::class, array('choices'=>["0","1","2","3","4","5"],'label' => 'Номер колонки (для корневых разделов)'))
+            ->add('pos', null, array('label' => 'Позиция'))
             ->add('text', null, array('label' => 'Текст', 'required' => false, 'attr'=> ['class' => 'tinymce','data-theme' => 'advanced']))
         ;
     }
@@ -29,7 +33,7 @@ class CategoryAdmin extends Admin
         ;
     }
 
-    public function postPersist($object)
+    public function prePersist($object)
     {
         $object->setAlias($this->_generateAlias($object->getName()));
     }

@@ -86,14 +86,14 @@
                             {% for e in categories %}
                             <li class="treeview">
                                 <a href="{{ admin.generateUrl('edit', {id:e.id}) }}">
-                                    <span>{{ e.name|raw }}</span>
+                                    <span>{{ e.name|raw }} ({{ e.pos }})</span>
                                 </a>
                                 {% if e.children|length > 0 %}
                                     <ul class="treeview-menu" style="display: block;">
                                         {% for e2 in e.children %}
                                             <li class="treeview">
                                                 <a href="{{ admin.generateUrl('edit', {id:e2.id}) }}">
-                                                    <span>{{ e2.name|raw }}</span>
+                                                    <span>{{ e2.name|raw }} ({{ e2.pos }})</span>
                                                 </a>
                                             </li>
                                         {% endfor %}

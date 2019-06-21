@@ -61,7 +61,7 @@ class Category
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent", cascade={"all"}, orphanRemoval=true)
-     * @ORM\OrderBy({"id" = "ASC"})
+     * @ORM\OrderBy({"pos" = "ASC"})
      */
     private $children;
 

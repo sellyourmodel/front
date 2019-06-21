@@ -5,9 +5,9 @@ services:
         class: App\Admin\CategoryAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Каталог, label: Разделы каталога}
-        arguments: [~, App\Entity\Category, App:CategoryAdmin]
+        arguments: [~, App\Entity\Category, App\Controller\CategoryAdminController]
         calls:
-            - [ setTemplate, [list, App:Admin:category_list.html.twig]]
+            - [ setTemplate, [list, admin/category_list.html.twig]]
 
     app.admin.faq:
         class: App\Admin\FaqAdmin
@@ -33,7 +33,7 @@ services:
 #        class: App\Admin\TextPageAdmin
 #        tags:
 #            - { name: sonata.admin, manager_type: orm, group: Главная страница, label: Текст}
-#        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+#        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
 #        calls:
 #            - { method: setPageId, arguments: [1]}
 
@@ -65,7 +65,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: О нас}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [2]}
 
@@ -73,7 +73,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Продавайте 3D модели}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [3]}
 
@@ -81,7 +81,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Правила}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [4]}
 
@@ -89,7 +89,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Реклама}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [5]}
 
@@ -97,7 +97,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Контакты}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [6]}
 
@@ -105,7 +105,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Лицензионное соглашение}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [7]}
 
@@ -113,7 +113,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Условия использования}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [8]}
 
@@ -121,7 +121,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Политика конфиденциальности}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [9]}
 
@@ -129,7 +129,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Положение о конфиденциальности}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [10]}
 
@@ -137,7 +137,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Политика защиты персональной информации}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [11]}
 
@@ -145,7 +145,7 @@ services:
         class: App\Admin\TextPageAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Текстовые страницы, label: Поддержка}
-        arguments: [~, App\Entity\TextPage, App:AdminTextPage]
+        arguments: [~, App\Entity\TextPage, App\Controller\AdminTextPageController]
         calls:
             - { method: setPageId, arguments: [12]}
 
@@ -177,7 +177,7 @@ services:
         class: App\Admin\SettingSiteAdmin
         tags:
             - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Общие настройки}
-        arguments: [~, App\Entity\Setting, App:AdminEdit]
+        arguments: [~, App\Entity\Setting, App\Controller\AdminEditController]
 
     app.admin.software:
         class: App\Admin\SoftwareAdmin

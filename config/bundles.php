@@ -30,4 +30,6 @@ return [
     Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle::class => ['all' => true],
     Symfony\Bundle\MonologBundle\MonologBundle::class => ['all' => true],
     FOS\ElasticaBundle\FOSElasticaBundle::class => ['all' => true],
+    Stfalcon\Bundle\TinymceBundle\StfalconTinymceBundle::class => ['all' => true],
+    FM\ElfinderBundle\FMElfinderBundle::class => ['all' => true],
 ];

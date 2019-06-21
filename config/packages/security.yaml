@@ -67,5 +67,5 @@ security:
         - { path: ^/catalog/add/, role: ROLE_USER }
         - { path: ^/cabinet/, role: ROLE_USER }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/efconnect, role: ROLE_USER }
-        - { path: ^/elfinder, role: ROLE_USER }
+        - { path: ^/efconnect, role: ROLE_ADMIN }
+        - { path: ^/elfinder, role: ROLE_ADMIN }

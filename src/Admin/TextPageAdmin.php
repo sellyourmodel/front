@@ -28,7 +28,7 @@ class TextPageAdmin extends Admin
     public function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('text', 'textarea', array('label' => 'Текст','attr' => array('class' => 'tinymce','data-theme' => 'advanced'), 'required'=>false))
+            ->add('text', NULL, array('label' => 'Текст','attr' => array('class' => 'tinymce','data-theme' => 'advanced'), 'required'=>false))
         ;
     }
 
