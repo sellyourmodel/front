@@ -106,6 +106,7 @@ moderate: Moderate
 block: Block
 unblock: Unlock
 model_name: Model name
+model_name_en: Model name in English
 category: Category
 model_images: Model images
 model_files: Model files
@@ -113,10 +114,12 @@ model_info: Information
 model_cover: Cover model
 model_custom_images: Additional model images
 model_manufacturer: Manufacturer
+model_manufacturer_en: Manufacturer in English
 model_tags: Tags
 model_po: Software
 model_style: Style
 model_description: Description
+model_description_en: Description in English
 model_add_btn: Upload
 file_not_select: No file selected
 upload_file: Upload file

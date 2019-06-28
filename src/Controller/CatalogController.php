@@ -121,18 +121,21 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $name = trim($request->get('name'));
+        $nameEn = trim($request->get('nameEn'));
         $categoryId = trim($request->get('category'));
         $mainImg = $request->get('mainImg');
         $addImg = $request->get('addImg');
         $files = $request->get('files');
         $manufacturer = trim($request->get('manufacturer'));
+        $manufacturerEn = trim($request->get('manufacturerEn'));
         $tags = $request->get('tags');
         $software = $request->get('software');
         $style = $request->get('style');
         $text = trim($request->get('text'));
+        $textEn = trim($request->get('textEn'));
         $user_agreement = trim($request->get('user_agreement', '0'));
 
-        if ($name == '' OR $categoryId == '') {
+        if ($name == '' OR $nameEn == '' OR $categoryId == '') {
             return JsonResponse::create(["error" => true, 'error_text' => 'Заполните обязательные поля']);
         }
 
@@ -205,8 +208,11 @@ class  CatalogController extends Controller
         $entity->setDate(new \DateTime());
         $entity->setCategory($category);
         $entity->setName($name);
+        $entity->setNameEn($nameEn);
         $entity->setManufacturer($manufacturer);
+        $entity->setManufacturerEn($manufacturerEn);
         $entity->setText($text);
+        $entity->setTextEn($textEn);
 
         $entity->setImage($mediaMain);
 
@@ -833,6 +839,7 @@ class  CatalogController extends Controller
         }
 
         $name = trim($request->get('name'));
+        $nameEn = trim($request->get('nameEn'));
         $categoryId = trim($request->get('category'));
         $mainImg = $request->get('mainImg');
         $addImg = $request->get('addImg');
@@ -841,12 +848,14 @@ class  CatalogController extends Controller
         $existsAddImg = $request->get('existsAddImg');
         $existsFiles = $request->get('existsFiles');
         $manufacturer = trim($request->get('manufacturer'));
+        $manufacturerEn = trim($request->get('manufacturerEn'));
         $tags = $request->get('tags');
         $software = $request->get('software');
         $style = $request->get('style');
         $text = trim($request->get('text'));
+        $textEn = trim($request->get('textEn'));
 
-        if ($name == '' OR $categoryId == '') {
+        if ($name == '' OR $nameEn == '' OR $categoryId == '') {
             return JsonResponse::create(["error" => true, 'error_text' => 'Заполните обязательные поля']);
         }
 
@@ -965,8 +974,11 @@ class  CatalogController extends Controller
 
         $entity->setCategory($category);
         $entity->setName($name);
+        $entity->setNameEn($nameEn);
         $entity->setManufacturer($manufacturer);
+        $entity->setManufacturerEn($manufacturerEn);
         $entity->setText($text);
+        $entity->setTextEn($textEn);
 
         $entity->setModerated(false);
 

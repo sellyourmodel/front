@@ -108,6 +108,7 @@ moderate: Отмодерировать
 block: Блокировать
 unblock: Снять блокировку
 model_name: Название модели
+model_name_en: Название модели на английском языке
 category: Категория
 model_images: Фотографии модели
 model_files: Файлы модели
@@ -115,10 +116,12 @@ model_info: Описание
 model_cover: Обложка модели
 model_custom_images: Дополнительные изображения модели
 model_manufacturer: Производитель
+model_manufacturer_en: Производитель на английском языке
 model_tags: Теги
 model_po: ПО
 model_style: Стили
 model_description: Описание
+model_description_en: Описание на английском языке
 model_add_btn: Загрузить
 file_not_select: Фаил не выбран
 upload_file: Загрузить файл

@@ -1596,6 +1596,12 @@ label {
     width: 23%; }
   .box-field.col-1 {
     width: 13.5%; }
+  .box-field--2col {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+  .box-field__col {
+    width: 48%; }
   .box-field input,
   .box-field textarea,
   .box-field select {
@@ -3365,7 +3371,14 @@ footer {
     transform: rotate(-45deg);
     top: 0; }
   .menu-btn.btn-close span {
-    background-color: transparent; } }
+    background-color: transparent; }
+  .box-field--2col {
+    flex-direction: column; }
+  .box-field__col {
+    width: 61%;
+    margin-bottom: 10px; }
+    .box-field__col:last-child {
+      margin-bottom: 0px; } }
 
 @media screen and (max-width: 767px) {
   .mini-profile__link-login-name {

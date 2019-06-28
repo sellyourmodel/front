@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Intl\Locale;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -34,6 +35,13 @@ class Product
     /**
      * @var string
      *
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
+    private $nameEn;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $alias;
@@ -41,9 +49,16 @@ class Product
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $manufacturer;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $manufacturerEn;
 
     /**
      * @ORM\ManyToMany(targetEntity="Tag")
@@ -91,6 +106,13 @@ class Product
      * @ORM\Column(type="text", nullable=true)
      */
     private $text;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $textEn;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Application\Sonata\MediaBundle\Entity\Media", fetch="EAGER")
@@ -802,6 +824,84 @@ class Product
     public function setPaidAuthor(bool $paidAuthor): self
     {
         $this->paidAuthor = $paidAuthor;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getNameLocale()
+    {
+        $locale = Locale::getDefault();
+        if($locale == 'en'){
+            return $this->nameEn;
+        }
+        return $this->name;
+    }
+
+    public function getNameEn(): ?string
+    {
+        return $this->nameEn;
+    }
+
+    public function setNameEn(string $nameEn): self
+    {
+        $this->nameEn = $nameEn;
+
+        return $this;
+    }
+
+    /**
+     * Get manufacturer
+     *
+     * @return string
+     */
+    public function getManufacturerLocale()
+    {
+        $locale = Locale::getDefault();
+        if($locale == 'en'){
+            return $this->manufacturerEn;
+        }
+        return $this->manufacturer;
+    }
+
+    public function getManufacturerEn(): ?string
+    {
+        return $this->manufacturerEn;
+    }
+
+    public function setManufacturerEn(string $manufacturerEn): self
+    {
+        $this->manufacturerEn = $manufacturerEn;
+
+        return $this;
+    }
+
+    /**
+     * Get text
+     *
+     * @return string
+     */
+    public function getTextLocale()
+    {
+        $locale = Locale::getDefault();
+        if($locale == 'en'){
+            return $this->textEn;
+        }
+        return $this->text;
+    }
+
+    public function getTextEn(): ?string
+    {
+        return $this->textEn;
+    }
+
+    public function setTextEn(?string $textEn): self
+    {
+        $this->textEn = $textEn;
 
         return $this;
     }
