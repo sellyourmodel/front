@@ -49,6 +49,13 @@ class Setting
      */
     private $modelPrice;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="integer", nullable=false)
+     */
+    private $loadModelPrice;
+
 
     /**
      * Get id
@@ -157,5 +164,17 @@ class Setting
     public function getModelPrice()
     {
         return $this->modelPrice;
+    }
+
+    public function getLoadModelPrice(): ?int
+    {
+        return $this->loadModelPrice;
+    }
+
+    public function setLoadModelPrice(int $loadModelPrice): self
+    {
+        $this->loadModelPrice = $loadModelPrice;
+
+        return $this;
     }
 }

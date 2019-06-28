@@ -74,6 +74,13 @@ services:
         # not required, will help in our example
         autowire: true
         public: true
+
+    wp.payment.manager:
+        class: App\Manager\PaymentManager
+        arguments: ['@doctrine.orm.entity_manager', '@mailer', '@templating', '@service_container']
+        # not required, will help in our example
+        autowire: true
+        public: true
         
         
     wp.menu:

@@ -158,6 +158,13 @@ class Product
      *
      * @ORM\Column(type="boolean")
      */
+    private $paidAuthor = false;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(type="boolean")
+     */
     private $block = false;
 
     /**
@@ -785,5 +792,17 @@ class Product
     public function getLog()
     {
         return $this->log;
+    }
+
+    public function getPaidAuthor(): ?bool
+    {
+        return $this->paidAuthor;
+    }
+
+    public function setPaidAuthor(bool $paidAuthor): self
+    {
+        $this->paidAuthor = $paidAuthor;
+
+        return $this;
     }
 }

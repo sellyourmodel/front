@@ -306,14 +306,6 @@ class  CatalogController extends Controller
         $this->getUser()->setModelsModeration($this->getUser()->getModelsModeration() + 1);
         $em->flush($this->getUser());
 
-        $user = $this->getUser();
-
-        $models = $user->getModels();
-        $models += 1;
-        $user->setModels($models);
-
-        $this->get("fos_user.user_manager")->updateUser($user);
-
         $this->get('wp.notify.manager')->sendAdminNewProduct($entity, $this->getUser());
 
         return JsonResponse::create(["error" => false, 'url' => $this->generateUrl('catalog_product', ["alias" => $entity->getAlias()])]);
@@ -447,18 +439,7 @@ class  CatalogController extends Controller
         $entity->setModerated(true);
         $em->flush($entity);
 
-        $modelsModeration = $em->getRepository('App:Product')->findBy(["user"=>$entity->getUser(), "moderated"=>false]);
-        $user = $entity->getUser();
-        $user->setModelsModeration(count($modelsModeration));
-        $em->flush($user);
-
-        $log = new ProductLog();
-        $log->setText('product_log_moderated');
-        $log->setProduct($entity);
-        $log->setUser($this->getUser());
-        $log->setDate(new \DateTime());
-        $em->persist($log);
-        $em->flush($log);
+        $this->get('wp.payment.manager')->moderationModel($entity, $this->getUser());
 
         $data = [
             "product" => $entity,
@@ -1097,74 +1078,7 @@ class  CatalogController extends Controller
             return $returnError('У Вас не хватает оплаченных моделей для покупки', 'email');
         }
 
-        $transaction = new PaymentLog();
-        $transaction->setDate(new \DateTime());
-        $transaction->setUser($user);
-        $transaction->setPrice(-1);
-        $transaction->setName('Покупка модели "' . $product->getName() . '"');
-        $transaction->setType('buy');
-
-        $em->persist($transaction);
-        $em->flush($transaction);
-
-        $models = $user->getModels();
-        $models -= 1;
-
-        $user->setModels($models);
-
-        $this->get("fos_user.user_manager")->updateUser($user);
-
-        $product->setDownloads($product->getDownloads() + 1);
-        $em->persist($product);
-        $em->flush($product);
-
-        $author = $product->getUser();
-
-        if ($author) {
-            $author->setModelsLoadedBuy($author->getModelsLoadedBuy() + 1);
-            $em->persist($author);
-            $em->flush($author);
-        }
-
-        $buy = new Buy();
-        $buy->setDate(new \DateTime());
-        $buy->setUser($user);
-        $buy->setProduct($product);
-        $buy->setPrice(1);
-
-        $em->persist($buy);
-        $em->flush($buy);
-
-        $log = new ProductLog();
-        $log->setText('product_log_buyed');
-        $log->setProduct($product);
-        $log->setUser($this->getUser());
-        $log->setDate(new \DateTime());
-        $em->persist($log);
-        $em->flush($log);
-
-        $settings = $this->getDoctrine()->getRepository('App:Setting')->findOneBy([]);
-
-        $price = intval($settings->getModelPrice() / 2);
-
-        $transaction = new PaymentLog();
-        $transaction->setDate(new \DateTime());
-        $transaction->setUser($author);
-        $transaction->setPrice($price);
-        $transaction->setName('Коммисия с покупки модели "' . $product->getName() . '"');
-        $transaction->setType('sell');
-
-        $em->persist($transaction);
-        $em->flush($transaction);
-
-        $balance = $author->getBalance();
-        $balance += $price;
-        $author->setBalance($balance);
-
-        $this->get("fos_user.user_manager")->updateUser($author);
-
-        $this->get('wp.notify.manager')->sendBuyModelEmail($product, $user);
-        $this->get('wp.notify.manager')->sendBuyModelInfoEmail($product, $user);
+        $this->get('wp.payment.manager')->buyModel($user, $product);
 
         $productFile = null;
         $files = $em->getRepository('App:ProductFile')->findBy(['product' => $product]);
