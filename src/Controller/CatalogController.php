@@ -127,7 +127,6 @@ class  CatalogController extends Controller
         $addImg = $request->get('addImg');
         $files = $request->get('files');
         $manufacturer = trim($request->get('manufacturer'));
-        $manufacturerEn = trim($request->get('manufacturerEn'));
         $tags = $request->get('tags');
         $software = $request->get('software');
         $style = $request->get('style');
@@ -210,7 +209,6 @@ class  CatalogController extends Controller
         $entity->setName($name);
         $entity->setNameEn($nameEn);
         $entity->setManufacturer($manufacturer);
-        $entity->setManufacturerEn($manufacturerEn);
         $entity->setText($text);
         $entity->setTextEn($textEn);
 
@@ -848,7 +846,6 @@ class  CatalogController extends Controller
         $existsAddImg = $request->get('existsAddImg');
         $existsFiles = $request->get('existsFiles');
         $manufacturer = trim($request->get('manufacturer'));
-        $manufacturerEn = trim($request->get('manufacturerEn'));
         $tags = $request->get('tags');
         $software = $request->get('software');
         $style = $request->get('style');
@@ -976,7 +973,6 @@ class  CatalogController extends Controller
         $entity->setName($name);
         $entity->setNameEn($nameEn);
         $entity->setManufacturer($manufacturer);
-        $entity->setManufacturerEn($manufacturerEn);
         $entity->setText($text);
         $entity->setTextEn($textEn);
 

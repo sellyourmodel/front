@@ -861,10 +861,10 @@ class Product
      */
     public function getManufacturerLocale()
     {
-        $locale = Locale::getDefault();
+        /*$locale = Locale::getDefault();
         if($locale == 'en'){
             return $this->manufacturerEn;
-        }
+        }*/
         return $this->manufacturer;
     }
 
