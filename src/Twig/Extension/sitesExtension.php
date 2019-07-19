@@ -38,7 +38,7 @@ class sitesExtension extends \Twig_Extension
     {
         $em = $this->container->get('doctrine')->getManager();
 
-        return $this->container->get('templating')->render("block/sites.html.twig", ["sites"=>$em->getRepository('App:Site')->findAll()]);
+        return $this->container->get('templating')->render("block/sites.html.twig", ["sites"=>$em->getRepository('App:Site')->findBy(["active"=>true])]);
 
     }
 
