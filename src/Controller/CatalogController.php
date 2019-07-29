@@ -273,7 +273,10 @@ class  CatalogController extends Controller
                     $em->flush($tagEntity);
                 }
 
-                $entity->addTag($tagEntity);
+                $tagsCurrent = $entity->getTags();
+                if(!$tagsCurrent->contains($tagEntity)){
+                    $entity->addTag($tagEntity);
+                }
             }
             $em->flush($entity);
         }
