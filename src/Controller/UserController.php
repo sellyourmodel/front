@@ -32,7 +32,7 @@ class  UserController extends Controller
 
         return [
             "entity"=>$entity,
-            "products"=>$em->getRepository('App:Product')->findBy(["user"=>$entity, "moderated"=>true],["date"=>"DESC"]),
+            "products"=>$em->getRepository('App:Product')->findBy(["user"=>$entity, "moderated"=>true, "deleted"=>false],["date"=>"DESC"]),
             "withdrawals"=>$em->getRepository('App:UserWithdrawal')->findBy(["user"=>$entity],["date"=>"DESC"]),
             "history"=>$em->getRepository('App:PaymentLog')->findBy(["user"=>$entity],["date"=>"DESC"]),
             "favorites"=>$em->getRepository('App:ProductFavorite')->getMyFavorites($entity),
