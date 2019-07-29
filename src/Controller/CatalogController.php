@@ -363,8 +363,8 @@ class  CatalogController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $responseData = [];
-        $responseData["products"] = $em->getRepository('App:Product')->findBy(["user"=>$this->getUser(), "moderated"=>true],["date"=>"DESC"]);
-        $responseData["productsModeration"] = $em->getRepository('App:Product')->findBy(["user"=>$this->getUser(), "moderated"=>false],["date"=>"DESC"]);
+        $responseData["products"] = $em->getRepository('App:Product')->findBy(["user"=>$this->getUser(), "moderated"=>true, "deleted"=>false],["date"=>"DESC"]);
+        $responseData["productsModeration"] = $em->getRepository('App:Product')->findBy(["user"=>$this->getUser(), "moderated"=>false, "deleted"=>false],["date"=>"DESC"]);
 
         return $responseData;
     }
