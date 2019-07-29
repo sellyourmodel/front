@@ -684,7 +684,7 @@ class  CatalogController extends Controller
     public function productAction(Request $request, $alias)
     {
         $em = $this->getDoctrine()->getManager();
-        $product = $em->getRepository('App:Product')->findOneBy(['alias' => $alias, "active" => true]);
+        $product = $em->getRepository('App:Product')->findOneBy(['alias' => $alias, "active" => true, "deleted"=>false]);
 
         if (!$product) {
             throw $this->createNotFoundException('Product not found');
