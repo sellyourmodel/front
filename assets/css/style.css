@@ -2305,10 +2305,23 @@ header {
   margin: -8px 26px;
   position: relative;
   padding: 49px 0; }
-
-.product p {
-  line-height: 16px;
-  padding-bottom: 11px; }
+  .product-info__text-block {
+    padding: 7px 0 11px 0; }
+  .product-info__text {
+    line-height: 16px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1f1611; }
+  .product-info__text-wrapper {
+    display: block; }
+    .product-info__text-wrapper.collapsed {
+      height: 80px;
+      overflow: hidden; }
+  .product-info__more-link {
+    display: none;
+    margin-top: 8px; }
+  .product-info__more-link a {
+    color: #c1a788; }
 
 .product-list {
   margin: 0 0 0 -10px;

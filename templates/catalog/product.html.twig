@@ -26,11 +26,20 @@
                     <span class="rating__count js-product-likes">{{ product.stars }}</span>
                     <span class="product-star"></span>
                 </div>
-                <p>
-                    {{ product.text|nl2br }}
-                </p>
+                <div class="product-info__text-block">
+                    <div class="product-info__text-wrapper">
+                        <div class="product-info__text">
+                            {{ product.text|nl2br }}
+                        </div>
+                    </div>
+                    <div class="product-info__more-link">
+                        <a href="#" onclick="toggleCollapsedText();return false;" data-text-active="{% trans %}show_more{% endtrans %}" data-text-inactive="{% trans %}show_less{% endtrans %}">{% trans %}show_more{% endtrans %}</a>
+                    </div>
+                </div>
                 {% if product.software|length > 0 %}
-                    <p>{% for e in product.software %}{{ e.name }}{% if loop.last == false %}, {% endif %}{% endfor %}</p>
+                    <div class="product-info__text-block">
+                        <div class="product-info__text">{% for e in product.software %}{{ e.name }}{% if loop.last == false %}, {% endif %}{% endfor %}</div>
+                    </div>
                 {% endif %}
                 {% if product.tags|length > 0 %}
                     <ul class="tags-list">

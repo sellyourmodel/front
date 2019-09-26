@@ -33,3 +33,28 @@ function deleteComment(id, e){
         }
     });
 }
+
+function toggleCollapsedText(){
+    var wrapper = $(".product-info__text-wrapper");
+    var link = $(".product-info__more-link a");
+    if(wrapper.hasClass('collapsed')){
+        wrapper.removeClass('collapsed');
+        link.html(link.data('text-inactive'));
+    }else{
+        wrapper.addClass('collapsed');
+        link.html(link.data('text-active'));
+    }
+}
+
+$(function(){
+    if($(".product-info__text-wrapper").length > 0){
+        var wrapper = $(".product-info__text-wrapper");
+        var text = $(".product-info__text");
+        var linkWrepper = $(".product-info__more-link");
+        var link = $(".product-info__more-link a");
+        if(text.height() > 80){
+            wrapper.addClass('collapsed');
+            linkWrepper.show();
+        }
+    }
+});
