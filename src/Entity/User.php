@@ -241,6 +241,13 @@ class User extends BaseUser
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
+    private $cookieAgree = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean", nullable=false)
+     */
     private $accessTracker = false;
 
     /** @ORM\Column(name="user_type", type="string", length=255, nullable=true) */
@@ -1351,6 +1358,18 @@ class User extends BaseUser
     public function setAccessTracker(bool $accessTracker): self
     {
         $this->accessTracker = $accessTracker;
+
+        return $this;
+    }
+
+    public function getCookieAgree(): ?bool
+    {
+        return $this->cookieAgree;
+    }
+
+    public function setCookieAgree(bool $cookieAgree): self
+    {
+        $this->cookieAgree = $cookieAgree;
 
         return $this;
     }

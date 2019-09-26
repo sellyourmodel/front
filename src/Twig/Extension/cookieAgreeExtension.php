@@ -2,6 +2,7 @@
 
 namespace App\Twig\Extension;
 
+use App\Entity\User;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Bundle\TwigBundle\TwigEngine;
 use Symfony\Component\Templating\Helper\Helper;
@@ -37,6 +38,14 @@ class cookieAgreeExtension extends \Twig_Extension
     public function renderCookieAgree(array $options = array())
     {
         $em = $this->container->get('doctrine')->getManager();
+
+        $token = $this->container->get('security.token_storage')->getToken();
+        $user = $token->getUser();
+        if($user instanceof User){
+            if($user->getCookieAgree()){
+                return '';
+            }
+        }
 
         $requestStack = $this->container->get('request_stack');
 

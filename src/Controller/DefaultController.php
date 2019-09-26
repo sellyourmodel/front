@@ -39,6 +39,12 @@ class DefaultController extends Controller
         $response->headers->setCookie($cookie);
         $response->setData(["error" => false]);
 
+        $user = $this->getUser();
+        if($user){
+            $user->setCookieAgree(true);
+            $em->flush($user);
+        }
+
         return $response;
     }
 }
