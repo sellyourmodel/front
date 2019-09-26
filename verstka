@@ -2,8 +2,6 @@
 
 cd verstka_src
 gulp build
-#cp -R dist/css ../src/AppBundle/Resources/public/
-#cp -R dist/fonts ../src/AppBundle/Resources/public/
-#cp -R dist/img ../src/AppBundle/Resources/public/
-#cp -R dist/js ../src/AppBundle/Resources/public/
+cp -R dist/css ../assets/
 cd ..
+yarn encore dev
