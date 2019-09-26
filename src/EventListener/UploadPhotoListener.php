@@ -59,6 +59,13 @@ class UploadPhotoListener
                 $response["wp_error_text"] = "Вы загрузили не изображение";
                 return;
             }
+
+            list($width, $height) = getimagesize($event->getFile()->getPathname());
+            if($width !== 1200 OR $height !== 1200){
+                $response["wp_error"] = true;
+                $response["wp_error_text"] = "Загрузите изображение размером 1200х1200";
+                return;
+            }
         }
 
         $file = new ProductFile();

@@ -113,8 +113,8 @@ category: Категория
 model_images: Фотографии модели
 model_files: Файлы модели
 model_info: Описание
-model_cover: Обложка модели
-model_custom_images: Дополнительные изображения модели
+model_cover: Обложка модели (1200x1200px)
+model_custom_images: Дополнительные изображения модели (1200x1200px)
 model_manufacturer: Производитель
 model_manufacturer_en: Производитель на английском языке
 model_tags: Теги

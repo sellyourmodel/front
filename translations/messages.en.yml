@@ -111,8 +111,8 @@ category: Category
 model_images: Model images
 model_files: Model files
 model_info: Information
-model_cover: Cover model
-model_custom_images: Additional model images
+model_cover: Cover model (1200x1200px)
+model_custom_images: Additional model images (1200x1200px)
 model_manufacturer: Manufacturer
 model_manufacturer_en: Manufacturer in English
 model_tags: Tags
