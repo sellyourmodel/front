@@ -2344,6 +2344,7 @@ header {
     position: relative;
     border: 1px solid #fff;
     border-bottom: none;
+    height: 290px;
     overflow: hidden; }
     .product-list__img a:not(.product-list__ajax) {
       /*position: absolute*/ }
