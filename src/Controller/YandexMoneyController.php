@@ -6,6 +6,7 @@ use App\Entity\PaymentLog;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Request;
 use WP\ReshatelBundle\Entity\OrderNotification;
 
 class YandexMoneyController extends Controller
@@ -14,12 +15,12 @@ class YandexMoneyController extends Controller
      * @Route("/yandex_kassa/check_order")
      * @Template()
      */
-    public function checkAction()
+    public function checkAction(Request $request)
     {
 
-        $orderId = $this->get('request')->get('orderNumber');
-        $invoiceId = $this->get('request')->get('invoiceId');
-        $orderSumAmount = $this->get('request')->get('orderSumAmount');
+        $orderId = $request->get('orderNumber');
+        $invoiceId = $request->get('invoiceId');
+        $orderSumAmount = $request->get('orderSumAmount');
 
         $order = $this->getDoctrine()->getRepository('App:PaymentOrder')->find($orderId);
 
@@ -47,13 +48,13 @@ class YandexMoneyController extends Controller
      * @Route("/yandex_kassa/payment_aviso")
      * @Template()
      */
-    public function avisoAction()
+    public function avisoAction(Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
 
-        $orderId = $this->get('request')->get('orderNumber');
-        $invoiceId = $this->get('request')->get('invoiceId');
+        $orderId = $request->get('orderNumber');
+        $invoiceId = $request->get('invoiceId');
 
         $order = $this->getDoctrine()->getRepository('App:PaymentOrder')->find($orderId);
 
