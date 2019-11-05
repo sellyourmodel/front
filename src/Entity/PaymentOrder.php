@@ -35,6 +35,12 @@ class PaymentOrder
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Product")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=true)
+     */
+    private $product;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="integer", nullable=false)
@@ -286,5 +292,17 @@ class PaymentOrder
     public function getAccountBalanceSum()
     {
         return $this->accountBalanceSum;
+    }
+
+    public function getProduct(): ?Product
+    {
+        return $this->product;
+    }
+
+    public function setProduct(?Product $product): self
+    {
+        $this->product = $product;
+
+        return $this;
     }
 }

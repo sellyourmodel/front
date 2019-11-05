@@ -14,7 +14,7 @@
                         {% if app.user.models > 0 %}
                             <a href="#" class="button button_warning button_warning--user-buy" onclick="questionBuyModel();return false;">{% trans %}buy_btn{% endtrans %}</a>
                         {% else %}
-                            <a href="{{ path('cabinet_buy') }}" class="button button_warning button_warning--user-buy">{{ settings.modelPrice }} р.</a>
+                            <a href="{{ path('cabinet_buy', {product:product.id}) }}" class="button button_warning button_warning--user-buy">{{ settings.modelPrice }} р.</a>
                         {% endif %}
                         <span class="button-info">{% trans %}models_available{% endtrans %}
                             <span>- {{ app.user.models }}</span></span>

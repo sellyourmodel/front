@@ -28,7 +28,7 @@ function setBuyCount(price){
 
 }
 
-function buyModels(){
+function buyModels(product){
 
     var count = parseInt($(".js-buy-count").val());
     var dontUseAccountBalance = $("#no-use-account-sum").prop('checked');
@@ -56,7 +56,7 @@ function buyModels(){
     $.ajax({
         type: "POST",
         url: Routing.generate('cabinet_buy_write'),
-        data: {count: count, dontUseAccountBalance:dontUseAccountBalance},
+        data: {count: count, dontUseAccountBalance:dontUseAccountBalance, product:product},
         dataType: "json",
         success: function (data, status, object) {
             if (data.error) {

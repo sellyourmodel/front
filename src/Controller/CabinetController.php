@@ -532,6 +532,9 @@ class  CabinetController extends Controller
      */
     public function buyAction(Request $request)
     {
+
+        $em = $this->getDoctrine()->getManager();
+
         $locale = $request->getLocale();
         $textBlock = $this->getDoctrine()->getRepository('App:RightTextBlock')->findOneBy(["type" => "buy"]);
         if ($locale == 'en') {
@@ -540,7 +543,18 @@ class  CabinetController extends Controller
             $rightText = $textBlock->getText();
         }
 
+        $product = NULL;
+
+        if($request->get('product')){
+            $productId = intval($request->get('product'));
+            $product = $em->getRepository('App:Product')->find($productId);
+            if(!$product){
+                throw $this->createNotFoundException('Product not found');
+            }
+        }
+
         return [
+            "product" => $product,
             "settings" => $this->getDoctrine()->getRepository('App:Setting')->findOneBy([]),
             "rightText" => $rightText
         ];
@@ -599,6 +613,15 @@ class  CabinetController extends Controller
         $order->setUseAccountBalance($useAccountBalance);
         $order->setAccountBalanceSum($useAccountBalanceSum);
 
+        if($request->get('product')){
+            $productId = intval($request->get('product'));
+            $product = $em->getRepository('App:Product')->find($productId);
+            if(!$product){
+                return $returnError('Модель не найдена', 'email');
+            }
+            $order->setProduct($product);
+        }
+
         if($noPay){
             $order->setFinished(true);
         }
@@ -637,7 +660,11 @@ class  CabinetController extends Controller
         }
 
         if($noPay){
-            $url = $this->generateUrl('cabinet_buy_order_accountsum', ["id" => $order->getId()]);
+            if($product){
+                $url = $this->generateUrl('catalog_product', ["alias" => $product->getAlias()]);
+            }else{
+                $url = $this->generateUrl('cabinet_buy_order_accountsum', ["id" => $order->getId()]);
+            }
         }else{
             $url = $this->generateUrl('cabinet_buy_order', ["id" => $order->getId()]);
         }
@@ -694,6 +721,10 @@ class  CabinetController extends Controller
 
         if (!$order) {
             throw $this->createNotFoundException('Order not found');
+        }
+
+        if($order->getProduct()){
+            return $this->redirectToRoute('catalog_product', ["alias" => $order->getProduct()->getAlias()]);
         }
 
         return [
