@@ -119,6 +119,12 @@ services:
             - { name: twig.extension }
         arguments: ["@service_container"]
 
+    wp.social.links:
+        class: App\Twig\Extension\socialLinkExtension
+        tags:
+            - { name: twig.extension }
+        arguments: ["@service_container"]
+
     wp.cookie.agree:
         class: App\Twig\Extension\cookieAgreeExtension
         tags:

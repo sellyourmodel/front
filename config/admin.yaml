@@ -179,6 +179,12 @@ services:
             - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Общие настройки}
         arguments: [~, App\Entity\Setting, App\Controller\AdminEditController]
 
+    app.admin.social.link:
+        class: App\Admin\SocialLinkAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Настройки сайта, label: Ссылки на соц сети}
+        arguments: [~, App\Entity\SocialLink, ~]
+
     app.admin.software:
         class: App\Admin\SoftwareAdmin
         tags:

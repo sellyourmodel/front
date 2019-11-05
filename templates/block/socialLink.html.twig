@@ -1,0 +1,3 @@
+{% for e in entities %}
+        <li class="social__item"><a href="{{ e.link }}" class="social__link social__link_{{ e.type2 }}" target="_blank"><i class="fa fa-{{ e.type }}" aria-hidden="true"></i></a></li>
+{% endfor %}
