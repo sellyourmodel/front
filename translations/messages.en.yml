@@ -88,7 +88,7 @@ change_password_header: Change password
 new_password: New password
 repeat_password: Confirm password
 socials_header: Soc. profiles
-socials_left_text: To connect or disconnect the social network - click on its logo (connection and disconnection on the test server does not work, check the attached social network for an example)
+socials_left_text: To connect or disconnect the social network - click on its logo
 buying_models_header: Buying models
 payment_error: I'm sorry to hear that you have problems with payment.
 payment_go_to_treatment: Your payment has been accepted for processing.
