@@ -26,6 +26,7 @@
             <p>{% trans %}cabinet_buy_left_info_l2{% endtrans %}</p>
             
             <div class="box-form payment">
+                {% if settings.paymentAccept %}
                 <form action="#">
                     <dl class="box-label">
                         <dt class="box-label__title">{% trans %}available_3d_models{% endtrans %}</dt>
@@ -78,6 +79,9 @@
                     </div>
                     <div class="payment__method"><img src="img/payment.jpg" alt=""></div>>#}
                 </form>
+                {% else %}
+                    <p>Покупка моделей временно недоступна.</p>
+                {% endif %}
             </div>
         </div>
     </div>

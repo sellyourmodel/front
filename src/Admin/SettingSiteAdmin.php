@@ -21,6 +21,7 @@ class SettingSiteAdmin extends Admin
             ->add('emailAdmin', null, array('label' => 'E-mail для приема заказов и сообщений с сайта', 'required' => true))
             ->add('modelPrice', null, array('label' => 'Цена 1-й модели (руб.)', 'required' => true))
             ->add('loadModelPrice', null, array('label' => 'Сумма зачисляемая автору после загрузки модели (руб.)', 'required' => true))
+            ->add('paymentAccept', null, array('label' => 'Принимать оплату на сайте', 'required' => false))
         ;
     }
 

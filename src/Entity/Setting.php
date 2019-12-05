@@ -56,6 +56,13 @@ class Setting
      */
     private $loadModelPrice;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(type="boolean")
+     */
+    private $paymentAccept = true;
+
 
     /**
      * Get id
@@ -174,6 +181,18 @@ class Setting
     public function setLoadModelPrice(int $loadModelPrice): self
     {
         $this->loadModelPrice = $loadModelPrice;
+
+        return $this;
+    }
+
+    public function getPaymentAccept(): ?bool
+    {
+        return $this->paymentAccept;
+    }
+
+    public function setPaymentAccept(bool $paymentAccept): self
+    {
+        $this->paymentAccept = $paymentAccept;
 
         return $this;
     }
