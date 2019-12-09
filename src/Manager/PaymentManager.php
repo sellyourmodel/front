@@ -172,6 +172,11 @@ class PaymentManager
         $this->container->get("fos_user.user_manager")->updateUser($user);
 
         /*
+         * Временно отключаем начисление коммисий за загрузку моделей
+         */
+        return;
+
+        /*
          * Если автору уже выплачено то ничего не начисляем
          */
         if($product->getPaidAuthor()){
