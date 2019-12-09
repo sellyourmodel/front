@@ -151,15 +151,34 @@ class PaymentManager
 
     public function moderationModel(Product $product, User $moderator){
 
+        $user = $product->getUser();
+
         /*
-         * Если автору уже выплачено то ничего не делаем
+         * Записываем лог что модель отмодерирована
+         */
+        $log = new ProductLog();
+        $log->setText('product_log_moderated');
+        $log->setProduct($product);
+        $log->setUser($moderator);
+        $log->setDate(new \DateTime());
+        $this->em->persist($log);
+        $this->em->flush($log);
+
+        /*
+         * Обновляем статистику автора по загруженным моделям
+         */
+        $modelsModeration = $this->em->getRepository('App:Product')->findBy(["user"=>$user, "moderated"=>false]);
+        $user->setModelsModeration(count($modelsModeration));
+        $this->container->get("fos_user.user_manager")->updateUser($user);
+
+        /*
+         * Если автору уже выплачено то ничего не начисляем
          */
         if($product->getPaidAuthor()){
             return;
         }
 
         $settings = $this->settings;
-        $user = $product->getUser();
 
         /*
          * Начисляем коммисию автору
@@ -183,24 +202,6 @@ class PaymentManager
          * Обновляем баланс автора
          */
         $this->_updateUserBalance($user);
-
-        /*
-         * Обновляем статистику автора по загруженным моделям
-         */
-        $modelsModeration = $this->em->getRepository('App:Product')->findBy(["user"=>$user, "moderated"=>false]);
-        $user->setModelsModeration(count($modelsModeration));
-        $this->container->get("fos_user.user_manager")->updateUser($user);
-
-        /*
-         * Записываем лог что модель отмодерирована
-         */
-        $log = new ProductLog();
-        $log->setText('product_log_moderated');
-        $log->setProduct($product);
-        $log->setUser($moderator);
-        $log->setDate(new \DateTime());
-        $this->em->persist($log);
-        $this->em->flush($log);
 
     }
 
