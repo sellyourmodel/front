@@ -2328,6 +2328,8 @@ header {
   overflow: hidden; }
   .product-list.col-4 .product-list__item {
     width: 25%; }
+  .product-list.col-4 .product-list__img {
+    height: 290px; }
   .product-list.col-4:not(.sm) .product-list__img {
     /*height: 219px*/ }
     .product-list.col-4:not(.sm) .product-list__img img {
@@ -2357,7 +2359,8 @@ header {
     position: relative;
     border: 1px solid #fff;
     border-bottom: none;
-    height: 290px;
+    background: #fff;
+    height: 230px;
     overflow: hidden; }
     .product-list__img a:not(.product-list__ajax) {
       /*position: absolute*/ }
