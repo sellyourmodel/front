@@ -664,11 +664,20 @@ class  CatalogController extends Controller
             $filter["style"] = intval($request->get('style'));
         }
 
+        $paginator = $this->get('knp_paginator');
+
+        $productsEntities = $em->getRepository('App:Product')->getByCategories($categories, $filter, $sort);
+        $products = $paginator->paginate(
+            $productsEntities,
+            $request->query->getInt('page', 1),
+            100
+        );
+
         $responseData = [];
         $responseData["software"] = $em->getRepository('App:Software')->findForStats();
         $responseData["style"] = $em->getRepository('App:Style')->findForStats();
         $responseData["category"] = $category;
-        $responseData["products"] = $em->getRepository('App:Product')->getByCategories($categories, $filter, $sort);
+        $responseData["products"] = $products;
 
         if($request->isXmlHttpRequest()){
             $html = $this->get('templating')->render('catalog/_category_inside.html.twig', $responseData);
