@@ -77,6 +77,8 @@ class SearchController extends Controller
 
         $finalQuery = new \Elastica\Query($boolQuery);
 
+        $finalQuery->setSize(10000);
+
         if($sort == 'date'){
             $finalQuery->setSort(array('date' => array('order' => 'DESC')));
         }elseif($sort == 'comments'){
