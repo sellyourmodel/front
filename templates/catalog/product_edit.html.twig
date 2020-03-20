@@ -111,7 +111,7 @@
                     <div class="box-field col-5">
                         <label class="box-field__label">{% trans %}model_tags{% endtrans %}</label>
                         <div class="box-field__input">
-                            <select name="tags[]" multiple class="select2-tags form-control">
+                            <select name="tags[]" multiple class="js-selectize-add form-control">
                                 {% for e in tags %}
                                     <option value="{{ e.name }}" {% if e in product.tags %}selected{% endif %}>{{ e.name }}</option>
                                 {% endfor %}
@@ -121,7 +121,7 @@
                     <div class="box-field col-5">
                         <label class="box-field__label">{% trans %}model_po{% endtrans %}</label>
                         <div class="box-field__input">
-                            <select name="software[]" multiple class="select2 form-control">
+                            <select name="software[]" multiple class="js-selectize form-control">
                                 {% for e in software %}
                                     <option value="{{ e.id }}" {% if e in product.software %}selected{% endif %}>{{ e.name }}</option>
                                 {% endfor %}
@@ -131,7 +131,7 @@
                     <div class="box-field col-5">
                         <label class="box-field__label">{% trans %}model_style{% endtrans %}</label>
                         <div class="box-field__input">
-                            <select name="style[]" multiple class="select2 form-control">
+                            <select name="style[]" multiple class="js-selectize form-control">
                                 {% for e in style %}
                                     <option value="{{ e.id }}" {% if e in product.style %}selected{% endif %}>{{ e.name }}</option>
                                 {% endfor %}

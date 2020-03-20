@@ -97,7 +97,28 @@ $(function () {
     }
 
     if ($('.select2-tags').length) {
-        $('.select2-tags').select2({tags: true});
+        $('.select2-tags').select2({
+            tags: true,
+            minimumResultsForSearch: 50
+        });
+    }
+
+    if ($('.js-selectize').length) {
+        $('.js-selectize').selectize({
+        });
+    }
+
+    if ($('.js-selectize-add').length) {
+        $('.js-selectize-add').selectize({
+            maxOptions: 50,
+            persist: false,
+            create: function(input) {
+                return {
+                    value: input,
+                    text: input
+                }
+            }
+        });
     }
 
     if ($('.js-date').length) {

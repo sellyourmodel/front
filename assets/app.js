@@ -1,6 +1,7 @@
 // CSS
 require('./css/style.css');
 require('./custom-js/select2/css/select2.css');
+require('./custom-js/selectize.css');
 
 //require('./js/libs.min.js');
 require('./js/custom.js');
@@ -18,6 +19,7 @@ require('./custom-js/anythingslider/js/jquery.anythingslider.min.js');
 require('jquery-form-styler');
 require('slick-carousel');
 require('select2');
+require('selectize');
 require("@fancyapps/fancybox");
 require("@fancyapps/fancybox/dist/jquery.fancybox.css");
 //require('jquery.ui.widget/jquery.ui.widget.js');
