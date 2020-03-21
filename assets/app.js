@@ -88,6 +88,7 @@ require('script-loader!./pages/tracker.js');
 require('./pages/tracker.css');
 require('./pages/product-categories.css');
 require('script-loader!./pages/product-categories.js');
+require('./pages/product-plus-hover.css');
 
 // Jquery
 var $ = require('jquery');
