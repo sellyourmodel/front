@@ -77,6 +77,13 @@ class Category
     private $products;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="products_count", type="integer", nullable=false)
+     */
+    private $productsCount = 0;
+
+    /**
      * @var string
      *
      * @ORM\Column(type="text", nullable=true)
@@ -413,5 +420,17 @@ class Category
     public function getNameEn()
     {
         return $this->nameEn;
+    }
+
+    public function getProductsCount(): ?int
+    {
+        return $this->productsCount;
+    }
+
+    public function setProductsCount(int $productsCount): self
+    {
+        $this->productsCount = $productsCount;
+
+        return $this;
     }
 }
