@@ -229,6 +229,7 @@ class Product
         $this->software = new ArrayCollection();
         $this->style = new ArrayCollection();
         $this->log = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
