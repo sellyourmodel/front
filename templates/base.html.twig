@@ -30,6 +30,7 @@
                 <nav class="box-nav-list">
                     <ul class="nav-list unstyled">
                         {% if is_granted('ROLE_TRACKER') %}
+                            <li class="nav-list__item"><a href="{{ path('cabinet_log') }}" class="nav-list__link"><span>Лог</span></a></li>
                             <li class="nav-list__item"><a href="{{ path('cabinet_tracker') }}" class="nav-list__link"><span>Трекер</span></a></li>
                         {% endif %}
                         {% if is_granted('ROLE_SUPER_ADMIN') %}

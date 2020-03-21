@@ -1,0 +1,43 @@
+{% extends 'tracker/_tracker_base.html.twig' %}
+
+{% block cabinetTitle %}Лог пользователей{% endblock %}
+
+{% block cabinetContent %}
+    <div class="box-form settings">
+        <h4 class="tickets__header">Лог пользователей</h4>
+        <div class="clearfix"></div>
+        <div>
+            <a href="{{ path('cabinet_log') }}">Все</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{{ path('cabinet_log', {action:"user_registration"}) }}">Регистрации</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{{ path('cabinet_log', {action:"product_log_buyed"}) }}">Покупка моделей</a>
+        </div>
+        {% if entities|length > 0 %}
+            <table class="table">
+                <tr>
+                    <th class="td-date-time">Дата</th>
+                    <th>Действие</th>
+                </tr>
+                {% for e in entities %}
+                    <tr>
+                        <td>{{ e.date|date("H:i d.m.Y") }}</td>
+                        <td>
+                            {% if e.product %}
+                                Модель: <a href="{{ path('catalog_product', {alias:e.product.alias}) }}" class="tickets__link" target="_blank">{{ e.product.name }}</a>
+                                <br />
+                            {% endif %}
+                            {{ e.text|trans|nl2br|replace({'{comment}':e.comment}) }}
+                            <br />
+                            Пользователь:
+                            <a href="{{ path('user_view', {nickname:e.user.nickname}) }}" class="tickets__link" target="_blank">{{ e.user.nickname }} / {{ e.user.email }} / {{ e.user.name }}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            {{ knp_pagination_render(entities) }}
+        {% else %}
+            <p>Задач не обнаружено.</p>
+        {% endif %}
+    </div>
+{% endblock %}
