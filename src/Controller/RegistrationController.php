@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\ProductLog;
 use App\Entity\User;
 use App\Helper\SendPulse\SendpulseApi;
 use FOS\UserBundle\Security\LoginManagerInterface;
@@ -106,6 +107,13 @@ class  RegistrationController extends Controller
 
         $em->persist($user);
         $em->flush($user);
+
+        $log = new ProductLog();
+        $log->setText('user_registration');
+        $log->setUser($user);
+        $log->setDate(new \DateTime());
+        $em->persist($log);
+        $em->flush($log);
 
         $SPApiProxy = new SendpulseApi( getenv('sendpulse_client_id'), getenv('sendpulse_client_secret'), 'file' );
         $SPApiProxy->addEmails(getenv('sendpulse_book_registration'),[["email"=>$email]]);
