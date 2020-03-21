@@ -122,7 +122,7 @@ class  CatalogController extends Controller
 
         $name = trim($request->get('name'));
         $nameEn = trim($request->get('nameEn'));
-        $categoryId = trim($request->get('category'));
+        $categoriesIds = $request->get('categories');
         $mainImg = $request->get('mainImg');
         $addImg = $request->get('addImg');
         $files = $request->get('files');
@@ -134,11 +134,31 @@ class  CatalogController extends Controller
         $textEn = trim($request->get('textEn'));
         $user_agreement = trim($request->get('user_agreement', '0'));
 
-        if ($name == '' OR $nameEn == '' OR $categoryId == '') {
+        $categoryError = false;
+        if(!is_array($categoriesIds)){
+            $categoryError = true;
+        }
+        if(count($categoriesIds) == 0){
+            $categoryError = true;
+        }
+
+        if ($name == '' OR $nameEn == '' OR $categoryError) {
             return JsonResponse::create(["error" => true, 'error_text' => 'Заполните обязательные поля']);
         }
 
-        $category = $em->getRepository('App:Category')->find($categoryId);
+        $categories = [];
+        foreach ($categoriesIds as $e){
+            $categoryEntity = $em->getRepository('App:Category')->find($e);
+            if($categoryEntity){
+                $categories[] = $categoryEntity;
+            }
+        }
+
+        if (count($categories) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Категория не найдена']);
+        }
+
+        $category = $categories[0];
 
         if (!is_array($mainImg)) {
             $mainImg = [];
@@ -218,6 +238,14 @@ class  CatalogController extends Controller
         $em->flush($entity);
 
         $entity->setAlias($this->_generateAlias($entity->getName()) . '-' . $entity->getId());
+        $em->flush($entity);
+
+        /*
+         * Добавляем категории
+         */
+        foreach ($categories as $e){
+            $entity->addCategory($e);
+        }
         $em->flush($entity);
 
         $pos = 0;
@@ -850,7 +878,7 @@ class  CatalogController extends Controller
 
         $name = trim($request->get('name'));
         $nameEn = trim($request->get('nameEn'));
-        $categoryId = trim($request->get('category'));
+        $categoriesIds = $request->get('categories');
         $mainImg = $request->get('mainImg');
         $addImg = $request->get('addImg');
         $files = $request->get('files');
@@ -864,11 +892,31 @@ class  CatalogController extends Controller
         $text = trim($request->get('text'));
         $textEn = trim($request->get('textEn'));
 
-        if ($name == '' OR $nameEn == '' OR $categoryId == '') {
+        $categoryError = false;
+        if(!is_array($categoriesIds)){
+            $categoryError = true;
+        }
+        if(count($categoriesIds) == 0){
+            $categoryError = true;
+        }
+
+        if ($name == '' OR $nameEn == '' OR $categoryError) {
             return JsonResponse::create(["error" => true, 'error_text' => 'Заполните обязательные поля']);
         }
 
-        $category = $em->getRepository('App:Category')->find($categoryId);
+        $categories = [];
+        foreach ($categoriesIds as $e){
+            $categoryEntity = $em->getRepository('App:Category')->find($e);
+            if($categoryEntity){
+                $categories[] = $categoryEntity;
+            }
+        }
+
+        if (count($categories) == 0) {
+            return JsonResponse::create(["error" => true, 'error_text' => 'Категория не найдена']);
+        }
+
+        $category = $categories[0];
 
         if (!is_array($mainImg)) {
             $mainImg = [];
@@ -887,10 +935,6 @@ class  CatalogController extends Controller
         }
         if (!is_array($existsFiles)) {
             $existsFiles = [];
-        }
-
-        if (!$category) {
-            return JsonResponse::create(["error" => true, 'error_text' => 'Категория не найдена']);
         }
 
         if (count($mainImg) == 0 AND count($existsMainImg) == 0) {
@@ -992,6 +1036,23 @@ class  CatalogController extends Controller
 
         $em->flush($entity);
 
+        /*
+         * Обновляем категории
+         */
+
+        $curCategories = $entity->getCategories();
+        foreach ($curCategories as $e){
+            $entity->removeCategory($e);
+        }
+        foreach ($categories as $e){
+            $entity->addCategory($e);
+        }
+        $em->flush($entity);
+
+        /*
+         * Обновляем теги
+         */
+
         $curTags = [];
         foreach ($entity->getTags() as $e) {
             $curTags[] = $e->getId();
@@ -1016,6 +1077,10 @@ class  CatalogController extends Controller
             $em->flush($entity);
         }
 
+        /*
+         * Обновляем ПО
+         */
+
         $curSoftware = [];
         foreach ($entity->getSoftware() as $e) {
             $curSoftware[] = $e->getId();
@@ -1032,6 +1097,10 @@ class  CatalogController extends Controller
             }
             $em->flush($entity);
         }
+
+        /*
+         * Обновляем стили
+         */
 
         $curStyle = [];
         foreach ($entity->getStyle() as $e) {

@@ -1,0 +1,24 @@
+.product-categories__category{
+    margin-bottom: 10px;
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+}
+.product-categories__select{
+    width: 100%;
+}
+.product-categories__link{
+    color: #bda180;
+}
+.product-categories__link:hover{
+    color: #000;
+}
+.product-categories__icon{
+    font-size: 14px;
+    margin-right: 4px;
+}
+.product-categories__remove{
+    font-size: 14px;
+    margin-left: 10px;
+    color:#ff0000;
+}

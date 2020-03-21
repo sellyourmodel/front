@@ -42,6 +42,52 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
     {
         $qb = $this->_baseQb();
 
+        $qb = $this->createQueryBuilder('p')
+            ->leftJoin('p.categories', 'c');
+
+        $qb
+            ->andWhere('c IN (:categories)')
+            ->setParameter('categories', $categories)
+        ;
+
+        if(isset($filter["software"]) AND $filter["software"]){
+            $qb
+                ->leftJoin('p.software', 's')
+                ->andWhere('s.id = :software')
+                ->setParameter('software', $filter["software"])
+            ;
+        }
+
+        if(isset($filter["style"]) AND $filter["style"]){
+            $qb
+                ->leftJoin('p.style', 'st')
+                ->andWhere('st.id = :style')
+                ->setParameter('style', $filter["style"])
+            ;
+        }
+
+        if($sort == 'date'){
+            $qb->orderBy('p.date', 'DESC');
+        }
+        if($sort == 'comments'){
+            $qb->orderBy('p.comments', 'DESC');
+        }
+        if($sort == 'views'){
+            $qb->orderBy('p.views', 'DESC');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get from category
+     *
+     * @return array
+     */
+    public function getByRootCategories($categories, $filter, $sort)
+    {
+        $qb = $this->_baseQb();
+
         $qb
             ->andWhere('p.category IN (:categories)')
             ->setParameter('categories', $categories)

@@ -86,6 +86,8 @@ require('./pages/tooltip.css');
 require('script-loader!./pages/withdrawal.js');
 require('script-loader!./pages/tracker.js');
 require('./pages/tracker.css');
+require('./pages/product-categories.css');
+require('script-loader!./pages/product-categories.js');
 
 // Jquery
 var $ = require('jquery');

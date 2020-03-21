@@ -32,17 +32,27 @@
 
                     </div>
                     <div class="box-field col-5">
-                        <label class="box-field__label">{% trans %}category{% endtrans %}
-                            <span class="require-field-z">*</span></label>
-                        <div class="box-field__input">
-                            <select name="category" data-placeholder=" " class="styler form-control">
-                                <option value=""></option>
-                                {% for e in categories %}
-                                    {% for e2 in e.children %}
-                                        <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
-                                    {% endfor %}
-                                {% endfor %}
-                            </select>
+                        <label class="box-field__label">{% trans %}category{% endtrans %}<span class="require-field-z">*</span></label>
+                        <div class="product-categories">
+                            <div class="product-categories__list">
+                                <div class="product-categories__category">
+                                    <div class="product-categories__select box-field__input">
+                                        <select name="categories[]" data-placeholder="Выберите категорию" class="styler form-control">
+                                            <option value=""></option>
+                                            {% for e in categories %}
+                                                {% for e2 in e.children %}
+                                                    <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-categories__add-category">
+                                <a href="#" class="product-categories__link" onclick="addProductCategory();return false;">
+                                    <i class="fa fa-plus product-categories__icon"></i> Добавить категорию
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="box-field-line">
@@ -80,8 +90,7 @@
                     <div class="box-field-title">{% trans %}model_files{% endtrans %}</div>
                     <div class="box-field-group user js-image-wrapper js-files-drop">
                         <label class="box-field__label">{% trans %}model_files{% endtrans %}
-                            <span class="require-field-z">*</span>
-                        </label>
+                            <span class="require-field-z">*</span> </label>
                         <div class="add-model__file-error"></div>
                         <div class="add-model__file-upload-process"></div>
                         <div class="box-field__input jq-file__no-show">
@@ -156,6 +165,25 @@
             </div>
         </div>
     </div>
+    <div style="display: none;">
+        <div class="js-category-skeleton">
+            <div class="product-categories__category">
+                <div class="product-categories__select box-field__input">
+                    <select name="categories[]" data-placeholder="Выберите категорию" class="styler-dinamic form-control">
+                        <option value=""></option>
+                        {% for e in categories %}
+                            {% for e2 in e.children %}
+                                <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <a href="#" onclick="removeProductCategory(this);return false;">
+                    <i class="fa fa-remove product-categories__remove"></i>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts_custom %}
@@ -172,8 +200,7 @@
                 done: function (e, data) {
                     if (data.result.wp_error) {
                         alert(data.result.wp_error_text);
-                    }
-                    else {
+                    } else {
                         var wrapper = $(e.target).closest('.js-image-wrapper');
                         wrapper.find('.js-main-pic').append(data.result.wp_container);
                         wrapper.find('.js-image-add-input').hide();
@@ -195,8 +222,7 @@
                 done: function (e, data) {
                     if (data.result.wp_error) {
                         alert(data.result.wp_error_text);
-                    }
-                    else {
+                    } else {
                         var wrapper = $(e.target).closest('.js-image-wrapper');
                         wrapper.find('.js-add-pic').append(data.result.wp_container);
                     }
@@ -217,8 +243,7 @@
                 done: function (e, data) {
                     if (data.result.wp_error) {
                         alert(data.result.wp_error_text);
-                    }
-                    else {
+                    } else {
                         var wrapper = $(e.target).closest('.js-image-wrapper');
                         wrapper.find('.js-model-files').append(data.result.wp_container);
                     }

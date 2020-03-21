@@ -127,6 +127,12 @@ class Product
     private $category;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Category")
+     * @ORM\JoinTable(name="catalog_categories_products")
+     **/
+    private $categories;
+
+    /**
      * @var integer
      *
      * @ORM\Column(type="integer")
@@ -904,5 +910,39 @@ class Product
         $this->textEn = $textEn;
 
         return $this;
+    }
+
+    /**
+     * Add category
+     *
+     * @param \App\Entity\Category $category
+     *
+     * @return Product
+     */
+    public function addCategory(\App\Entity\Category $category)
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    /**
+     * Remove category
+     *
+     * @param \App\Entity\Category $category
+     */
+    public function removeCategory(\App\Entity\Category $category)
+    {
+        $this->categories->removeElement($category);
+    }
+
+    /**
+     * Get categories
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }

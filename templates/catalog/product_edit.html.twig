@@ -30,15 +30,33 @@
                     </div>
                     <div class="box-field col-5">
                         <label class="box-field__label">{% trans %}category{% endtrans %} <span class="require-field-z">*</span></label>
-                        <div class="box-field__input">
-                            <select name="category" data-placeholder=" " class="styler form-control">
-                                <option value=""></option>
-                                {% for e in categories %}
-                                    {% for e2 in e.children %}
-                                        <option value="{{ e2.id }}" {% if product.category == e2 %}selected{% endif %}>{{ e.name }} / {{ e2.name }}</option>
-                                    {% endfor %}
+                        <div class="product-categories">
+                            <div class="product-categories__list">
+                                {% for category in product.categories %}
+                                    <div class="product-categories__category">
+                                        <div class="product-categories__select box-field__input">
+                                            <select name="categories[]" data-placeholder=" " class="styler form-control">
+                                                <option value=""></option>
+                                                {% for e in categories %}
+                                                    {% for e2 in e.children %}
+                                                        <option value="{{ e2.id }}" {% if category == e2 %}selected{% endif %}>{{ e.name }} / {{ e2.name }}</option>
+                                                    {% endfor %}
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        {% if loop.index > 1 %}
+                                            <a href="#" onclick="removeProductCategory(this);return false;">
+                                                <i class="fa fa-remove product-categories__remove"></i>
+                                            </a>
+                                        {% endif %}
+                                    </div>
                                 {% endfor %}
-                            </select>
+                            </div>
+                            <div class="product-categories__add-category">
+                                <a href="#" class="product-categories__link" onclick="addProductCategory();return false;">
+                                    <i class="fa fa-plus product-categories__icon"></i> Добавить категорию
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <div class="box-field-line">
@@ -155,6 +173,25 @@
                     <button type="submit" class="button button_warning js-add-model-btn" onclick="editModel();return false;">{% trans %}edit{% endtrans %}</button>
                     <span class="help-text inline add-model__result js-add-model-result"></span>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div style="display: none;">
+        <div class="js-category-skeleton">
+            <div class="product-categories__category">
+                <div class="product-categories__select box-field__input">
+                    <select name="categories[]" data-placeholder="Выберите категорию" class="styler-dinamic form-control">
+                        <option value=""></option>
+                        {% for e in categories %}
+                            {% for e2 in e.children %}
+                                <option value="{{ e2.id }}">{{ e.name }} / {{ e2.name }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <a href="#" onclick="removeProductCategory(this);return false;">
+                    <i class="fa fa-remove product-categories__remove"></i>
+                </a>
             </div>
         </div>
     </div>
