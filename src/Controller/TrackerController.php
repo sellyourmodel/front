@@ -33,6 +33,9 @@ class  TrackerController extends Controller
     {
 
         $filter = [];
+        if($request->get('status')){
+            $filter["status"] = $request->get('status');
+        }
 
         return [
             "entities" => $this->getDoctrine()->getRepository('App:TrackerTask')->findBy($filter, ["dateUpdate" => "DESC"])

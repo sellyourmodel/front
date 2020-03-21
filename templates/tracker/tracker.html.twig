@@ -7,6 +7,15 @@
         <h4 class="tickets__header">Активный задачи</h4>
         <a href="{{ path('cabinet_tracker_add') }}" class="button button_warning tickets__add">Создать задачу</a>
         <div class="clearfix"></div>
+        <div>
+            <a href="{{ path('cabinet_tracker') }}">Все</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{{ path('cabinet_tracker', {status:"new"}) }}">Новое</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{{ path('cabinet_tracker', {status:"work"}) }}">В работе</a>
+            &nbsp;&nbsp;&nbsp;
+            <a href="{{ path('cabinet_tracker', {status:"close"}) }}">Закрыто</a>
+        </div>
         {% if entities|length > 0 %}
             <table class="table">
                 <tr>
