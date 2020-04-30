@@ -17,7 +17,7 @@
         "@fancyapps/fancybox": "^3.5.2",
         "blueimp-file-upload": "^9.28.0",
         "copy-webpack-plugin": "^4.6.0",
-        "jquery": "^1.11.3",
+        "jquery": "^3.5.0",
         "jquery-form-styler": "^1.7.8",
         "jquery.ui.widget": "^1.10.3",
         "jqueryui": "^1.11.1",
